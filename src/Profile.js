@@ -1,15 +1,14 @@
 import React from "react";
 import { Navbar, Button, Card } from "react-bootstrap";
-import PostCard from './components/PostCard'
+import PostCard from "./components/PostCard";
 
 export default class Profile extends React.Component {
-
- postCard=()=>{
-   return <PostCard/>
- }
+  postCard = () => {
+    return <PostCard />;
+  };
 
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <div>
         <div className="signindiv">
@@ -23,7 +22,8 @@ export default class Profile extends React.Component {
                 <Button
                   variant="outline-dark"
                   onClick={() => this.props.history.push("/login")}
-                  className="logout-btn">
+                  className="logout-btn"
+                >
                   logout
                 </Button>
                 Signed in as: <a href="#login">#UsersNameHere</a>
@@ -31,15 +31,16 @@ export default class Profile extends React.Component {
             </Navbar.Collapse>
           </Navbar>
           <Card style={{ width: "18rem" }} className="post-card">
-           {/* {this.postCard()} */}
-           </Card>
+            {/* {this.postCard()} */}
+          </Card>
         </div>
       </div>
     );
   }
 }
 
-
- {/* <Col xs={6} md={4}>
+{
+  /* <Col xs={6} md={4}>
       <Image src="holder.js/171x180" roundedCircle />
-    </Col> from https://react-bootstrap.github.io/components/images/ */}
+    </Col> from https://react-bootstrap.github.io/components/images/ */
+}
