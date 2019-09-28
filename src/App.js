@@ -28,9 +28,7 @@ class App extends React.Component {
       page: "login"
     });
     
-    this.componentDidMount()
-    if(localStorage.token){ this.redirect('profile')}
-    console.log(localStorage.token);
+   
   };
   render() {
     return(
