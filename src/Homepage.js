@@ -1,4 +1,6 @@
 import React from "react";
+import Container from "./components/HomeContainer";
+import PostCard from './components/PostCard'
 
 class Homepage extends React.Component {
   state = {
@@ -19,7 +21,10 @@ class Homepage extends React.Component {
   }
 
   render() {
-    return <p>{this.state.username}</p>;
+    return(
+    <Container/>
+    // return <p>{this.state.username}</p>;
+    )
   }
 }
 export default Homepage;

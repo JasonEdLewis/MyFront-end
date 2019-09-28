@@ -1,0 +1,57 @@
+body{
+    font-family: 'Times New Roman', Times, serif
+}
+
+
+.Home-Container{
+   
+    color: white;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto; 
+}
+
+.Home-Header{
+    background-color: green ;
+    text-align: center;
+
+}
+
+
+.Home-Content{
+padding: 10px ;
+text-align: center;
+}
+
+
+.Home-Nav{
+width: 80 px;
+height: 500px;
+float: left;
+text-align: relative;
+color:grey;
+border:#234556, 2px
+}
+.Home-Nav ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+
+.Home-main{
+background-color: orange;
+width: 600px;
+float: right;
+
+}
+
+
+.Home-footer{
+clear: both;
+background-color: #009999;
+}
+
+p {
+    margin-left: auto;
+    margin-right: auto;  
+}
