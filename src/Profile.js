@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Button, Card, Form } from "react-bootstrap";
+import { Navbar, Button, Card } from "react-bootstrap";
 import PostCard from './components/PostCard'
 
 export default class Profile extends React.Component {
@@ -9,6 +9,7 @@ export default class Profile extends React.Component {
  }
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <div className="signindiv">
@@ -21,7 +22,7 @@ export default class Profile extends React.Component {
               <Navbar.Text>
                 <Button
                   variant="outline-dark"
-                  onClick={() => this.props.logout()}
+                  onClick={() => this.props.history.push("/login")}
                   className="logout-btn">
                   logout
                 </Button>
@@ -30,7 +31,8 @@ export default class Profile extends React.Component {
             </Navbar.Collapse>
           </Navbar>
           <Card style={{ width: "18rem" }} className="post-card">
-           {this.postCard()}
+           {/* {this.postCard()} */}
+           </Card>
         </div>
       </div>
     );

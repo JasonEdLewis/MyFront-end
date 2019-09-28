@@ -1,6 +1,6 @@
 import React from "react";
 
-loginForm =()=>{
+const LoginForm =()=>{
 
     <div className="signindiv">
     <Navbar className="login-nav">

@@ -1,9 +1,10 @@
 
 import React from "react";
+import { Card, Form } from "react-bootstrap";
 
 
-post=(props)=>{
-  const {post} =props
+const  PostCard =()=>{
+  // const {post} = props
 return(
 <Card style={{ width: "18rem" }} className="post-card">
     <Card.Img

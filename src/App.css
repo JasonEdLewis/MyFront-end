@@ -70,3 +70,19 @@
   justify-content: center;
   align-items: flex-end;
 }
+.signup-text, .signup-text:hover {
+  position: relative;
+  margin: auto 25% 20% 37%;
+  text-decoration: none;
+  font-size: 150%;
+  
+}
+
+.signup-text:hover{
+  color: rgb(240, 13, 13);
+  font-weight: 500;
+  
+}
+.stars-under-signup {
+  margin: 10%  25% 0% 35%;
+}
