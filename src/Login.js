@@ -1,4 +1,5 @@
 import React from "react";
+import LoginForm from './components/LoginForm'
 import { Form, Navbar, Button } from "react-bootstrap";
 
 {
@@ -30,17 +31,20 @@ class Login extends React.Component {
     })
       .then(r => r.json())
       .then(user => {
-        user.token
-          ? this.props.history.push("/home")
+        user.token ? this.props.history.push("/home")
           : this.props.history.push("/");
         localStorage.setItem("token", user.token);
         console.log("Token from 2nd then fetch: ",localStorage.token)
       });
   };
 
+  // renderLoginForm=()=>{
+  //   return <LoginForm handleChange={this.handleChage} username={this.state.username} password={this.state.password} handleSubmit={this.handleSubmit}/>
+  // }
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
+      // this.renderLoginForm()
       <div className="signindiv">
         <Navbar className="login-nav">
           <Navbar.Brand href="#home">

@@ -8,12 +8,13 @@ export default class Profile extends React.Component {
   };
 
   render() {
-    console.log(this.props);
+    const { user } = this.props;
+    console.log("Profile page props:", this.props);
     return (
       <div>
         <div className="signindiv">
           <Navbar className="login-nav">
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="/home">
               <h1 className="sign-in-header">Jays'taGram </h1>
             </Navbar.Brand>
             <Navbar.Toggle />
@@ -26,7 +27,7 @@ export default class Profile extends React.Component {
                 >
                   logout
                 </Button>
-                Signed in as: <a href="#login">#UsersNameHere</a>
+                Signed in as: <a href="#login">{user}</a>
               </Navbar.Text>
             </Navbar.Collapse>
           </Navbar>

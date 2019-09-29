@@ -1,8 +1,8 @@
 import React from "react";
 import "./components/HomeContainer.css";
 import Postcard from './components/PostCard';
-import BlankCard from './components/BlankCard';
-import { Card, Form, Navbar, Button} from "react-bootstrap";
+import BlankCard from './components/NewPost';
+import { Card, Form, Navbar, Button, NavbarBrand, Nav} from "react-bootstrap";
 
 
 class HomeContainer extends React.Component {
@@ -12,7 +12,25 @@ class HomeContainer extends React.Component {
     comment:""
   }
 
+  
+  // POST COMMENT FETCH POST
+  postComment=(id,content,fId)=>{
+    fetch('http://localhost:3000/comments', {
+        method: 'POST',
+        headers:{
+          'Content-Type': 'Application/json'
+        },
+        body :JSON.stringify({
+            id,
+            content,
+            fId,
+        })
 
+    })
+  }
+
+
+  // HANDLER FOR COMMENTS
 handleComment =(e)=>{
   this.setState({
     comment:  e.target.value,
@@ -20,9 +38,13 @@ handleComment =(e)=>{
   })
   
 }
+
+// SUBMIT THE COMMENT /FETCH POST
 submitComment=(e)=>{
 console.log(e)
 }
+
+
 
   render(){
         const {fposts, user, handleComment} = this.props
@@ -34,17 +56,18 @@ console.log(e)
      
     <div className="Home-Content">
     <div className="signindiv">
-        <Navbar className="login-nav">
-          <Navbar.Brand href="#home">
-            <Navbar.Text>
-            <h6 className="sign-in-header">Jays'taGram </h6>
-            </Navbar.Text>
-            <Button variant="link" onClick='/post' style={{marginLeft: "auto", marginRight: "auto"}}>📸</Button>
+        <Navbar className="ml-auto" >
+          <Navbar.Brand href="/profile">
+            <Nav.Item className="sign-in-header">Jays'taGram </Nav.Item>
+            <Nav.Item>
+            <Button variant="" href='/post' className="margin-auto">📸</Button>
+            </Nav.Item>
           </Navbar.Brand>
           <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
+          <Navbar.Collapse className="justify-content-end"> 
             <Navbar.Text>
-            Welcome Back <a href="/profile">{user}</a>
+              
+            <Navbar.Brand href='/profile'>Welcome Back {user}</Navbar.Brand>
             </Navbar.Text>
           </Navbar.Collapse>
         </Navbar>

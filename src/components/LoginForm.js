@@ -1,7 +1,10 @@
 import React from "react";
+import { Form, Navbar, Button } from "react-bootstrap";
 
-const LoginForm =()=>{
+const LoginForm =(props)=>{
 
+  const {handleChange, username, password, handleSubmit} = props
+return(
     <div className="signindiv">
     <Navbar className="login-nav">
       <Navbar.Brand href="#home">
@@ -21,15 +24,15 @@ const LoginForm =()=>{
         className="camera-logo"
       />
     </div>
-    <Form className="signInForm" onSubmit={this.handleSubmit}>
+    <Form className="signInForm" onSubmit={handleSubmit}>
       <Form.Group controlId="formGroupEmail">
         <Form.Label alt="username-field"></Form.Label>
         <Form.Control
           type="text"
-          value={this.state.username}
+          value={username}
           placeholder="Username"
           name="username"
-          onChange={this.handleChage}
+          onChange={handleChange}
         />
       </Form.Group>
       <Form.Group controlId="formGroupPassword">
@@ -37,8 +40,8 @@ const LoginForm =()=>{
         <Form.Control
           type="password"
           name="password"
-          value={this.state.password}
-          onChange={this.handleChage}
+          value={password}
+          onChange={handleChange}
           placeholder="Password"
         />
       </Form.Group>
@@ -47,8 +50,8 @@ const LoginForm =()=>{
       </Button>
     </Form>
     </div>
-
+)
 
 }
 
-export loginForm
+export default LoginForm
