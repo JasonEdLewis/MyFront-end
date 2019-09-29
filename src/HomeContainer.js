@@ -1,8 +1,8 @@
 import React from "react";
-import "./HomeContainer.css";
-import Postcard from './PostCard'
-import { Card, Form, Navbar} from "react-bootstrap";
-
+import "./components/HomeContainer.css";
+import Postcard from './components/PostCard';
+import BlankCard from './components/BlankCard';
+import { Card, Form, Navbar, Button} from "react-bootstrap";
 
 
 class HomeContainer extends React.Component {
@@ -36,7 +36,10 @@ console.log(e)
     <div className="signindiv">
         <Navbar className="login-nav">
           <Navbar.Brand href="#home">
+            <Navbar.Text>
             <h6 className="sign-in-header">Jays'taGram </h6>
+            </Navbar.Text>
+            <Button variant="link" onClick='/post' style={{marginLeft: "auto", marginRight: "auto"}}>📸</Button>
           </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">

@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Card, Form } from "react-bootstrap";
+import { Card, Form,Button } from "react-bootstrap";
 
 
 
@@ -40,6 +40,7 @@ return(
        {comment()}
       </Card.Text>
       <Form.Control size="sm" type="text" name="comment" value={props.comment} onChange={props.handleComment} onEnter={props.submitComment(post.id)} placeholder="comment" />
+      <Button variant="link">Post</Button>
     </Card.Body>
   </Card>
 )

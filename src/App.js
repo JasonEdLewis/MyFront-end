@@ -4,6 +4,8 @@ import "./App.css";
 import Profile from "./Profile";
 import Signup from "./Signup";
 import Home from "./Homepage";
+import Post from "./NewPost"
+
 import { Switch, Route, Link } from "react-router-dom";
 
 class App extends React.Component {
@@ -30,6 +32,7 @@ class App extends React.Component {
         <Route exact path="/home" component={Home} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/post" component={Post} />
       </Switch>
     );
 

@@ -1,5 +1,5 @@
 import React from "react";
-import HomeContainer from "./components/HomeContainer";
+import HomeContainer from "./HomeContainer";
 import PostCard from "./components/PostCard";
 
 class Homepage extends React.Component {
