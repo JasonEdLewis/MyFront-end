@@ -4,7 +4,7 @@ import "./App.css";
 import Profile from "./Profile";
 import Signup from "./Signup";
 import Home from "./Homepage";
-import {Switch, Route} from 'react-router-dom'
+import { Switch, Route } from "react-router-dom";
 
 class App extends React.Component {
   state = {
@@ -16,10 +16,9 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    if (localStorage.token){
-      this.redirect("profile")
-    }
-    
+    // if (localStorage.token) {
+      this.redirect("login");
+    // }
   }
 
   logout = () => {
@@ -27,27 +26,23 @@ class App extends React.Component {
     this.setState({
       page: "login"
     });
-    
-   
   };
   render() {
-    return(
-    <Switch>
-      < Route exact path="/" component={Home} />
-      < Route exact path="/login" component={Login} />
-      < Route exact path="/profile" component={Profile} />
-      < Route exact path="/signup" component={Signup} />
-    </Switch>
-    )
-    
-   
+    return (
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/profile" component={Profile} />
+        <Route exact path="/signup" component={Signup} />
+      </Switch>
+    );
+
     // switch (this.state.page) {
     //   case "profile":
     //     return <Profile logout={this.logout} />;
     //   case "login":
     //     return <Login redirect={this.redirect} logout={this.logout}/>;
     // }
-   
   }
 }
 

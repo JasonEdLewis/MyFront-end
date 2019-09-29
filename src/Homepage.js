@@ -4,25 +4,40 @@ import PostCard from './components/PostCard'
 
 class Homepage extends React.Component {
   state = {
-    username: ""
+    username: "",
+    posts: []
   };
 
+
+  
   componentDidMount() {
-    // console.log(localStorage.token);
-    fetch("http://localhost:3000/profile", {
-      Headers: {
-        Authorization: localStorage.token
-      }
-    })
-      .then(res => res.json())
-      .then(profile => console.log(profile));
+
+     return fetch('http://localhost:3000/posts')
+            .then(resp => resp.json())
+            .then(data => this.setState({posts: data}))
+
+  
+    // // console.log(localStorage.token);
+    // fetch("http://localhost:3000/profile", {
+    //   Headers: {
+    //     Authorization: localStorage.token
+    //   }
+    // })
+    //   .then(res => res.json())
+    //   .then(data => console.log(data));
 
     //   this.setState({ username: profile.username })
   }
 
+  // loadFolloweesPost=()=>{
+  //   return this.theFetch('post')
+  // }
+
   render() {
+    // console.log(this.state)
     return(
-    <Container/>
+      // <PostCard/>
+    <Container posts={this.state.posts}/>
     // return <p>{this.state.username}</p>;
     )
   }

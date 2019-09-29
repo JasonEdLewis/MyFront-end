@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Form,
-  Navbar,
-  Button,
-} from "react-bootstrap";
+import { Form, Navbar, Button } from "react-bootstrap";
 
 {
   /* <Spinner animation="grow" variant="info" /> */
@@ -34,13 +30,15 @@ class Login extends React.Component {
     })
       .then(r => r.json())
       .then(user => {
-        user.token ? this.props.history.push("/profile"): this.props.history.push("/login")
+        user.token
+          ? this.props.history.push("/")
+          : this.props.history.push("/login");
         localStorage.setItem("token", user.token);
       });
   };
 
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <div className="signindiv">
         <Navbar className="login-nav">
@@ -48,11 +46,6 @@ class Login extends React.Component {
             <h1 className="sign-in-header">Jays'taGram </h1>
           </Navbar.Brand>
           <Navbar.Toggle />
-          {/* <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-              Signed in as: <a href="#login">#UsersNameHere</a>
-            </Navbar.Text>
-          </Navbar.Collapse> */}
         </Navbar>
 
         <div>
@@ -85,8 +78,10 @@ class Login extends React.Component {
           <Button variant="primary" type="submit" className="submit-btn">
             Login
           </Button>
-          <p className="stars-under-signup">º  º  º   º  º  º  º  º  º </p>
-         <a href="/signup" className="signup-text">signup </a>
+          <p className="stars-under-signup">º º º º º º º º º </p>
+          <a href="/signup" className="signup-text">
+            signup{" "}
+          </a>
         </Form>
       </div>
     );

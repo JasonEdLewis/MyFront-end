@@ -3,7 +3,13 @@ import "./HomeContainer.css";
 import Postcard from './PostCard'
 import { Card, Form, Navbar } from "react-bootstrap";
 
-const HomeContainer = () => {
+
+
+const HomeContainer = (props) => {
+
+  const thePost = props.posts.map(post => <Postcard post={post} id={post.id} comments={post.comments}/>)
+  
+  // console.log("Home Container Props:", props.posts)
   return (
     <div className="Home-Container">
      
@@ -29,7 +35,7 @@ const HomeContainer = () => {
             Put cards here!!
         </h2>
 
-        {<Postcard/>}
+        {thePost}
         {/* <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
