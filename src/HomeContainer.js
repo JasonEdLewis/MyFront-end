@@ -60,7 +60,7 @@ console.log(e)
           <Navbar.Brand href="/profile">
             <Nav.Item className="sign-in-header">Jays'taGram </Nav.Item>
             <Nav.Item>
-            <Button variant="" href='/post' className="margin-auto">📸</Button>
+            <Button variant="" href='/post' className="margin-auto"><span>📸</span></Button>
             </Nav.Item>
           </Navbar.Brand>
           <Navbar.Toggle />

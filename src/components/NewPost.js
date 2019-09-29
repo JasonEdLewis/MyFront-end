@@ -1,6 +1,6 @@
 import React from "react";
 import {Fragment, Label} from 'react'
-import { InputGroup, FormControl, Jumbotron } from "react-bootstrap";
+import { Form, FormControl, Button, Jumbotron } from "react-bootstrap";
 
 const divStyle = {
   marginLeft: "auto",
@@ -13,27 +13,27 @@ const divStyle = {
 }
 
 
-const BlankCard = () => {
+const NewPost=(props) => {
+
+  console.log(props)
   return (
     <Jumbotron>
     
-    <label htmlFor="basic-url" style={divStyle, {textAlign: "center"}}><h3>Post Your Latest Experience here! URL</h3></label>
-    <InputGroup style={divStyle}>
-    <InputGroup.Prepend>
-      <InputGroup.Text>Upload</InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl as="textarea" aria-label="With textarea" />
-    </InputGroup>
+    <>
+    Upload Photo
+  <Form.Control size="lg" type="text" placeholder="picture" value={props.state.picture}  name="picture" onChange={props.handleChange} />
+  <br />
+  Caption
+  <Form.Control type="text" placeholder="caption" name="caption" value={props.state.capiton} onChange={props.handleChange}/>
+  <br />
 
-    <InputGroup style={divStyle}>
-    <InputGroup.Prepend>
-      <InputGroup.Text>Caption</InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl as="textarea" aria-label="With textarea" />
-    </InputGroup>
+  <Button variant="primary" type="submit">
+    Submit
+  </Button>
 
+</>
 
     </Jumbotron>
   );
 }
-export default BlankCard;
+export default NewPost;
