@@ -17,14 +17,14 @@ class Homepage extends React.Component {
             .then(data => this.setState({posts: data}))
 
   
-    // // console.log(localStorage.token);
+    // console.log(localStorage.token);
     // fetch("http://localhost:3000/profile", {
     //   Headers: {
     //     Authorization: localStorage.token
     //   }
     // })
     //   .then(res => res.json())
-    //   .then(data => console.log(data));
+    //   .then(profile => console.log(profile));
 
     //   this.setState({ username: profile.username })
   }

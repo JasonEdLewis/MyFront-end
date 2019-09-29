@@ -3,6 +3,7 @@ import React from "react";
 import { Card, Form } from "react-bootstrap";
 
 
+
 const divStyle= {
  marginLeft: "32%",
  marginRight: 'auto',
@@ -12,14 +13,17 @@ const divStyle= {
 }
 const  PostCard =(props)=>{
  
-  // debugger
+  debugger
   const {post} = props
-  console.log("Card props: ", post.comments)
+  // console.log("Card props: ", post.comments)
   
   const comment = ()=>{ 
     const text =  post.comments
     if (text.length > 0){
-      return text.map(t=> t.content)
+      return text.map(t=> {
+       return( t.content )
+      }
+        )
     } 
     else{
     return
@@ -29,14 +33,14 @@ return(
 <Card style={divStyle} className="post-card" >
     <Card.Img
       variant="top"
-      src={post.picture}
+      src={require('../img/allison-christine-8j-2d94Orlc-unsplash.jpg')}
     />
     <Card.Body>
-      <Card.Title>Cat Heaven</Card.Title>
+      <Card.Title></Card.Title>
       <Card.Text>
        {comment()}
       </Card.Text>
-      <Form.Control size="sm" type="text" placeholder="Small text" />
+      <Form.Control size="sm" type="text" placeholder="comment" />
     </Card.Body>
   </Card>
 )

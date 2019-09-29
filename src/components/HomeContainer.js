@@ -7,7 +7,7 @@ import { Card, Form, Navbar } from "react-bootstrap";
 
 const HomeContainer = (props) => {
 
-  const thePost = props.posts.map(post => <Postcard post={post} id={post.id} comments={post.comments}/>)
+  const thePost = props.posts.map(post => <Postcard post={post} id={post.id} comments={post.comments} key={post.id}/>)
   
   // console.log("Home Container Props:", props.posts)
   return (
@@ -36,12 +36,7 @@ const HomeContainer = (props) => {
         </h2>
 
         {thePost}
-        {/* <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-        <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Posuere lorem ipsum dolor sit amet. Dignissim convallis aenean et tortor at risus viverra adipiscing at. Ultricies leo integer malesuada nunc vel risus commodo viverra. Leo in vitae turpis massa sed elementum tempus egestas sed. Nascetur ridiculus mus mauris vitae ultricies leo integer malesuada. Ut morbi tincidunt augue interdum velit euismod in pellentesque. Egestas integer eget aliquet nibh praesent tristique magna. Enim praesent elementum facilisis leo. Ultricies leo integer malesuada nunc.
-        </p> */}
+        
         </div>
       <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div>
     </div>

@@ -31,8 +31,8 @@ class Login extends React.Component {
       .then(r => r.json())
       .then(user => {
         user.token
-          ? this.props.history.push("/")
-          : this.props.history.push("/login");
+          ? this.props.history.push("/home")
+          : this.props.history.push("/");
         localStorage.setItem("token", user.token);
       });
   };
