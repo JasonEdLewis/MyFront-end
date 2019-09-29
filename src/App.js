@@ -4,12 +4,10 @@ import "./App.css";
 import Profile from "./Profile";
 import Signup from "./Signup";
 import Home from "./Homepage";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 
 class App extends React.Component {
-  state = {
-    page: "login"
-  };
+  
 
   redirect = page => {
     this.setState({ page: page });
@@ -22,10 +20,8 @@ class App extends React.Component {
   }
 
   logout = () => {
-    localStorage.clear();
-    this.setState({
-      page: "login"
-    });
+    window.localStorage.clear();
+    this.redirect('/')
   };
   render() {
     return (

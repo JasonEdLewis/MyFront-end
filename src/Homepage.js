@@ -1,45 +1,68 @@
 import React from "react";
-import Container from "./components/HomeContainer";
-import PostCard from './components/PostCard'
+import HomeContainer from "./components/HomeContainer";
+import PostCard from "./components/PostCard";
 
 class Homepage extends React.Component {
   state = {
-    username: "",
-    posts: []
+    currentUser: "",
+    id: '',
+    follooweePosts: [],
+   
   };
 
-
-  
+  theFetch = way => {
+    let url;
+    way
+      ? (url = `http://localhost:3000/${way}`)
+      : (url = "http://localhost:3000/");
+    return fetch(url).then(resp => resp.json());
+  };
   componentDidMount() {
+    // this.theFetch('profile')
+    console.log("Home page: ", localStorage.token);
+    fetch("http://localhost:3000/profile", {
+      headers: {
+        Authorization: localStorage.token
+      }
+    })
+      .then(res => res.json())
+      .then(profile => {
+    
+        this.setState({ currentUser: profile.username, id: profile.id })
+        console.log("Current User: ",this.state.currentUser)
+      });
 
-     return fetch('http://localhost:3000/posts')
-            .then(resp => resp.json())
-            .then(data => this.setState({posts: data}))
 
-  
-    // console.log(localStorage.token);
-    // fetch("http://localhost:3000/profile", {
-    //   Headers: {
-    //     Authorization: localStorage.token
-    //   }
-    // })
-    //   .then(res => res.json())
-    //   .then(profile => console.log(profile));
-
-    //   this.setState({ username: profile.username })
+    this.theFetch("posts").then(data =>
+      this.setState({ follooweePosts: data })
+    );
   }
 
-  // loadFolloweesPost=()=>{
-  //   return this.theFetch('post')
-  // }
+  postComment=(id,content,fId)=>{
+    fetch('http://localhost:3000/comments', {
+        method: 'POST',
+        headers:{
+          'Content-Type': 'Application/json'
+        },
+        body :JSON.stringify({
+            id,
+            content,
+            fId,
+        })
+
+
+    })
+  }
+ 
+ 
 
   render() {
     // console.log(this.state)
-    return(
-      // <PostCard/>
-    <Container posts={this.state.posts}/>
-    // return <p>{this.state.username}</p>;
-    )
+    return (
+    
+      <HomeContainer fposts={this.state.follooweePosts} user={this.state.currentUser} userid={this.state.id} />
+     
+    );
   }
 }
 export default Homepage;

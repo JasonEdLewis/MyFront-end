@@ -13,9 +13,8 @@ const divStyle= {
 }
 const  PostCard =(props)=>{
  
-  debugger
   const {post} = props
-  // console.log("Card props: ", post.comments)
+  // console.log("Card props: ", props)
   
   const comment = ()=>{ 
     const text =  post.comments
@@ -30,7 +29,7 @@ const  PostCard =(props)=>{
     }
   }
 return(
-<Card style={divStyle} className="post-card" >
+<Card style={divStyle} className="post-card" id={post.id} >
     <Card.Img
       variant="top"
       src={require('../img/allison-christine-8j-2d94Orlc-unsplash.jpg')}
@@ -40,7 +39,7 @@ return(
       <Card.Text>
        {comment()}
       </Card.Text>
-      <Form.Control size="sm" type="text" placeholder="comment" />
+      <Form.Control size="sm" type="text" name="comment" value={props.comment} onChange={props.handleComment} onEnter={props.submitComment(post.id)} placeholder="comment" />
     </Card.Body>
   </Card>
 )

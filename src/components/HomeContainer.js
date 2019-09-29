@@ -1,15 +1,34 @@
 import React from "react";
 import "./HomeContainer.css";
 import Postcard from './PostCard'
-import { Card, Form, Navbar } from "react-bootstrap";
+import { Card, Form, Navbar} from "react-bootstrap";
 
 
 
-const HomeContainer = (props) => {
+class HomeContainer extends React.Component {
 
-  const thePost = props.posts.map(post => <Postcard post={post} id={post.id} comments={post.comments} key={post.id}/>)
+
+  state ={
+    comment:""
+  }
+
+
+handleComment =(e)=>{
+  this.setState({
+    comment:  e.target.value,
+   
+  })
   
-  // console.log("Home Container Props:", props.posts)
+}
+submitComment=(e)=>{
+console.log(e)
+}
+
+  render(){
+        const {fposts, user, handleComment} = this.props
+  const thePost = fposts.map(post => <Postcard post={post} id={post.id} comments={post.comments} key={post.id} handleComment={this.handleComment} comment={this.state.comment} submitComment={this.submitComment}/>)
+  
+  console.log("Home Container Props:", this.props)
   return (
     <div className="Home-Container">
      
@@ -22,7 +41,7 @@ const HomeContainer = (props) => {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              Signed in as: <a href="#login">#UsersNameHere</a>
+            Welcome Back <a href="/profile">{user}</a>
             </Navbar.Text>
           </Navbar.Collapse>
         </Navbar>
@@ -31,8 +50,8 @@ const HomeContainer = (props) => {
       <div className="Home-main"> 
       
       </div>
-        <h2>
-            Put cards here!!
+        <h2 style={{ color:"black" }}>
+            We've missed YOU...
         </h2>
 
         {thePost}
@@ -41,6 +60,7 @@ const HomeContainer = (props) => {
       <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div>
     </div>
   );
+}
 };
 
 export default HomeContainer;
