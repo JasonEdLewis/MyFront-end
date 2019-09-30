@@ -61,7 +61,7 @@ class Homepage extends React.Component {
         <HomeContainer
           fposts={this.state.follooweePosts}
           user={this.state.currentUser}
-          userid={this.state.id}
+          userId={this.state.id}
         />
       </>
     );

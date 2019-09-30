@@ -1,7 +1,8 @@
 import React from "react";
 import "./components/HomeContainer.css";
 import Postcard from './components/PostCard';
-import BlankCard from './components/NewPost';
+import NewPost from './components/NewPost';
+
 import { Card, Form, Navbar, Button, NavbarBrand, Nav} from "react-bootstrap";
 
 
@@ -9,7 +10,13 @@ class HomeContainer extends React.Component {
 
 
   state ={
-    comment:""
+    comment:'',
+    id : '',
+    picture: '',
+    caption: '',
+    likes: 0,
+    newPost: false,
+
   }
 
   
@@ -40,15 +47,26 @@ handleComment =(e)=>{
 }
 
 // SUBMIT THE COMMENT /FETCH POST
-submitComment=(e)=>{
+cameraClick=(e)=>{
+this.setState({
+  cameraClick: ! this.state.cameraClick
+})
+
 console.log(e)
+}
+// this.state.cameraClick ? NewPost() : 
+submitComment=()=>{
+
 }
 
 
 
   render(){
-        const {fposts, user, handleComment} = this.props
-  const thePost = fposts.map(post => <Postcard post={post} id={post.id} comments={post.comments} key={post.id} handleComment={this.handleComment} comment={this.state.comment} submitComment={this.submitComment}/>)
+ 
+      
+        const {fposts, user, userId} = this.props;
+    const thePost = fposts.map(post => <Postcard post={post} id={post.id} submitComment={this.submitComment} handleComment={this.handleComment} />)
+ 
   
   console.log("Home Container Props:", this.props)
   return (
@@ -56,18 +74,18 @@ console.log(e)
      
     <div className="Home-Content">
     <div className="signindiv">
-        <Navbar className="ml-auto" >
-          <Navbar.Brand href="/profile">
-            <Nav.Item className="sign-in-header">Jays'taGram </Nav.Item>
+        <Navbar  >
+          <Navbar.Brand    href="/profile">
+            <h3>Jays'taGram </h3>
             <Nav.Item>
-            <Button variant="" href='/post' className="margin-auto"><span>📸</span></Button>
+            <Button variant="" href='/post' className="margin-auto" onClick={(e)=>this.submitComment(e)}><span id={userId}>📸</span></Button>
             </Nav.Item>
           </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end"> 
             <Navbar.Text>
               
-            <Navbar.Brand href='/profile'>Welcome Back {user}</Navbar.Brand>
+            <Navbar.Brand href='/profile' >Welcome Back {user}</Navbar.Brand>
             </Navbar.Text>
           </Navbar.Collapse>
         </Navbar>
@@ -80,7 +98,7 @@ console.log(e)
             We've missed YOU...
         </h2>
 
-        {thePost}
+        { thePost}
         
         </div>
       <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div>

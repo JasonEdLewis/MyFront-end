@@ -1,6 +1,12 @@
 import React from "react";
 import { Form, Navbar, Button } from "react-bootstrap";
 
+
+
+const headerStyle = {
+  margin:"35%",
+   
+ }
 const LoginForm =(props)=>{
 
   const {handleChange, username, password, handleSubmit} = props
@@ -8,7 +14,7 @@ return(
     <div className="signindiv">
     <Navbar className="login-nav">
       <Navbar.Brand href="#home">
-        <h1 className="sign-in-header">Jays'taGram </h1>
+        <h1 style={headerStyle}>Jays'taGram </h1>
       </Navbar.Brand>
       <Navbar.Toggle />
       {/* <Navbar.Collapse className="justify-content-end">
