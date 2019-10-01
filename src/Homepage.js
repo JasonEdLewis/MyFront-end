@@ -30,28 +30,13 @@ class Homepage extends React.Component {
       .then(res => res.json())
       .then(profile => {
         this.setState({ currentUser: profile.username, id: profile.id });
-        // console.log("Current User: ", this.state.currentUser);
+        
       });
 
     this.theFetch("posts").then(data =>
       this.setState({ follooweePosts: data })
     );
   }
-
-  // postComment=(id,content,fId)=>{
-  //   fetch('http://localhost:3000/comments', {
-  //       method: 'POST',
-  //       headers:{
-  //         'Content-Type': 'Application/json'
-  //       },
-  //       body :JSON.stringify({
-  //           id,
-  //           content,
-  //           fId,
-  //       })
-
-  //   })
-  // }
 
   render() {
     // console.log(this.state)

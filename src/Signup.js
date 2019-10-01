@@ -3,38 +3,98 @@ import { Form, Col, Button, Row } from "react-bootstrap";
 import "./components/Signup.css";
 
 class Signup extends React.Component {
+  state = {
+    username: "",
+    password: "",
+    caption: ""
+  };
+
+  handleChange = e => {
+    console.log(e.target.value);
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  submitNewUser = (user, pass, cap) => {
+    // debugger;
+    return fetch("http://localhost:3000/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "Application/json",
+        Accept: "Application/json"
+      },
+      body: JSON.stringify({
+        username: user,
+        password: pass,
+        caption: cap
+      })
+    })
+      .then(resp => resp.json())
+      .then(user => {
+        user.token
+          ? this.props.history.push("/home")
+          : this.props.history.push("/");
+        localStorage.setItem("token", user.token);
+        console.log("New USer Token : ", localStorage.token);
+      });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    return this.submitNewUser(
+      this.state.username,
+      this.state.password,
+      this.state.caption
+    );
+  };
+
   render() {
+    console.log("Signup States:", this.state);
     return (
       <div className="form">
         <Form>
           <Form.Row>
-            <Form.Group as={Col} controlId="formGridEmail">
+            <Form.Group as={Col}>
               <Form.Label>Choose a Username</Form.Label>
               <Form.Control
                 type="text"
                 name="username"
                 placeholder="Enter Name"
+                value={this.state.username}
+                onChange={this.handleChange}
               />
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridPassword">
+            <Form.Group as={Col}>
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="*&*^W%^#" />
+              <Form.Control
+                type="password"
+                placeholder="*&*^W%^#"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
             </Form.Group>
           </Form.Row>
 
-          <Form.Group controlId="formGridAddress1">
+          <Form.Group>
             <Form.Label>Email</Form.Label>
             <Form.Control placeholder="" />
           </Form.Group>
 
-          <Form.Group controlId="formGridAddress2">
+          <Form.Group>
             <Form.Label>Describe Yourself</Form.Label>
-            <Form.Control placeholder="What do you like to do...?" />
+            <Form.Control
+              placeholder="What do you like to do...?"
+              value={this.state.caption}
+              name="caption"
+              onChange={this.handleChange}
+            />
           </Form.Group>
 
           <Form.Row>
-            <Form.Group as={Col} controlId="formGridCity">
+            <Form.Group as={Col}>
               <Form.Label>City</Form.Label>
               <Form.Control />
             </Form.Group>
@@ -103,7 +163,7 @@ class Signup extends React.Component {
             </Form.Group>
           </Form.Row>
 
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" onClick={this.handleSubmit}>
             Submit
           </Button>
         </Form>
