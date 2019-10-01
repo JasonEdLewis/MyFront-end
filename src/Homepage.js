@@ -3,8 +3,7 @@ import HomeContainer from "./HomeContainer";
 import PostCard from "./components/PostCard";
 import Profile from "./Profile";
 import Fragment from "react";
-import PostPage from "./PostPage"
-
+import PostPage from "./PostPage";
 
 class Homepage extends React.Component {
   state = {
@@ -22,7 +21,7 @@ class Homepage extends React.Component {
   };
   componentDidMount() {
     // this.theFetch('profile')
-    console.log("Home page: ", localStorage.token);
+    // console.log("Home page: ", localStorage.token);
     fetch("http://localhost:3000/profile", {
       headers: {
         Authorization: localStorage.token
@@ -31,7 +30,7 @@ class Homepage extends React.Component {
       .then(res => res.json())
       .then(profile => {
         this.setState({ currentUser: profile.username, id: profile.id });
-        console.log("Current User: ", this.state.currentUser);
+        // console.log("Current User: ", this.state.currentUser);
       });
 
     this.theFetch("posts").then(data =>

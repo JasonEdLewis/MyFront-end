@@ -6,6 +6,7 @@ import Profile from "./Profile";
 import Signup from "./Signup";
 import Home from "./Homepage";
 import PostPage from "./PostPage";
+import NewPostCard from './components/NewPostCard';
 import Layout from './components/Layout'
 
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
@@ -43,7 +44,7 @@ class App extends React.Component {
         <Route exact path="/home" component={Home} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/signup" component={Signup} />
-        <Route exact path="/post" component={PostPage} />
+        {/* <Route exact path="/post" component={NewPostCard} /> */}
         <Route  component={Login} />
         </Switch>
       </Router>
