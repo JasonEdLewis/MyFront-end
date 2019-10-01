@@ -52,6 +52,11 @@ class Signup extends React.Component {
   render() {
     console.log("Signup States:", this.state);
     return (
+      <>
+      <span><h3 style={{
+      color: "red", marginLeft:"25%", marginTop:"15%", fontSize: "75px"
+    
+    }}>Jays'taGram </h3></span>
       <div className="form">
         <Form>
           <Form.Row>
@@ -168,6 +173,7 @@ class Signup extends React.Component {
           </Button>
         </Form>
       </div>
+      </>
     );
   }
 }

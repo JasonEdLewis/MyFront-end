@@ -60,5 +60,6 @@ p {
     margin-right: 50%;
 }
 .nav-main{
-    flex: row
+    flex: row;
+    justify-content: space-between
 }
