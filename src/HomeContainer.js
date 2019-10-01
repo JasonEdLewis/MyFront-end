@@ -57,7 +57,6 @@ class HomeContainer extends React.Component {
   // SUBMIT THE COMMENT /FETCH POST
   handleNewPostClick = () => {
     this.setState({ newPost: !this.state.newPost });
-  
   };
 
   theNewPostCard = props => {
@@ -74,8 +73,8 @@ class HomeContainer extends React.Component {
   pageToRender = () => {
     // debugger;
     // console.log(this.props)
-   this.state.newPost 
-      ?this.theNewPostCard(this.props)
+    this.state.newPost
+      ? this.theNewPostCard(this.props)
       : this.thePost(this.props);
   };
   // this.state.cameraClick ? NewPost() :
@@ -135,56 +134,53 @@ class HomeContainer extends React.Component {
     console.log("New Post Status", this.state.newPost);
     const { fposts, user, userId } = this.props;
 
-  
     return (
       <div className="Home-Container">
         <div className="Home-Content">
           <div className="signindiv">
-            <Navbar>
-              <Navbar.Brand>
-                <h3>Jays'taGram </h3>
-                <Nav.Item>
+            <Navbar className="nav-main">
+              <Navbar.Brand >
+              <Nav.Item>
+                  <h3>Jays'taGram </h3>
+                  </Nav.Item>
+                  <Nav.Item>
                   <Button
-                    variant=""
-                    className="margin-auto"
-                    onClick={() => this.handleNewPostClick()}
-                  >
-                    <span id={this.state.id}>📸</span>
-                  </Button>
-                </Nav.Item>
+                      variant=""
+                      className="camera-btn"
+                      onClick={() => this.handleNewPostClick()}
+                    >
+                      <span className="logo" id={this.state.id}>
+                        📸
+                      </span>
+                    </Button>
+                    </Nav.Item>
+                  <Nav.Item >
+                  Welcome Back <a a href="/profile">{this.props.user}</a>
+                  </Nav.Item>
+             
               </Navbar.Brand>
               <Navbar.Toggle />
-              <Navbar.Collapse className="justify-content-end">
-                <Navbar.Text>
-                  <Navbar.Brand href="/profile">
-                    Welcome Back {this.props.user}
-                  </Navbar.Brand>
-                </Navbar.Text>
-              </Navbar.Collapse>
+    
             </Navbar>
           </div>
 
           <div className="Home-main"></div>
-         
-       
 
           {this.state.newPost ? (
             <>
-           
-            <NewPostCard
-              handleNewPost={this.handleNewPost}
-              submitPost={() => this.submitNewPost(userId)}
-              state={this.state}
-              userId={userId}
-            />
+              <NewPostCard
+                handleNewPost={this.handleNewPost}
+                submitPost={() => this.submitNewPost(userId)}
+                state={this.state}
+                userId={userId}
+              />
             </>
           ) : (
             <>
-             <h2 style={{ color: "black" }}>We've missed YOU...</h2>
-            {this.thePost()}
+              <h2 style={{ color: "black" }}>What You missed 👇🏽</h2>
+              {this.thePost()}
             </>
-          )
-        }
+          )}
         </div>
         <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div>
       </div>

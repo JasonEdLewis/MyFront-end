@@ -8,19 +8,29 @@ const divStyle = {
   width: "18rem",
   color: "black"
 };
+const cardStyle = {
+  width: "450px",
+  hieght: "250px",
+  marginLeft: "auto",
+  marginRight: "auto",
+  border: "1px",
+  borderStyle: "dashed",
+  borderColor: "pink",
+  backgroundColor: "#fff"
+};
 const spanStyle = {
   marginLeft: "auto",
   marginRight: "auto",
-  marginTop: "-15%",
+  marginTop: "0%",
   color: "pink",
   fontStyle: "italic",
   fontWeight: "bold",
   fontSize: "185%"
 };
 const thumbnailStyle = {
-  height: "35px",
-  marginRight: "15%",
-  marginTop: "1%"
+  height: "50px",
+  marginRight: "5%",
+  marginTop: "3%"
 };
 const ulStyle ={
 listStyleType :"circle"
@@ -41,7 +51,7 @@ const PostCard = props => {
     }
   };
   return (
-    <Card style={divStyle} className="post-card" id={post.id}>
+    <Card style={cardStyle} className="post-card" id={post.id}>
       <Image
         className="thumbnal"
         style={thumbnailStyle}

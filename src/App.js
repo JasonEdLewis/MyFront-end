@@ -52,12 +52,7 @@ class App extends React.Component {
       </Fragment> 
     )
 
-    // switch (this.state.page) {
-    //   case "profile":
-    //     return <Profile logout={this.logout} />;
-    //   case "login":
-    //     return <Login redirect={this.redirect} logout={this.logout}/>;
-    // }
+  
   }
 }
 

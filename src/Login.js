@@ -38,13 +38,12 @@ class Login extends React.Component {
       });
   };
 
-  // renderLoginForm=()=>{
-  //   return <LoginForm handleChange={this.handleChage} username={this.state.username} password={this.state.password} handleSubmit={this.handleSubmit}/>
-  // }
+ 
+  
   render() {
     // console.log(this.props);
     return (
-      // this.renderLoginForm()
+     
       <div className="signindiv">
         <Navbar className="login-nav">
           <Navbar.Brand href="#home">

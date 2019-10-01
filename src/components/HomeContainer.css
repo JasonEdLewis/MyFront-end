@@ -30,7 +30,7 @@ height: 500px;
 float: left;
 text-align: relative;
 color:grey;
-border:#234556, 2px
+border:#3f8aaf, 2px
 }
 .Home-Nav ul{
     list-style-type: none;
@@ -54,4 +54,11 @@ background-color: #009999;
 p {
     margin-left: auto;
     margin-right: auto;  
+}
+.logo {
+    font-size: 25px;
+    margin-right: 50%;
+}
+.nav-main{
+    flex: row
 }
