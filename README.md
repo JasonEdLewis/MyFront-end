@@ -76,3 +76,49 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 // } else {
 //   this.props.redirect("login");
 // }
+
+
+/*if (this.state.newPost){
+  return (
+    <>
+              <NewPostCard
+                handleNewPost={this.handleNewPost}
+                submitPost={() => this.submitNewPost(userId)}
+                state={this.state}
+                userId={userId}
+              />
+            </>
+     </>
+  )
+}
+else if (this.state.profile){
+this.myPost())
+}
+else {
+  return this.myPost()
+} */
+
+
+
+
+
+
+
+
+
+
+this.state.newPost ? (
+            <>
+              <NewPostCard
+                handleNewPost={this.handleNewPost}
+                submitPost={() => this.submitNewPost(userId)}
+                state={this.state}
+                userId={userId}
+              />
+            </>
+          ) : ( this.state.profile ? (this.myPost()):
+                                (<>
+              <h2 style={{ color: "black" }}>What You missed 👇🏽</h2>
+              {this.thePost()}
+            </>)
+          )

@@ -114,16 +114,16 @@ class HomeContainer extends React.Component {
     );
   };
 
-  myProfile= (props) => {
-    
-  const myPost = this.props.fposts.map(post => post.userId === this.state.id)
-     return ( <Postcard
+  myProfile = props => {
+    const myPost = this.props.fposts.map(post => post.userId === this.state.id);
+    return (
+      <Postcard
         post={myPost}
         id={myPost.id}
         submitComment={() => this.submitComment(myPost.id, myPost.userId)}
         handleComment={this.handleComment}
-      />)
-   
+      />
+    );
   };
   // this.state.cameraClick ? NewPost() :
 
@@ -140,9 +140,6 @@ class HomeContainer extends React.Component {
       .then(resp => resp.json())
       .then(console.log);
   };
-
-
-
 
   submitNewPost = id => {
     console.log(id);
@@ -206,10 +203,7 @@ class HomeContainer extends React.Component {
               </Nav.Item>
               <Nav.Item>
                 Welcome Back{" "}
-                <span style={{color: "blue"}}>
-                  {this.props.user}
-                  </span>
-              
+                <span style={{ color: "blue" }}>{this.props.user}</span>
               </Nav.Item>
               <Nav.Item>
                 <Button
@@ -235,12 +229,13 @@ class HomeContainer extends React.Component {
                 userId={userId}
               />
             </>
-          ) : ( 
-            this.state.profile ? ( this.myPost()):
-                                (<>
+          ) : this.state.profile ? (
+            this.myPost()
+          ) : (
+            <>
               <h2 style={{ color: "black" }}>What You missed 👇🏽</h2>
               {this.thePost()}
-            </>)
+            </>
           )}
         </div>
         <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div>
@@ -250,7 +245,6 @@ class HomeContainer extends React.Component {
 }
 
 export default HomeContainer;
-
 
 /* if this.state.newPost? <NewPostCard> : (this.state.profile ? this.myPost : thisThePost())
 
