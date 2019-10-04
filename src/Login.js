@@ -46,7 +46,7 @@ class Login extends React.Component {
      
       <div className="signindiv">
         <Navbar className="login-nav">
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="home">
             <h1 className="sign-in-header">Jays'taGram </h1>
           </Navbar.Brand>
           <Navbar.Toggle />

@@ -32,19 +32,21 @@ const thumbnailStyle = {
   marginRight: "5%",
   marginTop: "3%"
 };
-const ulStyle ={
-listStyleType :"circle"
-}
+const ulStyle = {
+  listStyleType: "circle",
+  color: "black"
+};
 
 const PostCard = props => {
-  const { post } = props;
-  // console.log("Card props: ", props);
+  const { post, user } = props;
+  console.log("Card props: ", props);
 
   const comment = () => {
+    debugger
     const text = post.comments;
     if (text.length > 0) {
       return text.map(t => {
-        return <li style={ulStyle}>{t.content}</li>
+        return <li style={ulStyle}>{t.content}</li>;
       });
     } else {
       return;
@@ -57,14 +59,15 @@ const PostCard = props => {
         style={thumbnailStyle}
         src={require("../img/jack.png")}
       />
-      <span style={spanStyle}>{post.user.username}</span>
+      <span style={spanStyle}>{post.username}</span>
 
       <Card.Img variant="top" src={Jack} />
 
       <Card.Body>
         <Card.Title></Card.Title>
         <Card.Text>
-        <ul>{comment()}</ul></Card.Text>
+          <ul>{comment()}</ul>
+        </Card.Text>
         <Form.Control
           size="sm"
           type="text"
@@ -75,8 +78,8 @@ const PostCard = props => {
         />
       </Card.Body>
       <Button variant="link" onClick={props.submitComment}>
-          Post
-        </Button>
+        Post
+      </Button>
     </Card>
   );
 };

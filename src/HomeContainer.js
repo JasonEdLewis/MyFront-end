@@ -48,13 +48,15 @@ import { Card, Form, Navbar, Button, NavbarBrand, Nav } from "react-bootstrap";
 
 class HomeContainer extends React.Component {
   state = {
-    id: "",
+    id: this.props.userId,
+    name: this.props.user,
     comment: "",
     post_id: "",
     Picture: "",
     caption: "",
     likes: 0,
-    newPost: false
+    page:"thePost"
+    
   };
 
   info = () => {
@@ -77,6 +79,8 @@ class HomeContainer extends React.Component {
     });
   };
 
+  
+
   // HANDLER FOR COMMENTS
   handleComment = e => {
     // console.log(e.target.value);
@@ -86,7 +90,7 @@ class HomeContainer extends React.Component {
   };
 
   thePost = props => {
-    let i = 0;
+    
 
     return this.props.fposts.map(post => (
       <Postcard
@@ -110,18 +114,21 @@ class HomeContainer extends React.Component {
         submitPost={() => this.submitNewPost(this.state.id)}
         state={this.state}
         userId={this.state.id}
+
       />
     );
   };
 
-  myProfile = props => {
-    const myPost = this.props.fposts.map(post => post.userId === this.state.id);
+  myProfile =() => {
+    const myPost = this.props.fposts.filter(post => post.user_id === this.state.id);
+    debugger
     return (
       <Postcard
         post={myPost}
         id={myPost.id}
         submitComment={() => this.submitComment(myPost.id, myPost.userId)}
         handleComment={this.handleComment}
+        
       />
     );
   };
@@ -178,15 +185,27 @@ class HomeContainer extends React.Component {
     });
   };
 
+  pageToRender=()=>{
+    switch(this.state.page){
+      case "thePost":
+        return this.thePost()
+      case "newPost":
+        return this.theNewPostCard()
+      case "profile":
+        return this.myProfile()
+    }
+  }
+
   render() {
-    console.log("New Post Status", this.state.newPost);
+    // debugger
+    console.log("Home Container state", this.state);
     const { fposts, user, userId } = this.props;
 
     return (
       <div className="Home-Container">
         <div className="Home-Content">
           <div className="signindiv">
-            <Navbar className="nav-main">
+            <Navbar className="ml-auto">
               <Nav.Item>
                 <h3>Jays'taGram </h3>
               </Nav.Item>
@@ -194,7 +213,7 @@ class HomeContainer extends React.Component {
                 <Button
                   variant=""
                   className="camera-btn"
-                  onClick={() => this.handleNewPostClick()}
+                  onClick={() => this.state.page({page:"newPost"})}
                 >
                   <span className="logo" id={this.state.id}>
                     📸
@@ -202,14 +221,14 @@ class HomeContainer extends React.Component {
                 </Button>
               </Nav.Item>
               <Nav.Item>
-                Welcome Back{" "}
-                <span style={{ color: "blue" }}>{this.props.user}</span>
+                Welcome Back
+                <span style={{ color: "blue" }} onClick={()=> this.setState({page:"profile"})}>{this.props.user}</span>
               </Nav.Item>
               <Nav.Item>
                 <Button
                   variant="outline-dark"
                   onClick={() => this.props.history.push("/login")}
-                  className="logout-btn"
+                  className="ml-auto"
                 >
                   logout
                 </Button>
@@ -220,23 +239,23 @@ class HomeContainer extends React.Component {
 
           <div className="Home-main"></div>
 
-          {this.state.newPost ? (
-            <>
-              <NewPostCard
-                handleNewPost={this.handleNewPost}
-                submitPost={() => this.submitNewPost(userId)}
-                state={this.state}
-                userId={userId}
-              />
-            </>
-          ) : this.state.profile ? (
-            this.myPost()
-          ) : (
-            <>
-              <h2 style={{ color: "black" }}>What You missed 👇🏽</h2>
-              {this.thePost()}
-            </>
-          )}
+          { 
+            this.pageToRender()
+            
+          // this.state.newPost ? (
+          //   <>
+          //     <NewPostCard
+          //       handleNewPost={this.handleNewPost}
+          //       submitPost={() => this.submitNewPost(userId)}
+          //       state={this.state}
+          //       userId={userId}
+          //     />
+          //   </>)
+          //  :
+          //   this.thePost()
+          
+              
+          }
         </div>
         <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div>
       </div>
