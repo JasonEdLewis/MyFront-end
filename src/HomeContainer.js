@@ -122,27 +122,17 @@ class HomeContainer extends React.Component {
     return (
       <div className="Home-Container">
         <div className="Home-Content">
-          <div className="signindiv">
-            <Navbar className="ml-auto">
-              <Nav.Item>
-                <h3>Jays'taGram </h3>
-              </Nav.Item>
-              <Nav.Item>
-                <Button
-                  variant=""
-                  className="camera-btn"
-                  onClick={() => this.setState({page:"newPost"})}
-                >
-                  <span className="logo" id={this.state.id}>
-                    📸
-                  </span>
-                </Button>
-              </Nav.Item>
-              <Nav.Item>
-                Welcome Back
-                <span style={{ color: "blue" }} onClick={()=> this.setState({page:"profile"})}>{this.props.user}</span>
-              </Nav.Item>
-              <Nav.Item>
+          <div className="Homepage-nav">
+          <span>Jays'taGram </span>
+          <Button variant="" className="camera-btn" 
+          onClick={() => this.setState({page:"newPost"})} >
+          </Button>
+          <span className="logo" id={this.state.id}> 📸 </span>
+          <span onClick={()=> this.setState({page:"profile"})} className="User-span" >Welcome Back {this.props.user}</span>
+          </div>
+               
+                
+              
                 <Button
                   variant="outline-dark"
                   onClick={this.logout}
@@ -150,20 +140,14 @@ class HomeContainer extends React.Component {
                 >
                   logout
                 </Button>
-              </Nav.Item>
-              <Navbar.Toggle />
-            </Navbar>
           </div>
-
           <div className="Home-main"></div>
-
-          { 
-            this.pageToRender()   
-              
-          }
+          {  this.pageToRender()  }
+          <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div>
         </div>
-        <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div>
-      </div>
+        
+   
+
     );
   }
 }

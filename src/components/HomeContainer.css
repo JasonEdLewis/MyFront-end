@@ -24,13 +24,16 @@ text-align: center;
 }
 
 
-.Home-Nav{
+.Homepage-nav{
 width: 80 px;
 height: 500px;
 float: left;
 text-align: relative;
 color:grey;
 border:#3f8aaf, 2px
+}
+.User-span{
+    color: rgb(24, 73, 233);
 }
 .Home-Nav ul{
     list-style-type: none;
