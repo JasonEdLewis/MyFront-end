@@ -17,11 +17,6 @@ return(
         <h1 style={headerStyle}>Jays'taGram </h1>
       </Navbar.Brand>
       <Navbar.Toggle />
-      {/* <Navbar.Collapse className="justify-content-end">
-        <Navbar.Text>
-          Signed in as: <a href="#login">#UsersNameHere</a>
-        </Navbar.Text>
-      </Navbar.Collapse> */}
     </Navbar>
 
     <div>
