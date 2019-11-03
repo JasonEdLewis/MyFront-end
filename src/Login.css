@@ -1,0 +1,39 @@
+.login-nav {
+    align-items: center;
+    justify-items: center;
+    border-style: solid;
+    border-width: 0.1rem;
+    border-color: rgba(226, 228, 230, 0.794);
+    border-radius: 2%;
+    margin: 0% 1% 0% 1%;
+  }
+
+  .signindiv {
+    width: 100vw;
+    height: 100vh;
+    margin-left: -20.5vw;
+    position: absolute;
+    /* background-color: black; */
+  }
+  .sign-in-header {
+    color: red;
+    text-emphasis: ;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-feature-settings: "c2sc";
+   text-align: center;
+   background-color: grey;
+  }
+  .header-div{
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAATklEQVQoU2O0O3X+PwMDA8MhM0NGEI0LMBKtEJsJD27YgW1R0DgEtwWrdUQrxGYLY8V5iDUdhghrKFOITfenmXFgW/jSF+H3DNEKsdkCAO99IAvXcD3VAAAAAElFTkSuQmCC");
+    padding: 2.5vh;
+    width: 96vw;
+    margin-left: 1.5vw;
+    margin-top: 5vh;
+    border: solid rgb(196, 194, 194) .1em ;
+    align-content: center;
+  }
+  .camera-logo {
+    padding-top: 7.5%;
+    width: 200px;
+    margin: 0% 45%;
+  }
