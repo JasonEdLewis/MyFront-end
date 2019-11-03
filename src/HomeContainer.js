@@ -129,19 +129,10 @@ class HomeContainer extends React.Component {
           </Button>
           <span className="logo" id={this.state.id}> 📸 </span>
           <span onClick={()=> this.setState({page:"profile"})} className="User-span" >Welcome Back {this.props.user}</span>
+          
           </div>
-               
-                
-              
-                <Button
-                  variant="outline-dark"
-                  onClick={this.logout}
-                  className="ml-auto"
-                >
-                  logout
-                </Button>
+          <Button variant="outline-dark" onClick={this.logout} className="ml-auto"> logout </Button>
           </div>
-          <div className="Home-main"></div>
           {  this.pageToRender()  }
           <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div>
         </div>

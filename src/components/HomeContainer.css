@@ -4,11 +4,9 @@ body{
 
 
 .Home-Container{
-   
     color: white;
-    width: 800px;
-    margin-left: auto;
-    margin-right: auto; 
+    width: 100vw;
+  
 }
 
 .Home-Header{
@@ -25,12 +23,15 @@ text-align: center;
 
 
 .Homepage-nav{
-width: 80 px;
-height: 500px;
-float: left;
-text-align: relative;
-color:grey;
-border:#3f8aaf, 2px
+width: 90vw;
+height: 10vh;
+align-items: center;
+margin-right: -100vw;
+color:rgb(53, 221, 123);
+border:#3f8aaf;
+border-width: .2em;
+border-style: dotted;
+background-color: darkgray;
 }
 .User-span{
     color: rgb(24, 73, 233);
@@ -42,7 +43,7 @@ border:#3f8aaf, 2px
 
 
 .Home-main{
-background-color: orange;
+background-color: rgb(17, 12, 1);
 width: 600px;
 float: right;
 
