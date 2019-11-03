@@ -108,6 +108,11 @@ class HomeContainer extends React.Component {
         return this.myProfile()
     }
   }
+  logout=()=>{
+    localStorage.clear()
+    this.props.history.push('/')
+  }
+
 
   render() {
     // debugger
@@ -126,7 +131,7 @@ class HomeContainer extends React.Component {
                 <Button
                   variant=""
                   className="camera-btn"
-                  onClick={() => this.state.page({page:"newPost"})}
+                  onClick={() => this.setState({page:"newPost"})}
                 >
                   <span className="logo" id={this.state.id}>
                     📸
@@ -140,7 +145,7 @@ class HomeContainer extends React.Component {
               <Nav.Item>
                 <Button
                   variant="outline-dark"
-                  onClick={() => fetchPost()}
+                  onClick={this.logout}
                   className="ml-auto"
                 >
                   logout

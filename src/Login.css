@@ -17,10 +17,14 @@
   }
   .sign-in-header {
     color: red;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-feature-settings: "c2sc";
-   text-align: center;
-   background-color: grey;
+    font-family: 'Abril Fatface', cursive;
+    /* font-family: Georgia, "Times New Roman", Times, serif; */
+  font-feature-settings: "c2sc";
+   align-items: center;
+   justify-content: center;
+   font-size: 5rem;
+   font-weight: 900;
+   text-shadow: 2px 2px rgba(5, 111, 138, 0.712) ;
   }
   .header-div{
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAATklEQVQoU2O0O3X+PwMDA8MhM0NGEI0LMBKtEJsJD27YgW1R0DgEtwWrdUQrxGYLY8V5iDUdhghrKFOITfenmXFgW/jSF+H3DNEKsdkCAO99IAvXcD3VAAAAAElFTkSuQmCC");
@@ -28,13 +32,18 @@
     width: 96vw;
     margin-left: 1.5vw;
     margin-top: 5vh;
-    border: solid rgb(196, 194, 194) .1em ;
+    border: solid rgb(196, 194, 194) .01em ;
     align-content: center;
+    text-align: center;
+  }
+  .signInForm {
+    width: 10%;
+    margin: 2.5% 49%;
   }
   .camera-logo {
     padding-top: 7.5%;
     width: 200px;
-    margin: 0% 45%;
+    margin: 0% 50%;
   }
   #myVideo {
     position: fixed;

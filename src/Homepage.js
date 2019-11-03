@@ -41,13 +41,14 @@ class Homepage extends React.Component {
   }
 
   render() {
-    // console.log(this.state)
+    console.log("Home Page Props:", this.props)
     return (
       <>
         <HomeContainer
           fposts={this.state.follooweePosts}
           user={this.state.currentUser}
           userId={this.state.id}
+          history={this.props.history}
         />
       </>
     );
