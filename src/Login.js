@@ -46,6 +46,7 @@ class Login extends React.Component {
     return (
      
       <div className="signindiv">
+       
         <div className="header-div">
            <span className="sign-in-header"><h1 >Jays'taGram </h1></span> 
         </div>

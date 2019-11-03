@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar, Button, Card } from "react-bootstrap";
 import PostCard from "./components/PostCard";
 
+
 export default class Profile extends React.Component {
   postCard = () => {
     return <PostCard />;
