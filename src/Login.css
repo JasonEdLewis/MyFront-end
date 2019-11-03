@@ -9,15 +9,14 @@
   }
 
   .signindiv {
-    width: 100vw;
+    width: 90vw;
     height: 100vh;
-    margin-left: -20.5vw;
+    margin-left: -27.5vw;
     position: absolute;
     /* background-color: black; */
   }
   .sign-in-header {
     color: red;
-    text-emphasis: ;
     font-family: Georgia, "Times New Roman", Times, serif;
     font-feature-settings: "c2sc";
    text-align: center;

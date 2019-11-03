@@ -3,6 +3,7 @@ import HomeContainer from "./HomeContainer";
 import PostCard from "./components/PostCard";
 import Profile from "./Profile";
 import Fragment from "react";
+import {fetchPost } from './components/PostAdapter'
 
 
 class Homepage extends React.Component {
@@ -12,12 +13,13 @@ class Homepage extends React.Component {
     follooweePosts: []
   };
 
-  theFetch = way => {
+  theFetch = async way => {
     let url;
     way
       ? (url = `http://localhost:3000/${way}`)
       : (url = "http://localhost:3000/");
-    return fetch(url).then(resp => resp.json());
+    const resp = await fetch(url);
+    return await resp.json();
   };
   componentDidMount() {
     // this.theFetch('profile')
