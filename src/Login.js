@@ -1,5 +1,6 @@
 import React from "react";
-import LoginForm from './components/LoginForm'
+import LoginForm from './components/LoginForm';
+import './Login.css'
 import { Form, Navbar, Button } from "react-bootstrap";
 
 {
@@ -45,13 +46,9 @@ class Login extends React.Component {
     return (
      
       <div className="signindiv">
-        <Navbar className="login-nav">
-          <Navbar.Brand href="home">
-            <h1 className="sign-in-header">Jays'taGram </h1>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar>
-
+        <div className="header-div">
+           <span className="sign-in-header"><h1 >Jays'taGram </h1></span> 
+        </div>
         <div>
           <img
             src="https://www.jing.fm/clipimg/full/90-902599_camera-icons-transparent-background-ios-camera-logo-png.png"
@@ -82,7 +79,7 @@ class Login extends React.Component {
           <Button variant="primary" type="submit" className="submit-btn">
             Login
           </Button>
-          <p className="stars-under-signup">º º º º º º º º º </p>
+          <p className="stars-under-signup">º º º º º º º º </p>
           <a href="/signup" className="signup-text">
             signup{" "}
           </a>
