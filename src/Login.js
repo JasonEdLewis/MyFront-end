@@ -35,7 +35,6 @@ class Login extends React.Component {
         user.token ? this.props.history.push("/home")
           : this.props.history.push("/");
         localStorage.setItem("token", user.token);
-        console.log("Token from 2nd then fetch: ",localStorage.token)
       });
   };
 
@@ -48,7 +47,7 @@ class Login extends React.Component {
       <div className="signindiv">
        
         <div className="header-div">
-           <span className="sign-in-header"><h1 >Jays'taGram </h1></span> 
+           <span className="sign-in-header" >Jays'taGram</span> 
         </div>
         <div>
           <img

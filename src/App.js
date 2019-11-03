@@ -39,7 +39,10 @@ class App extends React.Component {
       <Router>
        <Switch>
         <Route exact path="/" component={Login} />
-        <Route exact path="/home" component={Home} />
+        <Route exact path="/home"
+        render={routerProps => <Home  {... routerProps}  history={this.props.history}/>} 
+        component={Home} 
+        />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/signup" component={Signup} />
         <Route  component={Login} />
