@@ -9,7 +9,7 @@ const formStyle = {
   color: "black"
 };
 const thumbnailStyle = {
-  height: "250px",
+  height: "150px",
   marginRight: "auto",
   marginLeft: "auto",
   marginTop: "1%"

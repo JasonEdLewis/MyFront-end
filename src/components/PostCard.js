@@ -33,16 +33,16 @@ const thumbnailStyle = {
   marginTop: "3%"
 };
 const ulStyle = {
-  listStyleType: "circle",
+  listStyleType: "square",
   color: "black"
 };
 
 const PostCard = props => {
   const { post, user } = props;
-  console.log("Card props: ", props);
+  // console.log("Card props: ", props);
 
   const comment = () => {
-    debugger
+
     const text = post.comments;
     if (text.length > 0) {
       return text.map(t => {

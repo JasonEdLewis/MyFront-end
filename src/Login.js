@@ -46,9 +46,7 @@ class Login extends React.Component {
     return (
      
       <div className="signindiv">
-        <video autoplay muted loop id="myVideo">
-          <source src="rain.mp4" type="video/mp4"/>
-        </video>
+       
         <div className="header-div">
            <span className="sign-in-header"><h1 >Jays'taGram </h1></span> 
         </div>
