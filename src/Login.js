@@ -85,7 +85,7 @@ class Login extends React.Component {
           <Button variant="primary" type="submit" className="submit-btn">
             Login
           </Button>
-          <p className="stars-under-signup">º º º º º º º º </p>
+          <p className="stars-under-signup">º º º º º º  </p>
           <a href="/signup" className="signup-text">
             signup{" "}
           </a>

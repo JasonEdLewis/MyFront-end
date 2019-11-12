@@ -3,7 +3,9 @@ import HomeContainer from "./HomeContainer";
 import PostCard from "./components/PostCard";
 import Profile from "./Profile";
 import Fragment from "react";
-import {fetchPost } from './components/PostAdapter'
+import { fetchPost } from './components/PostAdapter';
+import firebase, { storage } from 'firebase';
+import { db } from './firebase'
 
 
 class Homepage extends React.Component {
@@ -24,6 +26,17 @@ class Homepage extends React.Component {
   componentDidMount() {
     // this.theFetch('profile')
     // console.log("Home page: ", localStorage.token);
+
+
+    // db.collection('postpics').get().then((snapshot) => {
+    //   console.log(snapshot.docs);
+    //   snapshot.docs.forEach(doc => {
+    //     console.log(doc.data())
+    //   })
+    // })
+    
+
+
     fetch("http://localhost:3000/profile", {
       headers: {
         Authorization: localStorage.token
@@ -32,7 +45,7 @@ class Homepage extends React.Component {
       .then(res => res.json())
       .then(profile => {
         this.setState({ currentUser: profile.username, id: profile.id });
-        
+
       });
 
     this.theFetch("posts").then(data =>
