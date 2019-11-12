@@ -11,15 +11,11 @@ const LoginForm =(props)=>{
 
   const {handleChange, username, password, handleSubmit} = props
 return(
-    <div className="signindiv">
-    <Navbar className="login-nav">
-      <Navbar.Brand href="#home">
-        <h1 style={headerStyle}>Jays'taGram </h1>
-      </Navbar.Brand>
-      <Navbar.Toggle />
-    </Navbar>
-
     <div>
+    <div>
+      <div className="signindiv">
+        <h1 style={headerStyle}>Jays'taGram </h1>
+    </div>
       <img
         src="https://www.jing.fm/clipimg/full/90-902599_camera-icons-transparent-background-ios-camera-logo-png.png"
         className="camera-logo"
