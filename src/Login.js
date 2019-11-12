@@ -1,7 +1,8 @@
 import React from "react";
 import LoginForm from './components/LoginForm';
-import './Login.css'
+import './css/Login.css';
 import { Form, Navbar, Button } from "react-bootstrap";
+import Vid from './img/caliSkaters.mp4';
 
 {
   /* <Spinner animation="grow" variant="info" /> */
@@ -43,10 +44,15 @@ class Login extends React.Component {
   render() {
     // console.log(this.props);
     return (
-     
+    //  <div className="video-div">
+    //   <video  id="myVideo" loop autoplay >
+    //   <source src="http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4" />
+    //       {/* <source src={ Vid } type="video/mp4"/> */}
+    //     </video>
+    //  </div>
       <div className="signindiv">
-       
-        <div className="header-div">
+        
+         <div className="header-div">
            <span className="sign-in-header" >Jays'taGram</span> 
         </div>
         <div>
@@ -83,8 +89,8 @@ class Login extends React.Component {
           <a href="/signup" className="signup-text">
             signup{" "}
           </a>
-        </Form>
-      </div>
+        </Form> 
+    </div> 
     );
   }
 }

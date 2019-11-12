@@ -1,0 +1,45 @@
+.the-card {
+    margin: auto;
+    margin-top: 5%;
+    border-style: solid;
+    border-color: #000;
+    border-width:1px;
+    width: 288px;
+    height: 425px;
+    color: black
+  }
+
+  
+  .img-box{
+    padding-top: 15%;
+  }
+  .post-text-area{
+      margin-top: 10%;
+    
+      border-color: rgb(215, 216, 216);
+     
+  }
+  #post-submit-plus{
+    background-color:rgb(233, 229, 222);
+    font-size: 1rem;
+    color: rgb(3, 45, 185);
+    padding:.5% 2%;
+    border-radius: 10%;
+    margin: 55% 55% 55% 45%;
+    border-style: solid;
+    border-width:.075rem;
+    border-color:rgb(3, 45, 185);
+
+  }
+  #post-submit-plus:hover{
+    font-size:1.01rem;
+    background-color: rgba(221, 220, 218, 0.788);
+    color: rgb(29, 82, 255);
+    padding:1.5% 2%;
+    margin: 5% 55% 55% 45%;
+    border-color:black;
+    border-style: solid;
+    border-width: .05rem;
+    border-radius: 12%;
+  }
+  

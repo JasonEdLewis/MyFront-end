@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Col, Button, Row } from "react-bootstrap";
-import "./components/Signup.css";
+import "./css/Signup.css";
 
 class Signup extends React.Component {
   state = {

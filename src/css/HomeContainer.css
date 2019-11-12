@@ -1,0 +1,137 @@
+body{
+    font-family: 'Times New Roman', Times; 
+    display: flex;
+}
+
+
+.Home-Container{
+    color: white;
+    opacity: 100%;
+    width: 100vw; 
+
+    
+   
+  
+}
+
+
+.Home-Header{
+    background-color: green ;
+    text-align: center;
+
+}
+
+
+.Home-Content{
+padding: 10px ;
+text-align: center;
+}
+
+
+.Homepage-nav{
+display: grid;
+width: 100vw;
+height: 15vh;
+margin: 0 auto;
+padding: 2%;
+margin-top: 1%;
+position: absolute center;
+color:rgb(53, 221, 123);
+border:#3f8aaf; 
+border-width: .2em;
+border-style: dotted;
+ background-color: darkgray;
+grid-template-columns: repeat(4, 1fr);
+grid-auto-rows:15vh ;
+grid-template-areas:
+            'jay camera theUser thumb'
+
+;
+
+}
+#jays-gram {
+    grid-area: jay;
+    color: red;
+    font-family: 'Abril Fatface', cursive;
+    /* font-family: Georgia, "Times New Roman", Times, serif; */
+  font-feature-settings: "c2sc";
+   font-size: 3rem;
+   font-weight: 900;
+   margin: -2% 0% 0% 0%;
+   text-shadow: 2px 2px rgba(5, 111, 138, 0.712) ;
+
+}
+.camera {
+    grid-area: camera;
+    font-size: 5vw;
+    margin: -16% 0% 0% 90%;
+   float: center;
+}
+.user-span{
+    grid-area: theUser;
+    margin: 0% 50% 50% 0%;
+    color: rgb(24, 73, 233);
+  
+}
+.thumb-and-button{
+    display: grid;
+    grid-area: thumb;
+    grid-template-rows: repeat(1, 1fr);
+    grid-auto-rows: 15 vh;
+    grid-template-areas:
+                'thumbnail logout'
+    
+    ;
+   
+    }
+
+.thumbnail{
+    grid-area: thumbnail;
+    margin: -7.5% 0% 0% 65%;
+}
+#thumbnail{
+    width: 7.5rem
+}
+.logout{
+        grid-area: logout;
+        width: 20%;
+        height: 20%;
+        margin: 90% 0% 10% -30%;
+       
+    }
+#logout-button {
+    border-radius: 7.5%;
+    border-style: solid;
+    border-color: rgb(85, 85, 85);
+    border-width: .075rem;
+    color: rgb(102, 101, 104);
+}
+.Home-Nav ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+
+.Home-main{
+background-color: rgb(17, 12, 1);
+width: 600px;
+float: right;
+
+}
+
+
+.Home-footer{
+clear: both;
+background-color: #009999;
+}
+
+p {
+    margin-left: auto;
+    margin-right: auto;  
+}
+
+.nav-main{
+    flex: row;
+    justify-content: space-between
+}
+

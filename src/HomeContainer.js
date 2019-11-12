@@ -1,9 +1,11 @@
 import React from "react";
-import "./components/HomeContainer.css";
+import "./css/HomeContainer.css";
 import Postcard from "./components/PostCard";
 import NewPostCard from "./components/NewPostCard";
-import {fetchPost, submitNewPost } from './components/PostAdapter';
-import {postComment } from './components/CommentAdapter'
+import { fetchPost, submitNewPost } from './components/PostAdapter';
+import { postComment } from './components/CommentAdapter';
+import { Image } from 'react-bootstrap';
+import Jack from "./img/jack.png";
 
 
 import { Card, Form, Navbar, Button, NavbarBrand, Nav } from "react-bootstrap";
@@ -17,8 +19,8 @@ class HomeContainer extends React.Component {
     Picture: "",
     caption: "",
     likes: 0,
-    page:"thePost"
-    
+    page: "thePost"
+
   };
 
   info = () => {
@@ -34,7 +36,7 @@ class HomeContainer extends React.Component {
   };
 
   thePost = props => {
-    
+
 
     return this.props.fposts.map(post => (
       <Postcard
@@ -58,26 +60,29 @@ class HomeContainer extends React.Component {
         submitPost={() => (this.state.id)}
         state={this.state}
         userId={this.state.id}
+        back={this.returnToThePost}
 
       />
     );
   };
 
-  myProfile =() => {
+  myProfile = () => {
     const myPost = this.props.fposts.filter(post => post.user_id === this.state.id);
-    debugger
     return (
       <Postcard
         post={myPost}
         id={myPost.id}
         submitComment={() => this.submitComment(myPost.id, myPost.userId)}
         handleComment={this.handleComment}
-        
+
       />
     );
   };
   // this.state.cameraClick ? NewPost() :
 
+  returnToThePost =()=>{
+    this.setState({page:"thePost"})
+  }
   submitComment = (postId, userId) => {
     console.log(
       "Post id",
@@ -98,8 +103,9 @@ class HomeContainer extends React.Component {
     });
   };
 
-  pageToRender=()=>{
-    switch(this.state.page){
+  pageToRender = () => {
+
+    switch (this.state.page) {
       case "thePost":
         return this.thePost()
       case "newPost":
@@ -108,7 +114,7 @@ class HomeContainer extends React.Component {
         return this.myProfile()
     }
   }
-  logout=()=>{
+  logout = () => {
     localStorage.clear()
     this.props.history.push('/')
   }
@@ -117,27 +123,37 @@ class HomeContainer extends React.Component {
   render() {
     // debugger
     console.log("Home Container props", this.props);
-    const { fposts, user, userId } = this.props;
+    const { fposts, user, userId, history } = this.props;
 
     return (
       <div className="Home-Container">
-        <div className="Home-Content">
-          <div className="Homepage-nav">
-          <span>Jays'taGram </span>
-          <Button variant="" className="camera-btn" 
-          onClick={() => this.setState({page:"newPost"})} >
-          </Button>
-          <span className="logo" id={this.state.id}> 📸 </span>
-          <span onClick={()=> this.setState({page:"profile"})} className="User-span" >Welcome Back {this.props.user}</span>
-          
+        <div className="Homepage-nav">
+
+          <div id="jays-gram" onClick={()=> this.returnToThePost()}><span >{this.props.user}s'taGram </span></div>
+
+          <div>
+            <span className="camera" id={this.state.id} onClick={() => this.setState({ page: "newPost" })}> 📸 </span>
           </div>
-          <Button variant="outline-dark" onClick={this.logout} className="ml-auto"> logout </Button>
+
+         
+          <div className="thumb-and-button">
+            <div className="thumbnail" onClick={()=> this.myProfile()}><img src={Jack} id='thumbnail' /> </div>
+            <div className="logout"><button onClick={this.logout} id="logout-button" > logout  </button></div>
+
+
+
           </div>
-          {  this.pageToRender()  }
-          <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div>
+
+
         </div>
-        
-   
+        <div className="Home-Content">
+
+          {this.pageToRender()}
+          {this.state.page !== "newPost" ? <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div> : <></>}
+        </div>
+      </div>
+
+
 
     );
   }
