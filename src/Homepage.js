@@ -2,10 +2,9 @@ import React from "react";
 import HomeContainer from "./HomeContainer";
 import PostCard from "./components/PostCard";
 import Profile from "./Profile";
-import Fragment from "react";
 import { fetchPost } from './components/PostAdapter';
-import firebase, { storage } from 'firebase';
-import { db } from './firebase'
+
+
 
 
 class Homepage extends React.Component {

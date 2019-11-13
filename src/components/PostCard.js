@@ -38,26 +38,25 @@ const ulStyle = {
 };
 
 const PostCard = props => {
-  
 
   const { post, user } = props;
-  // console.log("Card props: ", props);
+  console.log("Card props: ", props);
 
-  
-  
+
+
   const comment = () => {
 
     const text = post.comments;
-    if (text.length > 0) {
+    if (text) {
       return text.map(t => {
         return <li style={ulStyle}>{t.content}</li>;
       });
     } else {
-      return;
+      return <h6 style={{ color: "light-grey" }}>Be the first to comment</h6>;
     }
   };
   return (
-    
+
     <Card style={cardStyle} className="post-card" id={post.id}>
 
       <Image
@@ -88,7 +87,7 @@ const PostCard = props => {
         Post
       </Button>
     </Card>
-    
+
   );
 };
 
