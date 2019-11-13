@@ -5,7 +5,7 @@ import NewPostCard from "./components/NewPostCard";
 import { fetchPost, submitNewPost } from './components/PostAdapter';
 import { postComment } from './components/CommentAdapter';
 import { Image } from 'react-bootstrap';
-import Jack from "./img/jack.png";
+import Jack from "./img/jack.jpg";
 
 
 import { Card, Form, Navbar, Button, NavbarBrand, Nav } from "react-bootstrap";
@@ -122,7 +122,7 @@ class HomeContainer extends React.Component {
 
   render() {
     // debugger
-    console.log("Home Container props", this.props);
+    // console.log("Home Container props", this.props);
     const { fposts, user, userId, history } = this.props;
 
     return (

@@ -54,7 +54,7 @@ class Homepage extends React.Component {
   }
 
   render() {
-    console.log("Home Page Props:", this.props)
+    // console.log("Home Page Props:", this.props)
     return (
       <>
         <HomeContainer

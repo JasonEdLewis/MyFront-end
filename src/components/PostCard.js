@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Form, Button, Col, Image, Container } from "react-bootstrap";
-import Jack from "../img/jack.png";
+import Jack from "../img/jack.jpg";
 
 const divStyle = {
   marginLeft: "32%",
@@ -41,7 +41,7 @@ const PostCard = props => {
   
 
   const { post, user } = props;
-  console.log("Card props: ", props);
+  // console.log("Card props: ", props);
 
   
   
@@ -63,7 +63,7 @@ const PostCard = props => {
       <Image
         className="thumbnal"
         style={thumbnailStyle}
-        src={require("../img/jack.png")}
+        src={require("../img/jack.jpg")}
       />
       <h5>{post.caption}</h5>
       <span style={spanStyle}>{post.username}</span>

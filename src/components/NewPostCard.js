@@ -1,6 +1,8 @@
 import React from "react";
 import '../css/newPostCard.css';
-import { storage } from '../firebase'
+import { storage } from '../firebase/index';
+import Loader from '../components/loader'
+
 
 
 
@@ -8,49 +10,66 @@ import { storage } from '../firebase'
 
 class NewPostCard extends React.Component {
 
-  state ={
+  state = {
     image: null,
     url: "",
-    caption: ""
+    caption: "",
+    loading: false
   }
 
   selectedFileHander = (e) => {
-   if(e.target.files[0]){ this.setState({image: e.target.files[0]}) };
-  
-  }
- handleSubmit =(e)=>{
-    e.preventDefault()
+    if (e.target.files[0]) { this.setState({ image: e.target.files[0] }) };
 
-
-  //  this.props.submitPost(this.state.caption)
   }
-  handleTextChange = e =>{
-    this.setState({ [e.target.name]: e.target.value  })
+  handleSubmit = () => {
+    const { image } = this.state;
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+     this.setState({ loading: true })
+     debugger
+    uploadTask.on('state_changed', (snapshot) => {
+     
+    },
+      (error) => {
+        console.log(error);
+
+      },
+      () => {
+        storage.ref('images').child(image.name).getDownloadURL().then(url => {
+          console.log(url)
+          // this.setState({loading:false})
+        })
+      })
+
+    //  this.props.submitPost(this.state.caption)
+    //[funcName].on(progress, error, complete) these are the task for the arguments that '.on()' takes
+  }
+  handleTextChange = e => {
+    this.setState({ [e.target.name]: e.target.value })
   }
   render() {
     console.log("NewPost Card props:", this.props, "New card State", this.state);
     const { handleNewPost, state, submitPost, userId } = this.props;
     return (
-      <><br/><p className="new-post-heading">Make New Post</p>
-      <div className="the-card">
-        
-        <input type="file" onChange={this.selectedFileHander} style={{display:"none"}} ref={fileInput => this.fileInput = fileInput}/>
-        <div className="img-box" onClick={()=> this.fileInput.click()}>
-          
-          <img src={require("../img/pic_placeholder.png")} />
-        </div>
+      <><br />{this.state.loading ? <Loader /> : <p className="new-post-heading">Make New Post</p>}
+        <div className="the-card">
 
-        <div>
-          <textarea className="post-text-area" rows="5" cols="30" placeholder="#litty #🔥 last night was mad trill" style={{ color: "light-blue" }} name="caption" value={this.state.caption} onChange={this.handleTextChange}></textarea>
+          <input type="file" onChange={this.selectedFileHander} style={{ display: "none" }} ref={fileInput => this.fileInput = fileInput} />
+          <div className="img-box" onClick={() => this.fileInput.click()}>
 
-          <span></span>
-        </div>
-        <span onClick={this.handleSubmit} id="post-submit-plus">
-          ✚
+            <img src={require("../img/pic_placeholder.png")} />
+          </div>
+
+          <div>
+            <textarea className="post-text-area" rows="5" cols="30" placeholder="#litty #🔥 last night was mad trill" style={{ color: "light-blue" }} name="caption" value={this.state.caption} onChange={this.handleTextChange}></textarea>
+
+            <span></span>
+          </div>
+          <span onClick={this.handleSubmit} id="post-submit-plus">
+            ✚
           </span>
 
 
-      </div>
+        </div>
       </>
     );
   }
