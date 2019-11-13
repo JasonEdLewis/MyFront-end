@@ -1,5 +1,29 @@
 .form {
-  margin-top: 10%;
-  /* background-color: rgb(213, 225, 250); */
-  padding: 10%;
+position: relative;
+margin-left: 50%;
+margin-top: 10%;
+width: 50vw;
+height:auto;
+background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAATklEQVQoU2O0O3X+PwMDA8MhM0NGEI0LMBKtEJsJD27YgW1R0DgEtwWrdUQrxGYLY8V5iDUdhghrKFOITfenmXFgW/jSF+H3DNEKsdkCAO99IAvXcD3VAAAAAElFTkSuQmCC");
+background-color: rgb(225, 232, 246);
+border-style: solid;
+border-color: rgba(255, 127, 80, 0.39);
+border-width: .01rem;
+padding: 7.5% 10% 10% 10%;
+
+}
+.sign-up-logo{
+  grid-area: jay;
+  color: red;
+  font-family: 'Abril Fatface', cursive;
+  /* font-family: Georgia, "Times New Roman", Times, serif; */
+font-feature-settings: "c2sc";
+ font-size: 3rem;
+ font-weight: 900;
+ margin: 0% 0% 10% 30%;
+ text-shadow: 2px 2px rgba(5, 111, 138, 0.712) ;
+
+}
+.cancel-btn{
+  margin-left: 59%;
 }

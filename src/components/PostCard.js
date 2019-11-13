@@ -38,9 +38,13 @@ const ulStyle = {
 };
 
 const PostCard = props => {
-  const { post, user } = props;
-  // console.log("Card props: ", props);
+  
 
+  const { post, user } = props;
+  console.log("Card props: ", props);
+
+  
+  
   const comment = () => {
 
     const text = post.comments;
@@ -53,15 +57,18 @@ const PostCard = props => {
     }
   };
   return (
+    
     <Card style={cardStyle} className="post-card" id={post.id}>
+
       <Image
         className="thumbnal"
         style={thumbnailStyle}
         src={require("../img/jack.png")}
       />
+      <h5>{post.caption}</h5>
       <span style={spanStyle}>{post.username}</span>
 
-      <Card.Img variant="top" src={Jack} />
+      <Card.Img variant="top" src={require('../img/pic_placeholder.png')} />
 
       <Card.Body>
         <Card.Title></Card.Title>
@@ -81,6 +88,7 @@ const PostCard = props => {
         Post
       </Button>
     </Card>
+    
   );
 };
 
