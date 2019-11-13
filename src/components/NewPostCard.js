@@ -24,10 +24,9 @@ class NewPostCard extends React.Component {
   handleSubmit = () => {
     const { image } = this.state;
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
-     this.setState({ loading: true })
-     debugger
+
     uploadTask.on('state_changed', (snapshot) => {
-     
+      this.setState({ loading: true })
     },
       (error) => {
         console.log(error);
@@ -36,7 +35,7 @@ class NewPostCard extends React.Component {
       () => {
         storage.ref('images').child(image.name).getDownloadURL().then(url => {
           console.log(url)
-          // this.setState({loading:false})
+          this.setState({ loading: false, url })
         })
       })
 
@@ -48,6 +47,7 @@ class NewPostCard extends React.Component {
   }
   render() {
     console.log("NewPost Card props:", this.props, "New card State", this.state);
+    const { url } = this.state
     const { handleNewPost, state, submitPost, userId } = this.props;
     return (
       <><br />{this.state.loading ? <Loader /> : <p className="new-post-heading">Make New Post</p>}
@@ -56,7 +56,7 @@ class NewPostCard extends React.Component {
           <input type="file" onChange={this.selectedFileHander} style={{ display: "none" }} ref={fileInput => this.fileInput = fileInput} />
           <div className="img-box" onClick={() => this.fileInput.click()}>
 
-            <img src={require("../img/pic_placeholder.png")} />
+            <img src={url || require("../img/pic_placeholder.png")} style={{width:"286px", height:"180px"}} />
           </div>
 
           <div>
