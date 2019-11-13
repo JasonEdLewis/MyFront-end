@@ -50,14 +50,11 @@ class Signup extends React.Component {
   };
 
   render() {
-    console.log("Signup States:", this.state);
+    console.log("Signup States:", this.props);
     return (
-      <>
-      <span><h3 style={{
-      color: "red", marginLeft:"25%", marginTop:"15%", fontSize: "75px"
-    
-    }}>Jays'taGram </h3></span>
       <div className="form">
+      <span><h3 className="sign-up-logo">Jays'taGram </h3></span>
+      <div >
         <Form>
           <Form.Row>
             <Form.Group as={Col}>
@@ -171,9 +168,12 @@ class Signup extends React.Component {
           <Button variant="primary" type="submit" onClick={this.handleSubmit}>
             Submit
           </Button>
+          <Button variant="secondary" type="submit" onClick={()=> this.props.history.push('/')} className="cancel-btn">
+            Cancel
+          </Button>
         </Form>
       </div>
-      </>
+      </div>
     );
   }
 }

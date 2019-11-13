@@ -1,3 +1,8 @@
+.new-post-heading {
+  text-shadow: .02em .02em red;
+  font-size: 2.5rem;
+}
+
 .the-card {
     margin: auto;
     margin-top: 5%;

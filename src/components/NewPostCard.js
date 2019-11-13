@@ -15,13 +15,15 @@ class NewPostCard extends React.Component {
   }
   uploadFileHandler =(e)=>{
     e.preventDefault()
-   
+  
   }
   render() {
     console.log("NewPost Card props:", this.props);
     const { handleNewPost, state, submitPost, userId } = this.props;
     return (
+      <><br/><p className="new-post-heading">Make New Post</p>
       <div className="the-card">
+        
         <input type="file" onChange={this.selectedFileHander} style={{display:"none"}} ref={fileInput => this.fileInput = fileInput}/>
         <div className="img-box" onClick={()=> this.fileInput.click()}>
           
@@ -39,6 +41,7 @@ class NewPostCard extends React.Component {
 
 
       </div>
+      </>
     );
   }
 }
