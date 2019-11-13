@@ -8,6 +8,9 @@ import Home from "./Homepage";
 import Layout from './components/Layout'
 
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { Provider } from 'react-redux';
+import store from './redux/store'
+
 
 class App extends React.Component {
   
@@ -35,7 +38,7 @@ class App extends React.Component {
   render() {
     return (
      <Fragment>
-      <Layout>
+     <Provider store={store}>
       <Router>
        <Switch>
         <Route exact path="/" component={Login} />
@@ -48,7 +51,7 @@ class App extends React.Component {
         <Route  component={Login} />
         </Switch>
       </Router>
-      </Layout>
+      </Provider>
       </Fragment> 
     )
 
