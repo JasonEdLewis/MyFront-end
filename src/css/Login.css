@@ -13,7 +13,7 @@
   font-feature-settings: "c2sc";
    align-items: center;
    justify-content: center;
-   font-size: 5rem;
+   font-size: 5vw;
    font-weight: 900;
    text-shadow: 2px 2px rgba(5, 111, 138, 0.712) ;
   }
@@ -29,11 +29,11 @@
   }
   .signInForm {
     width: 10%;
-    margin: 2.5% 49%;
+    margin: 2.5% 50%;
   }
   .camera-logo {
     padding-top: 7.5%;
-    width: 200px;
+    width: 10vw;
     margin: 0% 50%;
   }
 

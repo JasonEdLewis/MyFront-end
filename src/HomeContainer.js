@@ -5,14 +5,14 @@ import NewPostCard from "./components/NewPostCard";
 import { fetchPost, submitNewPost } from './components/PostAdapter';
 import { postComment } from './components/CommentAdapter';
 import { Image } from 'react-bootstrap';
-import Jack from "./img/jack.png";
+import Jack from "./img/jack.jpg";
 
 
 import { Card, Form, Navbar, Button, NavbarBrand, Nav } from "react-bootstrap";
 
 class HomeContainer extends React.Component {
   state = {
-    id: this.props.userId,
+    id: "",
     name: this.props.user,
     comment: "",
     post_id: "",
@@ -67,21 +67,28 @@ class HomeContainer extends React.Component {
   };
 
   myProfile = () => {
-    const myPost = this.props.fposts.filter(post => post.user_id === this.state.id);
-    return (
+    // debugger
+    const { fposts, userId, history } = this.props
+    // this.setState({ page: "profile" })
+    const myPost = fposts.filter(post => post.user_id === userId);
+
+    return ( history.push('/profile'),
       <Postcard
         post={myPost}
-        id={myPost.id}
+        // id={myPost.id}
         submitComment={() => this.submitComment(myPost.id, myPost.userId)}
         handleComment={this.handleComment}
 
       />
+      
+      
     );
+   
   };
   // this.state.cameraClick ? NewPost() :
 
-  returnToThePost =()=>{
-    this.setState({page:"thePost"})
+  returnToThePost = () => {
+    this.setState({ page: "thePost" })
   }
   submitComment = (postId, userId) => {
     console.log(
@@ -129,15 +136,15 @@ class HomeContainer extends React.Component {
       <div className="Home-Container">
         <div className="Homepage-nav">
 
-          <div id="jays-gram" onClick={()=> this.returnToThePost()}><span >{this.props.user}s'taGram </span></div>
+          <div id="jays-gram" onClick={() => this.returnToThePost()}><span >{this.props.user}s'taGram </span></div>
 
           <div>
             <span className="camera" id={this.state.id} onClick={() => this.setState({ page: "newPost" })}> 📸 </span>
           </div>
 
-         
+
           <div className="thumb-and-button">
-            <div className="thumbnail" onClick={()=> this.myProfile()}><img src={Jack} id='thumbnail' /> </div>
+            <div className="thumbnail" onClick={() => this.setState({ page: "profile" })}><img src={Jack} id='thumbnail' /> </div>
             <div className="logout"><button onClick={this.logout} id="logout-button" > logout  </button></div>
 
 

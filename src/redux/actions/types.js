@@ -1,0 +1,7 @@
+// LOGIN ACTIONS //
+    export const REQUEST_LOGIN = "REQUEST_LOGIN"
+    export const SUCCESSFUL_LOGIN = "SUCCESSFUL_LOGIN"
+    export const FAILED_LOGIN = "FAILED_LOGIN"
+    export const LOGGED_OUT = "LOGGED_OUT"
+
+// LOGIN ACTIONS //

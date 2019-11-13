@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Form, Button, Col, Image, Container } from "react-bootstrap";
-import Jack from "../img/jack.png";
+import Jack from "../img/jack.jpg";
 
 const divStyle = {
   marginLeft: "32%",
@@ -38,32 +38,31 @@ const ulStyle = {
 };
 
 const PostCard = props => {
-  
 
   const { post, user } = props;
   console.log("Card props: ", props);
 
-  
-  
+
+
   const comment = () => {
 
     const text = post.comments;
-    if (text.length > 0) {
+    if (text) {
       return text.map(t => {
         return <li style={ulStyle}>{t.content}</li>;
       });
     } else {
-      return;
+      return <h6 style={{ color: "light-grey" }}>Be the first to comment</h6>;
     }
   };
   return (
-    
+
     <Card style={cardStyle} className="post-card" id={post.id}>
 
       <Image
         className="thumbnal"
         style={thumbnailStyle}
-        src={require("../img/jack.png")}
+        src={require("../img/jack.jpg")}
       />
       <h5>{post.caption}</h5>
       <span style={spanStyle}>{post.username}</span>
@@ -88,7 +87,7 @@ const PostCard = props => {
         Post
       </Button>
     </Card>
-    
+
   );
 };
 

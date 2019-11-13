@@ -2,7 +2,7 @@ import React from "react";
 import LoginForm from './components/LoginForm';
 import './css/Login.css';
 import { Form, Navbar, Button } from "react-bootstrap";
-import Vid from './img/caliSkaters.mp4';
+// import Vid from './img/caliSkaters.mp4';
 
 {
   /* <Spinner animation="grow" variant="info" /> */
