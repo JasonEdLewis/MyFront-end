@@ -1,5 +1,7 @@
 import React from "react";
-import moduleName from '../css/newPostCard.css'
+import '../css/newPostCard.css';
+import { storage } from '../firebase'
+
 
 
 //  SET UP FETCH POST FOR NEW POST AND CREATE MIGRATTION FOR CAPTION FOR POST AND SET UP TO GO BACK THE HOME PAGE AFTER POST IS FINISHED POSTING
@@ -7,18 +9,26 @@ import moduleName from '../css/newPostCard.css'
 class NewPostCard extends React.Component {
 
   state ={
-    selectedFile: null,
+    image: null,
+    url: "",
+    caption: ""
   }
 
   selectedFileHander = (e) => {
-    this.setState({selectedFile: e.target.files[0]})
-  }
-  uploadFileHandler =(e)=>{
-    e.preventDefault()
+   if(e.target.files[0]){ this.setState({image: e.target.files[0]}) };
   
   }
+ handleSubmit =(e)=>{
+    e.preventDefault()
+
+
+  //  this.props.submitPost(this.state.caption)
+  }
+  handleTextChange = e =>{
+    this.setState({ [e.target.name]: e.target.value  })
+  }
   render() {
-    console.log("NewPost Card props:", this.props);
+    console.log("NewPost Card props:", this.props, "New card State", this.state);
     const { handleNewPost, state, submitPost, userId } = this.props;
     return (
       <><br/><p className="new-post-heading">Make New Post</p>
@@ -31,11 +41,11 @@ class NewPostCard extends React.Component {
         </div>
 
         <div>
-          <textarea className="post-text-area" rows="5" cols="30" placeholder="#litty #🔥 last night was mad trill" style={{ color: "light-blue" }}></textarea>
+          <textarea className="post-text-area" rows="5" cols="30" placeholder="#litty #🔥 last night was mad trill" style={{ color: "light-blue" }} name="caption" value={this.state.caption} onChange={this.handleTextChange}></textarea>
 
           <span></span>
         </div>
-        <span onClick={() => submitPost(userId)} id="post-submit-plus">
+        <span onClick={this.handleSubmit} id="post-submit-plus">
           ✚
           </span>
 
