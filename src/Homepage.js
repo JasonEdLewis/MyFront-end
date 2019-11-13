@@ -23,19 +23,7 @@ class Homepage extends React.Component {
     return await resp.json();
   };
   componentDidMount() {
-    // this.theFetch('profile')
-    // console.log("Home page: ", localStorage.token);
-
-
-    // db.collection('postpics').get().then((snapshot) => {
-    //   console.log(snapshot.docs);
-    //   snapshot.docs.forEach(doc => {
-    //     console.log(doc.data())
-    //   })
-    // })
-    
-
-
+   
     fetch("http://localhost:3000/profile", {
       headers: {
         Authorization: localStorage.token

@@ -1,17 +1,17 @@
+import axios from 'axios';
+import { REQUEST_LOGIN, SUCCESSFUL_LOGIN, FAILED_LOGIN, LOGGED_OUT } from './types'
 
 
+export const fetchLogin = (info) =>  {
+return function (dispatch){
+  dispatch({ type: REQUEST_LOGIN })
+  return axios.post("http://localhost:3000/login", info).then(user => {
+   dispatch({type: SUCCESSFUL_LOGIN, payload: user.data.token }) 
+  }
+  )
 
-fetch("http://localhost:3000/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json"
-    },
-    body: JSON.stringify(this.state)
-  })
-    .then(r => r.json())
-    .then(user => {
-      user.token ? this.props.history.push("/home")
-        : this.props.history.push("/");
-      localStorage.setItem("token", user.token);
-    });  
+}
+}
+export {
+  fetchLogin as default
+}

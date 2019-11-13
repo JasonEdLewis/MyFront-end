@@ -10,14 +10,15 @@ const initialState = {
 }
 export default (state = initialState, action)=>{
         switch (action.type) {
+            
             case REQUEST_LOGIN:
-                return
+                return {... state, requested:true}
             case FAILED_LOGIN:
-                return
+                return {... state, requested:false, success:false, errorMessage: action.payload}
             case SUCCESSFUL_LOGIN:
-                    return
+                    return {... state, requested:false, loggedIn:true, token: action.payload}
             case LOGGED_OUT:
-                return
+                return { ... state, loggedIn: false, token: ""}
             default:
                 return state
         }
