@@ -1,26 +1,42 @@
-.add-friend{
+.post-card-div{
+    width: 450px ;
+    height:550px;
+    padding-bottom: 15%;
+    margin: 0% 0% 15% 40%;
+    border: 1px;
+    border-style:dashed;
+    border-color: pink ;
+    /* background-color:#000 */
 
 }
 
-
+#add-friend{
+    background-color: chartreuse;
+    width: 5vw;
+    margin: 0%  0%  0%  0%;
+}
 
 .divStyle {
     margin-left:  32%  ;
     margin-right:  auto  ;
     width:  18rem  ;
     color:  black 
-  };
-     .cardStyle{
-    width: 450px ;
-    height:250px;
-    margin-left:  auto ;
-    margin-right:  auto;
-    border: 1px;
-    border-style:dashed;
-    border-color: pink ;
-    background-color:#fff 
-  };
-     .spanStyle{
+  }
+    .post-card{
+        width: 350px ;
+        height:450px;
+        padding-bottom: 5%;
+        margin: 0% 0% 15% 0%;
+        border: 1px;
+        border-style:dashed;
+        border-color: pink ;
+        background-color:#fff;
+        /* opacity: 0%; */
+  }
+  .caption{
+      color:black
+  }
+     .span-style{
     margin-left: auto;
     margin-right: auto;
     margin-top: 0%;
@@ -28,13 +44,26 @@
     font-style:italic ;
     font-weight:bold  ;
     font-size: 185% 
-  };
-     .thumbnailStyle{
-    height:50px ;
-    margin-right:5%;
-    margin-top: 3% 
-  };
+  }
+    .post-thumbnail{
+    width: 5vw;
+    position: fixed;
+    height:5vw ;
+    margin: 5% 0% 0% 82% ;
+  }
      .ulStyle{
     list-style-type:square;
-    color:black 
-  };
+    /* color:black; */
+    background-color: yellow;
+    list-style: none;
+    text-align: center;
+   
+  }
+  .li-style{
+    text-align: center;
+  }
+  .img-box {
+      height: 80vh;
+
+      
+  }
