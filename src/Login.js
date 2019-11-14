@@ -16,7 +16,7 @@ class Login extends React.Component {
   state = {
     username: "",
     password: "",
-    errorMessage: "",
+    errorMessage: `🛑  WroNg UserNaMe Or PaSsWord   🛑`,
     showError: false,
   };
 
@@ -29,10 +29,10 @@ class Login extends React.Component {
   handleSubmit = e => {
     const { fetchLogin, login, history } = this.props
     e.preventDefault();
-    fetchLogin(this.state).then(()=> 
-    !!localStorage.token ? history.push('/home') : this.setState({ errorMessage: login.errorMessage, showError: true })
+    fetchLogin(this.state).then(() =>
+      !!localStorage.token ? history.push('/home') : this.setState({  showError: true })
     )
-
+    setTimeout(() => { this.setState({ showError: false }) }, 2250)
     this.setState({ username: '', password: "" })
   };
 
@@ -42,6 +42,7 @@ class Login extends React.Component {
     console.log("Login Props:", this.props);
 
     const { login } = this.props
+    const { showError, errorMessage } = this.state
     return (
       //  <div className="video-div">
       //   <video  id="myVideo" loop autoplay >
@@ -54,13 +55,14 @@ class Login extends React.Component {
         <div className="header-div">
           <span className="sign-in-header" >Jays'taGram</span>
         </div>
-        <div>
-          <img
-            src="https://www.jing.fm/clipimg/full/90-902599_camera-icons-transparent-background-ios-camera-logo-png.png"
-            className="camera-logo"
-          />
-        </div>
-        <Form className="signInForm" onSubmit={this.handleSubmit}>
+        {showError ? <div id="wrong-login-info"><p>{errorMessage}</p></div> :
+          <div>
+            <img
+              src="https://www.jing.fm/clipimg/full/90-902599_camera-icons-transparent-background-ios-camera-logo-png.png"
+              className="camera-logo"
+            />
+          </div>}
+        <Form className={showError ? 'wrongSignInForm' : 'signInForm'} onSubmit={this.handleSubmit}>
           <Form.Group controlId="formGroupEmail">
             <Form.Label alt="username-field"></Form.Label>
             <Form.Control
@@ -82,7 +84,7 @@ class Login extends React.Component {
               placeholder="Password"
               required
             />
-            {this.state.showError && <p>{this.state.errorMessage}</p>}
+
           </Form.Group>
           {login.requested ? <Loader /> : <><Button variant="primary" type="submit" className="submit-btn">
             Login

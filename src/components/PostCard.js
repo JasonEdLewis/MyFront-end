@@ -58,12 +58,12 @@ const PostCard = props => {
   return (
 
     <Card style={cardStyle} className="post-card" id={post.id}>
-
+     
       <Image
         className="thumbnal"
         style={thumbnailStyle}
         src={require("../img/jack.jpg")}
-      />
+      /> <button id="add-friend">Add</button>
       <h5>{post.caption}</h5>
       <span style={spanStyle}>{post.username}</span>
 
