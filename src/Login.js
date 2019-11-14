@@ -2,6 +2,9 @@ import React from "react";
 import LoginForm from './components/LoginForm';
 import './css/Login.css';
 import { Form, Navbar, Button } from "react-bootstrap";
+import { connect } from 'react-redux';
+import fetchLogin from './redux/actions/LoginActions';
+import Loader from './components/loader'
 // import Vid from './img/caliSkaters.mp4';
 
 {
@@ -12,7 +15,9 @@ import { Form, Navbar, Button } from "react-bootstrap";
 class Login extends React.Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    errorMessage: "",
+    showError: false,
   };
 
   handleChage = e => {
@@ -22,38 +27,31 @@ class Login extends React.Component {
   };
 
   handleSubmit = e => {
+    const { fetchLogin, login, history } = this.props
     e.preventDefault();
-    fetch("http://localhost:3000/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify(this.state)
-    })
-      .then(r => r.json())
-      .then(user => {
-        user.token ? this.props.history.push("/home")
-          : this.props.history.push("/");
-        localStorage.setItem("token", user.token);
-      });
+    fetchLogin(this.state)
+    this.setState({ username: '', password: "" })
+    !!login.token ? history.push('/home') : this.setState({errorMessage: login.errorMessage, showError:true })
+
   };
 
- 
-  
+
+
   render() {
-    // console.log(this.props);
+    console.log("Login Props:", this.props);
+
+    const { login } = this.props
     return (
-    //  <div className="video-div">
-    //   <video  id="myVideo" loop autoplay >
-    //   <source src="http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4" />
-    //       {/* <source src={ Vid } type="video/mp4"/> */}
-    //     </video>
-    //  </div>
+      //  <div className="video-div">
+      //   <video  id="myVideo" loop autoplay >
+      //   <source src="http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4" />
+      //       {/* <source src={ Vid } type="video/mp4"/> */}
+      //     </video>
+      //  </div>
       <div className="signindiv">
-        
-         <div className="header-div">
-           <span className="sign-in-header" >Jays'taGram</span> 
+
+        <div className="header-div">
+          <span className="sign-in-header" >Jays'taGram</span>
         </div>
         <div>
           <img
@@ -70,6 +68,7 @@ class Login extends React.Component {
               placeholder="Username"
               name="username"
               onChange={this.handleChage}
+              required
             />
           </Form.Group>
           <Form.Group controlId="formGroupPassword">
@@ -80,19 +79,29 @@ class Login extends React.Component {
               value={this.state.password}
               onChange={this.handleChage}
               placeholder="Password"
+              required
             />
+            {this.state.showError && <p>{this.state.errorMessage}</p> }
           </Form.Group>
-          <Button variant="primary" type="submit" className="submit-btn">
+          {login.requested ? <Loader /> : <><Button variant="primary" type="submit" className="submit-btn">
             Login
-          </Button>
-          <p className="stars-under-signup">º º º º º   </p>
-          <a href="/signup" className="signup-text">
-            signup{" "}
-          </a>
-        </Form> 
-    </div> 
+  </Button>
+            <p className="stars-under-signup">º º º º º   </p>
+            <a href="/signup" className="signup-text">
+              signup{" "}
+            </a> </>}
+        </Form>
+      </div>
     );
+  }
+
+}
+const mapStateToProps = (state) => {
+  return {
+    login: state.login
   }
 }
 
-export default Login;
+
+export default connect(mapStateToProps, { fetchLogin })(Login);
+

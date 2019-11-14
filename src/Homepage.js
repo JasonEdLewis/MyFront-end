@@ -3,7 +3,7 @@ import HomeContainer from "./HomeContainer";
 import PostCard from "./components/PostCard";
 import Profile from "./Profile";
 import { fetchPost } from './components/PostAdapter';
-
+import { connect }  from 'react-redux'
 
 
 
@@ -23,19 +23,7 @@ class Homepage extends React.Component {
     return await resp.json();
   };
   componentDidMount() {
-    // this.theFetch('profile')
-    // console.log("Home page: ", localStorage.token);
-
-
-    // db.collection('postpics').get().then((snapshot) => {
-    //   console.log(snapshot.docs);
-    //   snapshot.docs.forEach(doc => {
-    //     console.log(doc.data())
-    //   })
-    // })
-    
-
-
+   
     fetch("http://localhost:3000/profile", {
       headers: {
         Authorization: localStorage.token
@@ -53,7 +41,7 @@ class Homepage extends React.Component {
   }
 
   render() {
-    // console.log("Home Page Props:", this.props)
+    console.log("Home Page Props:", this.props)
     return (
       <>
         <HomeContainer
@@ -66,4 +54,12 @@ class Homepage extends React.Component {
     );
   }
 }
-export default Homepage;
+  const mapStateToProps = state => {
+    return {
+        token: state.login.token
+    }
+  }
+
+ 
+
+export default connect(mapStateToProps)(Homepage)
