@@ -15,7 +15,9 @@ import Loader from './components/loader'
 class Login extends React.Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    errorMessage: "",
+    showError: false,
   };
 
   handleChage = e => {
@@ -25,16 +27,19 @@ class Login extends React.Component {
   };
 
   handleSubmit = e => {
+    const { fetchLogin, login, history } = this.props
     e.preventDefault();
-    this.props.fetchLogin(this.state)
-    debugger
-  
+    fetchLogin(this.state)
+    this.setState({ username: '', password: "" })
+    !!login.token ? history.push('/home') : this.setState({errorMessage: login.errorMessage, showError:true })
+
   };
 
 
 
   render() {
-    console.log(this.props);
+    console.log("Login Props:", this.props);
+
     const { login } = this.props
     return (
       //  <div className="video-div">
@@ -63,6 +68,7 @@ class Login extends React.Component {
               placeholder="Username"
               name="username"
               onChange={this.handleChage}
+              required
             />
           </Form.Group>
           <Form.Group controlId="formGroupPassword">
@@ -73,27 +79,29 @@ class Login extends React.Component {
               value={this.state.password}
               onChange={this.handleChage}
               placeholder="Password"
+              required
             />
+            {this.state.showError && <p>{this.state.errorMessage}</p> }
           </Form.Group>
-          {login.requested ? <Loader/> : <><Button variant="primary" type="submit" className="submit-btn"> 
+          {login.requested ? <Loader /> : <><Button variant="primary" type="submit" className="submit-btn">
             Login
-  </Button> 
-          <p className="stars-under-signup">º º º º º   </p>
-          <a href="/signup" className="signup-text">
-            signup{" "}
-    </a> </>}
+  </Button>
+            <p className="stars-under-signup">º º º º º   </p>
+            <a href="/signup" className="signup-text">
+              signup{" "}
+            </a> </>}
         </Form>
       </div>
     );
   }
-  
+
 }
-const mapStateToProps = (state) =>{
-    return {
-      login: state.login
-    }
+const mapStateToProps = (state) => {
+  return {
+    login: state.login
+  }
 }
 
 
-export default connect(mapStateToProps, {fetchLogin})(Login);
+export default connect(mapStateToProps, { fetchLogin })(Login);
 

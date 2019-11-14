@@ -3,7 +3,7 @@ import HomeContainer from "./HomeContainer";
 import PostCard from "./components/PostCard";
 import Profile from "./Profile";
 import { fetchPost } from './components/PostAdapter';
-
+import { connect }  from 'react-redux'
 
 
 
@@ -41,7 +41,7 @@ class Homepage extends React.Component {
   }
 
   render() {
-    // console.log("Home Page Props:", this.props)
+    console.log("Home Page Props:", this.props)
     return (
       <>
         <HomeContainer
@@ -54,4 +54,12 @@ class Homepage extends React.Component {
     );
   }
 }
-export default Homepage;
+  const mapStateToProps = state => {
+    return {
+        token: state.login.token
+    }
+  }
+
+ 
+
+export default connect(mapStateToProps)(Homepage)
