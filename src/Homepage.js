@@ -3,14 +3,13 @@ import HomeContainer from "./HomeContainer";
 import PostCard from "./components/PostCard";
 import Profile from "./Profile";
 import { fetchPost } from './components/PostAdapter';
-import { connect }  from 'react-redux'
+import { connect } from 'react-redux';
+import { fetchUser } from './redux/actions/UserActions'
 
 
 
 class Homepage extends React.Component {
   state = {
-    currentUser: "",
-    id: "",
     follooweePosts: []
   };
 
@@ -23,17 +22,8 @@ class Homepage extends React.Component {
     return await resp.json();
   };
   componentDidMount() {
-   
-    fetch("http://localhost:3000/profile", {
-      headers: {
-        Authorization: localStorage.token
-      }
-    })
-      .then(res => res.json())
-      .then(profile => {
-        this.setState({ currentUser: profile.username, id: profile.id });
-
-      });
+    const { fetchUser } = this.props
+    fetchUser(localStorage.token)
 
     this.theFetch("posts").then(data =>
       this.setState({ follooweePosts: data })
@@ -42,24 +32,26 @@ class Homepage extends React.Component {
 
   render() {
     console.log("Home Page Props:", this.props)
+    const { user } = this.props
     return (
       <>
         <HomeContainer
           fposts={this.state.follooweePosts}
-          user={this.state.currentUser}
-          userId={this.state.id}
+          user={user.username}
+          userId={user.id}
           history={this.props.history}
         />
       </>
     );
   }
 }
-  const mapStateToProps = state => {
-    return {
-        token: state.login.token
-    }
+const mapStateToProps = state => {
+  return {
+    token: state.login.token,
+    user: state.users
   }
+}
 
- 
 
-export default connect(mapStateToProps)(Homepage)
+
+export default connect(mapStateToProps, { fetchUser })(Homepage)

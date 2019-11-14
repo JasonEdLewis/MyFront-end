@@ -29,10 +29,11 @@ class Login extends React.Component {
   handleSubmit = e => {
     const { fetchLogin, login, history } = this.props
     e.preventDefault();
-    fetchLogin(this.state)
-    this.setState({ username: '', password: "" })
-    !!login.token ? history.push('/home') : this.setState({errorMessage: login.errorMessage, showError:true })
+    fetchLogin(this.state).then(()=> 
+    !!localStorage.token ? history.push('/home') : this.setState({ errorMessage: login.errorMessage, showError: true })
+    )
 
+    this.setState({ username: '', password: "" })
   };
 
 
@@ -81,7 +82,7 @@ class Login extends React.Component {
               placeholder="Password"
               required
             />
-            {this.state.showError && <p>{this.state.errorMessage}</p> }
+            {this.state.showError && <p>{this.state.errorMessage}</p>}
           </Form.Group>
           {login.requested ? <Loader /> : <><Button variant="primary" type="submit" className="submit-btn">
             Login

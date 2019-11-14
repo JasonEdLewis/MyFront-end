@@ -40,7 +40,7 @@ const ulStyle = {
 const PostCard = props => {
 
   const { post, user } = props;
-  console.log("Card props: ", props);
+  // console.log("Card props: ", props);
 
 
 
