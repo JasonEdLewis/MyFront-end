@@ -23,9 +23,8 @@ const PostCard = props => {
   };
 
   const activeComment=(e)=>{
-    props.toggleCommentField(); 
-    return props.commentFieldStatus && e.target.id === post.id ?
-   "💬" : "🖋 "
+    e.target.id === post.id.toString() && props.toggleCommentField()
+   
   }
 
   return (
@@ -52,7 +51,7 @@ const PostCard = props => {
           <span id="heart" onClick={() => console.log(post.id)}>♡</span>
 
           <span id={post.id} className="comment-icon"  onClick={(e) => activeComment(e)}
->{}</span>
+>{ props.commentFieldStatus ? "💬" : "🖋 "}</span>
 
           <br /><br />
 
@@ -70,10 +69,10 @@ const PostCard = props => {
             className="comment-input"
           /> : <><br /></>}
           <br /><br />
-          {props.commentLen === 0 ? <></> : <button onClick={props.submitComment}
+          {props.commentLen === 0 ? <></> : <span onClick={props.submitComment}
             id="post-span">
-            Post
-      </button>}
+            ⬆️
+      </span>}
         </div>
 
       </div>

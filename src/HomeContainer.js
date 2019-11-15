@@ -151,7 +151,7 @@ showCommentField=()=>{
 
           <div className="thumb-and-button">
             <div className="thumbnail" onClick={() => this.setState({ page: "profile" })}><img src={Jack} id='thumbnail' /> </div>
-            <div className="logout"><button onClick={this.logout} id="logout-button" > logout  </button></div>
+            <div className="logout"><span onClick={this.logout} id="logout-button" > logout  </span></div>
 
 
 

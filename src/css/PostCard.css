@@ -104,41 +104,43 @@
     /* background-color: coral; */
   }
   .comments-div{
-      width: 30vw;
+      width: 32vw;
       height: 34vh;
-      margin: 0 auto;
+      margin: 1.25vh 0vw 0vh 0.25vw;
       padding: 0%;
-      background-color:red;
+      background-color:rgb(250, 244, 244);
   }
   .comment-input{
-    margin: 10% 0% 0% -2vw;
+    margin: 5vh 0vw 0vh 0vw;
     width: 30vw;
   }
   
   #heart{
-      /* background-color: cadetblue; */
+      
       font-size: 1.75rem;
       float: left;
       margin-left: 5%;
       color: black;
+
+  }
+  #heart:hover{
+    color:rgb(153, 77, 77);
+    text-shadow: -.075vw -.075vh rgb(5, 21, 233);
   }
   .comment-icon{
     font-size: 2vw;
     float: left;
-    margin-top: 1vh;
-    margin-left: 1.5vw;
+    margin: 1vh 0vw 0vh 1.5vw;
     /* color: black; */
     /* background-color: pink; */
   }
-  #comment-icon:hover{
+  .comment-icon:hover{
       text-shadow: .1vh -.04vw rgb(126, 173, 226);
+      font-size: 2.05vw;
   }
 
   #post-span{
       color:black;
-      background-color: white;
-      border-style: solid;
-      /* border-color: springgreen; */
-      border-width: .025rem;
+    font-size: 2vw;
   }
   
