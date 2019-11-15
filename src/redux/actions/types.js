@@ -16,6 +16,12 @@ export const DELETE_USER = "DELETE_USER"
 export const REQUEST_POST = 'REQUEST_POST'
 export const POST_SUCCESS = 'POST_SUCCESS'
 export const POST_FAILURE = 'POST_FAILURE'
-export const CREATE_POST =  'CREATE_POST'
+export const CREATE_POST = 'CREATE_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const DELETE_POST = 'DELETE_POST'
+
+// COMMENTS ACTIONS //
+
+// FOLLOWS ACTIONS //
+
+
