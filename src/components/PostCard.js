@@ -40,7 +40,7 @@ const PostCard = props => {
         />  */}
           <button id="add-friend" onClick={() => { console.log(post.user.id) }}>🤝</button>
 
-          <span className="name-span-style" onClick={() => { console.log(post.user.id) }}>{post.user.username}</span>
+          {/* <span className="name-span-style" onClick={() => { console.log(post.user.id) }}>{post.user.username}</span> */}
         </div>
 
         <div className="img-div">
@@ -58,7 +58,7 @@ const PostCard = props => {
           <br /><br />
 
           <div className='ul-style'>
-            <p className='li-style'><span id="name-cap"><strong>{post.user.username} </strong></span>:{post.caption} </p>
+            <p className='li-style'><span id="name-cap"><strong>{user.username} </strong></span>:{post.caption} </p>
             {comment()}
           </div>
           {props.commentFieldStatus ? <input
@@ -85,7 +85,8 @@ const PostCard = props => {
 const mapStateToProps = state =>{
   return {
     user: state.users.username,
-    userid: state.users.id
+    userid: state.users.id,
+    
   }
 }
 export default connect(mapStateToProps)(PostCard);

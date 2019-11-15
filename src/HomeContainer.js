@@ -41,7 +41,6 @@ showCommentField=()=>{
 }
   thePost = props => {
 
-
     return this.props.fposts.map(post => (
       <Postcard
         post={post}
@@ -78,22 +77,22 @@ showCommentField=()=>{
     // debugger
     const { fposts, userid, history } = this.props
     // this.setState({ page: "profile" })
-    const myPost = fposts.filter(post => post.user_id === userid);
+   
 debugger
-    return ( history.push('/profile'),
-      <Postcard
-        post={myPost}
-        // id={myPost.id}
-        submitComment={() => this.submitComment(myPost.id, myPost.userId)}
-        handleComment={this.handleComment}
+    return ( history.push('/profile')
+      // <Postcard
+      //   post={myPost}
+      //   // id={myPost.id}
+      //   submitComment={() => this.submitComment(myPost.id, myPost.userId)}
+      //   handleComment={this.handleComment}
 
-      />
+      // />
       
       
     );
    
   };
-  // this.state.cameraClick ? NewPost() :
+ 
 
   returnToThePost = () => {
     this.setState({ page: "thePost" })

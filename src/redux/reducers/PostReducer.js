@@ -1,4 +1,4 @@
-import { REQUEST_POST, POST_SUCCESS, POST_FAILURE, CREATE_POST, EDIT_POST, DELETE_POST } from './types'
+import { REQUEST_POST, POST_SUCCESS, POST_FAILURE, CREATE_POST, EDIT_POST, DELETE_POST } from '../actions/types'
 
 const initialState = {
     post: [],
@@ -24,12 +24,12 @@ export default (state = initialState, action) => {
             }
         case EDIT_POST:
             return {
-                ...state,
+                ...state
 
             }
 
         default:
-            break;
+            return state;
     }
 
 }
