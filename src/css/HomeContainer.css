@@ -7,7 +7,7 @@ body{
 .Home-Container{
     color: white;
     opacity: 100%;
-    width: 100vw; 
+    width: 90vw; 
 
     
    
@@ -34,8 +34,8 @@ width: 98vw;
 height: 15vh;
 margin: 0 auto;
 padding: 2%;
-margin-top: 1%;
-position: absolute center;
+margin: 1% 0% 0% 1%;
+
 border:#3f8aaf; 
 border-width: .2em;
 border-style: dotted;
@@ -94,7 +94,7 @@ grid-template-areas:
         width: 20%;
         height: 20%;
         margin: -.5vh 0vh 15vw 35vw;
-        color: rgb(218, 10, 10);
+        color: rgb(222, 227, 243);
         text-shadow: 0.02vw 0.02vh rgb(1, 17, 20) ;
     }
 /* #logout-span {

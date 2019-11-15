@@ -2,12 +2,13 @@ import React from "react";
 import { Card, Form, Button, Col, Image, Container } from "react-bootstrap";
 import Jack from "../img/jack.jpg";
 import '../css/PostCard.css';
-import placeholder from '../img/placeHolder.png'
+import placeholder from '../img/placeHolder.png';
+import { connect } from 'react-redux';
 
 
 
 const PostCard = props => {
-  console.log("Post Card props: ", props);
+ console.log("Post card props", props)
   const { post, user } = props;
 
   const comment = () => {
@@ -15,8 +16,8 @@ const PostCard = props => {
     const text = post.comments;
     if (text) {
       return text.map(t => {
-        console.log("comments", t)
-        return (<li className='li-style'><strong>{t.followee_id}: </strong>{t.content}</li>);
+        console.log("comments", t, )
+        return (<p className='li-style'><strong>{t.followee_id}: </strong>{t.content}</p>);
       });
     } else {
       return <h6 style={{ color: "light-grey" }}>Be the first to comment</h6>;
@@ -56,10 +57,10 @@ const PostCard = props => {
 
           <br /><br />
 
-          <ul className='ul-style'>
-            <li className='li-style'><span id="name-cap"><strong>{post.user.username} </strong></span>: {post.caption}</li>
+          <div className='ul-style'>
+            <p className='li-style'><span id="name-cap"><strong>{post.user.username} </strong></span>:{post.caption} </p>
             {comment()}
-          </ul>
+          </div>
           {props.commentFieldStatus ? <input
             size="sm"
             type="text"
@@ -81,5 +82,10 @@ const PostCard = props => {
     </div>
   );
 };
-
-export default PostCard;
+const mapStateToProps = state =>{
+  return {
+    user: state.users.username,
+    userid: state.users.id
+  }
+}
+export default connect(mapStateToProps)(PostCard);

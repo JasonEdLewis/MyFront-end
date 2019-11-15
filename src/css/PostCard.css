@@ -32,7 +32,7 @@
     margin: 0%  0%  0%  -15vw;
     font-size: 2.5vw;
     border-radius: .25vw;
-    border-color: rgb(154, 189, 253);
+    border-color: rgb(209, 223, 250);
 }
 #add-friend:focus{
     display: none;
@@ -96,10 +96,12 @@
    
   }
   .li-style{
-    width: 31vw;
+   width: 32vw;
    float: right;
-   position:relative;
-   color: black
+   margin: 0vh 0vw 0vh 0vw;
+   position: relative;
+   color: black;
+   font-size: 1.25vw;
     /* background-color: coral; */
   }
   .comments-div{
@@ -123,19 +125,19 @@
 
   }
   #heart:hover{
-    color:rgb(153, 77, 77);
-    text-shadow: -.075vw -.075vh rgb(5, 21, 233);
+    color:rgb(233, 10, 10);
+    text-shadow: -.075vw -.075vh rgb(204, 208, 251);
   }
   .comment-icon{
-    font-size: 2vw;
+    font-size: 1.5vw;
     float: left;
-    margin: 1vh 0vw 0vh 1.5vw;
+    margin: 0vh 0vw 0vh 1.5vw;
     /* color: black; */
     /* background-color: pink; */
   }
   .comment-icon:hover{
       text-shadow: .1vh -.04vw rgb(126, 173, 226);
-      font-size: 2.05vw;
+      font-size: 1.55vw;
   }
 
   #post-span{

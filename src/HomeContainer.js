@@ -6,13 +6,14 @@ import { fetchPost, submitNewPost } from './components/PostAdapter';
 import { postComment } from './components/CommentAdapter';
 import { Image } from 'react-bootstrap';
 import Jack from "./img/jack.jpg";
+import { connect } from 'react-redux'
 
 
 import { Card, Form, Navbar, Button, NavbarBrand, Nav } from "react-bootstrap";
 
 class HomeContainer extends React.Component {
   state = {
-    id: "",
+    userId: this.props.userid,
     name: this.props.user,
     showCommentField: false,
     comment: "",
@@ -60,12 +61,13 @@ showCommentField=()=>{
   };
 
   theNewPostCard = props => {
+    const {userid } = this.props
     return (
       <NewPostCard
         handleNewPost={this.handleNewPost}
-        submitPost={() => (this.state.id)}
+        submitPost={() => (userid)}
         state={this.state}
-        userId={this.state.id}
+        userId={userid}
         back={this.returnToThePost}
 
       />
@@ -74,10 +76,10 @@ showCommentField=()=>{
 
   myProfile = () => {
     // debugger
-    const { fposts, userId, history } = this.props
+    const { fposts, userid, history } = this.props
     // this.setState({ page: "profile" })
-    const myPost = fposts.filter(post => post.user_id === userId);
-
+    const myPost = fposts.filter(post => post.user_id === userid);
+debugger
     return ( history.push('/profile'),
       <Postcard
         post={myPost}
@@ -96,7 +98,8 @@ showCommentField=()=>{
   returnToThePost = () => {
     this.setState({ page: "thePost" })
   }
-  submitComment = (postId, userId) => {
+  submitComment = (postId) => {
+    const {userId ,comment } = this.state
     console.log(
       "Post id",
       postId,
@@ -105,7 +108,7 @@ showCommentField=()=>{
       "comment: ",
       this.state.comment
     );
-    postComment(postId, this.state.comment, userId)
+    postComment(postId, comment, userId)
       .then(resp => resp.json())
       .then(console.log);
   };
@@ -169,7 +172,14 @@ showCommentField=()=>{
 
     );
   }
+ 
+}
+const mapStateToProps = (state)=>{
+  return {
+    user: state.users.username,
+    userid: state.users.id
+  }
 }
 
-export default HomeContainer;
+export default connect(mapStateToProps, null )(HomeContainer);
 
