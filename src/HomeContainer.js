@@ -78,7 +78,7 @@ showCommentField=()=>{
     const { fposts, userid, history } = this.props
     // this.setState({ page: "profile" })
    
-debugger
+
     return ( history.push('/profile')
       // <Postcard
       //   post={myPost}

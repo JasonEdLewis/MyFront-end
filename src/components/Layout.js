@@ -1,16 +1,16 @@
-import React from "react";
+// import React from "react";
 
 
 
-const Layout = props => {
-  console.log(props)
-  return (
-    <>
+// const Layout = props => {
+//   console.log(props)
+//   return (
+//     <>
              
-          {props.children}
+//           {props.children}
        
-    </>
-  );
-};
+//     </>
+//   );
+// };
 
-export default Layout;
+// export default Layout;

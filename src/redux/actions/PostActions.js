@@ -3,9 +3,9 @@ import axios from 'axios'
 
 export const getPost =()=> dispatch =>{
     dispatch({type: REQUEST_POST })
-    axios.get('http://localhost:3000/posts').then(data => {
+   return axios.get('http://localhost:3000/posts').then(data => {
     dispatch({type: POST_SUCCESS, payload: data })
-    console.log("From post actions",data)
+  
 }
    
     )

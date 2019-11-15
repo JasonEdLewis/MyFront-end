@@ -58,7 +58,7 @@ const PostCard = props => {
           <br /><br />
 
           <div className='ul-style'>
-            <p className='li-style'><span id="name-cap"><strong>{user.username} </strong></span>:{post.caption} </p>
+            <p className='li-style'><span id="name-cap"><strong>{user} </strong></span>:{post.caption} </p>
             {comment()}
           </div>
           {props.commentFieldStatus ? <input

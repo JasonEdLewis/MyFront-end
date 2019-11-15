@@ -5,11 +5,13 @@ import "./App.css";
 import Profile from "./Profile";
 import Signup from "./Signup";
 import Home from "./Homepage";
-import Layout from './components/Layout'
+// import Layout from './components/Layout'
 
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import { Provider } from 'react-redux';
-import store from './redux/store'
+
+
+import { connect } from 'react-redux';
+import { getPost } from './redux/actions/PostActions'
 
 
 class App extends React.Component {
@@ -25,6 +27,7 @@ class App extends React.Component {
   componentDidMount() {
     // if (localStorage.token) {
       this.redirect("/");
+      this.props.getPost()
     // }
   }
 
@@ -32,13 +35,13 @@ class App extends React.Component {
    
   localStorage.clear();
     this.redirect("/")
-    debugger
+
     localStorage.clear()
   };
   render() {
+ 
     return (
      <Fragment>
-     <Provider store={store}>
       <Router>
        <Switch>
         <Route exact path="/" component={Login} />
@@ -51,12 +54,15 @@ class App extends React.Component {
         <Route  component={Login} />
         </Switch>
       </Router>
-      </Provider>
       </Fragment> 
     )
 
   
   }
 }
+const mapStateToProps = state =>{
+  return {
 
-export default App;
+  }
+}
+export default connect(null,{ getPost } )(App);

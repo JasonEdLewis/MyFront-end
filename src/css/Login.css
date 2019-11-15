@@ -42,8 +42,11 @@
     margin: 2.5% 50%;
   }
   #wrong-login-info{
+    background-color: #8d8f8d;
+    background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre-big.png");
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
         position: absolute;
-        background-color: rgb(94, 90, 90);
+        /* background-color: rgb(94, 90, 90); */
         color:rgb(89, 245, 17);
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         font-weight: 600;
@@ -58,6 +61,7 @@
         border-width: .05rem;
         line-height: 18vh;
         z-index: 10;
+        text-shadow: .2vw .2vh rgb(6, 88, 43);
 
       
   }
