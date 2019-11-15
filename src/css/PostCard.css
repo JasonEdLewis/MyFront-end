@@ -1,32 +1,69 @@
 .post-card-div{
-    width: 450px ;
-    height:550px;
+   
+    width: 33vw ;
+    min-height: 25vh ;
     padding-bottom: 15%;
-    margin: 0% 0% 15% 40%;
+    margin: 5% 0% 5% 40%;
     border: 1px;
     border-style:dashed;
     border-color: pink ;
+    justify-self: center;
     /* background-color:#000 */
 
+}
+.card-header{
+    background-color: purple;
+    position: relative;
+    width: 32vw ;
+    height: 7.5vh;
+    margin: 0% 0% 0% 1%;
+    border-style: solid;
+    border-color: springgreen;
 }
 
 #add-friend{
     background-color: chartreuse;
-    width: 5vw;
-    margin: 0%  0%  0%  0%;
+    position: absolute;
+    width: 3vw;
+    height: 3vh;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 3vh;
+    margin: 0%  0%  0%  -65%;
+    font-size: 1.75rem;
 }
-
+.name-span-style{
+    position: absolute;
+    margin: 0% 0% 0% -50%;
+    color:pink;
+    font-style:italic ;
+    font-weight:bold  ;
+    font-size: 1.25rem;
+    background-color: rebeccapurple;
+  }
+    .post-thumbnail{
+    width: 5vw;
+    position: relative;
+    height:5vw ;
+    margin: -2% 0% 0% 40% ;
+    background-color: salmon;
+  }
+  .img-div {
+    height: 30vh;
+    background-color: blueviolet;
+    
+}
 .divStyle {
     margin-left:  32%  ;
     margin-right:  auto  ;
     width:  18rem  ;
     color:  black 
   }
-    .post-card{
-        width: 350px ;
-        height:450px;
+.post-card{
+        width: 32.5vw ;
+        height: 50.5vh;
         padding-bottom: 5%;
-        margin: 0% 0% 15% 0%;
+        margin: 0% 0% 15% .5%;
         border: 1px;
         border-style:dashed;
         border-color: pink ;
@@ -35,25 +72,12 @@
   }
   .caption{
       color:black
+
   }
-     .span-style{
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0%;
-    color:pink;
-    font-style:italic ;
-    font-weight:bold  ;
-    font-size: 185% 
-  }
-    .post-thumbnail{
-    width: 5vw;
-    position: fixed;
-    height:5vw ;
-    margin: 5% 0% 0% 82% ;
-  }
+
      .ulStyle{
     list-style-type:square;
-    /* color:black; */
+    color:black;
     background-color: yellow;
     list-style: none;
     text-align: center;
@@ -61,9 +85,10 @@
   }
   .li-style{
     text-align: center;
+    background-color: coral;
   }
-  .img-box {
-      height: 80vh;
-
-      
+  
+  #post-span{
+      color:black
   }
+  
