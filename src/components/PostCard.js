@@ -1,7 +1,6 @@
 import React from "react";
-import { Card, Form, Button, Col, Image, Container } from "react-bootstrap";
-import Jack from "../img/jack.jpg";
 import '../css/PostCard.css';
+import '../css/Profile.css';
 import placeholder from '../img/placeHolder.png';
 import { connect } from 'react-redux';
 
@@ -28,11 +27,12 @@ const PostCard = props => {
     e.target.id === post.id.toString() && props.toggleCommentField()
 
   }
-
+ 
   return (
-    <div className="post-card-div" id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
-      <div id={post.id} className="post-card">
-        <div className="card-header">
+    
+    <div className= {props.path === '/profile'? "profile-postcard-div" : "post-card-div"} id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
+      <div id={post.id} className={ props.path === '/profile' ?  "profile-post-card" : "post-card"}>
+        <div className= {props.path === '/profile' ? "profile-card-header"  : "card-header"}>
           {/* REPLACE WITH THE IMAGE ASSOCIATED WITH NAME
         <img
           className="post-thumbnail"
@@ -82,11 +82,6 @@ const PostCard = props => {
     </div>
   );
 };
-const mapStateToProps = state =>{
-  return {
-    user: state.users.username,
-    userid: state.users.id,
-    
-  }
-}
-export default connect(mapStateToProps)(PostCard);
+
+
+export default connect()(PostCard);

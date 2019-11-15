@@ -74,20 +74,11 @@ showCommentField=()=>{
   };
 
   myProfile = () => {
-    // debugger
+    debugger
     const { fposts, userid, history } = this.props
-    // this.setState({ page: "profile" })
    
-
     return ( history.push('/profile')
-      // <Postcard
-      //   post={myPost}
-      //   // id={myPost.id}
-      //   submitComment={() => this.submitComment(myPost.id, myPost.userId)}
-      //   handleComment={this.handleComment}
-
-      // />
-      
+     
       
     );
    

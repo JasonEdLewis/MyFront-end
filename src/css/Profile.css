@@ -1,0 +1,45 @@
+.main-div {
+    width: 90vw;
+    height: 100vh;
+   position: relative;
+}
+
+.header{
+    grid-area: jay;
+    color: red;
+    font-family: 'Abril Fatface', cursive;
+    /* font-family: Georgia, "Times New Roman", Times, serif; */
+  font-feature-settings: "c2sc";
+   font-size: 3rem;
+   font-weight: 900;
+   margin: 0% 0% 0% 50%;
+   text-shadow: 2px 2px rgba(5, 111, 138, 0.712) ;
+   background-color: aqua;
+}
+.profile-postcard-div {
+   margin: 0% 45%
+}
+#add-friend{
+    margin: 3% 0% 0% 2% ;
+}
+
+.profile-card-header{
+    /* background-color: purple; */
+    position: relative;
+    width: 32vw ;
+    height: 7.5vh;
+    margin: 1% 0% 0% 0%;
+   
+   
+}
+.profile-post-card {
+    /* margin-left: .5%; */
+    width: 32.5vw ;
+    min-height: 55.5vh;
+    padding-bottom: 5%;
+    margin: 0% 0% 15% .5%;
+    border: 1px;
+    border-style:dashed;
+    /* border-color: pink ; */
+     background-color:#fff; 
+  }
