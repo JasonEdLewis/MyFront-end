@@ -6,14 +6,16 @@ import { fetchPost, submitNewPost } from './components/PostAdapter';
 import { postComment } from './components/CommentAdapter';
 import { Image } from 'react-bootstrap';
 import Jack from "./img/jack.jpg";
+import { connect } from 'react-redux'
 
 
 import { Card, Form, Navbar, Button, NavbarBrand, Nav } from "react-bootstrap";
 
 class HomeContainer extends React.Component {
   state = {
-    id: "",
+    userId: this.props.userid,
     name: this.props.user,
+    showCommentField: false,
     comment: "",
     post_id: "",
     Picture: "",
@@ -34,13 +36,17 @@ class HomeContainer extends React.Component {
       [e.target.name]: e.target.value
     });
   };
-
+showCommentField=()=>{
+  return this.setState({showCommentField: !this.state.showCommentField})
+}
   thePost = props => {
-
 
     return this.props.fposts.map(post => (
       <Postcard
         post={post}
+        commentLen={this.state.comment.length}
+        toggleCommentField={this.showCommentField}
+        commentFieldStatus={this.state.showCommentField}
         id={post.id}
         submitComment={() => this.submitComment(post.id, post.userId)}
         handleComment={this.handleComment}
@@ -54,12 +60,13 @@ class HomeContainer extends React.Component {
   };
 
   theNewPostCard = props => {
+    const {userid } = this.props
     return (
       <NewPostCard
         handleNewPost={this.handleNewPost}
-        submitPost={() => (this.state.id)}
+        submitPost={() => (userid)}
         state={this.state}
-        userId={this.state.id}
+        userId={userid}
         back={this.returnToThePost}
 
       />
@@ -68,29 +75,30 @@ class HomeContainer extends React.Component {
 
   myProfile = () => {
     // debugger
-    const { fposts, userId, history } = this.props
+    const { fposts, userid, history } = this.props
     // this.setState({ page: "profile" })
-    const myPost = fposts.filter(post => post.user_id === userId);
+   
+debugger
+    return ( history.push('/profile')
+      // <Postcard
+      //   post={myPost}
+      //   // id={myPost.id}
+      //   submitComment={() => this.submitComment(myPost.id, myPost.userId)}
+      //   handleComment={this.handleComment}
 
-    return ( history.push('/profile'),
-      <Postcard
-        post={myPost}
-        // id={myPost.id}
-        submitComment={() => this.submitComment(myPost.id, myPost.userId)}
-        handleComment={this.handleComment}
-
-      />
+      // />
       
       
     );
    
   };
-  // this.state.cameraClick ? NewPost() :
+ 
 
   returnToThePost = () => {
     this.setState({ page: "thePost" })
   }
-  submitComment = (postId, userId) => {
+  submitComment = (postId) => {
+    const {userId ,comment } = this.state
     console.log(
       "Post id",
       postId,
@@ -99,7 +107,7 @@ class HomeContainer extends React.Component {
       "comment: ",
       this.state.comment
     );
-    postComment(postId, this.state.comment, userId)
+    postComment(postId, comment, userId)
       .then(resp => resp.json())
       .then(console.log);
   };
@@ -142,10 +150,9 @@ class HomeContainer extends React.Component {
             <span className="camera" id={this.state.id} onClick={() => this.setState({ page: "newPost" })}> 📸 </span>
           </div>
 
-
           <div className="thumb-and-button">
             <div className="thumbnail" onClick={() => this.setState({ page: "profile" })}><img src={Jack} id='thumbnail' /> </div>
-            <div className="logout"><button onClick={this.logout} id="logout-button" > logout  </button></div>
+            <div className="logout"><span onClick={this.logout} id="logout-button" > logout  </span></div>
 
 
 
@@ -164,7 +171,14 @@ class HomeContainer extends React.Component {
 
     );
   }
+ 
+}
+const mapStateToProps = (state)=>{
+  return {
+    user: state.users.username,
+    userid: state.users.id
+  }
 }
 
-export default HomeContainer;
+export default connect(mapStateToProps, null )(HomeContainer);
 

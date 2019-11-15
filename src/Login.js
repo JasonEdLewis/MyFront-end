@@ -16,7 +16,7 @@ class Login extends React.Component {
   state = {
     username: "",
     password: "",
-    errorMessage: "",
+    errorMessage: `🛑  WroNg UserNaMe Or PaSsWord   🛑`,
     showError: false,
   };
 
@@ -29,10 +29,11 @@ class Login extends React.Component {
   handleSubmit = e => {
     const { fetchLogin, login, history } = this.props
     e.preventDefault();
-    fetchLogin(this.state)
+    fetchLogin(this.state).then(() =>
+      !!localStorage.token ? history.push('/home') : this.setState({ showError: true })
+    )
+    setTimeout(() => { this.setState({ showError: false }) }, 2250)
     this.setState({ username: '', password: "" })
-    !!login.token ? history.push('/home') : this.setState({errorMessage: login.errorMessage, showError:true })
-
   };
 
 
@@ -41,6 +42,7 @@ class Login extends React.Component {
     console.log("Login Props:", this.props);
 
     const { login } = this.props
+    const { showError, errorMessage } = this.state
     return (
       //  <div className="video-div">
       //   <video  id="myVideo" loop autoplay >
@@ -48,50 +50,54 @@ class Login extends React.Component {
       //       {/* <source src={ Vid } type="video/mp4"/> */}
       //     </video>
       //  </div>
-      <div className="signindiv">
+      <>
+        {showError ? <div id="wrong-login-info"><p>{errorMessage}</p></div> : null}
+        <div className={showError ? "wrong-signindiv" : "signindiv"}>
 
-        <div className="header-div">
-          <span className="sign-in-header" >Jays'taGram</span>
-        </div>
-        <div>
-          <img
-            src="https://www.jing.fm/clipimg/full/90-902599_camera-icons-transparent-background-ios-camera-logo-png.png"
-            className="camera-logo"
-          />
-        </div>
-        <Form className="signInForm" onSubmit={this.handleSubmit}>
-          <Form.Group controlId="formGroupEmail">
-            <Form.Label alt="username-field"></Form.Label>
-            <Form.Control
-              type="text"
-              value={this.state.username}
-              placeholder="Username"
-              name="username"
-              onChange={this.handleChage}
-              required
+          <div className="header-div">
+            <span className="sign-in-header" >Jays'taGram</span>
+          </div>
+
+          <div>
+            <img
+              src="https://www.jing.fm/clipimg/full/90-902599_camera-icons-transparent-background-ios-camera-logo-png.png"
+              className="camera-logo"
             />
-          </Form.Group>
-          <Form.Group controlId="formGroupPassword">
-            <Form.Label alt="password-field"></Form.Label>
-            <Form.Control
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChage}
-              placeholder="Password"
-              required
-            />
-            {this.state.showError && <p>{this.state.errorMessage}</p> }
-          </Form.Group>
-          {login.requested ? <Loader /> : <><Button variant="primary" type="submit" className="submit-btn">
-            Login
+          </div>
+          <Form className={showError ? 'wrongSignInForm' : 'signInForm'} onSubmit={this.handleSubmit}>
+            <Form.Group controlId="formGroupEmail">
+              <Form.Label alt="username-field"></Form.Label>
+              <Form.Control
+                type="text"
+                value={this.state.username}
+                placeholder="Username"
+                name="username"
+                onChange={this.handleChage}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formGroupPassword">
+              <Form.Label alt="password-field"></Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChage}
+                placeholder="Password"
+                required
+              />
+
+            </Form.Group>
+            {login.requested ? <Loader /> : <><Button variant="primary" type="submit" className="submit-btn">
+              Login
   </Button>
-            <p className="stars-under-signup">º º º º º   </p>
-            <a href="/signup" className="signup-text">
-              signup{" "}
-            </a> </>}
-        </Form>
-      </div>
+              <p className="stars-under-signup">º º º º º   </p>
+              <a href="/signup" className="signup-text">
+                signup{" "}
+              </a> </>}
+          </Form>
+        </div>
+      </>
     );
   }
 

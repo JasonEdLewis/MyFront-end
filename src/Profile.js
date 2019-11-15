@@ -1,9 +1,10 @@
-import React from "react";
+import React, {Component} from "react";
 import { Navbar, Button, Card } from "react-bootstrap";
 import PostCard from "./components/PostCard";
+import { connect } from 'react-redux';
 
 
-export default class Profile extends React.Component {
+ class Profile extends Component {
   postCard = () => {
     return <PostCard />;
   };
@@ -40,7 +41,12 @@ export default class Profile extends React.Component {
     );
   }
 }
-
+const mapStateToProps = state =>{
+  return {
+    post: state.post
+  }
+}
+export default connect(mapStateToProps)(Profile)
 {
   /* <Col xs={6} md={4}>
       <Image src="holder.js/171x180" roundedCircle />

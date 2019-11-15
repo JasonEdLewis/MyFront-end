@@ -3,9 +3,19 @@
   .signindiv {
     width: 90vw;
     height: 100vh;
-    position: absolute;
+   position: relative;
+   
+   
+  }
+  .wrong-signindiv {
+    position: relative;
+    width: 90vw;
+    height: 100vh;
+    opacity: .1;
+    z-index: -1;
     /* background-color: black; */
   }
+  
   .sign-in-header {
     color: red;
     font-family: 'Abril Fatface', cursive;
@@ -21,7 +31,7 @@
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAATklEQVQoU2O0O3X+PwMDA8MhM0NGEI0LMBKtEJsJD27YgW1R0DgEtwWrdUQrxGYLY8V5iDUdhghrKFOITfenmXFgW/jSF+H3DNEKsdkCAO99IAvXcD3VAAAAAElFTkSuQmCC");
     padding: 2.5vh;
     width: 96vw;
-    margin-left: 1.5vw;
+    margin-left: 2vw;
     margin-top: 5vh;
     border: solid rgb(196, 194, 194) .01em ;
     align-content: center;
@@ -30,6 +40,30 @@
   .signInForm {
     width: 10%;
     margin: 2.5% 50%;
+  }
+  #wrong-login-info{
+        position: absolute;
+        background-color: rgb(94, 90, 90);
+        color:rgb(89, 245, 17);
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-weight: 600;
+        font-size: 2vw;
+        text-align: center;
+        vertical-align: middle;
+        width: 40vw;
+        height: 20vh;
+        margin: 22% 45% 0% 35%;
+        border-style: solid;
+        border-color: rgb(245, 17, 17);
+        border-width: .05rem;
+        line-height: 18vh;
+        z-index: 10;
+
+      
+  }
+  .wrongSignInForm {
+   display: none;
+
   }
   .camera-logo {
     padding-top: 7.5%;
@@ -47,3 +81,4 @@
     border-style: solid;
     
   } */
+

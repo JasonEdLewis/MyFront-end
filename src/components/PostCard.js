@@ -1,94 +1,92 @@
 import React from "react";
 import { Card, Form, Button, Col, Image, Container } from "react-bootstrap";
 import Jack from "../img/jack.jpg";
+import '../css/PostCard.css';
+import placeholder from '../img/placeHolder.png';
+import { connect } from 'react-redux';
 
-const divStyle = {
-  marginLeft: "32%",
-  marginRight: "auto",
-  width: "18rem",
-  color: "black"
-};
-const cardStyle = {
-  width: "450px",
-  hieght: "250px",
-  marginLeft: "auto",
-  marginRight: "auto",
-  border: "1px",
-  borderStyle: "dashed",
-  borderColor: "pink",
-  backgroundColor: "#fff"
-};
-const spanStyle = {
-  marginLeft: "auto",
-  marginRight: "auto",
-  marginTop: "0%",
-  color: "pink",
-  fontStyle: "italic",
-  fontWeight: "bold",
-  fontSize: "185%"
-};
-const thumbnailStyle = {
-  height: "50px",
-  marginRight: "5%",
-  marginTop: "3%"
-};
-const ulStyle = {
-  listStyleType: "square",
-  color: "black"
-};
+
 
 const PostCard = props => {
-
+ console.log("Post card props", props)
   const { post, user } = props;
-  console.log("Card props: ", props);
-
-
 
   const comment = () => {
 
     const text = post.comments;
     if (text) {
       return text.map(t => {
-        return <li style={ulStyle}>{t.content}</li>;
+        console.log("comments", t, )
+        return (<p className='li-style'><strong>{t.followee_id}: </strong>{t.content}</p>);
       });
     } else {
       return <h6 style={{ color: "light-grey" }}>Be the first to comment</h6>;
     }
   };
+
+  const activeComment = (e) => {
+    e.target.id === post.id.toString() && props.toggleCommentField()
+
+  }
+
   return (
+    <div className="post-card-div" id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
+      <div id={post.id} className="post-card">
+        <div className="card-header">
+          {/* REPLACE WITH THE IMAGE ASSOCIATED WITH NAME
+        <img
+          className="post-thumbnail"
+          src={require("../img/jack.jpg")}
+        />  */}
+          <button id="add-friend" onClick={() => { console.log(post.user.id) }}>🤝</button>
 
-    <Card style={cardStyle} className="post-card" id={post.id}>
+          {/* <span className="name-span-style" onClick={() => { console.log(post.user.id) }}>{post.user.username}</span> */}
+        </div>
 
-      <Image
-        className="thumbnal"
-        style={thumbnailStyle}
-        src={require("../img/jack.jpg")}
-      />
-      <h5>{post.caption}</h5>
-      <span style={spanStyle}>{post.username}</span>
+        <div className="img-div">
+          <img className="image" src={require('../img/placeHolder.png')} />
+        </div>
 
-      <Card.Img variant="top" src={require('../img/pic_placeholder.png')} />
 
-      <Card.Body>
-        <Card.Title></Card.Title>
-        <Card.Text>
-          <ul>{comment()}</ul>
-        </Card.Text>
-        <Form.Control
-          size="sm"
-          type="text"
-          name="comment"
-          value={props.comment}
-          onChange={props.handleComment}
-          placeholder="comment"
-        />
-      </Card.Body>
-      <Button variant="link" onClick={props.submitComment}>
-        Post
-      </Button>
-    </Card>
 
+        <div className="comments-div" id={post.id} onClick={(e) => console.log(e.target.id)}>
+          <span id="heart" onClick={() => console.log(post.id)}>♡</span>
+
+          <span id={post.id} className="comment-icon" onClick={(e) => activeComment(e)}
+          >{props.commentFieldStatus ? "💬" : "🖋 "}</span>
+
+          <br /><br />
+
+          <div className='ul-style'>
+            <p className='li-style'><span id="name-cap"><strong>{user.username} </strong></span>:{post.caption} </p>
+            {comment()}
+          </div>
+          {props.commentFieldStatus ? <input
+            size="sm"
+            type="text"
+            name="comment"
+            value={props.comment}
+            onChange={props.handleComment}
+            placeholder="comment"
+            className="comment-input"
+          /> : <><br /></>}
+          <br /><br />
+          {props.commentLen === 0 ? <></> : <span onClick={props.submitComment}
+            id="post-span">
+            ⬆️
+      </span>}
+        </div>
+
+      </div>
+
+    </div>
   );
 };
-
-export default PostCard;
+const mapStateToProps = state =>{
+  return {
+    user: state.users.username,
+    userid: state.users.id,
+    
+  }
+}
+export default connect(mapStateToProps)(PostCard);
