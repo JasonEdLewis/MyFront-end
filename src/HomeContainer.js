@@ -14,6 +14,7 @@ class HomeContainer extends React.Component {
   state = {
     id: "",
     name: this.props.user,
+    showCommentField: false,
     comment: "",
     post_id: "",
     Picture: "",
@@ -34,13 +35,18 @@ class HomeContainer extends React.Component {
       [e.target.name]: e.target.value
     });
   };
-
+showCommentField=()=>{
+  return this.setState({showCommentField: !this.state.showCommentField})
+}
   thePost = props => {
 
 
     return this.props.fposts.map(post => (
       <Postcard
         post={post}
+        commentLen={this.state.comment.length}
+        toggleCommentField={this.showCommentField}
+        commentFieldStatus={this.state.showCommentField}
         id={post.id}
         submitComment={() => this.submitComment(post.id, post.userId)}
         handleComment={this.handleComment}

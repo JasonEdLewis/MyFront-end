@@ -23,19 +23,24 @@
 }
 
 #add-friend{
-    background-color: chartreuse;
+    background-color: rgb(196, 199, 193);
     position: absolute;
     width: 4vw;
-    height: 3.75vh;
+    height: 4.5vh;
     text-align: center;
     vertical-align: middle;
     line-height: 3vh;
-    margin: 0%  0%  0%  -45%;
+    margin: 0%  0%  0%  -15vw;
     font-size: 2.5vw;
+    border-radius: .25vw;
+    border-color: rgb(154, 189, 253);
+}
+#add-friend:focus{
+    display: none;
 }
 .name-span-style{
     position: absolute;
-    margin: 0% 0% 0% 30%;
+    margin: -1vh 0vw 0vh 8vw;
     color:pink;
     font-style:italic ;
     font-weight:bold  ;
@@ -66,7 +71,7 @@
   }
 .post-card{
         width: 32.5vw ;
-        min-height: 50.5vh;
+        min-height: 55.5vh;
         padding-bottom: 5%;
         margin: 0% 0% 15% .5%;
         border: 1px;
@@ -100,23 +105,40 @@
   }
   .comments-div{
       width: 30vw;
-      min-height: 24vh;
+      height: 34vh;
       margin: 0 auto;
       padding: 0%;
-      /* background-color:red; */
+      background-color:red;
   }
   .comment-input{
-    margin: 10% 0% 0% 20%;
+    margin: 10% 0% 0% -2vw;
+    width: 30vw;
   }
   
   #heart{
       /* background-color: cadetblue; */
-      font-size: 1.25rem;
+      font-size: 1.75rem;
       float: left;
       margin-left: 5%;
       color: black;
   }
+  .comment-icon{
+    font-size: 2vw;
+    float: left;
+    margin-top: 1vh;
+    margin-left: 1.5vw;
+    /* color: black; */
+    /* background-color: pink; */
+  }
+  #comment-icon:hover{
+      text-shadow: .1vh -.04vw rgb(126, 173, 226);
+  }
+
   #post-span{
-      /* color:black */
+      color:black;
+      background-color: white;
+      border-style: solid;
+      /* border-color: springgreen; */
+      border-width: .025rem;
   }
   
