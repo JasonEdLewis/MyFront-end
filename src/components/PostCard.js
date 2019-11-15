@@ -14,7 +14,8 @@ const PostCard = props => {
     const text = post.comments;
     if (text) {
       return text.map(t => {
-        return <li className='li-style'>{t.content}</li>;
+        console.log("comments",t)
+      return (<li className='li-style'><strong>{t.followee_id}: </strong>{t.content}</li>);
       });
     } else {
       return <h6 style={{ color: "light-grey" }}>Be the first to comment</h6>;
@@ -36,14 +37,19 @@ const PostCard = props => {
         </div>
 
         <div className="img-div">
-        <img  src={require('../img/pic_placeholder.png')} />
+        <img className="image" src={require('../img/pic_placeholder.png')} />
         </div>
         
          
            
           <div className="comments-div">
-          <h5 className="caption">{post.user.username}: {post.caption}</h5>
-          <ul className='ulStyle'>{comment()}</ul>
+            <span id="heart">♡</span>
+            <br/><br/>
+         
+          <ul className='ul-style'>
+          <li className='li-style'><span id="name-cap"><strong>{post.user.username} </strong></span>: {post.caption}</li>
+            {comment()}
+            </ul>
           <input
             size="sm"
             type="text"
@@ -51,6 +57,7 @@ const PostCard = props => {
             value={props.comment}
             onChange={props.handleComment}
             placeholder="comment"
+            className="comment-input"
           />
           </div>
             

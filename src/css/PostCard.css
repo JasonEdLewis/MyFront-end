@@ -1,14 +1,14 @@
 .post-card-div{
    
     width: 33vw ;
-    min-height: 25vh ;
-    padding-bottom: 15%;
-    margin: 5% 0% 5% 40%;
+    height: auto ;
+    /* padding-bottom: 5%; */
+    margin: 5% 0% 10% 40%;
     border: 1px;
     border-style:dashed;
     border-color: pink ;
     justify-self: center;
-    /* background-color:#000 */
+    background-color:#fff
 
 }
 .card-header{
@@ -18,40 +18,45 @@
     height: 7.5vh;
     margin: 0% 0% 0% 1%;
     border-style: solid;
-    border-color: springgreen;
+    /* border-color: springgreen; */
+    border-width: .1rem;
 }
 
 #add-friend{
     background-color: chartreuse;
     position: absolute;
-    width: 3vw;
-    height: 3vh;
+    width: 4vw;
+    height: 3.75vh;
     text-align: center;
     vertical-align: middle;
     line-height: 3vh;
-    margin: 0%  0%  0%  -65%;
-    font-size: 1.75rem;
+    margin: 0%  0%  0%  -45%;
+    font-size: 2.5vw;
 }
 .name-span-style{
     position: absolute;
-    margin: 0% 0% 0% -50%;
+    margin: 0% 0% 0% 30%;
     color:pink;
     font-style:italic ;
     font-weight:bold  ;
-    font-size: 1.25rem;
-    background-color: rebeccapurple;
+    font-size: 2vw;
+    /* background-color: rebeccapurple; */
   }
     .post-thumbnail{
     width: 5vw;
     position: relative;
     height:5vw ;
     margin: -2% 0% 0% 40% ;
-    background-color: salmon;
+    /* background-color: salmon; */
   }
   .img-div {
-    height: 30vh;
-    background-color: blueviolet;
+    height: 32vh;
+    /* background-color: blueviolet; */
     
+}
+.image {
+    width: 32vw;
+    height: 32vh;
 }
 .divStyle {
     margin-left:  32%  ;
@@ -61,34 +66,57 @@
   }
 .post-card{
         width: 32.5vw ;
-        height: 50.5vh;
+        min-height: 50.5vh;
         padding-bottom: 5%;
         margin: 0% 0% 15% .5%;
         border: 1px;
         border-style:dashed;
-        border-color: pink ;
-        background-color:#fff;
-        /* opacity: 0%; */
+        /* border-color: pink ; */
+         background-color:#fff; 
+    
   }
   .caption{
-      color:black
+      color:black;
+      text-align: left;
 
   }
-
-     .ulStyle{
-    list-style-type:square;
-    color:black;
-    background-color: yellow;
+  .caption #name-cap{
+      font-weight: 700;
+      float: left;
+  }
+     .ul-style{
+        /* width: 33vw; */
+    /* background-color: yellow; */
     list-style: none;
-    text-align: center;
+   
    
   }
   .li-style{
-    text-align: center;
-    background-color: coral;
+    width: 31vw;
+   float: right;
+   position:relative;
+   color: black
+    /* background-color: coral; */
+  }
+  .comments-div{
+      width: 30vw;
+      min-height: 24vh;
+      margin: 0 auto;
+      padding: 0%;
+      /* background-color:red; */
+  }
+  .comment-input{
+    margin: 10% 0% 0% 20%;
   }
   
+  #heart{
+      /* background-color: cadetblue; */
+      font-size: 1.25rem;
+      float: left;
+      margin-left: 5%;
+      color: black;
+  }
   #post-span{
-      color:black
+      /* color:black */
   }
   
