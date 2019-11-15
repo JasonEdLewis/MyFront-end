@@ -3,9 +3,19 @@
   .signindiv {
     width: 90vw;
     height: 100vh;
-    position: absolute;
+   position: relative;
+   
+   
+  }
+  .wrong-signindiv {
+    position: relative;
+    width: 90vw;
+    height: 100vh;
+    opacity: .1;
+    z-index: -1;
     /* background-color: black; */
   }
+  
   .sign-in-header {
     color: red;
     font-family: 'Abril Fatface', cursive;
@@ -32,20 +42,22 @@
     margin: 2.5% 50%;
   }
   #wrong-login-info{
+        position: absolute;
         background-color: rgb(94, 90, 90);
         color:rgb(89, 245, 17);
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         font-weight: 600;
-        font-size: 1.5rem;
+        font-size: 2vw;
         text-align: center;
         vertical-align: middle;
-        width: 32vw;
-        height: 16vh;
-        margin: 15% 45% 0% 40%;
+        width: 40vw;
+        height: 20vh;
+        margin: 22% 45% 0% 35%;
         border-style: solid;
-        border-color: rgb(89, 245, 17);
+        border-color: rgb(245, 17, 17);
         border-width: .05rem;
-        line-height: 15vh;
+        line-height: 18vh;
+        z-index: 10;
 
       
   }

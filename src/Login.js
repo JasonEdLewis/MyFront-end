@@ -30,7 +30,7 @@ class Login extends React.Component {
     const { fetchLogin, login, history } = this.props
     e.preventDefault();
     fetchLogin(this.state).then(() =>
-      !!localStorage.token ? history.push('/home') : this.setState({  showError: true })
+      !!localStorage.token ? history.push('/home') : this.setState({ showError: true })
     )
     setTimeout(() => { this.setState({ showError: false }) }, 2250)
     this.setState({ username: '', password: "" })
@@ -50,51 +50,54 @@ class Login extends React.Component {
       //       {/* <source src={ Vid } type="video/mp4"/> */}
       //     </video>
       //  </div>
-      <div className="signindiv">
+      <>
+        {showError ? <div id="wrong-login-info"><p>{errorMessage}</p></div> : null}
+        <div className={showError ? "wrong-signindiv" : "signindiv"}>
 
-        <div className="header-div">
-          <span className="sign-in-header" >Jays'taGram</span>
-        </div>
-        {showError ? <div id="wrong-login-info"><p>{errorMessage}</p></div> :
+          <div className="header-div">
+            <span className="sign-in-header" >Jays'taGram</span>
+          </div>
+
           <div>
             <img
               src="https://www.jing.fm/clipimg/full/90-902599_camera-icons-transparent-background-ios-camera-logo-png.png"
               className="camera-logo"
             />
-          </div>}
-        <Form className={showError ? 'wrongSignInForm' : 'signInForm'} onSubmit={this.handleSubmit}>
-          <Form.Group controlId="formGroupEmail">
-            <Form.Label alt="username-field"></Form.Label>
-            <Form.Control
-              type="text"
-              value={this.state.username}
-              placeholder="Username"
-              name="username"
-              onChange={this.handleChage}
-              required
-            />
-          </Form.Group>
-          <Form.Group controlId="formGroupPassword">
-            <Form.Label alt="password-field"></Form.Label>
-            <Form.Control
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChage}
-              placeholder="Password"
-              required
-            />
+          </div>
+          <Form className={showError ? 'wrongSignInForm' : 'signInForm'} onSubmit={this.handleSubmit}>
+            <Form.Group controlId="formGroupEmail">
+              <Form.Label alt="username-field"></Form.Label>
+              <Form.Control
+                type="text"
+                value={this.state.username}
+                placeholder="Username"
+                name="username"
+                onChange={this.handleChage}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formGroupPassword">
+              <Form.Label alt="password-field"></Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChage}
+                placeholder="Password"
+                required
+              />
 
-          </Form.Group>
-          {login.requested ? <Loader /> : <><Button variant="primary" type="submit" className="submit-btn">
-            Login
+            </Form.Group>
+            {login.requested ? <Loader /> : <><Button variant="primary" type="submit" className="submit-btn">
+              Login
   </Button>
-            <p className="stars-under-signup">º º º º º   </p>
-            <a href="/signup" className="signup-text">
-              signup{" "}
-            </a> </>}
-        </Form>
-      </div>
+              <p className="stars-under-signup">º º º º º   </p>
+              <a href="/signup" className="signup-text">
+                signup{" "}
+              </a> </>}
+          </Form>
+        </div>
+      </>
     );
   }
 

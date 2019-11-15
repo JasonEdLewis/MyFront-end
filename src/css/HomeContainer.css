@@ -97,10 +97,10 @@ grid-template-areas:
         color: rgb(218, 10, 10);
         text-shadow: 0.02vw 0.02vh rgb(1, 17, 20) ;
     }
-#logout-span {
+/* #logout-span {
     
 
-}
+} */
 .Home-Nav ul{
     list-style-type: none;
     padding: 0;

@@ -4,22 +4,21 @@
     height: auto ;
     /* padding-bottom: 5%; */
     margin: 5% 0% 10% 40%;
-    border: 1px;
-    border-style:dashed;
-    border-color: pink ;
+    border-width: 0.01vw;
+    border-style:solid;
+    border-color: rgb(230, 223, 223) ;
     justify-self: center;
     background-color:#fff
 
 }
 .card-header{
-    background-color: purple;
+    /* background-color: purple; */
     position: relative;
     width: 32vw ;
     height: 7.5vh;
-    margin: 0% 0% 0% 1%;
-    border-style: solid;
-    /* border-color: springgreen; */
-    border-width: .1rem;
+    margin: 1% 0% 0% 1%;
+   
+   
 }
 
 #add-friend{
@@ -73,7 +72,7 @@
         width: 32.5vw ;
         min-height: 55.5vh;
         padding-bottom: 5%;
-        margin: 0% 0% 15% .5%;
+        margin: 1% 0% 15% .5%;
         border: 1px;
         border-style:dashed;
         /* border-color: pink ; */

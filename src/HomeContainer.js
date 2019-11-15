@@ -148,7 +148,6 @@ showCommentField=()=>{
             <span className="camera" id={this.state.id} onClick={() => this.setState({ page: "newPost" })}> 📸 </span>
           </div>
 
-
           <div className="thumb-and-button">
             <div className="thumbnail" onClick={() => this.setState({ page: "profile" })}><img src={Jack} id='thumbnail' /> </div>
             <div className="logout"><span onClick={this.logout} id="logout-button" > logout  </span></div>

@@ -1,7 +1,8 @@
 import React from "react";
 import { Card, Form, Button, Col, Image, Container } from "react-bootstrap";
 import Jack from "../img/jack.jpg";
-import '../css/PostCard.css'
+import '../css/PostCard.css';
+import placeholder from '../img/placeHolder.png'
 
 
 
@@ -22,9 +23,9 @@ const PostCard = props => {
     }
   };
 
-  const activeComment=(e)=>{
+  const activeComment = (e) => {
     e.target.id === post.id.toString() && props.toggleCommentField()
-   
+
   }
 
   return (
@@ -42,7 +43,7 @@ const PostCard = props => {
         </div>
 
         <div className="img-div">
-          <img className="image" src={require('../img/pic_placeholder.png')} />
+          <img className="image" src={require('../img/placeHolder.png')} />
         </div>
 
 
@@ -50,8 +51,8 @@ const PostCard = props => {
         <div className="comments-div" id={post.id} onClick={(e) => console.log(e.target.id)}>
           <span id="heart" onClick={() => console.log(post.id)}>♡</span>
 
-          <span id={post.id} className="comment-icon"  onClick={(e) => activeComment(e)}
->{ props.commentFieldStatus ? "💬" : "🖋 "}</span>
+          <span id={post.id} className="comment-icon" onClick={(e) => activeComment(e)}
+          >{props.commentFieldStatus ? "💬" : "🖋 "}</span>
 
           <br /><br />
 
