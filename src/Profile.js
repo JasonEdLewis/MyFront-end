@@ -50,8 +50,8 @@ class Profile extends Component {
             onClick={() => this.props.history.push("/login")}
             className="logout-btn">
             logout
-                </button>
-          Signed in as: <a href="#login">{user}</a>
+                </button >
+          <span className="signed-in-as">Signed in as: {user}</span>
           <div>
           {this.state.promiseReturned && this.postCard()}
           </div>

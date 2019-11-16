@@ -32,6 +32,12 @@
    
    
 }
+.logout-btn{
+    background-color: blue;
+}
+.signed-in-as{
+    background-color: blueviolet;
+}
 .profile-post-card {
     /* margin-left: .5%; */
     width: 32.5vw ;

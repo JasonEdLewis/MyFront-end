@@ -47,7 +47,7 @@ const mapStateToProps = state => {
   return {
     token: state.login.token,
     user: state.users,
-    post: state.post
+    post: state.post.data
   }
 }
 
