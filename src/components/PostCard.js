@@ -32,12 +32,17 @@ const PostCard = props => {
     return post.user.id !== props.userid ? post.user.username : user
   }
   const clearCommentBox = (e) => {
-    const {  commentFieldStatus,resetComment } = props
-    if (props.commentLen > 0 && commentFieldStatus) {
+    const {  commentFieldStatus,resetComment,editCapStatus,editCaption } = props
+    if (props.commentLen || commentFieldStatus) {
       activeComment(e); resetComment()
     }
+    else if(editCapStatus ){
+    editCaption()
+    }
   }
-
+const editCapInput =(cap)=>{
+  return <input type='text' value={this.state.comment} onChange={props.handleChange}placeholder={` ${cap}`} id="edit-caption-input"/>
+}
   return (
     <div className="post-card-div" id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
       <div id={post.id} className="post-card">
@@ -68,7 +73,7 @@ const PostCard = props => {
           </div>
           <br />
           <div className='ul-style'>
-            <p className='post-caption'><span id="name-cap"><strong>{whichUser()} </strong></span>:{post.caption} <span id="edit-caption">🖋</span></p>
+            <p className='post-caption'><span id="name-cap"><strong>{` ${whichUser()}`} : </strong></span> {props.editCapStatus ? editCapInput(post.caption): post.caption} {props.editCapStatus ? <span id="submit-cap-edit" onClick={console.log}>⬆️</span> : <span id="edit-caption" onClick={()=> props.editCaption(post.id)}>🖋</span> } </p>
             {comment()}
           </div>
           {props.commentFieldStatus ? <input

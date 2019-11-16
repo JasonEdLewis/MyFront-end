@@ -4,7 +4,7 @@ import Postcard from "./components/PostCard";
 import NewPostCard from "./components/NewPostCard";
 import Jack from "./img/jack.jpg";
 import { connect } from 'react-redux';
-import { getPost } from './redux/actions/PostActions';
+import { getPost, editCaption } from './redux/actions/PostActions';
 import { fetchUser } from './redux/actions/UserActions';
 import { addComment } from './redux/actions/CommentsActions'
 import Loader from './components/loader'
@@ -20,7 +20,8 @@ class HomeContainer extends React.Component {
     Picture: "",
     caption: "",
     likes: 0,
-    page: "thePost"
+    page: "thePost",
+    editingCaption: false
 
   };
 
@@ -40,9 +41,21 @@ class HomeContainer extends React.Component {
       [e.target.name]: e.target.value
     });
   };
+  handleCaptionEdit=(e)=>{
+    this.setState( {editingCaption: !this.state.editingCaption} )
+    // this.setState({ [e.target.name]: e.target.value}) 
+    console.log(this.state.editingCaption)
+  }
+  handleEditSubmit=(id)=>{
+    this.propseditCaption()
+  }
   showCommentField = () => {
     return this.setState({ showCommentField: !this.state.showCommentField })
   }
+
+
+
+
   thePost = () => {
     const { posts } = this.props
     return posts && posts.length > 0 ? posts.map(post => (
@@ -55,6 +68,8 @@ class HomeContainer extends React.Component {
         resetComment={this.resetCommentLength}
         submitComment={() => this.submitComment(post.id, post.userId)}
         handleComment={this.handleComment}
+        editCaption={this.handleCaptionEdit}
+        editCapStatus={this.state.editingCaption}
       />
     )) : console.log("The Post didnt work, here are the props:", this.props)
   };
@@ -178,5 +193,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getPost, fetchUser, addComment })(HomeContainer);
+export default connect(mapStateToProps, { getPost, fetchUser, addComment,editCaption })(HomeContainer);
 

@@ -175,4 +175,15 @@
       color:black;
     font-size: 2vw;
   }
+
+  #edit-caption-input{
+    font-size: small;
+    border-style: none;
+    width: 20vw;
+    height: 2.5vh;
+  }
+
+  #submit-cap-edit{
+    font-size: small;
+  }
   

@@ -1,5 +1,5 @@
 import {
-    REQUEST_POST, POST_SUCCESS, POST_FAILURE, CREATE_POST, EDIT_POST_CAPTION, DELETE_POST,
+    REQUESTING, POST_SUCCESS, POST_FAILURE, CREATE_POST, EDIT_POST_CAPTION, DELETE_POST,
     SUBMITTED_COMMENT, ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT
 } from '../actions/types'
 
@@ -14,7 +14,7 @@ const initialState = {
 }
 export default (state = initialState, action) => {
     switch (action.type) {
-        case REQUEST_POST:
+        case REQUESTING:
             return { ...state, request: true }
         case POST_SUCCESS:
             return {
