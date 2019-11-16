@@ -14,19 +14,12 @@ class Homepage extends React.Component {
     follooweePosts: []
   };
 
-  theFetch = async way => {
-    let url;
-    way
-      ? (url = `http://localhost:3000/${way}`)
-      : (url = "http://localhost:3000/");
-    const resp = await fetch(url);
-    return await resp.json();
-  };
   componentDidMount() {
+    debugger
     const { fetchUser, getPost } = this.props
     fetchUser(localStorage.token)
     getPost()
-   
+
   }
 
   render() {
@@ -34,10 +27,8 @@ class Homepage extends React.Component {
     const { user, post } = this.props
     return (
       <>
-      {post.request && <Loader/>}
+        {/* {post.request && <Loader />} */}
         <HomeContainer
-          fposts={this.state.follooweePosts}
-          history={this.props.history}
         />
       </>
     );
@@ -45,12 +36,11 @@ class Homepage extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-    token: state.login.token,
     user: state.users,
-    post: state.post.data
+    post: state.post
   }
 }
 
 
 
-export default connect(mapStateToProps, { fetchUser, getPost  })(Homepage)
+export default connect(mapStateToProps, { fetchUser, getPost })(Homepage)

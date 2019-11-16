@@ -23,12 +23,14 @@ class App extends React.Component {
   redirect = page => {
     this.setState({ page});
   };
-
+ 
   componentDidMount() {
+    
     // if (localStorage.token) {
       this.redirect("/");
       this.props.getPost()
     // }
+   
   }
 
   logout = () => {
@@ -46,7 +48,7 @@ class App extends React.Component {
        <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/home"
-        render={routerProps => <Home  {... routerProps}  history={this.props.history}/>} 
+        // render={routerProps => <Home  {... routerProps}  history={this.props.history}/>} 
         component={Home} 
         />
         <Route exact path="/profile" component={Profile} />

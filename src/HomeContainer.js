@@ -6,7 +6,8 @@ import { fetchPost, submitNewPost } from './components/PostAdapter';
 import { postComment } from './components/CommentAdapter';
 import { Image } from 'react-bootstrap';
 import Jack from "./img/jack.jpg";
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { getPost } from './redux/actions/PostActions'
 
 
 import { Card, Form, Navbar, Button, NavbarBrand, Nav } from "react-bootstrap";
@@ -21,14 +22,19 @@ class HomeContainer extends React.Component {
     Picture: "",
     caption: "",
     likes: 0,
-    page: "thePost"
+    page: "thePost",
+    postLoaded: false
+    
 
   };
 
-  info = () => {
-    console.log(this.props);
-    return this.props;
-  };
+  componentDidMount() {
+    // this.props.getPost().then(()=> {
+    //   this.setState( { postLoaded: true})
+    // }
+    // )
+    
+  }
 
   handleComment = e => {
     // console.log(e.target.value);
@@ -39,9 +45,10 @@ class HomeContainer extends React.Component {
 showCommentField=()=>{
   return this.setState({showCommentField: !this.state.showCommentField})
 }
-  thePost = props => {
-
-    return this.props.fposts.map(post => (
+  thePost = () => {
+    debugger
+    const { post } = this.props
+    return post.map(post => (
       <Postcard
         post={post}
         commentLen={this.state.comment.length}
@@ -153,7 +160,7 @@ showCommentField=()=>{
         </div>
         <div className="Home-Content">
 
-          {this.pageToRender()}
+          {this.state.postLoaded &&  this.pageToRender()}
           {this.state.page !== "newPost" ? <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div> : <></>}
         </div>
       </div>
@@ -167,9 +174,10 @@ showCommentField=()=>{
 const mapStateToProps = (state)=>{
   return {
     user: state.users.username,
-    userid: state.users.id
+    userid: state.users.id,
+    posts: post.data
   }
 }
 
-export default connect(mapStateToProps, null )(HomeContainer);
+export default connect(mapStateToProps, { getPost })(HomeContainer);
 
