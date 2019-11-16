@@ -28,6 +28,9 @@ const PostCard = props => {
     e.target.id === post.id.toString() && props.toggleCommentField()
 
   }
+ const whichUser = () =>{
+  return  post.user.id !== props.userid ? post.user.username : user
+  }
 
   return (
     <div className="post-card-div" id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
@@ -58,7 +61,7 @@ const PostCard = props => {
           <br /><br />
 
           <div className='ul-style'>
-            <p className='li-style'><span id="name-cap"><strong>{user.username} </strong></span>:{post.caption} </p>
+            <p className='li-style'><span id="name-cap"><strong>{whichUser()} </strong></span>:{post.caption} </p>
             {comment()}
           </div>
           {props.commentFieldStatus ? <input

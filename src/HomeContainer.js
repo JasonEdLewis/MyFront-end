@@ -6,7 +6,10 @@ import { fetchPost, submitNewPost } from './components/PostAdapter';
 import { postComment } from './components/CommentAdapter';
 import { Image } from 'react-bootstrap';
 import Jack from "./img/jack.jpg";
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { getPost } from './redux/actions/PostActions';
+import { fetchUser } from './redux/actions/UserActions';
+import Loader from './components/loader'
 
 
 import { Card, Form, Navbar, Button, NavbarBrand, Nav } from "react-bootstrap";
@@ -25,11 +28,14 @@ class HomeContainer extends React.Component {
 
   };
 
-  info = () => {
-    console.log(this.props);
-    return this.props;
-  };
+  componentDidMount() {
+    console.log("Home Page CONTAINER MOUNTED")
+     const { fetchUser, getPost } = this.props 
+     fetchUser(localStorage.token)
+    getPost()
 
+  }
+  
   handleComment = e => {
     // console.log(e.target.value);
     this.setState({
@@ -39,9 +45,9 @@ class HomeContainer extends React.Component {
 showCommentField=()=>{
   return this.setState({showCommentField: !this.state.showCommentField})
 }
-  thePost = props => {
-
-    return this.props.fposts.map(post => (
+  thePost = () => {
+   const { post } = this.props
+  return  post && post.length > 0 ?  post.map(post => (
       <Postcard
         post={post}
         commentLen={this.state.comment.length}
@@ -50,8 +56,8 @@ showCommentField=()=>{
         id={post.id}
         submitComment={() => this.submitComment(post.id, post.userId)}
         handleComment={this.handleComment}
-      />
-    ));
+      /> 
+    )) : console.log( "Checking what post is without data:" ,post)
   };
 
   // SUBMIT THE COMMENT /FETCH POST
@@ -74,22 +80,7 @@ showCommentField=()=>{
   };
 
   myProfile = () => {
-    // debugger
-    const { fposts, userid, history } = this.props
-    // this.setState({ page: "profile" })
-   
-debugger
-    return ( history.push('/profile')
-      // <Postcard
-      //   post={myPost}
-      //   // id={myPost.id}
-      //   submitComment={() => this.submitComment(myPost.id, myPost.userId)}
-      //   handleComment={this.handleComment}
-
-      // />
-      
-      
-    );
+    this.props.history.push('/profile')
    
   };
  
@@ -138,6 +129,7 @@ debugger
   render() {
     // debugger
     console.log("Home Container props", this.props);
+    
     const { fposts, user, userId, history } = this.props;
 
     return (
@@ -161,7 +153,7 @@ debugger
 
         </div>
         <div className="Home-Content">
-
+        {this.props.postRequest && <Loader/>}
           {this.pageToRender()}
           {this.state.page !== "newPost" ? <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div> : <></>}
         </div>
@@ -176,9 +168,11 @@ debugger
 const mapStateToProps = (state)=>{
   return {
     user: state.users.username,
-    userid: state.users.id
+    userid: state.users.id,
+    post: state.post.post.data,
+    postRequested: state.post.requested
   }
 }
 
-export default connect(mapStateToProps, null )(HomeContainer);
+export default connect(mapStateToProps, { getPost,fetchUser } )(HomeContainer);
 
