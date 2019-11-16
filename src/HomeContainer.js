@@ -4,11 +4,11 @@ import Postcard from "./components/PostCard";
 import NewPostCard from "./components/NewPostCard";
 import { fetchPost, submitNewPost } from './components/PostAdapter';
 import { postComment } from './components/CommentAdapter';
-import { Image } from 'react-bootstrap';
 import Jack from "./img/jack.jpg";
 import { connect } from 'react-redux';
 import { getPost } from './redux/actions/PostActions';
 import { fetchUser } from './redux/actions/UserActions';
+import { addComment } from './redux/actions/CommentsActions'
 import Loader from './components/loader'
 
 
@@ -16,8 +16,6 @@ import { Card, Form, Navbar, Button, NavbarBrand, Nav } from "react-bootstrap";
 
 class HomeContainer extends React.Component {
   state = {
-    userId: this.props.userid,
-    name: this.props.user,
     showCommentField: false,
     comment: "",
     post_id: "",
@@ -30,24 +28,24 @@ class HomeContainer extends React.Component {
 
   componentDidMount() {
     console.log("Home Page CONTAINER MOUNTED")
-     const { fetchUser, getPost } = this.props 
-     fetchUser(localStorage.token)
+    const { fetchUser, getPost } = this.props
+    fetchUser(localStorage.token)
     getPost()
 
   }
-  
+
   handleComment = e => {
     // console.log(e.target.value);
     this.setState({
       [e.target.name]: e.target.value
     });
   };
-showCommentField=()=>{
-  return this.setState({showCommentField: !this.state.showCommentField})
-}
+  showCommentField = () => {
+    return this.setState({ showCommentField: !this.state.showCommentField })
+  }
   thePost = () => {
-   const { post } = this.props
-  return  post && post.length > 0 ?  post.map(post => (
+    const { post } = this.props
+    return post && post.length > 0 && post.map(post => (
       <Postcard
         post={post}
         commentLen={this.state.comment.length}
@@ -56,8 +54,8 @@ showCommentField=()=>{
         id={post.id}
         submitComment={() => this.submitComment(post.id, post.userId)}
         handleComment={this.handleComment}
-      /> 
-    )) : console.log( "Checking what post is without data:" ,post)
+      />
+    ))
   };
 
   // SUBMIT THE COMMENT /FETCH POST
@@ -66,7 +64,7 @@ showCommentField=()=>{
   };
 
   theNewPostCard = props => {
-    const {userid } = this.props
+    const { userid } = this.props
     return (
       <NewPostCard
         handleNewPost={this.handleNewPost}
@@ -81,15 +79,16 @@ showCommentField=()=>{
 
   myProfile = () => {
     this.props.history.push('/profile')
-   
+
   };
- 
+
 
   returnToThePost = () => {
     this.setState({ page: "thePost" })
   }
   submitComment = (postId) => {
-    const {userId ,comment } = this.state
+    const { userid, addComment } = this.props
+    const { userId, comment } = this.state
     console.log(
       "Post id",
       postId,
@@ -98,9 +97,16 @@ showCommentField=()=>{
       "comment: ",
       this.state.comment
     );
-    postComment(postId, comment, userId)
-      .then(resp => resp.json())
+    debugger
+    const body = {
+      post_id: postId,
+      content: comment,
+      followee_id: userid
+    }
+    addComment(body)
+      // .then(resp => resp.json())
       .then(console.log);
+    this.setState({ comment: " " })
   };
 
   handleNewPost = e => {
@@ -129,7 +135,7 @@ showCommentField=()=>{
   render() {
     // debugger
     console.log("Home Container props", this.props);
-    
+
     const { fposts, user, userId, history } = this.props;
 
     return (
@@ -153,7 +159,7 @@ showCommentField=()=>{
 
         </div>
         <div className="Home-Content">
-        {this.props.postRequest && <Loader/>}
+          {this.props.postRequest && <Loader />}
           {this.pageToRender()}
           {this.state.page !== "newPost" ? <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div> : <></>}
         </div>
@@ -163,9 +169,9 @@ showCommentField=()=>{
 
     );
   }
- 
+
 }
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state) => {
   return {
     user: state.users.username,
     userid: state.users.id,
@@ -174,5 +180,5 @@ const mapStateToProps = (state)=>{
   }
 }
 
-export default connect(mapStateToProps, { getPost,fetchUser } )(HomeContainer);
+export default connect(mapStateToProps, { getPost, fetchUser, addComment })(HomeContainer);
 

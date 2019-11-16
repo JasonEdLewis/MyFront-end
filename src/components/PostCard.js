@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 
 const PostCard = props => {
- console.log("Post card props", props)
+//  console.log("Post card props", props)
   const { post, user } = props;
 
   const comment = () => {
@@ -16,7 +16,7 @@ const PostCard = props => {
     const text = post.comments;
     if (text) {
       return text.map(t => {
-        console.log("comments", t, )
+        // console.log("comments", t, )
         return (<p className='li-style'><strong>{t.followee_id}: </strong>{t.content}</p>);
       });
     } else {
