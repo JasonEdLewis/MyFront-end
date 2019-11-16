@@ -2,8 +2,6 @@ import React from "react";
 import "./css/HomeContainer.css";
 import Postcard from "./components/PostCard";
 import NewPostCard from "./components/NewPostCard";
-import { fetchPost, submitNewPost } from './components/PostAdapter';
-import { postComment } from './components/CommentAdapter';
 import Jack from "./img/jack.jpg";
 import { connect } from 'react-redux';
 import { getPost } from './redux/actions/PostActions';
@@ -33,7 +31,9 @@ class HomeContainer extends React.Component {
     getPost()
 
   }
-
+  resetCommentLength = () => {
+    this.setState({comment: ""})
+  }
   handleComment = e => {
     // console.log(e.target.value);
     this.setState({
@@ -44,18 +44,19 @@ class HomeContainer extends React.Component {
     return this.setState({ showCommentField: !this.state.showCommentField })
   }
   thePost = () => {
-    const { post } = this.props
-    return post && post.length > 0 && post.map(post => (
+    const { posts } = this.props
+    return posts && posts.length > 0 ? posts.map(post => (
       <Postcard
         post={post}
         commentLen={this.state.comment.length}
         toggleCommentField={this.showCommentField}
         commentFieldStatus={this.state.showCommentField}
         id={post.id}
+        resetComment={this.resetCommentLength}
         submitComment={() => this.submitComment(post.id, post.userId)}
         handleComment={this.handleComment}
       />
-    ))
+    )) : console.log("The Post didnt work, here are the props:", this.props)
   };
 
   // SUBMIT THE COMMENT /FETCH POST
@@ -97,15 +98,12 @@ class HomeContainer extends React.Component {
       "comment: ",
       this.state.comment
     );
-    debugger
     const body = {
       post_id: postId,
       content: comment,
       followee_id: userid
     }
     addComment(body)
-      // .then(resp => resp.json())
-      .then(console.log);
     this.setState({ comment: " " })
   };
 
@@ -175,7 +173,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.users.username,
     userid: state.users.id,
-    post: state.post.post.data,
+    posts: state.post.posts.data,
     postRequested: state.post.requested
   }
 }

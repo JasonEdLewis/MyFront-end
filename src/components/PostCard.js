@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 
 const PostCard = props => {
-//  console.log("Post card props", props)
+  //  console.log("Post card props", props)
   const { post, user } = props;
 
   const comment = () => {
@@ -28,8 +28,14 @@ const PostCard = props => {
     e.target.id === post.id.toString() && props.toggleCommentField()
 
   }
- const whichUser = () =>{
-  return  post.user.id !== props.userid ? post.user.username : user
+  const whichUser = () => {
+    return post.user.id !== props.userid ? post.user.username : user
+  }
+  const clearCommentBox = (e) => {
+    const {  commentFieldStatus,resetComment } = props
+    if (props.commentLen > 0 && commentFieldStatus) {
+      activeComment(e); resetComment()
+    }
   }
 
   return (
@@ -43,7 +49,7 @@ const PostCard = props => {
         />  */}
           <button id="add-friend" onClick={() => { console.log(post.user.id) }}>🤝</button>
 
-          {/* <span className="name-span-style" onClick={() => { console.log(post.user.id) }}>{post.user.username}</span> */}
+          <span className="name-span-style" onClick={() => { console.log(post.user.id) }}>{post.user.username}</span>
         </div>
 
         <div className="img-div">
@@ -52,16 +58,17 @@ const PostCard = props => {
 
 
 
-        <div className="comments-div" id={post.id} onClick={(e) => console.log(e.target.id)}>
+        <div className="comments-div" id={post.id} onClick={(e) => clearCommentBox(e)}>
           <span id="heart" onClick={() => console.log(post.id)}>♡</span>
+          <div id='comments-header'>
+            <span id={post.id} className="comment-icon" onClick={(e) => activeComment(e)}
+            >{props.commentFieldStatus ? "💬" : "🖋 "}</span>
+            <span id="likes" >Likes: {post.likes}</span>
 
-          <span id={post.id} className="comment-icon" onClick={(e) => activeComment(e)}
-          >{props.commentFieldStatus ? "💬" : "🖋 "}</span>
-
-          <br /><br />
-
+          </div>
+          <br />
           <div className='ul-style'>
-            <p className='li-style'><span id="name-cap"><strong>{whichUser()} </strong></span>:{post.caption} </p>
+            <p className='post-caption'><span id="name-cap"><strong>{whichUser()} </strong></span>:{post.caption} <span id="edit-caption">🖋</span></p>
             {comment()}
           </div>
           {props.commentFieldStatus ? <input
@@ -85,11 +92,11 @@ const PostCard = props => {
     </div>
   );
 };
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
   return {
     user: state.users.username,
     userid: state.users.id,
-    
+
   }
 }
 export default connect(mapStateToProps)(PostCard);

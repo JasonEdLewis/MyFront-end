@@ -139,7 +139,38 @@
       text-shadow: .1vh -.04vw rgb(126, 173, 226);
       font-size: 1.55vw;
   }
-
+  #likes {
+    color:rgb(180, 4, 4);
+    font-size: 1.25vw;
+    /* background-color: chartreuse; */
+    vertical-align: middle;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+    float: right;
+    margin-right: 5%;
+    margin-top: 1%;
+  }
+#comments-header {
+  height: 4vh;
+  background-color: rgb(245, 239, 235);
+  border-style:solid;
+  border-width: .01rem;
+  border-color: rgb(226, 225, 225);
+ 
+}
+.post-caption{
+  color:black;
+}
+.post-caption:hover{
+ 
+}
+#edit-caption{
+  display: unset;
+  font-size: xx-small;
+}
+#edit-caption:hover{
+  display: all;
+}
   #post-span{
       color:black;
     font-size: 2vw;
