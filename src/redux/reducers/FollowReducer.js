@@ -1,13 +1,12 @@
 import { GET_FOLLOWS, CREATE_FOLLOW, DELETE_FOLLOW } from '../actions/types'
 
-const initialState = {}
+const initialState = []
 
 export default function( state = initialState, action){
     switch (action.type) {
         case GET_FOLLOWS:
-            return {
+            return state.concat(action.payload ) 
 
-            }
         case CREATE_FOLLOW:
             return {
 

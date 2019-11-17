@@ -6,11 +6,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const onStartup = () => {
-   var i = 0
+   let i = 0
    i === 0 && !!localStorage.token && localStorage.clear()
     return console.log("Index started")}
     const i = 1
-onStartup()
+// onStartup()
 ReactDOM.render(
   
     <App />,document.getElementById('root'));
