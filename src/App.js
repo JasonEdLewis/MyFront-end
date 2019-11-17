@@ -5,7 +5,7 @@ import "./App.css";
 import Profile from "./Profile";
 import Signup from "./Signup";
 import Home from "./Homepage";
-import Layout from './components/Layout'
+
 
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import { Provider } from 'react-redux';

@@ -2,6 +2,7 @@ import React from "react";
 import "./css/HomeContainer.css";
 import Postcard from "./components/PostCard";
 import NewPostCard from "./components/NewPostCard";
+import Follows from './components/Follows';
 import Jack from "./img/jack.jpg";
 import { connect } from 'react-redux';
 import { getPost, editCaption } from './redux/actions/PostActions';
@@ -168,6 +169,7 @@ addLike = (id, like)=>{
 
     return (
       <div className="Home-Container">
+        <Follows/>
         <div className="Homepage-nav">
 
           <div id="jays-gram" onClick={() => this.returnToThePost()}><span >{this.props.user}s'taGram </span></div>
