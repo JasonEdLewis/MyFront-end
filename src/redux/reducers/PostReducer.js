@@ -1,5 +1,5 @@
 import {
-    REQUESTING, POST_SUCCESS, POST_FAILURE, CREATE_POST, EDIT_POST_CAPTION, DELETE_POST,
+    REQUESTING, POST_SUCCESS, POST_FAILURE, CREATE_POST, EDIT_POST_CAPTION, ADD_LIKE, DELETE_POST,
     SUBMITTED_COMMENT, ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT
 } from '../actions/types'
 
@@ -8,8 +8,8 @@ const initialState = {
     request: null,
     success: null,
     errorMessage: "",
-    editingPost:false,
-    submittedComment:false,
+    editingPost: false,
+    submittedComment: false,
 
 }
 export default (state = initialState, action) => {
@@ -29,18 +29,29 @@ export default (state = initialState, action) => {
                 post: [...state.post, action.payload]
             }
         case EDIT_POST_CAPTION:
-            const idx = state.post.findIndex(post => post.id === action.payload.id)
+            debugger
+            const idx = state.posts.findIndex(post => post.id === action.id)
             const post = state.post[idx]
             const pts = [
-                state.posts.slice(0,idx),
-                Object.assign({}, post, {caption:action.payload},
-                ...state.payload.slice(idx+1) )
+                ...state.posts.slice(0, idx),
+                Object.assign({}, post, { caption: action.payload },
+                    ...state.payload.slice(idx + 1))
             ]
             return {
                 ...state,
-                posts:pts
+                posts: pts
             }
+        // case ADD_LIKE:
+        //     debugger
+        //     const ix = state.posts.data.findIndex(p => p.id === action.payload.id)
+        //     const likedpost = state.posts[ix]
 
+        //     return{...state,
+        //         posts: [...state.posts.slice(0, ix),
+        //                 Object.assign({}, likedpost, {likes: action.payload.numLikes}),
+        //                 ...state.posts.slice(ix + 1)
+        //         ]
+        //      }
         default:
             return state;
     }

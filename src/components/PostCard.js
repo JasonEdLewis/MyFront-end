@@ -32,16 +32,17 @@ const PostCard = props => {
     return post.user.id !== props.userid ? post.user.username : user
   }
   const clearCommentBox = (e) => {
-    const {  commentFieldStatus,resetComment,editCapStatus,editCaption } = props
+    const {  commentFieldStatus,resetComment,editCapStatus,getCapEditField } = props
     if (props.commentLen || commentFieldStatus) {
       activeComment(e); resetComment()
     }
-    else if(editCapStatus ){
-    editCaption()
+    else if(editCapStatus && e.target.id !== "edit-caption-input" ){
+   return getCapEditField() 
     }
   }
 const editCapInput =(cap)=>{
-  return <input type='text' value={this.state.comment} onChange={props.handleChange}placeholder={` ${cap}`} id="edit-caption-input"/>
+  
+  return <input type='text' value={props.comment} onChange={props.handleComment}placeholder={` ${cap}`} id="edit-caption-input" name="comment"/>
 }
   return (
     <div className="post-card-div" id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
@@ -64,7 +65,7 @@ const editCapInput =(cap)=>{
 
 
         <div className="comments-div" id={post.id} onClick={(e) => clearCommentBox(e)}>
-          <span id="heart" onClick={() => console.log(post.id)}>♡</span>
+          <span id="heart" onClick={() => props.addLike(post.id,post.likes)}>♡</span>
           <div id='comments-header'>
             <span id={post.id} className="comment-icon" onClick={(e) => activeComment(e)}
             >{props.commentFieldStatus ? "💬" : "🖋 "}</span>
@@ -73,7 +74,7 @@ const editCapInput =(cap)=>{
           </div>
           <br />
           <div className='ul-style'>
-            <p className='post-caption'><span id="name-cap"><strong>{` ${whichUser()}`} : </strong></span> {props.editCapStatus ? editCapInput(post.caption): post.caption} {props.editCapStatus ? <span id="submit-cap-edit" onClick={console.log}>⬆️</span> : <span id="edit-caption" onClick={()=> props.editCaption(post.id)}>🖋</span> } </p>
+            <p className='post-caption'><span id="name-cap"><strong>{` ${whichUser()}`} : </strong></span> {props.editCapStatus ? editCapInput(post.caption): post.caption} {props.editCapStatus ? <span id="submit-cap-edit" onClick={()=> props.submitCapEdit(post.id)}>  ⬆️ </span> : <span id="edit-caption" onClick={()=> props.getCapEditField(post.id)}>🖋</span> } </p>
             {comment()}
           </div>
           {props.commentFieldStatus ? <input
@@ -86,7 +87,7 @@ const editCapInput =(cap)=>{
             className="comment-input"
           /> : <><br /></>}
           <br /><br />
-          {props.commentLen === 0 ? <></> : <span onClick={props.submitComment}
+          {props.commentLen > 0 && !props.editCapStatus &&  <span onClick={props.submitComment}
             id="post-span">
             ⬆️
       </span>}

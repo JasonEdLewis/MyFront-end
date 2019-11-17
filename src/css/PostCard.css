@@ -178,9 +178,12 @@
 
   #edit-caption-input{
     font-size: small;
-    border-style: none;
-    width: 20vw;
-    height: 2.5vh;
+    border-style: solid;
+    border-radius: .75vh;
+    border-width: .05vw;
+    border-color:rgb(240, 236, 236);
+    width: 25vw;
+    height: 2.75vh;
   }
 
   #submit-cap-edit{

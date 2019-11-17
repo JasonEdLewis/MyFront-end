@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { getPost, editCaption } from './redux/actions/PostActions';
 import { fetchUser } from './redux/actions/UserActions';
 import { addComment } from './redux/actions/CommentsActions'
+import { addLike } from './redux/actions/PostActions'
 import Loader from './components/loader'
 
 
@@ -32,6 +33,28 @@ class HomeContainer extends React.Component {
     getPost()
 
   }
+
+  // COMMENTS //
+  submitComment = (postId) => {
+    const { userid, addComment } = this.props
+    const { userId, comment } = this.state
+    console.log(
+      "Post id",
+      postId,
+      "User is:",
+      userId,
+      "comment: ",
+      this.state.comment
+    );
+    const body = {
+      post_id: postId,
+      content: comment,
+      followee_id: userid
+    }
+    addComment(body)
+    this.setState({ comment: " " })
+  };
+
   resetCommentLength = () => {
     this.setState({comment: ""})
   }
@@ -41,20 +64,26 @@ class HomeContainer extends React.Component {
       [e.target.name]: e.target.value
     });
   };
-  handleCaptionEdit=(e)=>{
+// EDIT CAPTION
+
+   getCapField=(e)=>{
     this.setState( {editingCaption: !this.state.editingCaption} )
-    // this.setState({ [e.target.name]: e.target.value}) 
-    console.log(this.state.editingCaption)
   }
   handleEditSubmit=(id)=>{
-    this.propseditCaption()
+  
+    this.props.editCaption(id,this.state.comment)
   }
   showCommentField = () => {
     return this.setState({ showCommentField: !this.state.showCommentField })
   }
+addLike = (id, like)=>{
+  console.log(like)
+  const numLikes = like + 1
+  this.props.addLike(id,numLikes)
+}
 
 
-
+// POST STUFF 
 
   thePost = () => {
     const { posts } = this.props
@@ -68,12 +97,17 @@ class HomeContainer extends React.Component {
         resetComment={this.resetCommentLength}
         submitComment={() => this.submitComment(post.id, post.userId)}
         handleComment={this.handleComment}
-        editCaption={this.handleCaptionEdit}
+        getCapEditField={this.getCapField}
         editCapStatus={this.state.editingCaption}
+        submitCapEdit={this.handleEditSubmit}
+        addLike={this.addLike}
       />
     )) : console.log("The Post didnt work, here are the props:", this.props)
   };
 
+
+
+  // NEW POST STUFF 
   // SUBMIT THE COMMENT /FETCH POST
   handleNewPostClick = () => {
     this.setState({ newPost: !this.state.newPost });
@@ -102,25 +136,7 @@ class HomeContainer extends React.Component {
   returnToThePost = () => {
     this.setState({ page: "thePost" })
   }
-  submitComment = (postId) => {
-    const { userid, addComment } = this.props
-    const { userId, comment } = this.state
-    console.log(
-      "Post id",
-      postId,
-      "User is:",
-      userId,
-      "comment: ",
-      this.state.comment
-    );
-    const body = {
-      post_id: postId,
-      content: comment,
-      followee_id: userid
-    }
-    addComment(body)
-    this.setState({ comment: " " })
-  };
+  
 
   handleNewPost = e => {
     this.setState({
@@ -188,10 +204,10 @@ const mapStateToProps = (state) => {
   return {
     user: state.users.username,
     userid: state.users.id,
-    posts: state.post.posts.data,
+    posts: state.post.posts,
     postRequested: state.post.requested
   }
 }
 
-export default connect(mapStateToProps, { getPost, fetchUser, addComment,editCaption })(HomeContainer);
+export default connect(mapStateToProps, { getPost, fetchUser, addComment,editCaption, addLike })(HomeContainer);
 
