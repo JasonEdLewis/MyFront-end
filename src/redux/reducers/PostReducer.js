@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
         case CREATE_POST:
             return {
                 ...state, request: false, success: true,
-                post: [...state.post, action.payload]
+                post: state.posts.concat(action.payload)
             }
         case EDIT_POST_CAPTION:
             debugger

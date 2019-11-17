@@ -59,7 +59,7 @@ const editCapInput =(cap)=>{
         </div>
 
         <div className="img-div">
-          <img className="image" src={require('../img/placeHolder.png')} />
+          <img className="image" src={post.picture || require('../img/placeHolder.png')} />
         </div>
 
 

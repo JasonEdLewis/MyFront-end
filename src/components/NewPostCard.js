@@ -40,9 +40,12 @@ class NewPostCard extends React.Component {
           this.setState({ loading: false, url })
 
         }).then(()=> {
+          debugger
           const {url, caption} =this.state
-          const { userid } = this.props
+          const { userid, back } = this.props
           this.props.createPost({user_id: userid ,picture:url, likes:0, caption: caption})
+          this.setState( {url:"", caption:"" })
+          back()
         }
          )
       })

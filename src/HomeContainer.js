@@ -21,7 +21,7 @@ class HomeContainer extends React.Component {
     Picture: "",
     caption: "",
     likes: 0,
-    page: "newPost",
+    page: "thePost",
     editingCaption: false,
     liked: false
 
@@ -162,7 +162,7 @@ addLike = (id, like)=>{
 
   render() {
     // debugger
-    console.log("Home Container props", this.props);
+    // console.log("Home Container props", this.props);
 
     const { fposts, user, userId, history } = this.props;
 
