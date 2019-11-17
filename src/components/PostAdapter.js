@@ -1,9 +1,7 @@
 import React from 'react';
 
 
-export const fetchPost=()=>{
-console.log("hello from the PostAdapter")
-}
+
 
   export const submitNewPost = id => {
     console.log(id);

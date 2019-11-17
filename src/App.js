@@ -23,6 +23,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+    console.log("App MOUNTED")
     // if (localStorage.token) {
       this.redirect("/");
     // }

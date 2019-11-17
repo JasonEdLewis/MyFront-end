@@ -116,7 +116,7 @@
     width: 30vw;
   }
   
-  #heart{
+  #off-heart{
       
       font-size: 1.75rem;
       float: left;
@@ -124,14 +124,23 @@
       color: black;
 
   }
-  #heart:hover{
+  #off-heart:hover{
     color:rgb(233, 10, 10);
     text-shadow: -.075vw -.075vh rgb(204, 208, 251);
   }
-  .comment-icon{
+  #on-heart{
+    font-size: 1.5rem;
+      float: left;
+      margin-left: 5%;
+      margin-top: 1%;
+  }
+  #on-heart:hover{
+    text-shadow: .075vw -.075vh rgb(107, 4, 107);
+  }
+  .pen{
     font-size: 1.5vw;
     float: left;
-    margin: 0vh 0vw 0vh 1.5vw;
+    margin: 1vh 0vw 0vh 1.5vw;
     /* color: black; */
     /* background-color: pink; */
   }
@@ -139,9 +148,54 @@
       text-shadow: .1vh -.04vw rgb(126, 173, 226);
       font-size: 1.55vw;
   }
-
+  #likes {
+    color:rgb(180, 4, 4);
+    font-size: 1.25vw;
+    /* background-color: chartreuse; */
+    vertical-align: middle;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+    float: right;
+    margin-right: 5%;
+    margin-top: 1%;
+  }
+#comments-header {
+  height: 4vh;
+  background-color: rgb(245, 239, 235);
+  border-style:solid;
+  border-width: .01rem;
+  border-color: rgb(226, 225, 225);
+ 
+}
+.post-caption{
+  color:black;
+}
+/* .post-caption:hover{
+ 
+} */
+#edit-caption{
+  display: unset;
+  font-size: xx-small;
+}
+#edit-caption:hover{
+  display: all;
+}
   #post-span{
       color:black;
     font-size: 2vw;
+  }
+
+  #edit-caption-input{
+    font-size: small;
+    border-style: solid;
+    border-radius: .75vh;
+    border-width: .05vw;
+    border-color:rgb(240, 236, 236);
+    width: 25vw;
+    height: 2.75vh;
+  }
+
+  #submit-cap-edit{
+    font-size: small;
   }
   
