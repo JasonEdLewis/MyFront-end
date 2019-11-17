@@ -66,18 +66,18 @@ class HomeContainer extends React.Component {
   };
 // EDIT CAPTION
 
-   getCapField=(e)=>{
+   getCapField=()=>{
     this.setState( {editingCaption: !this.state.editingCaption} )
   }
   handleEditSubmit=(id)=>{
-  
     this.props.editCaption(id,this.state.comment)
+    this.setState( { comment:""} )
+    this.getCapField()
   }
   showCommentField = () => {
     return this.setState({ showCommentField: !this.state.showCommentField })
   }
 addLike = (id, like)=>{
-  console.log(like)
   const numLikes = like + 1
   this.props.addLike(id,numLikes)
 }

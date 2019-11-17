@@ -6,7 +6,6 @@ export const getPost = () => dispatch => {
     axios.get('http://localhost:3000/posts')
     .then(post => {
         dispatch({ type: POST_SUCCESS, payload: post.data})
-        console.log("From post actions",post.data)
     }
 
     )
@@ -26,6 +25,8 @@ export const editCaption = (id, info) => dispatch => {
 }
 export const addLike = (id, numLikes) => dispatch =>{
     dispatch({ type: REQUESTING })
-    axios.patch(`http://localhost:3000/posts/${id}`, { likes: numLikes})
+     axios.patch(`http://localhost:3000/posts/${id}`,{ likes: numLikes })
+    .then(data => console.log( "From Likes action ",data),
     dispatch( { type: ADD_LIKE, id,likes: numLikes } )
+    )
 }

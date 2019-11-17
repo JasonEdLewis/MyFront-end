@@ -31,27 +31,26 @@ export default (state = initialState, action) => {
         case EDIT_POST_CAPTION:
             debugger
             const idx = state.posts.findIndex(post => post.id === action.id)
-            const post = state.post[idx]
-            const pts = [
+            const post = state.posts[idx]
+            const posts = [
                 ...state.posts.slice(0, idx),
-                Object.assign({}, post, { caption: action.payload },
-                    ...state.payload.slice(idx + 1))
+                Object.assign({}, post, action.payload),
+                ...state.posts.slice(idx + 1)
             ]
             return {
                 ...state,
-                posts: pts
+                posts
             }
-        // case ADD_LIKE:
-        //     debugger
-        //     const ix = state.posts.data.findIndex(p => p.id === action.payload.id)
-        //     const likedpost = state.posts[ix]
-
-        //     return{...state,
-        //         posts: [...state.posts.slice(0, ix),
-        //                 Object.assign({}, likedpost, {likes: action.payload.numLikes}),
-        //                 ...state.posts.slice(ix + 1)
-        //         ]
-        //      }
+        case ADD_LIKE:
+            const ix = state.posts.findIndex(p => p.id === action.id)
+            const likedpost = state.posts[ix]
+            return {
+                ...state,
+                posts: [...state.posts.slice(0, ix),
+                Object.assign({}, likedpost, { likes: action.likes }),
+                ...state.posts.slice(ix + 1)
+                ]
+            }
         default:
             return state;
     }
