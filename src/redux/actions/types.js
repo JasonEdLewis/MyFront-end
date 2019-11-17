@@ -36,5 +36,7 @@ export const DELETE_COMMENT = 'DELETE_COMMENT'
 
 
 // FOLLOWS ACTIONS //
-
+export const GET_FOLLOWS = 'GET_FOLLOWS'
+export const CREATE_FOLLOW= 'CREATE_FOLLOW'
+export const DELETE_FOLLOW = 'DELETE_FOLLOW'
 
