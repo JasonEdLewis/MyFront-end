@@ -116,7 +116,7 @@
     width: 30vw;
   }
   
-  #heart{
+  #off-heart{
       
       font-size: 1.75rem;
       float: left;
@@ -124,9 +124,18 @@
       color: black;
 
   }
-  #heart:hover{
+  #off-heart:hover{
     color:rgb(233, 10, 10);
     text-shadow: -.075vw -.075vh rgb(204, 208, 251);
+  }
+  #on-heart{
+    font-size: 1.5rem;
+      float: left;
+      margin-left: 5%;
+      margin-top: 1%;
+  }
+  #on-heart:hover{
+    text-shadow: .075vw -.075vh rgb(107, 4, 107);
   }
   .comment-icon{
     font-size: 1.5vw;

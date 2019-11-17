@@ -22,7 +22,8 @@ class HomeContainer extends React.Component {
     caption: "",
     likes: 0,
     page: "thePost",
-    editingCaption: false
+    editingCaption: false,
+    liked: false
 
   };
 
@@ -78,6 +79,7 @@ class HomeContainer extends React.Component {
     return this.setState({ showCommentField: !this.state.showCommentField })
   }
 addLike = (id, like)=>{
+  this.setState({ liked: !this.state.liked})
   const numLikes = like + 1
   this.props.addLike(id,numLikes)
 }
@@ -87,20 +89,22 @@ addLike = (id, like)=>{
 
   thePost = () => {
     const { posts } = this.props
+    const { comment, showCommentField,editingCaption, liked  } = this.state
     return posts && posts.length > 0 ? posts.map(post => (
       <Postcard
         post={post}
-        commentLen={this.state.comment.length}
+        commentLen={comment.length}
         toggleCommentField={this.showCommentField}
-        commentFieldStatus={this.state.showCommentField}
+        commentFieldStatus={showCommentField}
         id={post.id}
         resetComment={this.resetCommentLength}
         submitComment={() => this.submitComment(post.id, post.userId)}
         handleComment={this.handleComment}
         getCapEditField={this.getCapField}
-        editCapStatus={this.state.editingCaption}
+        editCapStatus={editingCaption}
         submitCapEdit={this.handleEditSubmit}
         addLike={this.addLike}
+        liked={liked}
       />
     )) : console.log("The Post didnt work, here are the props:", this.props)
   };

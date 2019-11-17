@@ -17,7 +17,6 @@ export const editCaption = (id, info) => dispatch => {
     axios.patch(`http://localhost:3000/posts/${id}`, { caption: info })
         .then(post => {  console.log(post.data)
    dispatch({ type: EDIT_POST_CAPTION, payload: post.data,id, request: false })
-   console.log(post)
         }
         
     )
