@@ -69,7 +69,7 @@ const editCapInput =(cap)=>{
           :
         <span id="off-heart" onClick={() => props.addLike(post.id,post.likes)}>♡</span>}
           <div id='comments-header'>
-            <span id={post.id} className="comment-icon" onClick={(e) => activeComment(e)}
+            <span id={post.id} className="pen" onClick={(e) => activeComment(e)}
             >{props.commentFieldStatus ? "💬" : "🖋 "}</span>
             <span id="likes" >Likes: {post.likes}</span>
 

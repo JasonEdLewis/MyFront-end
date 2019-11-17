@@ -1,7 +1,9 @@
 import React from "react";
 import '../css/newPostCard.css';
 import { storage } from '../firebase/index';
-import Loader from '../components/loader'
+import Loader from '../components/loader';
+import { connect } from 'react-redux';
+import { createPost } from '../redux/actions/PostActions'
 
 
 
@@ -36,7 +38,13 @@ class NewPostCard extends React.Component {
         storage.ref('images').child(image.name).getDownloadURL().then(url => {
           console.log(url)
           this.setState({ loading: false, url })
-        })
+
+        }).then(()=> {
+          const {url, caption} =this.state
+          const { userid } = this.props
+          this.props.createPost({user_id: userid ,picture:url, likes:0, caption: caption})
+        }
+         )
       })
 
     //  this.props.submitPost(this.state.caption)
@@ -74,4 +82,9 @@ class NewPostCard extends React.Component {
     );
   }
 }
-export default NewPostCard;
+const mapStateToProps = state =>{
+  return {
+    userid: state.users.id,
+  }
+}
+export default  connect(mapStateToProps, { createPost })(NewPostCard);

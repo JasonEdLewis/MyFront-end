@@ -21,7 +21,7 @@ class HomeContainer extends React.Component {
     Picture: "",
     caption: "",
     likes: 0,
-    page: "thePost",
+    page: "newPost",
     editingCaption: false,
     liked: false
 
@@ -121,12 +121,7 @@ addLike = (id, like)=>{
     const { userid } = this.props
     return (
       <NewPostCard
-        handleNewPost={this.handleNewPost}
-        submitPost={() => (userid)}
-        state={this.state}
-        userId={userid}
         back={this.returnToThePost}
-
       />
     );
   };

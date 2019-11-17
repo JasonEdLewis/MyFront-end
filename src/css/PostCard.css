@@ -137,10 +137,10 @@
   #on-heart:hover{
     text-shadow: .075vw -.075vh rgb(107, 4, 107);
   }
-  .comment-icon{
+  .pen{
     font-size: 1.5vw;
     float: left;
-    margin: 0vh 0vw 0vh 1.5vw;
+    margin: 1vh 0vw 0vh 1.5vw;
     /* color: black; */
     /* background-color: pink; */
   }
@@ -170,9 +170,9 @@
 .post-caption{
   color:black;
 }
-.post-caption:hover{
+/* .post-caption:hover{
  
-}
+} */
 #edit-caption{
   display: unset;
   font-size: xx-small;

@@ -11,6 +11,14 @@ export const getPost = () => dispatch => {
     )
 
 }
+export const createPost = (info) => dispatch => {
+    dispatch   ( { type: REQUESTING} )
+    axios.post(`http://localhost:3000/posts`, info)
+    .then(post => { dispatch( {type:CREATE_POST, payload:post.data } )
+    console.log(post.data)
+    })
+
+}
 export const editCaption = (id, info) => dispatch => {
     debugger
     dispatch({ type: REQUESTING })
