@@ -47,13 +47,20 @@ const PostCard = props => {
 
   const areFriends = (postuserid) => {
     const { follows, userid } = props
-    if (follows.length > 0) {
+    switch (true) {
+      case (follows.length > 0 && 
+       !!follows.find(follow => follow.follower_id === userid && postuserid === follow.followee_id)):
+       return (<button id="were-friends" onClick={() => { console.log(post.user.id) }}>🤝</button>)
+      case (postuserid === userid):
+        return ""
+      case (!(follows.length > 0 && 
+        !!follows.find(follow => follow.follower_id === userid && postuserid === follow.followee_id))):
+        return (<button id="add-friend" onClick={() => { console.log(post.user.id) }}
+        > 🤜🏽💥🤛🏻</button>);
 
-      return !!follows.find(follow => follow.follower_id === userid && postuserid === follow.followee_id)
-
-
+      default:
+        return null
     }
-
 
   }
 
@@ -69,10 +76,7 @@ const PostCard = props => {
           className="post-thumbnail"
           src={require("../img/jack.jpg")}
         />  */}
-          {areFriends(post.user_id) ?
-            <button id="were-friends" onClick={() => { console.log(post.user.id) }}>🤝</button>
-            :
-            <button id="add-friend" onClick={() => { console.log(post.user.id) }}>🤜🏽💥🤛🏻</button>
+          {areFriends(post.user.id) 
           }
           <span className="name-span-style" onClick={() => { console.log(post.user.id) }}>{post.user.username}</span>
         </div>
