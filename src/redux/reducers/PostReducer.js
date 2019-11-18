@@ -1,6 +1,5 @@
 import {
-    REQUESTING, POST_SUCCESS, POST_FAILURE, CREATE_POST, EDIT_POST_CAPTION, ADD_LIKE, DELETE_POST,
-    SUBMITTED_COMMENT, ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT
+    REQUESTING, POST_SUCCESS, POST_FAILURE, CREATE_POST, EDIT_POST_CAPTION, ADD_LIKE, DELETE_POST, ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT
 } from '../actions/types'
 
 const initialState = {
@@ -14,6 +13,7 @@ const initialState = {
 }
 export default (state = initialState, action) => {
     switch (action.type) {
+        //POST PROPER
         case REQUESTING:
             return { ...state, request: true }
         case POST_SUCCESS:
@@ -41,6 +41,7 @@ export default (state = initialState, action) => {
                 ...state,
                 posts
             }
+        // LIKES
         case ADD_LIKE:
             const ix = state.posts.findIndex(p => p.id === action.id)
             const likedpost = state.posts[ix]
@@ -51,6 +52,33 @@ export default (state = initialState, action) => {
                 ...state.posts.slice(ix + 1)
                 ]
             }
+        // COMMENTS 
+
+        case ADD_COMMENT:
+            debugger
+            return {
+                ...state,
+                submitted: false,
+                posts: state.post.comments.concat(action.payload)
+            }
+        case EDIT_COMMENT:
+            const ixa = state.comments.findIndex(com => com.id === action.payload.id)
+            const com = state.comments[ixa]
+            return {
+                ...state,
+                comments: [state.comments.slice(0, ixa),
+                Object.assign({}, com, action.payload),
+                state.comments.slice(ixa + 1)]
+            }
+        case DELETE_COMMENT:
+            const coms = state.comments.filter(com => com.id !== action.id)
+            return {
+                ...state,
+                comments: coms
+            }
+
+
+        //END
         default:
             return state;
     }
