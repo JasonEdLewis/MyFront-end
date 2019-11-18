@@ -43,7 +43,7 @@ class HomeContainer extends React.Component {
     const { userid, addComment } = this.props
     const { userId, comment } = this.state
     console.log(
-      "Post id",
+      "Post_id",
       postId,
       "User is:",
       userId,
@@ -56,7 +56,8 @@ class HomeContainer extends React.Component {
       followee_id: userid
     }
     addComment(body)
-    this.setState({ comment: " " })
+    this.setState({ comment: " ", showCommentField:false })
+    
   };
 
   resetCommentLength = () => {
