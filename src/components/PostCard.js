@@ -17,7 +17,10 @@ const PostCard = props => {
     if (text) {
       return text.map(t => {
         // console.log("comments", t, )
-        return (<p className='li-style'><strong>{t.followee_id}: </strong>{t.content}</p>);
+        return (<p className='li-style'><strong>
+          {commentor(t.followee_id)}
+        : 
+        </strong>{t.content}</p>);
       });
     } else {
       return <h6 style={{ color: "light-grey" }}>Be the first to comment</h6>;
@@ -70,10 +73,18 @@ const PostCard = props => {
   }
 
 
+const commentor = (id) =>{
+  const {users } = props
+  if(!!users){ const cmtr = users.find(u => u.id === id)
+    console.log("commentor",cmtr.username)
+  return cmtr.username
+  }
+}
 
-
+// console.log("Post card props", props)
 
   return (
+    
     <div className="post-card-div" id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
       <div id={post.id} className="post-card">
         <div className="card-header">
@@ -136,7 +147,8 @@ const mapStateToProps = state => {
   return {
     user: state.users.username,
     userid: state.users.id,
-    follows: state.follows.follows
+    follows: state.follows.follows,
+    users: state.users.all
 
   }
 }

@@ -56,10 +56,14 @@ export default (state = initialState, action) => {
 
         case ADD_COMMENT:
             debugger
+            const idb = state.posts.findIndex(post => post.id === action.payload.post_id)
+            const thePost = state.posts[idb]
             return {
                 ...state,
                 submitted: false,
-                posts: state.post.comments.concat(action.payload)
+                post: [state.posts.slice(0, idb),
+                Object.assign({}, thePost, thePost.comments.concat(action.payload)),
+                state.posts.slice(idb + 1)]
             }
         case EDIT_COMMENT:
             const ixa = state.comments.findIndex(com => com.id === action.payload.id)
