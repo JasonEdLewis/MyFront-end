@@ -4,6 +4,7 @@ import Postcard from "./components/PostCard";
 import NewPostCard from "./components/NewPostCard";
 import Follows from './components/Follows';
 import Jack from "./img/jack.jpg";
+import { getFollows } from './redux/actions/FollowActions';
 import { connect } from 'react-redux';
 import { getPost, editCaption } from './redux/actions/PostActions';
 import { fetchUser } from './redux/actions/UserActions';
@@ -30,8 +31,9 @@ class HomeContainer extends React.Component {
 
   componentDidMount() {
     console.log("Home Page CONTAINER MOUNTED")
-    const { fetchUser, getPost } = this.props
+    const { fetchUser, getPost, getFollows } = this.props
     fetchUser(localStorage.token)
+    getFollows()
     getPost()
 
   }
@@ -41,7 +43,7 @@ class HomeContainer extends React.Component {
     const { userid, addComment } = this.props
     const { userId, comment } = this.state
     console.log(
-      "Post id",
+      "Post_id",
       postId,
       "User is:",
       userId,
@@ -54,11 +56,12 @@ class HomeContainer extends React.Component {
       followee_id: userid
     }
     addComment(body)
-    this.setState({ comment: " " })
+    this.setState({ comment: " ", showCommentField:false })
+    
   };
 
   resetCommentLength = () => {
-    this.setState({comment: ""})
+    this.setState({ comment: "" })
   }
   handleComment = e => {
     // console.log(e.target.value);
@@ -66,31 +69,31 @@ class HomeContainer extends React.Component {
       [e.target.name]: e.target.value
     });
   };
-// EDIT CAPTION
+  // EDIT CAPTION
 
-   getCapField=()=>{
-    this.setState( {editingCaption: !this.state.editingCaption} )
+  getCapField = () => {
+    this.setState({ editingCaption: !this.state.editingCaption })
   }
-  handleEditSubmit=(id)=>{
-    this.props.editCaption(id,this.state.comment)
-    this.setState( { comment:""} )
+  handleEditSubmit = (id) => {
+    this.props.editCaption(id, this.state.comment)
+    this.setState({ comment: "" })
     this.getCapField()
   }
   showCommentField = () => {
     return this.setState({ showCommentField: !this.state.showCommentField })
   }
-addLike = (id, like)=>{
-  this.setState({ liked: !this.state.liked})
-  const numLikes = like + 1
-  this.props.addLike(id,numLikes)
-}
+  addLike = (id, like) => {
+    this.setState({ liked: !this.state.liked })
+    const numLikes = like + 1
+    this.props.addLike(id, numLikes)
+  }
 
 
-// POST STUFF 
+  // POST STUFF 
 
   thePost = () => {
     const { posts } = this.props
-    const { comment, showCommentField,editingCaption, liked  } = this.state
+    const { comment, showCommentField, editingCaption, liked } = this.state
     return posts && posts.length > 0 ? posts.map(post => (
       <Postcard
         post={post}
@@ -136,7 +139,7 @@ addLike = (id, like)=>{
   returnToThePost = () => {
     this.setState({ page: "thePost" })
   }
-  
+
 
   handleNewPost = e => {
     this.setState({
@@ -169,7 +172,7 @@ addLike = (id, like)=>{
 
     return (
       <div className="Home-Container">
-        <Follows/>
+        <Follows />
         <div className="Homepage-nav">
 
           <div id="jays-gram" onClick={() => this.returnToThePost()}><span >{this.props.user}s'taGram </span></div>
@@ -210,5 +213,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getPost, fetchUser, addComment,editCaption, addLike })(HomeContainer);
+export default connect(mapStateToProps, { getFollows, getPost, fetchUser, addComment, editCaption, addLike })(HomeContainer);
 

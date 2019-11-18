@@ -21,7 +21,7 @@
    
 }
 
-#add-friend{
+#were-friends, #add-friend{
     background-color: rgb(196, 199, 193);
     position: absolute;
     width: 4vw;
@@ -34,8 +34,14 @@
     border-radius: .25vw;
     border-color: rgb(209, 223, 250);
 }
-#add-friend:focus{
+#were-friends:focus{
     display: none;
+}
+ #add-friend{
+ background-color: rgb(255, 255, 255);
+ width: 6vw;
+  height: 5.5vh;
+ font-size: 1.5vw;
 }
 .name-span-style{
     position: absolute;

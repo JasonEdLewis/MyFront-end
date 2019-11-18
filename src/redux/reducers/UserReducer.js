@@ -1,10 +1,12 @@
-import { USER_REQUEST ,USER_SUCCESS,USER_FAILURE,CREATE_USER,UPDATE_USER,DELETE_USER } from '../actions/types'
+import { USER_REQUEST ,USER_SUCCESS,USER_FAILURE,CREATE_USER,UPDATE_USER,DELETE_USER, GET_ALL } from '../actions/types'
 
 const initialState = {
+    all: [],
     username: "",
     id:"",
     requested: null,
-    errorMessage:""
+    errorMessage:"",
+
 }
 
 export default (state = initialState, action)=> {
@@ -21,6 +23,10 @@ export default (state = initialState, action)=> {
             return {...state} 
         case DELETE_USER:
             return {...state }
+        case GET_ALL:
+            return {...state,
+                all: state.all.concat(action.payload)
+            }
         default:
             return state;
     }

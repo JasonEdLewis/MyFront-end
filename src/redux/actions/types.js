@@ -13,6 +13,7 @@ export const USER_FAILURE = "USER_FAILURE"
 export const CREATE_USER = "CREATE_USER"
 export const UPDATE_USER = "UPDATE_USER"
 export const DELETE_USER = "DELETE_USER"
+export const GET_ALL = 'GET_ALL'
 
 // POST ACTIONS 
 export const REQUEST_POST = 'REQUEST_POST'
@@ -31,9 +32,7 @@ export const DELETE_COMMENT = 'DELETE_COMMENT'
 
 // END OF POST ACTIONS
 
-
-
-
+// ********************* //
 
 // FOLLOWS ACTIONS //
 export const GET_FOLLOWS = 'GET_FOLLOWS'

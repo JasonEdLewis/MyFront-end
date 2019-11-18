@@ -20,7 +20,6 @@ export const createPost = (info) => dispatch => {
 
 }
 export const editCaption = (id, info) => dispatch => {
-    debugger
     dispatch({ type: REQUESTING })
     axios.patch(`http://localhost:3000/posts/${id}`, { caption: info })
         .then(post => {  console.log(post.data)
