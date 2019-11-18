@@ -32,9 +32,7 @@ export const DELETE_COMMENT = 'DELETE_COMMENT'
 
 // END OF POST ACTIONS
 
-
-
-
+// ********************* //
 
 // FOLLOWS ACTIONS //
 export const GET_FOLLOWS = 'GET_FOLLOWS'

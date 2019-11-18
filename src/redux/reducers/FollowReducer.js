@@ -11,6 +11,7 @@ export default function( state = initialState, action){
             return state.concat(action.payload)
 
         case DELETE_FOLLOW:
+            debugger
             const remainingFriends = state.filter(ele => ele.id !== action.id)
             return {state: remainingFriends}
         default:

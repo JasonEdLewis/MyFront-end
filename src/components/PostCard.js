@@ -4,11 +4,11 @@ import Jack from "../img/jack.jpg";
 import '../css/PostCard.css';
 import placeholder from '../img/placeHolder.png';
 import { connect } from 'react-redux';
-
+import { deleteFollow, createFollow } from '../redux/actions/FollowActions'
 
 
 const PostCard = props => {
-  console.log("Post card props", props)
+
   const { post, user } = props;
 
   const comment = () => {
@@ -47,12 +47,26 @@ const PostCard = props => {
 
 
   const areFriends = (postuser) => {
-    
-    const { follows, userid } = props
+
+    const { follows, userid, deleteFollow, createFollow } = props
     if (follows && postuser !== userid) {
+
       const theFollow = follows.find(follow => follow.followee_id === postuser && follow.follower_id === userid);
-      console.log("Follow id:",theFollow.id)
+      
+      if(postuser === userid){
+        return ""
     }
+      else if (theFollow)
+     {
+      return (<button id="add-friend" onClick={() => deleteFollow(theFollow.id)}> 🤝</button>)
+     }
+    else {
+      return <button id="add-friend" onClick={() => { createFollow(postuser, userid) }}
+
+      > 🤜🏽💥🤛🏻</button>
+    }
+
+  }
   }
 
 
@@ -69,9 +83,9 @@ const PostCard = props => {
           src={require("../img/jack.jpg")}
         />  */}
           {areFriends(post.user_id)}
-          <button id="add-friend" onClick={() => { console.log(post.user.id) }}
+          {/* <button id="add-friend" onClick={() => { console.log(post.user.id) }}
 
-          > 🤜🏽💥🤛🏻</button>
+          > 🤜🏽💥🤛🏻</button> */}
 
           <span className="name-span-style" onClick={() => { console.log(post.user.id) }}>{post.user.username}</span>
         </div>
@@ -126,4 +140,4 @@ const mapStateToProps = state => {
 
   }
 }
-export default connect(mapStateToProps)(PostCard);
+export default connect(mapStateToProps, { deleteFollow, createFollow })(PostCard);
