@@ -20,6 +20,5 @@ export const fetchUser = (token) => async dispatch => {
 export const fetchAllUsers = () => async dispatch => {
     const users = await axios.get('http://localhost:3000/users');
     dispatch({ type: GET_ALL, payload: users.data });
-    console.log(users.data);
 
 }

@@ -5,3 +5,4 @@ export const getFollows = () => dispatch => {
     axios.get('http://localhost:3000/follows')
     .then(follow => dispatch( {type:GET_FOLLOWS, payload: follow.data } ) )
 }
+

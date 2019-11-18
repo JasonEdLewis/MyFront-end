@@ -35,6 +35,11 @@ class Follows extends Component {
 
         })
 
+        const areFreinds = (postuser, currentuser)=>{
+            const { follows } = this.props
+            const followid = follows.find(follow => follow.followee_id === postuser && follow.foller_id === currentuser ).id
+        }
+
     }
     render() {
 

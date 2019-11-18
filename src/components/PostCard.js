@@ -45,24 +45,16 @@ const PostCard = props => {
     return <input type='text' value={props.comment} onChange={props.handleComment} placeholder={` ${cap}`} id="edit-caption-input" name="comment" />
   }
 
-  const areFriends = (postuserid) => {
+
+  const areFriends = (postuser) => {
+    
     const { follows, userid } = props
-    switch (true) {
-      case (follows.length > 0 && 
-       !!follows.find(follow => follow.follower_id === userid && postuserid === follow.followee_id)):
-       return (<button id="were-friends" onClick={() => { console.log(post.user.id) }}>🤝</button>)
-      case (postuserid === userid):
-        return ""
-      case (!(follows.length > 0 && 
-        !!follows.find(follow => follow.follower_id === userid && postuserid === follow.followee_id))):
-        return (<button id="add-friend" onClick={() => { console.log(post.user.id) }}
-        > 🤜🏽💥🤛🏻</button>);
-
-      default:
-        return null
+    if (follows && postuser !== userid) {
+      const theFollow = follows.find(follow => follow.followee_id === postuser && follow.follower_id === userid);
+      console.log("Follow id:",theFollow.id)
     }
-
   }
+
 
 
 
@@ -76,8 +68,11 @@ const PostCard = props => {
           className="post-thumbnail"
           src={require("../img/jack.jpg")}
         />  */}
-          {areFriends(post.user.id) 
-          }
+          {areFriends(post.user_id)}
+          <button id="add-friend" onClick={() => { console.log(post.user.id) }}
+
+          > 🤜🏽💥🤛🏻</button>
+
           <span className="name-span-style" onClick={() => { console.log(post.user.id) }}>{post.user.username}</span>
         </div>
 
