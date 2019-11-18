@@ -141,7 +141,7 @@
       margin-top: 1%;
   }
   #on-heart:hover{
-    text-shadow: .075vw -.075vh rgb(107, 4, 107);
+    text-shadow: -.075vw 0vh rgb(238, 167, 167);
   }
   .pen{
     font-size: 1.5vw;

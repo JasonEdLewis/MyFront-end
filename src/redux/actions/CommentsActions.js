@@ -5,6 +5,7 @@ import axios from 'axios'
 const url = 'http://localhost:3000/comments/'
 
 export const addComment =(info)=> async dispatch =>{
+  debugger
     dispatch( { type: SUBMITTED_COMMENT} )
   const comment = await axios.post(url, info);
   dispatch( {type:ADD_COMMENT, submitted: false, payload: comment.data } )

@@ -1,4 +1,4 @@
-import { REQUESTING, POST_SUCCESS, POST_FAILURE, CREATE_POST, ADD_LIKE,EDIT_POST_CAPTION, DELETE_POST } from './types';
+import { REQUESTING, POST_SUCCESS, POST_FAILURE, CREATE_POST, DELETE_LIKE, ADD_LIKE,EDIT_POST_CAPTION, DELETE_POST } from './types';
 import axios from 'axios'
 
 export const getPost = () => dispatch => {
@@ -23,16 +23,17 @@ export const editCaption = (id, info) => dispatch => {
     dispatch({ type: REQUESTING })
     axios.patch(`http://localhost:3000/posts/${id}`, { caption: info })
         .then(post => {  console.log(post.data)
-   dispatch({ type: EDIT_POST_CAPTION, payload: post.data,id, request: false })
+   dispatch({ type: EDIT_POST_CAPTION, payload: post.data,id, requested: false })
         }
         
     )
 
 }
-export const addLike = (id, numLikes) => dispatch =>{
+export const changeLike = (id, numLikes, change) => dispatch =>{
     dispatch({ type: REQUESTING })
      axios.patch(`http://localhost:3000/posts/${id}`,{ likes: numLikes })
     .then(data => console.log( "From Likes action ",data),
-    dispatch( { type: ADD_LIKE, id,likes: numLikes } )
+    change === "add" ? dispatch( { type: ADD_LIKE, id, requested:false } ) :  dispatch( { type: DELETE_LIKE, id } )
     )
 }
+

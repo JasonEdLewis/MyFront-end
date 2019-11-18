@@ -1,10 +1,10 @@
 import {
-    REQUESTING, POST_SUCCESS, POST_FAILURE, CREATE_POST, EDIT_POST_CAPTION, ADD_LIKE, DELETE_POST, ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT
+    REQUESTING, POST_SUCCESS, POST_FAILURE, CREATE_POST, EDIT_POST_CAPTION, ADD_LIKE, DELETE_LIKE, DELETE_POST, ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT
 } from '../actions/types'
 
 const initialState = {
     posts: [],
-    request: null,
+    requested: null,
     success: null,
     errorMessage: "",
     editingPost: false,
@@ -15,18 +15,18 @@ export default (state = initialState, action) => {
     switch (action.type) {
         //POST PROPER
         case REQUESTING:
-            return { ...state, request: true }
+            return { ...state, requested: true }
         case POST_SUCCESS:
             return {
-                ...state, request: false, success: true,
+                ...state, requested: false, success: true,
                 posts: action.payload
             }
         case POST_FAILURE:
-            return { ...state, success: false, request: false, errorMessage: action.payload }
+            return { ...state, success: false, requested: false, errorMessage: action.payload }
         case CREATE_POST:
             return {
-                ...state, request: false, success: true,
-                post: state.posts.concat(action.payload)
+                ...state, requested: false, success: true,
+                posts: state.posts.concat(action.payload)
             }
         case EDIT_POST_CAPTION:
             debugger
@@ -48,9 +48,21 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 posts: [...state.posts.slice(0, ix),
-                Object.assign({}, likedpost, { likes: action.likes }),
+                Object.assign({}, likedpost, { likes: likedpost.likes + 1 }),
                 ...state.posts.slice(ix + 1)
                 ]
+            }
+        case DELETE_LIKE:
+            const iz = state.posts.findIndex(p => p.id === action.id)
+            const dislikedpost = state.posts[iz]
+            if (dislikedpost.likes > 0) {
+                return {
+                    ...state,
+                    posts: [...state.posts.slice(0, iz),
+                    Object.assign({}, dislikedpost, { likes: dislikedpost.likes - 1 }),
+                    ...state.posts.slice(iz + 1)
+                    ]
+                }
             }
         // COMMENTS 
 
@@ -60,9 +72,9 @@ export default (state = initialState, action) => {
             const thePost = state.posts[idb]
             return {
                 ...state,
-                submitted: false,
-                post: [state.posts.slice(0, idb),
-                Object.assign({}, thePost, thePost.comments.concat(action.payload)),
+                requested: false,
+                posts: [state.posts.slice(0, idb),
+                Object.assign({}, thePost, { comments: thePost.comments.concat(action.payload) }),
                 state.posts.slice(idb + 1)]
             }
         case EDIT_COMMENT:

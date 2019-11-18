@@ -4,10 +4,15 @@ import Jack from "../img/jack.jpg";
 import '../css/PostCard.css';
 import placeholder from '../img/placeHolder.png';
 import { connect } from 'react-redux';
-import { deleteFollow, createFollow } from '../redux/actions/FollowActions'
+import { deleteFollow, createFollow } from '../redux/actions/FollowActions';
+import Loader from '../components/loader'
+
+
 
 
 const PostCard = props => {
+
+
 
   const { post, user } = props;
 
@@ -16,10 +21,10 @@ const PostCard = props => {
     const text = post.comments;
     if (text) {
       return text.map(t => {
-        // console.log("comments", t, )
+        // console.log("comments", t)
         return (<p className='li-style'><strong>
-          {commentor(t.followee_id)}
-        : 
+          {`${props.commentors()[t.followee_id.toString()]} :  `}
+           
         </strong>{t.content}</p>);
       });
     } else {
@@ -56,35 +61,28 @@ const PostCard = props => {
 
       const theFollow = follows.find(follow => follow.followee_id === postuser && follow.follower_id === userid);
 
-      if(postuser === userid){
+      if (postuser === userid) {
         return ""
+      }
+      else if (theFollow) {
+        return (<button id="add-friend" onClick={() => deleteFollow(theFollow.id)}> 🤝</button>)
+      }
+      else {
+        return <button id="add-friend" onClick={() => { createFollow(postuser, userid) }}
+
+        > 🤜🏽💥🤛🏻</button>
+      }
+
     }
-      else if (theFollow)
-     {
-      return (<button id="add-friend" onClick={() => deleteFollow(theFollow.id)}> 🤝</button>)
-     }
-    else {
-      return <button id="add-friend" onClick={() => { createFollow(postuser, userid) }}
-
-      > 🤜🏽💥🤛🏻</button>
-    }
-
-  }
   }
 
 
-const commentor = (id) =>{
-  const {users } = props
-  if(!!users){ const cmtr = users.find(u => u.id === id)
-    console.log("commentor",cmtr.username)
-  return cmtr.username
-  }
-}
+  
 
-// console.log("Post card props", props)
+  console.log("Post card props", props.status)
 
   return (
-    
+
     <div className="post-card-div" id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
       <div id={post.id} className="post-card">
         <div className="card-header">
@@ -94,9 +92,6 @@ const commentor = (id) =>{
           src={require("../img/jack.jpg")}
         />  */}
           {areFriends(post.user_id)}
-          {/* <button id="add-friend" onClick={() => { console.log(post.user.id) }}
-
-          > 🤜🏽💥🤛🏻</button> */}
 
           <span className="name-span-style" onClick={() => { console.log(post.user.id) }}>{post.user.username}</span>
         </div>
@@ -108,7 +103,7 @@ const commentor = (id) =>{
 
 
         <div className="comments-div" id={post.id} onClick={(e) => clearCommentBox(e)}>
-          {props.liked ? <span id="on-heart" onClick={() => props.addLike(post.id, post.likes)}>❤️</span>
+          {props.liked ? <span id="on-heart" onClick={() => props.disLike(post.id, post.likes)}>❤️</span>
             :
             <span id="off-heart" onClick={() => props.addLike(post.id, post.likes)}>♡</span>}
           <div id='comments-header'>
@@ -131,11 +126,14 @@ const commentor = (id) =>{
             placeholder="comment"
             className="comment-input"
           /> : <><br /></>}
-          <br /><br />
+          <br />
+          {props.status && <Loader/> }
+          <br />
           {props.commentLen > 0 && !props.editCapStatus && <span onClick={props.submitComment}
             id="post-span">
             ⬆️
       </span>}
+            
         </div>
 
       </div>
@@ -148,8 +146,7 @@ const mapStateToProps = state => {
     user: state.users.username,
     userid: state.users.id,
     follows: state.follows.follows,
-    users: state.users.all
-
+    status: state.post.requested
   }
 }
 export default connect(mapStateToProps, { deleteFollow, createFollow })(PostCard);
