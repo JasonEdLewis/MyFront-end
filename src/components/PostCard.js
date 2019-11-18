@@ -52,7 +52,7 @@ const PostCard = props => {
     if (follows && postuser !== userid) {
 
       const theFollow = follows.find(follow => follow.followee_id === postuser && follow.follower_id === userid);
-      
+
       if(postuser === userid){
         return ""
     }
@@ -136,7 +136,7 @@ const mapStateToProps = state => {
   return {
     user: state.users.username,
     userid: state.users.id,
-    follows: state.follows
+    follows: state.follows.follows
 
   }
 }

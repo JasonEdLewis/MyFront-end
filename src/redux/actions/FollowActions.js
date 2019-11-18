@@ -7,11 +7,10 @@ export const getFollows = () => dispatch => {
 }
 
 export const deleteFollow = (followid) => dispatch => {
-    debugger
     axios.delete(`http://localhost:3000/follows/${followid}`)
-        .then(dispatch({ type: DELETE_FOLLOW }))
+        .then(dispatch({ type: DELETE_FOLLOW, id: followid }))
 }
 export const createFollow = (postuser, currentuser) => dispatch => {
     axios.post('http://localhost:3000/follows', { followee_id: postuser, follower_id: currentuser })
-        .then(dispatch({ type: CREATE_FOLLOW }))
+        .then(follow => dispatch({ type: CREATE_FOLLOW, payload: follow.data }))
 }
