@@ -9,6 +9,7 @@ export const getPost = () => dispatch => {
     }
 
     )
+    
 
 }
 export const createPost = (info) => dispatch => {

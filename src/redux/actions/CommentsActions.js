@@ -4,12 +4,14 @@ import axios from 'axios'
 
 const url = 'http://localhost:3000/comments/'
 
-export const addComment = (info) => async dispatch => {
+export const addComment = (info) => dispatch => {
 
   dispatch({ type: REQUESTING })
-  const comment = await axios.post(url, info);
-  dispatch({ type: ADD_COMMENT, submitted: false, id: comment.data.post_id, payload: comment.data.content })
+   axios.post(url, info)
+   .then( comment => { 
+    dispatch({ type: ADD_COMMENT, submitted: false, id: comment.data.post_id, payload: comment.data.content })
   console.log("COMMENTS ACTION:", comment.data.content);
+})
 }
 
 export const editComment = (id, info) => dispatch => {
