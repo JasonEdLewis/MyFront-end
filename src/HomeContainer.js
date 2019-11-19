@@ -34,8 +34,9 @@ class HomeContainer extends React.Component {
   componentDidMount() {
 
     console.log("Home Page CONTAINER MOUNTED")
-    const { fetchUser, getPost, getFollows,fetchAllUsers } = this.props
+    const { fetchUser, getPost, getFollows,fetchAllUsers, history } = this.props
     fetchUser(localStorage.token)
+    !localStorage ? history.push('/') :
     fetchAllUsers()
     getFollows()
     getPost()

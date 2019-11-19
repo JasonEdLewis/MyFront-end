@@ -15,54 +15,60 @@ class Profile extends Component {
   postCard = () => {
 
     const { post, user } = this.props
-    const id=3
+    const id = 3
     const { pathname } = this.props.history.location
     let resultsArr = []
     const myPost = post.filter(p => {
-    return p.user_id == id && resultsArr.push(p)
-   }
-     )
-     console.log("My Post",myPost)
-      return myPost.map( p => <PostCard post={p} user="Corey" id={id} path={pathname} /> )
+      return p.user_id == id && resultsArr.push(p)
+    }
+    )
+    console.log("My Post", myPost)
+    return myPost.map(p => <PostCard post={p} user="Corey" id={id} path={pathname} />)
 
   };
 
   componentDidMount() {
-    const {getPost, post } =  this.props
-         getPost()
+    const { getPost, post } = this.props
+    // getPost()
 
-     post && this.setState({ promiseReturned: true })
-      console.log("Promise ", this.state.promiseReturned)
-  
+    post && this.setState({ promiseReturned: true })
+    console.log("Promise ", this.state.promiseReturned)
+
   }
 
 
   render() {
 
-    const { post } = this.props;
+    const { post,history } = this.props;
     const user = localStorage.currentUser
     // const { pathname } = this.props.history.location
     // console.log("Pathname:", pathname);
     // this.props.history.location.pathname
     console.log("Profile props:", this.props)
     return (
-      <div>
-        <div className="main-div">
-          <h1 className="header">{user}'taGram </h1>
+      <div class="parent">
+      
+        <div className="nav-div">
+          <span className="user-gram" onClick={()=> history.push( '/home')}>{user}'taGram </span>
           <button
+            className="logout-btn"
             variant="outline-dark"
             onClick={() => this.props.history.push("/login")}
-            className="logout-btn">
+            >
             logout
                 </button >
-          <span className="signed-in-as">Signed in as: {user}</span>
-          <div>
-            <ProfilePostCard post={post} user={user}/>
-          {/* {this.state.promiseReturned && this.postCard()} */}
+          
+          <div className="cards-div">
+
+            {/* <ProfilePostCard post={post} user={user} /> */}
+            {/* {this.state.promiseReturned && this.postCard()} */}
           </div>
 
         </div>
-        
+
+   
+
+
       </div>
     );
   }
