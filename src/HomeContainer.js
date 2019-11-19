@@ -41,7 +41,7 @@ class HomeContainer extends React.Component {
 
   // COMMENTS //
   submitComment = (postId) => {
-    const { userid, addComment,user } = this.props
+    const { userid, addComment,user, requested } = this.props
     const { userId, comment } = this.state
     console.log(
       "Post_id",
@@ -57,7 +57,7 @@ class HomeContainer extends React.Component {
       followee_id: userid
     }
     addComment(body)
-    .then( this.setState({ comment: " ", showCommentField:false }) )
+    !requested && this.setState({ comment: " ", showCommentField:false })
   };
 
   resetCommentLength = () => {
@@ -207,7 +207,7 @@ theUsers=()=>{
 
         </div>
         <div className="Home-Content">
-          {this.props.postRequest && <Loader />}
+          {this.props.requested && <Loader />}
           {this.pageToRender()}
           {this.state.page !== "newPost" ? <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div> : <></>}
         </div>
@@ -225,7 +225,7 @@ const mapStateToProps = (state) => {
     userid: state.users.id,
     users: state.users.all,
     posts: state.post.posts,
-    postRequested: state.post.requested
+    requested: state.post.requested
   }
 }
 
