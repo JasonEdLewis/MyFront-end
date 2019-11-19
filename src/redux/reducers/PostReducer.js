@@ -41,41 +41,21 @@ export default (state = initialState, action) => {
                 ...state,
                 posts
             }
-        // LIKES
-        case ADD_LIKE:
-            const ix = state.posts.findIndex(p => p.id === action.id)
-            const likedpost = state.posts[ix]
-            return {
-                ...state,
-                posts: [...state.posts.slice(0, ix),
-                Object.assign({}, likedpost, { likes: likedpost.likes + 1 }),
-                ...state.posts.slice(ix + 1)
-                ]
-            }
-        case DELETE_LIKE:
-            const iz = state.posts.findIndex(p => p.id === action.id)
-            const dislikedpost = state.posts[iz]
-            if (dislikedpost.likes > 0) {
-                return {
-                    ...state,
-                    posts: [...state.posts.slice(0, iz),
-                    Object.assign({}, dislikedpost, { likes: dislikedpost.likes - 1 }),
-                    ...state.posts.slice(iz + 1)
-                    ]
-                }
-            }
+
         // COMMENTS 
 
         case ADD_COMMENT:
-            debugger
-            const idb = state.posts.findIndex(post => post.id === action.payload.post_id)
+
+            const idb = state.posts.findIndex(post => post.id === action.id)
             const thePost = state.posts[idb]
+            const newposts = [...state.posts.slice(0, idb),
+            Object.assign({}, thePost, { comments: thePost.comments.concat(action.payload) }),
+            ...state.posts.slice(idb + 1)]
+            debugger
             return {
                 ...state,
+                posts: newposts,
                 requested: false,
-                posts: [state.posts.slice(0, idb),
-                Object.assign({}, thePost, { comments: thePost.comments.concat(action.payload) }),
-                state.posts.slice(idb + 1)]
             }
         case EDIT_COMMENT:
             const ixa = state.comments.findIndex(com => com.id === action.payload.id)
@@ -91,6 +71,32 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 comments: coms
+            }
+
+        // LIKES
+        case ADD_LIKE:
+            const ix = state.posts.findIndex(p => p.id === action.id)
+            const likedpost = state.posts[ix]
+            return {
+                ...state,
+                requested:false,
+                posts: [...state.posts.slice(0, ix),
+                Object.assign({}, likedpost, { likes: likedpost.likes + 1 }),
+                ...state.posts.slice(ix + 1)
+                ]
+            }
+        case DELETE_LIKE:
+            const iz = state.posts.findIndex(p => p.id === action.id)
+            const dislikedpost = state.posts[iz]
+            if (dislikedpost.likes > 0) {
+                return {
+                    ...state,
+                    requested:false,
+                    posts: [...state.posts.slice(0, iz),
+                    Object.assign({}, dislikedpost, { likes: dislikedpost.likes - 1 }),
+                    ...state.posts.slice(iz + 1)
+                    ]
+                }
             }
 
 

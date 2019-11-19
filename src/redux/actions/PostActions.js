@@ -33,7 +33,7 @@ export const changeLike = (id, numLikes, change) => dispatch =>{
     dispatch({ type: REQUESTING })
      axios.patch(`http://localhost:3000/posts/${id}`,{ likes: numLikes })
     .then(data => console.log( "From Likes action ",data),
-    change === "add" ? dispatch( { type: ADD_LIKE, id, requested:false } ) :  dispatch( { type: DELETE_LIKE, id } )
+    change === "add" ? dispatch( { type: ADD_LIKE, id} ) :  dispatch( { type: DELETE_LIKE, id } )
     )
 }
 

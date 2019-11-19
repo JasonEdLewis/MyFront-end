@@ -57,8 +57,7 @@ class HomeContainer extends React.Component {
       followee_id: userid
     }
     addComment(body)
-    this.setState({ comment: " ", showCommentField:false })
-    
+    .then( this.setState({ comment: " ", showCommentField:false }) )
   };
 
   resetCommentLength = () => {
@@ -171,9 +170,12 @@ class HomeContainer extends React.Component {
     this.props.history.push('/')
   }
 theUsers=()=>{
+  const { users} = this.props
   const commentor = {}
+  if (!!users){
   this.props.users.forEach(user => commentor[user.id] = user.username)
   return commentor
+  }
 }
 
   render() {

@@ -23,8 +23,11 @@ const PostCard = props => {
       return text.map(t => {
         // console.log("comments", t)
         return (<p className='li-style'><strong>
-          {`${props.commentors()[t.followee_id.toString()]} :  `}
-           
+          {!!t.followee_id ?
+          `${props.commentors()[t.followee_id.toString()]} :  ` :
+          `${props.commentors()[ props.userid]} :  `
+          }
+
         </strong>{t.content}</p>);
       });
     } else {
@@ -33,7 +36,8 @@ const PostCard = props => {
   };
 
   const activeComment = (e) => {
-    e.target.id === post.id.toString() && props.toggleCommentField()
+    console.log(e.target.id)
+    e.target.id === e.target.parentElement.parentElement.parentElement.id && props.toggleCommentField()
 
   }
   const whichUser = () => {
@@ -65,7 +69,7 @@ const PostCard = props => {
         return ""
       }
       else if (theFollow) {
-        return (<button id="add-friend" onClick={() => deleteFollow(theFollow.id)}> 🤝</button>)
+        return (<button id="were-friends" onClick={() => deleteFollow(theFollow.id)}> 🤝</button>)
       }
       else {
         return <button id="add-friend" onClick={() => { createFollow(postuser, userid) }}
@@ -77,7 +81,7 @@ const PostCard = props => {
   }
 
 
-  
+
 
   console.log("Post card props", props.status)
 
@@ -91,6 +95,7 @@ const PostCard = props => {
           className="post-thumbnail"
           src={require("../img/jack.jpg")}
         />  */}
+
           {areFriends(post.user_id)}
 
           <span className="name-span-style" onClick={() => { console.log(post.user.id) }}>{post.user.username}</span>
@@ -109,7 +114,7 @@ const PostCard = props => {
           <div id='comments-header'>
             <span id={post.id} className="pen" onClick={(e) => activeComment(e)}
             >{props.commentFieldStatus ? "💬" : "🖋 "}</span>
-            <span id="likes" >Likes: {post.likes}</span>
+            <span className="likes" >Likes: {post.likes}</span>
 
           </div>
           <br />
@@ -127,13 +132,13 @@ const PostCard = props => {
             className="comment-input"
           /> : <><br /></>}
           <br />
-          {props.status && <Loader/> }
+          {props.status && <Loader />}
           <br />
           {props.commentLen > 0 && !props.editCapStatus && <span onClick={props.submitComment}
             id="post-span">
             ⬆️
       </span>}
-            
+
         </div>
 
       </div>
