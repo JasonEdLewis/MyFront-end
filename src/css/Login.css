@@ -33,11 +33,13 @@
     width: 10%;
     margin: 2.5% 50%;
   }
+
   #error-message{
     width: 20vw;
     color: red;
     margin-left: -3vw;
     font-size: 1rem;
+
   }
   .wrongSignInForm {
    display: none;

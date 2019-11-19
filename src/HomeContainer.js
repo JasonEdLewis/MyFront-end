@@ -13,6 +13,7 @@ import { changeLike } from './redux/actions/PostActions'
 import Loader from './components/loader'
 
 
+
 import { Card, Form, Navbar, Button, NavbarBrand, Nav } from "react-bootstrap";
 
 class HomeContainer extends React.Component {
@@ -27,9 +28,11 @@ class HomeContainer extends React.Component {
     editingCaption: false,
     liked: false
 
+
   };
 
   componentDidMount() {
+
     console.log("Home Page CONTAINER MOUNTED")
     const { fetchUser, getPost, getFollows,fetchAllUsers } = this.props
     fetchUser(localStorage.token)
@@ -60,6 +63,7 @@ class HomeContainer extends React.Component {
     !requested && this.setState({ comment: " ", showCommentField:false })
   };
 
+
   resetCommentLength = () => {
     this.setState({ comment: "" })
   }
@@ -69,6 +73,7 @@ class HomeContainer extends React.Component {
       [e.target.name]: e.target.value
     });
   };
+
   // EDIT CAPTION
 
   getCapField = () => {
@@ -100,6 +105,7 @@ class HomeContainer extends React.Component {
     const { posts } = this.props
     const { comment, showCommentField, editingCaption, liked } = this.state
     return posts && posts.length > 0 ? posts.map(post => (
+
       <Postcard
         post={post}
         commentLen={comment.length}
@@ -139,7 +145,6 @@ class HomeContainer extends React.Component {
 
   myProfile = () => {
     this.props.history.push('/profile')
-
   };
 
 
@@ -223,6 +228,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.users.username,
     userid: state.users.id,
+
     users: state.users.all,
     posts: state.post.posts,
     requested: state.post.requested
@@ -230,4 +236,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, { getFollows, getPost,fetchAllUsers, fetchUser, addComment, editCaption, changeLike })(HomeContainer);
+
 

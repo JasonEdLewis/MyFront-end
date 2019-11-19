@@ -1,6 +1,7 @@
 import { REQUESTING, POST_SUCCESS, POST_FAILURE, CREATE_POST, DELETE_LIKE, ADD_LIKE,EDIT_POST_CAPTION, DELETE_POST } from './types';
 import axios from 'axios'
 
+
 export const getPost = () => dispatch => {
     dispatch({ type: REQUESTING })
     axios.get('http://localhost:3000/posts')

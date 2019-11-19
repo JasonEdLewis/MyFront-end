@@ -8,8 +8,10 @@ import Home from "./Homepage";
 
 
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import { Provider } from 'react-redux';
-import store from './redux/store'
+
+
+import { connect } from 'react-redux';
+import { getPost } from './redux/actions/PostActions'
 
 
 class App extends React.Component {
@@ -21,30 +23,34 @@ class App extends React.Component {
   redirect = page => {
     this.setState({ page});
   };
-
+ 
   componentDidMount() {
+
     console.log("App MOUNTED")
+
     // if (localStorage.token) {
       this.redirect("/");
+      this.props.getPost()
     // }
+   
   }
 
   logout = () => {
    
   localStorage.clear();
     this.redirect("/")
-    debugger
+
     localStorage.clear()
   };
   render() {
+ 
     return (
      <Fragment>
-     <Provider store={store}>
       <Router>
        <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/home"
-        render={routerProps => <Home  {... routerProps}  history={this.props.history}/>} 
+        // render={routerProps => <Home  {... routerProps}  history={this.props.history}/>} 
         component={Home} 
         />
         <Route exact path="/profile" component={Profile} />
@@ -52,12 +58,15 @@ class App extends React.Component {
         <Route  component={Login} />
         </Switch>
       </Router>
-      </Provider>
       </Fragment> 
     )
 
   
   }
 }
+const mapStateToProps = state =>{
+  return {
 
-export default App;
+  }
+}
+export default connect(null,{ getPost } )(App);

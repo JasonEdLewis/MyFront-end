@@ -16,7 +16,7 @@ class Signup extends React.Component {
   };
 
   handleChange = e => {
-    console.log(e.target.name ,":", e.target.value);
+    console.log(e.target.name, ":", e.target.value);
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -85,7 +85,7 @@ class Signup extends React.Component {
 
             <Form.Group>
               <Form.Label>Email</Form.Label>
-              <Form.Control placeholder="" name="email" value={email} type="email" onChange={this.handleChange}/>
+              <Form.Control placeholder="" name="email" value={email} type="email" onChange={this.handleChange} />
             </Form.Group>
 
             <Form.Group>
@@ -93,7 +93,7 @@ class Signup extends React.Component {
               <Form.Control
                 placeholder="What do you like to do...?"
                 value={bio}
-                name="caption"
+                name="bio"
                 onChange={this.handleChange}
               />
             </Form.Group>
@@ -164,7 +164,7 @@ class Signup extends React.Component {
 
               <Form.Group as={Col} controlId="formGridZip">
                 <Form.Label>Zip</Form.Label>
-                <Form.Control name="zip" type="text" value={zip} onChange={this.handleChange}/>
+                <Form.Control name="zip" type="text" value={zip} onChange={this.handleChange} />
               </Form.Group>
             </Form.Row>
 
