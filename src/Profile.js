@@ -3,7 +3,8 @@ import { Navbar, Button, Card } from "react-bootstrap";
 import PostCard from "./components/PostCard";
 import { connect } from 'react-redux';
 import { getPost } from './redux/actions/PostActions';
-import './css/Profile.css'
+import './css/Profile.css';
+import ProfilePostCard from './components/ProfilePostCard'
 
 class Profile extends Component {
   state = {
@@ -27,16 +28,18 @@ class Profile extends Component {
   };
 
   componentDidMount() {
-    this.props.getPost().then(() => {
-      this.setState({ promiseReturned: true })
-      console.log("Promise returned")
-    })
+    const {getPost, post } =  this.props
+         getPost()
+
+     post && this.setState({ promiseReturned: true })
+      console.log("Promise ", this.state.promiseReturned)
+  
   }
 
 
   render() {
 
-    const { user } = this.props;
+    const { user,post } = this.props;
     // const { pathname } = this.props.history.location
     // console.log("Pathname:", pathname);
     // this.props.history.location.pathname
@@ -53,7 +56,8 @@ class Profile extends Component {
                 </button >
           <span className="signed-in-as">Signed in as: {user}</span>
           <div>
-          {this.state.promiseReturned && this.postCard()}
+            <ProfilePostCard post={post}/>
+          {/* {this.state.promiseReturned && this.postCard()} */}
           </div>
 
         </div>
@@ -64,7 +68,7 @@ class Profile extends Component {
 }
 const mapStateToProps = state => {
   return {
-    post: state.post.post.data,
+    post: state.post.posts,
     user: state.users.username,
     id: state.users.id
   }
