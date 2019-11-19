@@ -28,12 +28,8 @@
     grid-area: cards;
     background-color: turquoise;
 }
-.logout-btn{
-    background-color: tomato;
-    position: fixed;
-    margin: 5vh 0vw 0vh 75vw;
 
-}
+
 .user-gram{
     color: red;
     font-family: 'Abril Fatface', cursive;
@@ -44,6 +40,32 @@
    margin: 0vh 0vw 0vh 1vw;
    text-shadow: 2px 2px rgba(5, 111, 138, 0.712) ;
    text-align: center;
+    vertical-align: top;
+    line-height: 10vh;
+}
+.logout-btn{
+    background-color: tomato;
+    position: fixed;
+    margin: 5vh 0vw 0vh 35vw;
+
+}
+.edit-profile-dots{
+    position: fixed;
+    background-color: rgba(248, 243, 239, 0.623);
+    margin: 1vh 0vw 0vh 35vw;
+    font-size: 2.5rem;
+    color: black;
+    border-style: dotted;
+    border-width: .05vw;
+    border-radius: 2%;
+    border-color: rgb(189, 190, 190);
+    text-align: center;
     vertical-align: middle;
-    line-height: 12.5vh;
+    line-height: .5vh;
+    height: 3vh;
+    width:4vw;
+}
+.camera{
+    position: relative;
+   font-size: 2vw;
 }

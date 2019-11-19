@@ -50,6 +50,7 @@ class Profile extends Component {
       
         <div className="nav-div">
           <span className="user-gram" onClick={()=> history.push( '/home')}>{user}'taGram </span>
+          <span className="camera" id={this.state.id} onClick={() => history.push('/home')}> 📸 </span>
           <button
             className="logout-btn"
             variant="outline-dark"
@@ -57,6 +58,7 @@ class Profile extends Component {
             >
             logout
                 </button >
+                <span className="edit-profile-dots" onClick={(e)=> console.log(e.target.className)}>. . .</span>
           
           <div className="cards-div">
 
