@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getFollows } from '../redux/actions/FollowActions';
-import { fetchAllUsers } from '../redux/actions/UserActions'
 
 
 class Follows extends Component {
 
     componentDidMount() {
-        const { getFollows, fetchAllUsers } = this.props
+        const { getFollows} = this.props
         getFollows()
-        fetchAllUsers().then(() => {
-            // this.allFriends()
-        }
-        )
+
     }
 
     allFriends = () => {
@@ -57,4 +53,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { getFollows, fetchAllUsers })(Follows)
+export default connect(mapStateToProps, { getFollows })(Follows)

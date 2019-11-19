@@ -7,9 +7,9 @@ import Jack from "./img/jack.jpg";
 import { getFollows } from './redux/actions/FollowActions';
 import { connect } from 'react-redux';
 import { getPost, editCaption } from './redux/actions/PostActions';
-import { fetchUser } from './redux/actions/UserActions';
+import { fetchUser,fetchAllUsers } from './redux/actions/UserActions';
 import { addComment } from './redux/actions/CommentsActions'
-import { addLike } from './redux/actions/PostActions'
+import { changeLike } from './redux/actions/PostActions'
 import Loader from './components/loader'
 
 
@@ -31,8 +31,9 @@ class HomeContainer extends React.Component {
 
   componentDidMount() {
     console.log("Home Page CONTAINER MOUNTED")
-    const { fetchUser, getPost, getFollows } = this.props
+    const { fetchUser, getPost, getFollows,fetchAllUsers } = this.props
     fetchUser(localStorage.token)
+    fetchAllUsers()
     getFollows()
     getPost()
 
@@ -40,13 +41,13 @@ class HomeContainer extends React.Component {
 
   // COMMENTS //
   submitComment = (postId) => {
-    const { userid, addComment } = this.props
+    const { userid, addComment,user } = this.props
     const { userId, comment } = this.state
     console.log(
       "Post_id",
       postId,
       "User is:",
-      userId,
+      user,
       "comment: ",
       this.state.comment
     );
@@ -56,8 +57,7 @@ class HomeContainer extends React.Component {
       followee_id: userid
     }
     addComment(body)
-    this.setState({ comment: " ", showCommentField:false })
-    
+    .then( this.setState({ comment: " ", showCommentField:false }) )
   };
 
   resetCommentLength = () => {
@@ -85,7 +85,12 @@ class HomeContainer extends React.Component {
   addLike = (id, like) => {
     this.setState({ liked: !this.state.liked })
     const numLikes = like + 1
-    this.props.addLike(id, numLikes)
+    this.props.changeLike(id, numLikes, "add")
+  }
+  deleteLike = (id, like) => {
+    this.setState({ liked: !this.state.liked })
+    const numLikes = like - 1
+    this.props.changeLike(id, numLikes, "")
   }
 
 
@@ -108,7 +113,9 @@ class HomeContainer extends React.Component {
         editCapStatus={editingCaption}
         submitCapEdit={this.handleEditSubmit}
         addLike={this.addLike}
+        disLike={this.deleteLike}
         liked={liked}
+        commentors={this.theUsers}
       />
     )) : console.log("The Post didnt work, here are the props:", this.props)
   };
@@ -162,13 +169,21 @@ class HomeContainer extends React.Component {
     localStorage.clear()
     this.props.history.push('/')
   }
-
+theUsers=()=>{
+  const { users} = this.props
+  const commentor = {}
+  if (!!users){
+  this.props.users.forEach(user => commentor[user.id] = user.username)
+  return commentor
+  }
+}
 
   render() {
     // debugger
     // console.log("Home Container props", this.props);
 
     const { fposts, user, userId, history } = this.props;
+    this.theUsers()
 
     return (
       <div className="Home-Container">
@@ -180,7 +195,7 @@ class HomeContainer extends React.Component {
           <div>
             <span className="camera" id={this.state.id} onClick={() => this.setState({ page: "newPost" })}> 📸 </span>
           </div>
-
+         
           <div className="thumb-and-button">
             <div className="thumbnail" onClick={() => this.setState({ page: "profile" })}><img src={Jack} id='thumbnail' /> </div>
             <div className="logout"><span onClick={this.logout} id="logout-button" > logout  </span></div>
@@ -208,10 +223,11 @@ const mapStateToProps = (state) => {
   return {
     user: state.users.username,
     userid: state.users.id,
+    users: state.users.all,
     posts: state.post.posts,
     postRequested: state.post.requested
   }
 }
 
-export default connect(mapStateToProps, { getFollows, getPost, fetchUser, addComment, editCaption, addLike })(HomeContainer);
+export default connect(mapStateToProps, { getFollows, getPost,fetchAllUsers, fetchUser, addComment, editCaption, changeLike })(HomeContainer);
 
