@@ -39,7 +39,8 @@ class Profile extends Component {
 
   render() {
 
-    const { user,post } = this.props;
+    const { post } = this.props;
+    const user = localStorage.currentUser
     // const { pathname } = this.props.history.location
     // console.log("Pathname:", pathname);
     // this.props.history.location.pathname
@@ -56,7 +57,7 @@ class Profile extends Component {
                 </button >
           <span className="signed-in-as">Signed in as: {user}</span>
           <div>
-            <ProfilePostCard post={post}/>
+            <ProfilePostCard post={post} user={user}/>
           {/* {this.state.promiseReturned && this.postCard()} */}
           </div>
 

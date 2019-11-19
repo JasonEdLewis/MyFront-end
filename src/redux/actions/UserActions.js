@@ -11,9 +11,11 @@ export const fetchUser = (token) => async dispatch => {
         }
     }
     const user = await axios.get('http://localhost:3000/profile', config);
-    !!user ? dispatch({ type: USER_SUCCESS, payload: user.data }) : dispatch({ type: USER_FAILURE, payload: user.message })
+    console.log(user.username)
+    !!user ? dispatch({ type: USER_SUCCESS, payload: user.data })
+    : dispatch({ type: USER_FAILURE, payload: user.message })
 
-
+    !!user && localStorage.setItem("currentUser", user.data.username)
     return console.log("From fetch User in UsersActions", user.data);
 
 }

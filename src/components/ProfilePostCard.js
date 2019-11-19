@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function ProfilePostCard(props) {
-    const {post } = props
+    const {post, user } = props
     return (
         
         <div className="post-card-div" id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
@@ -16,7 +16,7 @@ export default function ProfilePostCard(props) {
   
             {/* {areFriends(post.user_id)} */}
   
-            <span className="name-span-style" onClick={(e) => { console.log(e) }}>USERNAME</span>
+            <span className="name-span-style" onClick={(e) => { console.log(e) }} >{user}</span>
           </div>
   
           <div className="img-div">
