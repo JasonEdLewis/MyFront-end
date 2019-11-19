@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { REQUEST_LOGIN, SUCCESSFUL_LOGIN, FAILED_LOGIN, LOG_OUT } from './types'
+import { REQUESTING, SUCCESSFUL_LOGIN, FAILED_LOGIN, LOG_OUT } from './types'
 
 
 export const fetchLogin = (info) => dispatch => {
-  dispatch({ type: REQUEST_LOGIN })
+  dispatch({ type: REQUESTING })
   return axios.post("http://localhost:3000/login", info).then(user => {
     if(!!user.data.token){
       localStorage.setItem("token", user.data.token)

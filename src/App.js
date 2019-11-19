@@ -5,7 +5,7 @@ import "./App.css";
 import Profile from "./Profile";
 import Signup from "./Signup";
 import Home from "./Homepage";
-// import Layout from './components/Layout'
+
 
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
@@ -25,7 +25,9 @@ class App extends React.Component {
   };
  
   componentDidMount() {
-    
+
+    console.log("App MOUNTED")
+
     // if (localStorage.token) {
       this.redirect("/");
       this.props.getPost()

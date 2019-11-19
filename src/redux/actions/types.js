@@ -1,5 +1,7 @@
+export const REQUESTING = "REQUESTING"
+
+
 // LOGIN ACTIONS //
-export const REQUEST_LOGIN = "REQUEST_LOGIN"
 export const SUCCESSFUL_LOGIN = "SUCCESSFUL_LOGIN"
 export const FAILED_LOGIN = "FAILED_LOGIN"
 export const LOG_OUT = "LOG_OUT"
@@ -11,17 +13,30 @@ export const USER_FAILURE = "USER_FAILURE"
 export const CREATE_USER = "CREATE_USER"
 export const UPDATE_USER = "UPDATE_USER"
 export const DELETE_USER = "DELETE_USER"
+export const GET_ALL = 'GET_ALL'
 
-// POST ACTIONS //
+// POST ACTIONS 
 export const REQUEST_POST = 'REQUEST_POST'
 export const POST_SUCCESS = 'POST_SUCCESS'
 export const POST_FAILURE = 'POST_FAILURE'
 export const CREATE_POST = 'CREATE_POST'
-export const EDIT_POST = 'EDIT_POST'
+export const EDIT_POST_CAPTION = 'EDIT_POST_CAPTION'
 export const DELETE_POST = 'DELETE_POST'
+export const ADD_LIKE = 'ADD_LIKE'
+export const DELETE_LIKE = 'DELETE_LIKE'
 
-// COMMENTS ACTIONS //
+// POST COMMENTS ACTIONS //
+export const SUBMITTED_COMMENT = 'SUBMITTED_COMMENT'
+export const ADD_COMMENT = 'ADD_COMMENT'
+export const EDIT_COMMENT = 'EDIT_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
+
+// END OF POST ACTIONS
+
+// ********************* //
 
 // FOLLOWS ACTIONS //
-
+export const GET_FOLLOWS = 'GET_FOLLOWS'
+export const CREATE_FOLLOW= 'CREATE_FOLLOW'
+export const DELETE_FOLLOW = 'DELETE_FOLLOW'
 

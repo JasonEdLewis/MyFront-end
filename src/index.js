@@ -7,13 +7,17 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 
 
-
+const onStartup = () => {
+   let i = 0
+   i === 0 && !!localStorage.token && localStorage.clear()
+    return console.log("Index started")}
+    const i = 1
+// onStartup()
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-</Provider>
-    
-    ,document.getElementById('root'));
+
+  
+    <App />,document.getElementById('root'));
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

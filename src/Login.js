@@ -16,7 +16,7 @@ class Login extends React.Component {
   state = {
     username: "",
     password: "",
-    errorMessage: `🛑  WroNg UserNaMe Or PaSsWord   🛑`,
+    errorMessage: `Please enter valid username & or password`,
     showError: false,
   };
 
@@ -32,15 +32,13 @@ class Login extends React.Component {
     fetchLogin(this.state).then(() =>
       !!localStorage.token ? history.push('/home') : this.setState({ showError: true })
     )
-    setTimeout(() => { this.setState({ showError: false }) }, 2250)
+    // setTimeout(() => { this.setState({ showError: false }) }, 3000)
     this.setState({ username: '', password: "" })
   };
 
 
 
   render() {
-    console.log("Login Props:", this.props);
-
     const { login } = this.props
     const { showError, errorMessage } = this.state
     return (
@@ -51,8 +49,7 @@ class Login extends React.Component {
       //     </video>
       //  </div>
       <>
-        {showError ? <div id="wrong-login-info"><p>{errorMessage}</p></div> : null}
-        <div className={showError ? "wrong-signindiv" : "signindiv"}>
+        <div className= "signindiv">
 
           <div className="header-div">
             <span className="sign-in-header" >Jays'taGram</span>
@@ -64,7 +61,7 @@ class Login extends React.Component {
               className="camera-logo"
             />
           </div>
-          <Form className={showError ? 'wrongSignInForm' : 'signInForm'} onSubmit={this.handleSubmit}>
+          <Form className='signInForm' onSubmit={this.handleSubmit}>
             <Form.Group controlId="formGroupEmail">
               <Form.Label alt="username-field"></Form.Label>
               <Form.Control
@@ -74,16 +71,18 @@ class Login extends React.Component {
                 name="username"
                 onChange={this.handleChage}
                 required
+                id={showError && "Wrong-user-input" }
               />
             </Form.Group>
             <Form.Group controlId="formGroupPassword">
-              <Form.Label alt="password-field"></Form.Label>
+            <Form.Label alt="password-field"><p id="error-message">{showError && errorMessage }</p></Form.Label>
               <Form.Control
                 type="password"
                 name="password"
                 value={this.state.password}
                 onChange={this.handleChage}
                 placeholder="Password"
+                id={showError && "Wrong-user-input" }
                 required
               />
 
