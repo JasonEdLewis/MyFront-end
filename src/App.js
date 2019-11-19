@@ -66,7 +66,7 @@ class App extends React.Component {
 }
 const mapStateToProps = state =>{
   return {
-
+      // user: state.users.username
   }
 }
 export default connect(null,{ getPost } )(App);

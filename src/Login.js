@@ -87,7 +87,7 @@ class Login extends React.Component {
               />
 
             </Form.Group>
-            {login.requested ? <Loader /> : <><Button variant="primary" type="submit" className="submit-btn">
+            {!login.requested ? <Loader /> : <><Button variant="primary" type="submit" className="submit-btn">
               Login
   </Button>
               <p className="stars-under-signup">º º º º º   </p>
