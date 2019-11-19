@@ -27,11 +27,9 @@ class App extends React.Component {
   componentDidMount() {
 
     console.log("App MOUNTED")
-
-    // if (localStorage.token) {
       this.redirect("/");
-      this.props.getPost()
-    // }
+    !localStorage &&  this.props.getPost()
+   
    
   }
 

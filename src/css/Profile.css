@@ -1,51 +1,49 @@
-.main-div {
-    width: 90vw;
-    height: 100vh;
-   position: relative;
-}
 
-.header{
-    grid-area: jay;
+  .parent {
+    /* background-color: black; */
+    min-height:100vh ;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: .5fr repeat(4, 1fr) .5fr;
+    grid-template-rows: .25fr repeat(3, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 0px;
+           
+    ;
+    } 
+    .parent .nav-div{
+        position: sticky;
+       grid-column: 1/-1;
+       grid-row:1;
+       min-height: 10vh;
+       max-width: 98vw;
+       margin: .5vh 0vw 0vh 1vw;
+       background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAATklEQVQoU2O0O3X+PwMDA8MhM0NGEI0LMBKtEJsJD27YgW1R0DgEtwWrdUQrxGYLY8V5iDUdhghrKFOITfenmXFgW/jSF+H3DNEKsdkCAO99IAvXcD3VAAAAAElFTkSuQmCC");
+       border-style: solid;
+       border-width: .01vw;
+       border-color: rgb(105, 109, 109,.25);    
+    }
+
+.cards-div{
+    grid-area: cards;
+    background-color: turquoise;
+}
+.logout-btn{
+    background-color: tomato;
+    position: fixed;
+    margin: 5vh 0vw 0vh 75vw;
+
+}
+.user-gram{
     color: red;
     font-family: 'Abril Fatface', cursive;
     /* font-family: Georgia, "Times New Roman", Times, serif; */
   font-feature-settings: "c2sc";
    font-size: 3rem;
    font-weight: 900;
-   margin: 0% 0% 0% 50%;
+   margin: 0vh 0vw 0vh 1vw;
    text-shadow: 2px 2px rgba(5, 111, 138, 0.712) ;
-   background-color: aqua;
+   text-align: center;
+    vertical-align: middle;
+    line-height: 12.5vh;
 }
-.profile-postcard-div {
-   margin: 0% 45%
-}
-#add-friend{
-    margin: 3% 0% 0% 2% ;
-}
-
-.profile-card-header{
-    /* background-color: purple; */
-    position: relative;
-    width: 32vw ;
-    height: 7.5vh;
-    margin: 1% 0% 0% 0%;
-   
-   
-}
-.logout-btn{
-    background-color: blue;
-}
-.signed-in-as{
-    background-color: blueviolet;
-}
-.profile-post-card {
-    /* margin-left: .5%; */
-    width: 32.5vw ;
-    min-height: 55.5vh;
-    padding-bottom: 5%;
-    margin: 0% 0% 15% .5%;
-    border: 1px;
-    border-style:dashed;
-    /* border-color: pink ; */
-     background-color:#fff; 
-  }
