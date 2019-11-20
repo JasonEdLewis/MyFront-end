@@ -5,17 +5,24 @@
     width: 100vw;
     display: grid;
     grid-template-columns: .5fr repeat(4, 1fr) .5fr;
-    grid-template-rows: .25fr repeat(3, 1fr);
+    grid-template-rows: .1fr;
+    grid-auto-rows:  500px  ; 
     grid-column-gap: 5px;
-    grid-row-gap: 0px;
-           
-    ;
+    grid-row-gap: 10px;
+    grid-template-areas:
+                'nav nav nav nav nav nav'
+                'friends card card card card nonfriends'
+                ;
     } 
-    .parent .nav-div{
-        position: sticky;
+
+    /* NAV STUFF */
+
+    .nav-div{
+        grid-area: nav;
+        /* position: sticky; */
        grid-column: 1/-1;
        grid-row:1;
-       min-height: 10vh;
+       max-height: 10vh;
        max-width: 98vw;
        margin: .5vh 0vw 0vh 1vw;
        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAATklEQVQoU2O0O3X+PwMDA8MhM0NGEI0LMBKtEJsJD27YgW1R0DgEtwWrdUQrxGYLY8V5iDUdhghrKFOITfenmXFgW/jSF+H3DNEKsdkCAO99IAvXcD3VAAAAAElFTkSuQmCC");
@@ -24,13 +31,8 @@
        border-color: rgb(105, 109, 109,.25);    
     }
 
-.cards-div{
-    grid-area: cards;
-    background-color: turquoise;
-}
-
-
 .user-gram{
+    grid-area: nav;
     color: red;
     font-family: 'Abril Fatface', cursive;
     /* font-family: Georgia, "Times New Roman", Times, serif; */
@@ -49,7 +51,7 @@
     margin: 5vh 0vw 0vh 35vw;
 
 }
-.edit-profile-dots{
+.dots-edit-profile{
     position: fixed;
     background-color: rgba(248, 243, 239, 0.623);
     margin: 1vh 0vw 0vh 35vw;
@@ -65,7 +67,59 @@
     height: 3vh;
     width:4vw;
 }
+.dots-edit-profile:hover{
+    background-color: rgb(216, 215, 214);
+    border-width: .075vw;
+    border-radius: 10%;
+    border-color: rgb(137, 138, 138);
+    color:white;
+}
 .camera{
     position: relative;
    font-size: 2vw;
+}
+
+/* ********* */
+
+
+/* BODY STUFF */
+
+.friends{
+    grid-area: friends;
+    text-align: center;
+    background-color: rgba(255, 192, 203, 0.137);
+    width: 20vw;
+    margin-left: 1vw;
+    border-style: solid;
+    border-color:rgb(160, 159, 159);
+    border-width: .025vw;
+}
+
+/* CARD AND CARD DIV STUFF */
+
+.cards-div{
+    text-align: center;
+    grid-area: card;
+    background-color: rgba(238, 232, 170, 0.233);
+    border-style: solid;
+    border-color:rgb(160, 159, 159);
+    border-width: .025vw;
+   
+}
+.post-card-div{
+    grid-area: card;
+    /* background-color: blueviolet; */
+}
+
+/* ******** */
+
+.non-friends{
+    text-align: center;
+    grid-area: nonfriends;
+    border-style: solid;
+    border-color:rgb(160, 159, 159);
+    border-width: .025vw;
+    background-color: rgba(255, 166, 0, 0.089);
+    width: 20vw;
+    margin-right: 1vw;
 }

@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import '../css/Profile.css'
 
 export default function ProfilePostCard(props) {
     const {post, user } = props
