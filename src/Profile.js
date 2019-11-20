@@ -66,7 +66,7 @@ class Profile extends Component {
             </div>
 
             <div className="cards-div">
-                where cards will go
+               
                 
               <ProfilePostCard  post={post} user={user} />
               {/* {this.state.promiseReturned && this.postCard()} */}

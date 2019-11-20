@@ -1,95 +1,92 @@
+.profile-post-card{
+    width: 23.3vw ;
+    min-height: 25vh;
+    padding-bottom: 5%;
+    margin: 0% 0% 0% 0%;
+    border: 3px;
+    /* border-style:dashed; */
+    /* border-color: pink ; */
+     /* background-color:#fff;  */
+
+}
+
 .profile-post-card-div {
     grid-area: card;
-    margin-top: -5%;
-    width: 20vw;
-    background-color:black;
+    margin: 0% 0% 0% 0%;
+    width: 23vw;
+    /* background-color:rgb(199, 196, 196); */
     height: 500px;
-    border: rgb(0, 193, 252);
-    border-style:solid;
+    /* border: rgb(0, 0, 0);
+    border-style:solid; */
 }
+
+
+/*   CARD HEADER*/ 
 
 .profile-card-header{
     position: relative;
-    width: 32vw ;
-    height: 7.5vh;
-    margin: 1% 0% 0% 1%;
-    background-color: lawngreen;
+    width: 22.75vw ;
+    height: 5vh;
+    margin: 1% 0% 2% 1.25%;
+    border-style:solid;
+    border-radius: 2.5%;
+    border-color: rgb(204, 201, 201);
+    border-width: .1vw;
+    background-color: rgb(242, 246, 253);
    
    
 }
 
-
-#profile-were-friends, #profile-add-friend{
-
-    background-color: rgb(196, 199, 193);
-    position: absolute;
-    width: 4vw;
-    height: 4.5vh;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 3vh;
-    margin: 0%  0%  0%  -15vw;
-    font-size: 200%;
-    border-radius: .25vw;
-    border-color: rgb(209, 223, 250);
-}
-
-#profile-were-friends:focus{
-    display: none;
-}
-
- #profile-add-friend{
- background-color: rgb(255, 255, 255);
- width:22.5%;
-  height: 60%;
- font-size: 100%;
-}
 .profile-name-span-style{
     position: absolute;
-    margin: -1vh 0vw 0vh 8vw;
-    color:pink;
+    margin: 0vh 0vw 0vh 8vw;
+    color:rgb(168, 3, 31);
     font-style:italic ;
     font-weight:bold  ;
-    font-size: 2vw;
+    font-size: 1.5vw;
     /* background-color: rebeccapurple; */
   }
-    .profile-post-thumbnail{
+
+/* ADJUST WHEN PROFILE PIC IS INSERTED */
+/* .profile-post-thumbnail{
     width: 5vw;
     position: relative;
     height:5vw ;
     margin: -2% 0% 0% 40% ;
-    /* background-color: salmon; */
-  }
-  .profile-img-div {
-    height: 100px;;
-    width: 20%;
-    /* background-color: blueviolet; */
+    background-color: salmon;
+  } */
+
+  /*   PIC BOX  */ 
+
+.profile-img-div {
+    max-height: 32vh;
+    max-width: 22.5vw;
+    margin: 0% 0% 0% 1.75%;
+    background-color: blueviolet;
     
 }
 .profile-image {
-    width: 32vw;
-    max-height: 35vh;
+    width: 22.5vw;
+    max-height: 32vh;
     border:solid;
     border-color: rgb(192, 192, 192);
     border-width: .01vw;
 }
+
+/*   PIC BOX  */ 
 .profile-divStyle {
     margin-left:  32%  ;
     margin-right:  auto  ;
-    width:  18rem  ;
+    width: 18rem  ;
     color:  black 
   }
-.profile-profile-post-card{
-        width: 32.5vw ;
-        min-height: 15.5vh;
-        padding-bottom: 5%;
-        margin: 1% 0% 0% .5%;
-        border: 1px;
-        border-style:dashed;
-        /* border-color: pink ; */
-         /* background-color:#fff;  */
-    
-  }
+
+
+/* * * *  INTERACTION * * * */
+
+
+  /* COMMENTS SECTION*/
+
   .profile-caption{
       color:black;
       text-align: left;
@@ -103,7 +100,7 @@
       color: brown;
   }
      .profile-ul-style{
-    width: 32.5vw;
+    width: 22.5vw;
     /* background-color: yellow; */
     margin:auto;
     list-style: none;
@@ -112,7 +109,7 @@
    
   }
   .profile-li-style{
-   width: 32vw;
+   width: 22.5vw;
    float: left;
    margin: auto;
    position: relative;
@@ -120,14 +117,16 @@
    font-size: 1.25vw;
     /* background-color: coral; */
   }
+
+  /* *****  MAIN COMMENTS DIV ***** */
   .profile-comments-div{
-      width: 20vw;
-      min-height: 5vh; 
-      margin: 1.25vh 0vw 0vh 0.25vw;
-      padding: 0%;
+      width: 22.75vw ;
+      min-height: 25vh; 
+      margin: 1vh 0vw 0vh 0.25vw;
       background-color:rgb(250, 244, 244);
       border-style: solid;
-      border-color:white
+      border-width:.1vw;
+      border-color:rgb(218, 215, 215)
   }
   .profile-comment-input{
     margin: 5vh 0vw 0vh 0vw;
@@ -136,7 +135,7 @@
   
   #profile-off-heart{
       
-      font-size: 1.75rem;
+      font-size: 1.5rem;
       float: left;
       margin-left: 5%;
       color: black;
@@ -148,7 +147,7 @@
     text-shadow: -.075vw -.075vh rgb(204, 208, 251);
   }
   #profile-on-heart{
-    font-size: 1.5rem;
+    font-size: 1.25rem;
       float: left;
       margin-left: 5%;
       margin-top: 1%;
@@ -159,9 +158,9 @@
   .profile-pen{
     font-size: 1.5vw;
     float: left;
-    margin: 1vh 0vw 0vh 1.5vw;
-    /* color: black; */
-    /* background-color: pink; */
+    margin: 0vh 0vw 0vh 1.5vw;
+    color: black;
+     /* background-color: pink; */
   }
   .profile-comment-icon:hover{
       text-shadow: .1vh -.04vw rgb(126, 173, 226);
@@ -175,12 +174,13 @@
     font-family: 'Times New Roman', Times, serif;
     font-weight: bolder;
     float: right;
-    margin-right: 5%;
-    margin-top: 1%;
+    margin-right: 10%;
+    margin-top: 0.5%;
   }
 #profile-comments-header {
   height: 4vh;
-  background-color: rgb(245, 239, 235);
+  margin-top: -7.5%;
+  background-color: rgb(248, 248, 248);
   border-style:solid;
   border-width: .01rem;
   border-color: rgb(226, 225, 225);
