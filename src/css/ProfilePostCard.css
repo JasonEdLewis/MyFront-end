@@ -1,0 +1,220 @@
+.profile-post-card-div {
+    grid-area: card;
+    margin-top: -5%;
+    width: 20vw;
+    background-color:black;
+    height: 500px;
+    border: rgb(0, 193, 252);
+    border-style:solid;
+}
+
+.profile-card-header{
+    position: relative;
+    width: 32vw ;
+    height: 7.5vh;
+    margin: 1% 0% 0% 1%;
+    background-color: lawngreen;
+   
+   
+}
+
+
+#profile-were-friends, #profile-add-friend{
+
+    background-color: rgb(196, 199, 193);
+    position: absolute;
+    width: 4vw;
+    height: 4.5vh;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 3vh;
+    margin: 0%  0%  0%  -15vw;
+    font-size: 200%;
+    border-radius: .25vw;
+    border-color: rgb(209, 223, 250);
+}
+
+#profile-were-friends:focus{
+    display: none;
+}
+
+ #profile-add-friend{
+ background-color: rgb(255, 255, 255);
+ width:22.5%;
+  height: 60%;
+ font-size: 100%;
+}
+.profile-name-span-style{
+    position: absolute;
+    margin: -1vh 0vw 0vh 8vw;
+    color:pink;
+    font-style:italic ;
+    font-weight:bold  ;
+    font-size: 2vw;
+    /* background-color: rebeccapurple; */
+  }
+    .profile-post-thumbnail{
+    width: 5vw;
+    position: relative;
+    height:5vw ;
+    margin: -2% 0% 0% 40% ;
+    /* background-color: salmon; */
+  }
+  .profile-img-div {
+    height: 100px;;
+    width: 20%;
+    /* background-color: blueviolet; */
+    
+}
+.profile-image {
+    width: 32vw;
+    max-height: 35vh;
+    border:solid;
+    border-color: rgb(192, 192, 192);
+    border-width: .01vw;
+}
+.profile-divStyle {
+    margin-left:  32%  ;
+    margin-right:  auto  ;
+    width:  18rem  ;
+    color:  black 
+  }
+.profile-profile-post-card{
+        width: 32.5vw ;
+        min-height: 15.5vh;
+        padding-bottom: 5%;
+        margin: 1% 0% 0% .5%;
+        border: 1px;
+        border-style:dashed;
+        /* border-color: pink ; */
+         /* background-color:#fff;  */
+    
+  }
+  .profile-caption{
+      color:black;
+      text-align: left;
+
+  }
+  .profile-caption,#name-cap{
+      font-weight: 700;
+      float: left;
+      font-style: italic;
+      margin-left: .5vw;
+      color: brown;
+  }
+     .profile-ul-style{
+    width: 32.5vw;
+    /* background-color: yellow; */
+    margin:auto;
+    list-style: none;
+    float: right;
+   
+   
+  }
+  .profile-li-style{
+   width: 32vw;
+   float: left;
+   margin: auto;
+   position: relative;
+   color: black;
+   font-size: 1.25vw;
+    /* background-color: coral; */
+  }
+  .profile-comments-div{
+      width: 20vw;
+      min-height: 5vh; 
+      margin: 1.25vh 0vw 0vh 0.25vw;
+      padding: 0%;
+      background-color:rgb(250, 244, 244);
+      border-style: solid;
+      border-color:white
+  }
+  .profile-comment-input{
+    margin: 5vh 0vw 0vh 0vw;
+    width: 30vw;
+  }
+  
+  #profile-off-heart{
+      
+      font-size: 1.75rem;
+      float: left;
+      margin-left: 5%;
+      color: black;
+
+  }
+
+  #profile-off-heart:hover{
+    color:rgb(233, 10, 10);
+    text-shadow: -.075vw -.075vh rgb(204, 208, 251);
+  }
+  #profile-on-heart{
+    font-size: 1.5rem;
+      float: left;
+      margin-left: 5%;
+      margin-top: 1%;
+  }
+  #profile-on-heart:hover{
+    text-shadow: -.075vw 0vh rgb(238, 167, 167);
+  }
+  .profile-pen{
+    font-size: 1.5vw;
+    float: left;
+    margin: 1vh 0vw 0vh 1.5vw;
+    /* color: black; */
+    /* background-color: pink; */
+  }
+  .profile-comment-icon:hover{
+      text-shadow: .1vh -.04vw rgb(126, 173, 226);
+      font-size: 1.55vw;
+  }
+  .profile-likes {
+    color:rgb(180, 4, 4);
+    font-size: 1.25vw;
+    /* background-color: chartreuse; */
+    vertical-align: middle;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+    float: right;
+    margin-right: 5%;
+    margin-top: 1%;
+  }
+#profile-comments-header {
+  height: 4vh;
+  background-color: rgb(245, 239, 235);
+  border-style:solid;
+  border-width: .01rem;
+  border-color: rgb(226, 225, 225);
+ 
+}
+.profile-post-caption{
+  color:black;
+}
+/* .post-caption:hover{
+ 
+} */
+#profile-edit-caption{
+  display: unset;
+  font-size: xx-small;
+}
+#profile-edit-caption:hover{
+  display: all;
+}
+  #post-span{
+      color:black;
+    font-size: 2vw;
+  }
+
+  #profile-edit-caption-input{
+    font-size: small;
+    border-style: solid;
+    border-radius: .75vh;
+    border-width: .05vw;
+    border-color:rgb(240, 236, 236);
+    width: 25vw;
+    height: 2.75vh;
+  }
+
+  #profile-submit-cap-edit{
+    font-size: small;
+  }
+  

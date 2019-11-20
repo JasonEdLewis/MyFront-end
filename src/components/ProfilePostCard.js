@@ -1,13 +1,14 @@
 import React from 'react';
-import '../css/Profile.css'
+import '../css/ProfilePostCard.css';
+// import '../css/Profile.css';
 
 export default function ProfilePostCard(props) {
     const {post, user } = props
     return (
         
-        <div className="post-card-div" id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
-        <div id={post.id} className="post-card">
-          <div className="card-header">
+        <div className="profile-post-card-div" id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
+        <div id={post.id} className="profile-post-card">
+          <div className="profile-card-header">
   
             {/* REPLACE WITH THE IMAGE ASSOCIATED WITH NAME
           <img
@@ -17,29 +18,29 @@ export default function ProfilePostCard(props) {
   
             {/* {areFriends(post.user_id)} */}
   
-            <span className="name-span-style" onClick={(e) => { console.log(e) }} >{user}</span>
+            <span className="profile-name-span-style" onClick={(e) => { console.log(e) }} >{user}</span>
           </div>
   
-          <div className="img-div">
-            <img className="image" src="" />
+          <div className="profile-img-div">
+            <img className="profile-image" src="" />
           </div>
   
   
   
-          <div className="comments-div" id={post.id} onClick={(e) => console(e)}>
-            <span id="on-heart" onClick={() => console.log("post.id, post.likes")}>❤️</span>
+          <div className="profile-comments-div" id={post.id} onClick={(e) => console.log(e)}>
+            <span id="profile-on-heart" onClick={() => console.log("post.id, post.likes")}>❤️</span>
               :
-              <span id="off-heart" onClick={() => console.log("post.id, post.likes")}>♡</span>
-            <div id='comments-header'>
-              <span id={post.id} className="pen" onClick={(e) => console.log("activeComment",e)}
+              <span id="profile-off-heart" onClick={() => console.log("post.id, post.likes")}>♡</span>
+            <div id='profile-comments-header'>
+              <span id={post.id} className="profile-pen" onClick={(e) => console.log("activeComment",e)}
               >{"props.commentFieldStatus ? 💬  :  🖋 "}</span>
-              <span className="likes" >Likes: {post.likes}</span>
+              <span className="profile-likes" >Likes: {post.likes}</span>
   
             </div>
             <br />
-            <div className='ul-style'>
+            <div className='profile-ul-style'>
   
-              <p className='post-caption'><span id="name-cap"><strong>{' ${whichUser()}'} : </strong></span> {'props.editCapStatus ? editCapInput(post.caption) : post.caption'} {'props.editCapStatus ? <span id="submit-cap-edit" onClick={() => console.log("props.submitCapEdit",post.id)}>  ⬆️ </span> : <span id="edit-caption" onClick={() => console.log("props.getCapEditField",post.id)}>🖋</span>'} </p>
+              <p className='profile-post-caption'><span id="profile-name-cap"><strong>{' ${whichUser()}'} : </strong></span> {'props.editCapStatus ? editCapInput(post.caption) : post.caption'} {'props.editCapStatus ? <span id="profile-submit-cap-edit" onClick={() => console.log("props.submitCapEdit",post.id)}>  ⬆️ </span> : <span id="profile-edit-caption" onClick={() => console.log("props.getCapEditField",post.id)}>🖋</span>'} </p>
   
               {/* {comment()} */}
             </div>
@@ -50,14 +51,14 @@ export default function ProfilePostCard(props) {
               value={"props.comment"}
               onChange={"props.handleComment"}
               placeholder="comment"
-              className="comment-input"
+              className="profile-comment-input"
             /> : <><br /></>}
             <br />
             {'props.status && <Loader />'}
             <br />
             {'props.commentLen > 0 && !props.editCapStatus &&' }
             <span onClick={props.submitComment}
-              id="post-span">
+              id="profile-post-span">
               ⬆️
         </span>
         

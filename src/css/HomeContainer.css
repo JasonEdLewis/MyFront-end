@@ -76,9 +76,9 @@ grid-template-areas:
 
 
 .thumbnail{
-    position: relative;
+    position: sticky;
     grid-area: thumb;
-    margin: -4vh -25vw 0vh 35vw;
+    margin: -2.5vh -25vw 0vh 35vw;
 }
 #thumbnail{
     width: 4vw;
@@ -93,7 +93,7 @@ grid-template-areas:
         font-weight: 900;
         width: 20%;
         height: 20%;
-        margin: -.5vh 0vh 15vw 35vw;
+        margin: 0vh 0vh 15vw 35vw;
         color: rgb(222, 227, 243);
         text-shadow: 0.02vw 0.02vh rgb(1, 17, 20) ;
     }

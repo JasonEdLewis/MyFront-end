@@ -99,7 +99,7 @@
 
 .cards-div{
     text-align: center;
-    grid-area: card;
+    /* grid-area: card; */
     background-color: rgba(238, 232, 170, 0.233);
     border-style: solid;
     border-color:rgb(160, 159, 159);
