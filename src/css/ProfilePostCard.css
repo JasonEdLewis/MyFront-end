@@ -3,26 +3,24 @@
   display: flexbox;
     width: 23.3vw ;
     min-height: 20vh;
-    padding-right: 5%;
+    /* padding-right: 5%; */
     margin: 0% 0% 0% 0%;
     border: 3px;
-    border-style:dashed; 
-    justify-content: space-around;
-    align-content: space-between;
-    /* border-color: pink ; */
-     /* background-color:#fff;  */
+    border-style:dashed;  
+   border-color: pink ; 
+      background-color:#fff; 
 
 }
 
 .profile-post-card-div {
     /* grid-area: card; */
-    display: inline-block;
-    margin: 0% 0% 0% 0%;
+    display: inline-table;
+    margin: 1% 0% 2.5% 2.25%;
     width: 20vw;
     /* background-color:rgb(199, 196, 196); */
-    height: 500px;
-    /* border: rgb(0, 0, 0);
-    border-style:solid; */
+    min-height: 500px;
+    border: rgb(0, 0, 0);
+    border-style:solid;
 }
 
 
