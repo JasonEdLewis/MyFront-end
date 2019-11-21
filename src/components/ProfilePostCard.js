@@ -1,6 +1,6 @@
 import React from 'react';
 import '../css/ProfilePostCard.css';
-// import '../css/Profile.css';
+import '../css/Profile.css';
 import placeholder from '../img/placeHolder.png'
 
 
@@ -12,7 +12,7 @@ import placeholder from '../img/placeHolder.png'
 export default function ProfilePostCard(props) {
   const { post, user } = props
   return (
-
+<>
     <div className="profile-post-card-div" id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
       <div id={post.id} className="profile-post-card">
         <div className="profile-card-header">
@@ -35,10 +35,11 @@ export default function ProfilePostCard(props) {
 
 
         <div className="profile-comments-div" id={post.id} onClick={(e) => console.log(e)}>
+         
+          <div id='profile-comments-header'>
           <span id="profile-on-heart" onClick={() => console.log("post.id, post.likes")}>❤️</span>
           :
               <span id="profile-off-heart" onClick={() => console.log("post.id, post.likes")}>♡</span>
-          <div id='profile-comments-header'>
             <span id={post.id} className="profile-pen" onClick={(e) => console.log("activeComment", e)}
             // "props.commentFieldStatus ? 💬  :  🖋"
             > 🖋 </span>
@@ -73,8 +74,9 @@ export default function ProfilePostCard(props) {
 
         </div>
 
-      </div>
-
+        </div>
+      
     </div>
+    </>
   )
 }

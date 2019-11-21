@@ -18,18 +18,16 @@ class Profile extends Component {
     const id = 3
     const { pathname } = this.props.history.location
     let resultsArr = []
-    const myPost = post.filter(p => {
-      return p.user_id == id && resultsArr.push(p)
-    }
-    )
+    const myPost = post.filter(p =>  p.user_id == id)
     console.log("My Post", myPost)
-    return myPost.map(p => <PostCard post={p} user="Corey" id={id} path={pathname} />)
+    return myPost.map(p => <ProfilePostCard post={p} user="Corey" id={id} path={pathname} />)
+
 
   };
 
   componentDidMount() {
     const { getPost, post } = this.props
-    // getPost()
+    getPost()
 
     post && this.setState({ promiseReturned: true })
     console.log("Promise ", this.state.promiseReturned)
@@ -44,6 +42,7 @@ class Profile extends Component {
     // const { pathname } = this.props.history.location
     // console.log("Pathname:", pathname);
     // this.props.history.location.pathname
+    
     console.log("Profile props:", this.props)
     return (
       <div>
@@ -65,11 +64,11 @@ class Profile extends Component {
               friends
             </div>
 
-            <div className="cards-div">
+            <div className="post-cards-div">
                
                 
-              <ProfilePostCard  post={post} user={user} />
-              {/* {this.state.promiseReturned && this.postCard()} */}
+              {/* <ProfilePostCard  post={post} user={user} /> */}
+              {this.state.promiseReturned && this.postCard()}
             </div>
 
             <div className="non-friends">
