@@ -1,17 +1,37 @@
 body{
     font-family: 'Times New Roman', Times; 
     display: flex;
+   
 }
+.Home-Content{
+    padding: 10px ;
+    text-align: center;
+    /* background-color: black; */
+    width: 98vw;
+    margin-left: 1%;
+    justify-self: center;
+    opacity: 1;
+    
+    }
 
 
 .Home-Container{
-    color: white;
-    opacity: 100%;
+    color: rgb(246, 246, 246);
+   
     width: 90vw; 
 
     
    
   
+}
+ .loading{
+    opacity: .25;
+    padding: 10px ;
+    text-align: center;
+    /* background-color: black; */
+    width: 98vw;
+    margin-left: 1%;
+    justify-self: center;
 }
 
 
@@ -22,10 +42,7 @@ body{
 }
 
 
-.Home-Content{
-padding: 10px ;
-text-align: center;
-}
+
 
 
 .Homepage-nav{
@@ -37,8 +54,8 @@ padding: 2%;
 margin: 1% 0% 0% 1%;
 
 border:#3f8aaf; 
-border-width: .2em;
-border-style: dotted;
+border-width: .05vw;
+border-style: solid;
 background-color: darkgray;
 grid-template-columns: repeat(4, 1fr);
 grid-auto-rows:15vh ;

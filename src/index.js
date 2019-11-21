@@ -4,19 +4,17 @@ import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import { store, persistor }from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react'
 
 
-const onStartup = () => {
-   let i = 0
-   i === 0 && !!localStorage.token && localStorage.clear()
-    return console.log("Index started")}
-    const i = 1
-// onStartup()
+
 ReactDOM.render(
 
   <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
       <App />
+    </PersistGate>
   </Provider>
     ,document.getElementById('root'));
 

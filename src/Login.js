@@ -20,6 +20,10 @@ class Login extends React.Component {
     showError: false,
   };
 
+
+  componentDidMount() {
+    localStorage.clear()
+  }
   handleChage = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -41,6 +45,8 @@ class Login extends React.Component {
   render() {
     const { login } = this.props
     const { showError, errorMessage } = this.state
+
+    console.log("Login props", this.props)
     return (
       //  <div className="video-div">
       //   <video  id="myVideo" loop autoplay >
@@ -87,7 +93,7 @@ class Login extends React.Component {
               />
 
             </Form.Group>
-            {!login.requested ? <Loader /> : <><Button variant="primary" type="submit" className="submit-btn">
+            {!!login.requested ? <Loader /> : <><Button variant="primary" type="submit" className="submit-btn">
               Login
   </Button>
               <p className="stars-under-signup">º º º º º   </p>

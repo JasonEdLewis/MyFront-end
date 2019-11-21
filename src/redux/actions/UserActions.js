@@ -15,7 +15,7 @@ export const fetchUser = (token) => async dispatch => {
     !!user ? dispatch({ type: USER_SUCCESS, payload: user.data })
     : dispatch({ type: USER_FAILURE, payload: user.message })
 
-    !!user && localStorage.setItem("currentUser", user.data.username)
+    !!user && localStorage.setItem("currentUser", user.data.username, 'currentUserId', user.data.id)
     return console.log("From fetch User in UsersActions", user.data);
 
 }

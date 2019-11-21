@@ -9,9 +9,10 @@ import Home from "./Homepage";
 
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-
 import { connect } from 'react-redux';
 import { getPost } from './redux/actions/PostActions'
+import { fetchAllUsers } from './redux/actions/UserActions'
+import { getFollows } from './redux/actions/FollowActions'
 
 
 class App extends React.Component {
@@ -25,10 +26,15 @@ class App extends React.Component {
   };
  
   componentDidMount() {
-
-    console.log("App MOUNTED")
+    const { getPost,fetchAllUsers,getFollows } = this.props
+    console.log("App MOUNTED") 
+    if (!localStorage.token ){
       this.redirect("/");
-    !localStorage &&  this.props.getPost()
+    }
+    else{
+      getPost(); fetchAllUsers() ; getFollows()
+      
+    }
    
    
   }
@@ -67,4 +73,4 @@ const mapStateToProps = state =>{
       // user: state.users.username
   }
 }
-export default connect(null,{ getPost } )(App);
+export default connect(null,{ getPost,fetchAllUsers,getFollows } )(App);

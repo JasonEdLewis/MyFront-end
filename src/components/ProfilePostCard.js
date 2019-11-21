@@ -1,16 +1,19 @@
 import React from 'react';
 import '../css/ProfilePostCard.css';
 import '../css/Profile.css';
-import placeholder from '../img/placeHolder.png'
+import placeholder from '../img/placeHolder.png';
 
 
 
 
 
+const comments =(post)=>{
+   return  post.comments.map(c => <p>{c.content}</p>)
+}
 
 
 export default function ProfilePostCard(props) {
-  const { post, user } = props
+  const { post, user,comment } = props
   return (
 <>
     <div className="profile-post-card-div" id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
@@ -51,25 +54,25 @@ export default function ProfilePostCard(props) {
 
             {/* <p className='profile-post-caption'><span id="profile-name-cap"><strong>{user} : </strong></span> {'props.editCapStatus ? editCapInput(post.caption) : post.caption'} {'props.editCapStatus ? <span id="profile-submit-cap-edit" onClick={() => console.log("props.submitCapEdit",post.id)}>  ⬆️ </span> : <span id="profile-edit-caption" onClick={() => console.log("props.getCapEditField",post.id)}>🖋</span>'} </p> */}
 
-            {/* {comment()} */}
+            {comments(post)}
           </div>
-          {props.commentFieldStatus ? <input
+          { <input
             size="sm"
             type="text"
             name="comment"
-            value={"props.comment"}
-            onChange={"props.handleComment"}
+            value={props.caption}
+            onChange={props.handleComment}
             placeholder="comment"
             className="profile-comment-input"
-          /> : <><br /></>}
+          /> }  <span onClick={props.submitComment}
+          id="profile-post-span" id={post.id}>
+          ⬆️
+      </span>
           <br />
           {/* {'props.status && <Loader />'} */}
           <br />
-          {/* {'props.commentLen > 0 && !props.editCapStatus &&' } */}
-          <span onClick={props.submitComment}
-            id="profile-post-span">
-            ⬆️
-        </span>
+         
+        
 
 
         </div>
