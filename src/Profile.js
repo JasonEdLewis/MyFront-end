@@ -2,25 +2,34 @@ import React, { Component } from "react";
 import { Navbar, Button, Card } from "react-bootstrap";
 import PostCard from "./components/PostCard";
 import { connect } from 'react-redux';
-import { getPost } from './redux/actions/PostActions';
+import { getPost, changeLike } from './redux/actions/PostActions';
 import './css/Profile.css';
 import ProfilePostCard from './components/ProfilePostCard'
 
 class Profile extends Component {
   state = {
-    promiseReturned: false
+    promiseReturned: false,
+    liked: false,
+    comment:"",
   }
 
 
   postCard = () => {
-
-    const { post, user } = this.props
-    const id = 3
+    const { comment } = this.state
+    const { post, user, id } = this.props
+    
     const { pathname } = this.props.history.location
     let resultsArr = []
     const myPost = post.filter(p =>  p.user_id == id)
     console.log("My Post", myPost)
-    return myPost.map(p => <ProfilePostCard post={p} user="Corey" id={id} path={pathname} />)
+    return myPost.map(p => <ProfilePostCard 
+      post={p} 
+      user={user}
+      id={id} 
+      path={pathname}
+      handleComment={this.handleComment} 
+      comment={comment}
+    />)
 
 
   };
@@ -32,6 +41,9 @@ class Profile extends Component {
     post && this.setState({ promiseReturned: true })
     console.log("Promise ", this.state.promiseReturned)
 
+  }
+  handleComment=(e)=>{ 
+    this.setState( {[e.target.name]: e.target.value } )
   }
 
 
@@ -88,10 +100,11 @@ const mapStateToProps = state => {
   return {
     post: state.post.posts,
     user: state.users.username,
-    id: state.users.id
+    id: state.users.id,
+    users: state.users.all
   }
 }
-export default connect(mapStateToProps, { getPost })(Profile)
+export default connect(mapStateToProps, { getPost, changeLike })(Profile)
 {
   /* <Col xs={6} md={4}>
       <Image src="holder.js/171x180" roundedCircle />

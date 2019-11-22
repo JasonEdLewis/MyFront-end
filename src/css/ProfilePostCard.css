@@ -2,12 +2,11 @@
   grid-area: card;
   display: flexbox;
     width: 23.3vw ;
-    min-height: 20vh;
-    /* padding-right: 5%; */
+    min-height: 55vh;
     margin: 0% 0% 0% 0%;
     border: 3px;
-    border-style:dashed;  
-   border-color: pink ; 
+    /* border-style:dashed;   */
+   /* border-color: pink ;  */
       background-color:#fff; 
 
 }
@@ -19,7 +18,8 @@
     width: 20vw;
     /* background-color:rgb(199, 196, 196); */
     min-height: 500px;
-    border: rgb(0, 0, 0);
+    border: rgb(207, 207, 207);
+    border-width: 0.1vw;
     border-style:solid;
 }
 
@@ -29,8 +29,8 @@
 .profile-card-header{
     position: relative;
     width: 22.75vw ;
-    height: 5vh;
-    margin: 1% 0% 1% 1.25%;
+    height: 4vh;
+    margin: 1% 0% 1% 0.75%;
     border-style:solid;
     border-radius: 2.5%;
     border-color: rgb(204, 201, 201);
@@ -42,7 +42,7 @@
 
 .profile-name-span-style{
     position: absolute;
-    margin: 1vh 0vw 0vh 8vw;
+    margin: 1vh 0vw 0vh 18vw;
     color:rgb(168, 3, 31);
     font-style:italic ;
     font-weight:bold  ;
@@ -59,21 +59,24 @@
     background-color: salmon;
   } */
 
-  /*   PIC BOX  */ 
+                                           /******   PIC BOX  ******/ 
+
+
 
 .profile-img-div {
-    max-height: 32vh;
-    max-width: 22.5vw;
-    margin: 0% 0% 0% 1.75%;
+    height: 30vh;
+    width: 22.5vw;
+    margin: 0% 0% 10% 1%;
     /* background-color: blueviolet; */
     
 }
 .profile-image {
+    height: 30vh;
     width: 22vw;
-    max-height: 30vh;
     border:solid;
     border-color: rgb(192, 192, 192);
     border-width: .01vw;
+    margin-left: 1.5%
 }
 
 /*   PIC BOX  */ 
@@ -85,10 +88,10 @@
   }
 
 
-/* * * *  INTERACTION * * * */
+                                              /* * * *  INTERACTION * * * */
 
 
-  /* COMMENTS SECTION*/
+                                          /* COMMENTS SECTION*/
 
   .profile-caption{
       color:black;
@@ -102,26 +105,13 @@
       margin-left: .5vw;
       color: brown;
   }
-     .profile-ul-style{
-    width: 22.5vw;
-    /* background-color: yellow; */
-    margin:auto;
-    list-style: none;
-    float: right;
-   
-   
-  }
-  .profile-li-style{
-   width: 22.5vw;
-   float: left;
-   margin: auto;
-   position: relative;
-   color: black;
-   font-size: 1.25vw;
-    /* background-color: coral; */
-  }
+     
 
-  /* *****  MAIN COMMENTS DIV ***** */
+                                    /* *****  MAIN COMMENTS DIV ***** */
+
+
+
+
   .profile-comments-div{
       width: 22.75vw ;
       min-height: 20vh; 
@@ -129,10 +119,11 @@
       background-color:rgb(255, 255, 255);
       border-style: solid;
       border-width:.1vw;
-      border-color:rgb(218, 215, 215)
+      border-color:rgb(255, 255, 255)
   }
   #profile-comments-header {
     height: 3vh;
+    width:22.75vw;
     margin-top: -10%;
     /* margin-bottom: 25%; */
     background-color: rgb(248, 248, 248);
@@ -143,7 +134,7 @@
   }
   .profile-comment-input{
     margin: 5vh 0vw 0vh 0vw;
-    width: 30vw;
+    width: 20vw;
   }
   
   #profile-off-heart{
@@ -169,7 +160,7 @@
     text-shadow: -.075vw 0vh rgb(238, 167, 167);
   }
   .profile-pen{
-    font-size: 1.5vw;
+    font-size: 1.25vw;
     float: left;
     margin: 0vh 0vw 0vh 1.5vw;
     color: black;
@@ -181,7 +172,7 @@
   }
   .profile-likes {
     color:rgb(180, 4, 4);
-    font-size: 1.25vw;
+    font-size: 1vw;
     /* background-color: chartreuse; */
     vertical-align: middle;
     font-family: 'Times New Roman', Times, serif;
@@ -190,6 +181,31 @@
     margin-right: 10%;
     margin-top: 0.5%;
   }
+                                          /* ACTUAL TEXT STUFF */
+
+
+
+
+
+.profile-ul-style{
+  width: 22.5vw;
+  /* background-color: yellow; */
+  margin:auto;
+  list-style: none;
+  float: right;
+ 
+ 
+}
+.profile-li-style{
+ width: 22.5vw;
+ float: left;
+ margin: auto;
+ position: relative;
+ color: black;
+ font-size: 1.25vw;
+  /* background-color: coral; */
+} 
+
 
 .profile-post-caption{
   color:black;
@@ -215,7 +231,7 @@
     border-radius: .75vh;
     border-width: .05vw;
     border-color:rgb(240, 236, 236);
-    width: 25vw;
+    width: 20vw;
     height: 2.75vh;
   }
 

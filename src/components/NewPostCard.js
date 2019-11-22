@@ -3,7 +3,8 @@ import '../css/newPostCard.css';
 import { storage } from '../firebase/index';
 import Loader from '../components/loader';
 import { connect } from 'react-redux';
-import { createPost } from '../redux/actions/PostActions'
+import { createPost } from '../redux/actions/PostActions';
+import PicUploader from './PicUploader'
 
 
 

@@ -4,6 +4,7 @@ const initialState = {
     all: [],
     username: "",
     id:"",
+    picture:"",
     requested: null,
     errorMessage:"",
 
@@ -14,7 +15,7 @@ export default (state = initialState, action)=> {
         case USER_REQUEST:
             return {...state, requested: true   }
         case USER_SUCCESS:
-            return {...state, username: action.payload.username, id: action.payload.id }
+            return {...state, username: action.payload.username, id: action.payload.id, picture: action.payload.picture }
         case USER_FAILURE:
             return {...state, errorMessage: action.payload.message, requested:false} 
         case CREATE_USER:

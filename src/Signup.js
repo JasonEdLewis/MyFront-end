@@ -1,10 +1,13 @@
 import React from "react";
 import { Form, Col, Button, Row } from "react-bootstrap";
 import "./css/Signup.css";
+import PicUploader from './components/PicUploader';
+import axios from 'axios'
 
 class Signup extends React.Component {
   // FROM API username, password, picture: URL ,bio,email,city,state,zip: INTEGER
   state = {
+    file:"",
     username: "",
     password: "",
     picture: "",
@@ -22,15 +25,16 @@ class Signup extends React.Component {
     });
   };
 
-  submitNewUser = (user, pass, cap) => {
+  submitNewUser = ({info}) => {
     // debugger;
+  
     return fetch("http://localhost:3000/signup", {
       method: "POST",
       headers: {
         "Content-Type": "Application/json",
         Accept: "Application/json"
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(info)
     })
       .then(resp => resp.json())
       .then(user => {
@@ -43,17 +47,30 @@ class Signup extends React.Component {
   };
 
   handleSubmit = e => {
+    const  {username, password,picture, bio, email,city,state,zip} = this.state
+    const { } = this.props
     e.preventDefault();
     return this.submitNewUser(
-      this.state.username,
-      this.state.password,
-      this.state.caption
+      username,
+      password,
+      picture,
+      bio,
+      email,
+      city,
+      state,
+      zip
     );
   };
+  selectedFileHander = (e) => {
+    if (e.target.files[0]) {
+      this.setState( {file: e.target.files[0]  } )
+     const url =  PicUploader(e.target.files[0])
+      this.setState({ picture: url }) };
 
+  }
   render() {
-    console.log("Signup States:", this.props);
-    const { username, password, picture, bio, email, city, state, zip } = this.state
+    console.log("Signup States:", this.state);
+    const { username, password, file, bio, email, city, state, zip } = this.state
     return (
       <div className="form">
         <span><h3 className="sign-up-logo">Jays'taGram </h3></span>
@@ -171,6 +188,11 @@ class Signup extends React.Component {
             <Button variant="primary" type="submit" onClick={this.handleSubmit}>
               Submit
           </Button>
+          <input type="file" hidden ref={fileInput => this.fileInput = fileInput} onChange={this.selectedFileHander} name="file"/>
+          <Button variant="info" inputType="file" onClick={()=> this.fileInput.click()} className="pic-upload" >
+              Photo
+          </Button>
+         
             <Button variant="secondary" type="submit" onClick={() => this.props.history.push('/')} className="cancel-btn">
               Cancel
           </Button>

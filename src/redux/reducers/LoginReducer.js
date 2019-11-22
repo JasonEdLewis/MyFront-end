@@ -1,4 +1,4 @@
-import { REQUESTING, SUCCESSFUL_LOGIN, FAILED_LOGIN, LOG_OUT } from '../actions/types';
+import { REQUESTING, SUCCESSFUL_LOGIN, FAILED_LOGIN, LOG_OUT, FINISHED_REQUESTING } from '../actions/types';
 
 const initialState = {
     requested: false,
@@ -13,6 +13,9 @@ export default (state = initialState, action) => {
 
         case REQUESTING:
             return { ...state, requested: true }
+            
+        case FINISHED_REQUESTING:
+            return {...state, requested: false}
         case FAILED_LOGIN:
 
             return { ...state, requested: false, success: false, errorMessage: action.payload }

@@ -7,14 +7,12 @@ import Jack from "./img/jack.jpg";
 import { getFollows } from './redux/actions/FollowActions';
 import { connect } from 'react-redux';
 import { getPost, editCaption } from './redux/actions/PostActions';
-import { fetchUser,fetchAllUsers } from './redux/actions/UserActions';
-import { addComment } from './redux/actions/CommentsActions'
-import { changeLike } from './redux/actions/PostActions'
-import Loader from './components/loader'
+import { fetchUser, fetchAllUsers } from './redux/actions/UserActions';
+import { addComment } from './redux/actions/CommentsActions';
+import { changeLike } from './redux/actions/PostActions';
+import { logout, notRequesting } from './redux/actions/LoginActions';
+import Loader from './components/loader';
 
-
-
-import { Card, Form, Navbar, Button, NavbarBrand, Nav } from "react-bootstrap";
 
 class HomeContainer extends React.Component {
   state = {
@@ -26,26 +24,28 @@ class HomeContainer extends React.Component {
     likes: 0,
     page: "thePost",
     editingCaption: false,
-    liked: false
+    liked: false,
+    requesting: false
 
 
   };
 
   componentDidMount() {
 
-    console.log("Home Page CONTAINER MOUNTED")
-    const { fetchUser, getPost, getFollows,fetchAllUsers, history } = this.props
+    console.log("HOME CONTAINER")
+    const { fetchUser, history,notRequesting  } = this.props
     fetchUser(localStorage.token)
-    !localStorage ? history.push('/') :
-    fetchAllUsers()
-    getFollows()
-    getPost()
+
+    !localStorage.token ? history.push('/') : notRequesting()
+
+
+     
 
   }
 
   // COMMENTS //
   submitComment = (postId) => {
-    const { userid, addComment,user, requested } = this.props
+    const { userid, addComment, user, requestedPost } = this.props
     const { userId, comment } = this.state
     console.log(
       "Post_id",
@@ -61,7 +61,7 @@ class HomeContainer extends React.Component {
       followee_id: userid
     }
     addComment(body)
-    !requested && this.setState({ comment: " ", showCommentField:false })
+    !requestedPost && this.setState({ comment: " ", showCommentField: false })
   };
 
 
@@ -103,11 +103,12 @@ class HomeContainer extends React.Component {
   // POST STUFF 
 
   thePost = () => {
-    const { posts } = this.props
+    const { posts, users } = this.props
     const { comment, showCommentField, editingCaption, liked } = this.state
     return posts && posts.length > 0 ? posts.map(post => (
 
       <Postcard
+        users={users}
         post={post}
         commentLen={comment.length}
         toggleCommentField={this.showCommentField}
@@ -171,24 +172,37 @@ class HomeContainer extends React.Component {
         return this.myProfile()
     }
   }
-  logout = () => {
+
+  // LOGOUT //
+
+  appLogout = () => {
+    const {logout } = this.props
+    logout()
     localStorage.clear()
-    this.props.history.push('/')
+   localStorage.length === 0 && this.returnToLogoutPage()
+   
   }
-theUsers=()=>{
-  const { users} = this.props
-  const commentor = {}
-  if (!!users){
-  this.props.users.forEach(user => commentor[user.id] = user.username)
-  return commentor
+
+  returnToLogoutPage=()=>{
+    const {requestedLogin, logout } = this.props
+    logout()
+    this.props.history.push('/') 
   }
-}
+  theUsers = () => {
+    const { users } = this.props
+    const commentor = {}
+    if (!!users) {
+      this.props.users.forEach(user => commentor[user.id] = user.username)
+      return commentor
+    }
+  }
 
   render() {
     // debugger
-    // console.log("Home Container props", this.props);
+    console.log("Home Container props", this.props);
 
-    const { fposts, user, userId, history } = this.props;
+    const { fposts, user, userId, history, requestedLogin, picture} = this.props;
+    const { requesting } = this.state
     this.theUsers()
 
     return (
@@ -199,12 +213,12 @@ theUsers=()=>{
           <div id="jays-gram" onClick={() => this.returnToThePost()}><span >{this.props.user}s'taGram </span></div>
 
           <div>
-            <span className="camera" id={this.state.id} onClick={() => this.setState({ page: "newPost" })}> 📸 </span>
+            <p className="camera" id={this.state.id} onClick={() => this.setState({ page: "newPost" })}> 📸 </p>
           </div>
-         
+
           <div className="thumb-and-button">
-            <div className="thumbnail" onClick={() => this.setState({ page: "profile" })}><img src={Jack} id='thumbnail' /> </div>
-            <div className="logout"><span onClick={this.logout} id="logout-button" > logout  </span></div>
+            <div className="thumbnail" onClick={() => this.setState({ page: "profile" })}><img src={picture} id='thumbnail' /> </div>
+            <div className="logout"><p onClick={this.appLogout} id="logout-button" > logout  </p></div>
 
 
 
@@ -212,8 +226,9 @@ theUsers=()=>{
 
 
         </div>
-        <div className="Home-Content">
-          {this.props.requested && <Loader />}
+        
+        <div className={!localStorage.token ? "loading " : "Home-Content"}>
+
           {this.pageToRender()}
           {this.state.page !== "newPost" ? <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div> : <></>}
         </div>
@@ -229,13 +244,14 @@ const mapStateToProps = (state) => {
   return {
     user: state.users.username,
     userid: state.users.id,
-
+    picture: state.users.picture,
     users: state.users.all,
     posts: state.post.posts,
-    requested: state.post.requested
+    requestedPost: state.post.requested,
+    requestedLogin: state.login.requested
   }
 }
 
-export default connect(mapStateToProps, { getFollows, getPost,fetchAllUsers, fetchUser, addComment, editCaption, changeLike })(HomeContainer);
+export default connect(mapStateToProps, { getFollows, getPost, fetchAllUsers, fetchUser, addComment, editCaption, changeLike, logout, notRequesting })(HomeContainer);
 
 
