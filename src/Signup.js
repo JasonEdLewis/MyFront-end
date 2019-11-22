@@ -171,6 +171,9 @@ class Signup extends React.Component {
             <Button variant="primary" type="submit" onClick={this.handleSubmit}>
               Submit
           </Button>
+          <Button variant="info" type="file" onClick={this.handleSubmit} className="pic-upload">
+              Photo
+          </Button>
             <Button variant="secondary" type="submit" onClick={() => this.props.history.push('/')} className="cancel-btn">
               Cancel
           </Button>

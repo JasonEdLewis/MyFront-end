@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { REQUESTING, SUCCESSFUL_LOGIN, FAILED_LOGIN, LOG_OUT } from './types'
+import { REQUESTING, FINISHED_REQUESTING, SUCCESSFUL_LOGIN, FAILED_LOGIN, LOG_OUT } from './types'
 
 
 export const fetchLogin = (info) => dispatch => {
@@ -16,13 +16,16 @@ export const fetchLogin = (info) => dispatch => {
     dispatch({ type: FAILED_LOGIN, errorMessage: err })
   })
 }
-export const logout = () => dispatch => {
-  dispatch({ type: LOG_OUT })
+ const logout = () =>  dispatch => {
+ dispatch({ type: LOG_OUT })
+}
+ const notRequesting = ()=> dispatch => {
+  dispatch({ type: FINISHED_REQUESTING})
 }
 
 
 
-
 export {
+  notRequesting,logout,
   fetchLogin as default
 }

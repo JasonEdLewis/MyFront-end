@@ -49,7 +49,7 @@ class App extends React.Component {
   render() {
  
     return (
-     <Fragment>
+     <div>
       <Router>
        <Switch>
         <Route exact path="/" component={Login} />
@@ -62,7 +62,7 @@ class App extends React.Component {
         <Route  component={Login} />
         </Switch>
       </Router>
-      </Fragment> 
+      </div> 
     )
 
   

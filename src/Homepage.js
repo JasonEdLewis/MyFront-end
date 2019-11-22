@@ -11,11 +11,11 @@ export default class Homepage extends React.Component {
 
   render() {
     return (
-      <>
+      <div>
         <HomeContainer
           history={this.props.history}
         />
-      </>
+      </div>
     );
   }
 }

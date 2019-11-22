@@ -8,13 +8,11 @@ import { getFollows } from './redux/actions/FollowActions';
 import { connect } from 'react-redux';
 import { getPost, editCaption } from './redux/actions/PostActions';
 import { fetchUser, fetchAllUsers } from './redux/actions/UserActions';
-import { addComment } from './redux/actions/CommentsActions'
-import { changeLike } from './redux/actions/PostActions'
-import Loader from './components/loader'
+import { addComment } from './redux/actions/CommentsActions';
+import { changeLike } from './redux/actions/PostActions';
+import { logout, notRequesting } from './redux/actions/LoginActions';
+import Loader from './components/loader';
 
-
-
-import { Card, Form, Navbar, Button, NavbarBrand, Nav } from "react-bootstrap";
 
 class HomeContainer extends React.Component {
   state = {
@@ -35,16 +33,19 @@ class HomeContainer extends React.Component {
   componentDidMount() {
 
     console.log("HOME CONTAINER")
-    const { fetchUser, getPost, getFollows, fetchAllUsers, history } = this.props
+    const { fetchUser, history,notRequesting  } = this.props
     fetchUser(localStorage.token)
-    !localStorage.token && history.push('/') 
+
+    !localStorage.token ? history.push('/') : notRequesting()
+
+
      
 
   }
 
   // COMMENTS //
   submitComment = (postId) => {
-    const { userid, addComment, user, requested } = this.props
+    const { userid, addComment, user, requestedPost } = this.props
     const { userId, comment } = this.state
     console.log(
       "Post_id",
@@ -60,7 +61,7 @@ class HomeContainer extends React.Component {
       followee_id: userid
     }
     addComment(body)
-    !requested && this.setState({ comment: " ", showCommentField: false })
+    !requestedPost && this.setState({ comment: " ", showCommentField: false })
   };
 
 
@@ -170,13 +171,21 @@ class HomeContainer extends React.Component {
         return this.myProfile()
     }
   }
-  logout = () => {
+
+  // LOGOUT //
+
+  appLogout = () => {
+    const {logout } = this.props
+    logout()
     localStorage.clear()
-    localStorage.length === 0 && this.returnToLogoutPage()
+   localStorage.length === 0 && this.returnToLogoutPage()
+   
   }
 
   returnToLogoutPage=()=>{
-    this.props.history.push('/')
+    const {requestedLogin, logout } = this.props
+    logout()
+    this.props.history.push('/') 
   }
   theUsers = () => {
     const { users } = this.props
@@ -191,7 +200,7 @@ class HomeContainer extends React.Component {
     // debugger
     console.log("Home Container props", this.props);
 
-    const { fposts, user, userId, history, requested } = this.props;
+    const { fposts, user, userId, history, requestedLogin } = this.props;
     const { requesting } = this.state
     this.theUsers()
 
@@ -203,12 +212,12 @@ class HomeContainer extends React.Component {
           <div id="jays-gram" onClick={() => this.returnToThePost()}><span >{this.props.user}s'taGram </span></div>
 
           <div>
-            <span className="camera" id={this.state.id} onClick={() => this.setState({ page: "newPost" })}> 📸 </span>
+            <p className="camera" id={this.state.id} onClick={() => this.setState({ page: "newPost" })}> 📸 </p>
           </div>
 
           <div className="thumb-and-button">
             <div className="thumbnail" onClick={() => this.setState({ page: "profile" })}><img src={Jack} id='thumbnail' /> </div>
-            <div className="logout"><span onClick={this.logout} id="logout-button" > logout  </span></div>
+            <div className="logout"><p onClick={this.appLogout} id="logout-button" > logout  </p></div>
 
 
 
@@ -216,8 +225,8 @@ class HomeContainer extends React.Component {
 
 
         </div>
-        <div>{requested && <Loader />}</div>
-        <div className={requesting ? "loading " : "Home-Content"}>
+        
+        <div className={!localStorage.token ? "loading " : "Home-Content"}>
 
           {this.pageToRender()}
           {this.state.page !== "newPost" ? <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div> : <></>}
@@ -234,13 +243,13 @@ const mapStateToProps = (state) => {
   return {
     user: state.users.username,
     userid: state.users.id,
-
     users: state.users.all,
     posts: state.post.posts,
-    requested: state.post.requested
+    requestedPost: state.post.requested,
+    requestedLogin: state.login.requested
   }
 }
 
-export default connect(mapStateToProps, { getFollows, getPost, fetchAllUsers, fetchUser, addComment, editCaption, changeLike })(HomeContainer);
+export default connect(mapStateToProps, { getFollows, getPost, fetchAllUsers, fetchUser, addComment, editCaption, changeLike, logout, notRequesting })(HomeContainer);
 
 
