@@ -44,7 +44,7 @@ export default (state = initialState, action) => {
 
         // COMMENTS 
 
-   
+
         case EDIT_COMMENT:
             const ixa = state.comments.findIndex(com => com.id === action.payload.id)
             const com = state.comments[ixa]
@@ -60,31 +60,31 @@ export default (state = initialState, action) => {
                 ...state,
                 comments: coms
             }
-            case ADD_COMMENT:
-                const idb = state.posts.findIndex(post => post.id === action.id)
-                const thePost = state.posts[idb]
-              
-                return {
-                    ...state,
-                    requested: false,
-                    posts: [...state.posts.slice(0, idb),
-                    Object.assign({}, thePost, { comments: [...thePost.comments,action.payload] }),
-                    ...state.posts.slice(idb + 1)],
-                    
-        }
+        case ADD_COMMENT:
+            const idb = state.posts.findIndex(post => post.id === action.id)
+            const thePost = state.posts[idb]
+
+            return {
+                ...state,
+                requested: false,
+                posts: [...state.posts.slice(0, idb),
+                Object.assign({}, thePost, { comments: [...thePost.comments, action.payload] }),
+                ...state.posts.slice(idb + 1)],
+
+            }
 
         // LIKES
-            case ADD_LIKE:
-                const ix = state.posts.findIndex(p => p.id === action.id)
-                const likedpost = state.posts[ix]
-                return {
-                    ...state,
-                    requested: false,
-                    posts: [...state.posts.slice(0, ix),
-                    Object.assign({}, likedpost, { likes: likedpost.likes + 1 }),
-                    ...state.posts.slice(ix + 1)
-                    ]
-                }
+        case ADD_LIKE:
+            const ix = state.posts.findIndex(p => p.id === action.id)
+            const likedpost = state.posts[ix]
+            return {
+                ...state,
+                requested: false,
+                posts: [...state.posts.slice(0, ix),
+                Object.assign({}, likedpost, { likes: likedpost.likes + 1 }),
+                ...state.posts.slice(ix + 1)
+                ]
+            }
         case DELETE_LIKE:
             const iz = state.posts.findIndex(p => p.id === action.id)
             const dislikedpost = state.posts[iz]
