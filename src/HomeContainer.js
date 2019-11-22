@@ -103,11 +103,12 @@ class HomeContainer extends React.Component {
   // POST STUFF 
 
   thePost = () => {
-    const { posts } = this.props
+    const { posts, users } = this.props
     const { comment, showCommentField, editingCaption, liked } = this.state
     return posts && posts.length > 0 ? posts.map(post => (
 
       <Postcard
+        users={users}
         post={post}
         commentLen={comment.length}
         toggleCommentField={this.showCommentField}
@@ -200,7 +201,7 @@ class HomeContainer extends React.Component {
     // debugger
     console.log("Home Container props", this.props);
 
-    const { fposts, user, userId, history, requestedLogin } = this.props;
+    const { fposts, user, userId, history, requestedLogin, picture} = this.props;
     const { requesting } = this.state
     this.theUsers()
 
@@ -216,7 +217,7 @@ class HomeContainer extends React.Component {
           </div>
 
           <div className="thumb-and-button">
-            <div className="thumbnail" onClick={() => this.setState({ page: "profile" })}><img src={Jack} id='thumbnail' /> </div>
+            <div className="thumbnail" onClick={() => this.setState({ page: "profile" })}><img src={picture} id='thumbnail' /> </div>
             <div className="logout"><p onClick={this.appLogout} id="logout-button" > logout  </p></div>
 
 
@@ -243,6 +244,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.users.username,
     userid: state.users.id,
+    picture: state.users.picture,
     users: state.users.all,
     posts: state.post.posts,
     requestedPost: state.post.requested,

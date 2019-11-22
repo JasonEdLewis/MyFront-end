@@ -13,7 +13,7 @@ const comments =(post)=>{
 
 
 export default function ProfilePostCard(props) {
-  const { post, user,comment } = props
+  const { post, user,comment, picture } = props
   return (
 <>
     <div className="profile-post-card-div" id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
@@ -32,7 +32,10 @@ export default function ProfilePostCard(props) {
         </div>
 
         <div className="profile-img-div">
-          <img className="profile-image" src={placeholder} />
+          <img className="profile-image" src={
+            props.post.picture ? post.picture :
+            placeholder
+            } />
         </div>
 
 

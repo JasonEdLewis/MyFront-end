@@ -4,7 +4,8 @@ import '../css/Profile.css';
 import placeholder from '../img/placeHolder.png';
 import { connect } from 'react-redux';
 import { deleteFollow, createFollow } from '../redux/actions/FollowActions';
-import Loader from '../components/loader'
+import Loader from '../components/loader';
+import {TheUser, ThePic} from './TheUser'
 
 
 
@@ -13,7 +14,7 @@ const PostCard = props => {
 
 
 
-  const { post, user } = props;
+  const { post, user, users } = props;
 
   const comment = () => {
 
@@ -41,7 +42,7 @@ const PostCard = props => {
   }
 
   const whichUser = () => {
-    return post.user.id !== props.userid ? post.user.username : user
+    return post.user_id !== props.userid ? post.user.username : user
   }
   const clearCommentBox = (e) => {
     const { commentFieldStatus, resetComment, editCapStatus, getCapEditField } = props
@@ -57,7 +58,15 @@ const PostCard = props => {
     return <input type='text' value={props.comment} onChange={props.handleComment} placeholder={` ${cap}`} id="edit-caption-input" name="comment" />
   }
 
-
+const nameOrpic =(id)=>{
+  if(!!ThePic(id,users)){
+    return (<img src={`${ThePic(id,users)}`} style={{width:"5vw", float:"right", marginRight:"-60%"}} onClick={()=> props.history.push('/profile')}/>)
+  }
+  else {
+    return  TheUser(id,users)
+  }
+    
+}
   const areFriends = (postuser) => {
 
     const { follows, userid, deleteFollow, createFollow } = props
@@ -83,11 +92,12 @@ const PostCard = props => {
 
 
 
-  console.log("Post card props", props.status)
+  // console.log("Post card props", props)
 
   return (
 
     <div className="post-card-div" id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
+      
       <div id={post.id} className="post-card">
         <div className="card-header">
 
@@ -99,7 +109,7 @@ const PostCard = props => {
 
           {areFriends(post.user_id)}
 
-          <span className="name-span-style" onClick={() => { console.log(post.user.id) }}>{post.user.username}</span>
+          <span className="name-span-style" onClick={() => { console.log(post.user_id) }}>{nameOrpic(post.user_id)}</span>
         </div>
 
         <div className="img-div">
@@ -135,7 +145,7 @@ const PostCard = props => {
             className="comment-input"
           /> : <><br /></>}
           <br />
-          {props.status && <Loader />}
+          
           <br />
           {props.commentLen > 0 && !props.editCapStatus && <span onClick={props.submitComment}
             id="post-span">
