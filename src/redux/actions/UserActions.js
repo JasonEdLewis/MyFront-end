@@ -24,3 +24,7 @@ export const fetchAllUsers = () => async dispatch => {
     dispatch({ type: GET_ALL, payload: users.data });
 
 }
+export const picUrl=(url)=>{
+    debugger
+    return url
+}
