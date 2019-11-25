@@ -5,7 +5,8 @@ import placeholder from '../img/placeHolder.png';
 import { connect } from 'react-redux';
 import { deleteFollow, createFollow } from '../redux/actions/FollowActions';
 import Loader from '../components/loader';
-import {TheUser, ThePic} from './TheUser'
+import { TheUser, ThePic } from './TheUser';
+import { Player } from 'video-react'
 
 
 
@@ -24,8 +25,8 @@ const PostCard = props => {
         // console.log("comments", t)
         return (<p className='li-style'><strong>
           {!!t.followee_id ?
-          `${props.commentors()[t.followee_id.toString()]} :  ` :
-          `${props.commentors()[ props.userid]} :  `
+            `${props.commentors()[t.followee_id.toString()]} :  ` :
+            `${props.commentors()[props.userid]} :  `
           }
 
         </strong>{t.content}</p>);
@@ -42,7 +43,7 @@ const PostCard = props => {
   }
 
   const whichUser = () => {
-    return post.user_id !== props.userid ? post.user.username : user
+    return post.user_id !== props.userid ? TheUser(post.user_id, users) : user
   }
   const clearCommentBox = (e) => {
     const { commentFieldStatus, resetComment, editCapStatus, getCapEditField } = props
@@ -58,15 +59,21 @@ const PostCard = props => {
     return <input type='text' value={props.comment} onChange={props.handleComment} placeholder={` ${cap}`} id="edit-caption-input" name="comment" />
   }
 
-const nameOrpic =(id)=>{
-  if(!!ThePic(id,users)){
-    return (<img src={`${ThePic(id,users)}`} style={{width:"5vw", float:"right", marginRight:"-60%"}} onClick={()=> props.history.push('/profile')}/>)
+  const nameOrpic = (id) => {
+    if (!!ThePic(id, users) && ThePic(id, users).includes(".jpg")) {
+      return (<img src={`${ThePic(id, users)}`} style={{ width: "5vw", float: "right", marginRight: "-60%" }} onClick={() => props.history.push('/profile')} />)
+    }
+    else if (!!ThePic(id, users) && ThePic(id, users).includes('.mp4')) {
+      return (<Player
+        playsInline
+        poster=""
+        src={`${ThePic(id, users)}`} style={{ width: "5vw", float: "right", marginRight: "-60%" }} onClick={() => props.history.push('/profile')} />)
+    }
+    else {
+      return TheUser(id, users)
+    }
+
   }
-  else {
-    return  TheUser(id,users)
-  }
-    
-}
   const areFriends = (postuser) => {
 
     const { follows, userid, deleteFollow, createFollow } = props
@@ -97,7 +104,7 @@ const nameOrpic =(id)=>{
   return (
 
     <div className="post-card-div" id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
-      
+
       <div id={post.id} className="post-card">
         <div className="card-header">
 
@@ -145,7 +152,7 @@ const nameOrpic =(id)=>{
             className="comment-input"
           /> : <><br /></>}
           <br />
-          
+
           <br />
           {props.commentLen > 0 && !props.editCapStatus && <span onClick={props.submitComment}
             id="post-span">

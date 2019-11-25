@@ -33,13 +33,13 @@ class HomeContainer extends React.Component {
   componentDidMount() {
 
     console.log("HOME CONTAINER")
-    const { fetchUser, history,notRequesting  } = this.props
-    fetchUser(localStorage.token)
+    const { fetchUser, history, notRequesting } = this.props
+ 
+    localStorage.token && fetchUser(localStorage.token).then(() => !localStorage.token ? history.push('/') : notRequesting()
+    )
 
-    !localStorage.token ? history.push('/') : notRequesting()
 
 
-     
 
   }
 
@@ -176,17 +176,17 @@ class HomeContainer extends React.Component {
   // LOGOUT //
 
   appLogout = () => {
-    const {logout } = this.props
+    const { logout } = this.props
     logout()
     localStorage.clear()
-   localStorage.length === 0 && this.returnToLogoutPage()
-   
+    localStorage.length === 0 && this.returnToLogoutPage()
+
   }
 
-  returnToLogoutPage=()=>{
-    const {requestedLogin, logout } = this.props
+  returnToLogoutPage = () => {
+    const { requestedLogin, logout } = this.props
     logout()
-    this.props.history.push('/') 
+    this.props.history.push('/')
   }
   theUsers = () => {
     const { users } = this.props
@@ -201,7 +201,7 @@ class HomeContainer extends React.Component {
     // debugger
     console.log("Home Container props", this.props);
 
-    const { fposts, user, userId, history, requestedLogin, picture} = this.props;
+    const { fposts, user, userId, history, requestedLogin, picture } = this.props;
     const { requesting } = this.state
     this.theUsers()
 
@@ -226,7 +226,7 @@ class HomeContainer extends React.Component {
 
 
         </div>
-        
+
         <div className={!localStorage.token ? "loading " : "Home-Content"}>
 
           {this.pageToRender()}

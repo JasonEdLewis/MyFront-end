@@ -1,13 +1,14 @@
 import React from "react";
 import { Form, Col, Button, Row } from "react-bootstrap";
 import "./css/Signup.css";
-import PicUploader from './components/PicUploader';
+import { storage } from './firebase/index';
+
 import axios from 'axios'
 
 class Signup extends React.Component {
   // FROM API username, password, picture: URL ,bio,email,city,state,zip: INTEGER
   state = {
-    file:"",
+    file: "",
     username: "",
     password: "",
     picture: "",
@@ -25,49 +26,55 @@ class Signup extends React.Component {
     });
   };
 
-  submitNewUser = ({info}) => {
-    // debugger;
-  
-    return fetch("http://localhost:3000/signup", {
+  submitNewUser = async () => {
+
+    const resp = await fetch("http://localhost:3000/signup", {
       method: "POST",
       headers: {
         "Content-Type": "Application/json",
         Accept: "Application/json"
       },
-      body: JSON.stringify(info)
-    })
-      .then(resp => resp.json())
-      .then(user => {
-        user.token
-          ? this.props.history.push("/home")
-          : this.props.history.push("/");
-        localStorage.setItem("token", user.token);
-        console.log("New USer Token : ", localStorage.token);
-      });
+      body: JSON.stringify(this.state)
+    });
+    const user = await resp.json();
+    user.token
+      ? this.props.history.push("/home")
+      : this.props.history.push("/");
+    localStorage.setItem("token", user.token);
+    console.log("New User Token : ", localStorage.token);
   };
 
   handleSubmit = e => {
-    const  {username, password,picture, bio, email,city,state,zip} = this.state
+    const { username, password, picture, bio, email, city, state, zip } = this.state
     const { } = this.props
     e.preventDefault();
-    return this.submitNewUser(
-      username,
-      password,
-      picture,
-      bio,
-      email,
-      city,
-      state,
-      zip
-    );
+    return this.submitNewUser();
   };
   selectedFileHander = (e) => {
-    if (e.target.files[0]) {
-      this.setState( {file: e.target.files[0]  } )
-     const url =  PicUploader(e.target.files[0])
-      this.setState({ picture: url }) };
+    const image = e.target.files[0]
+    if (image) {
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+
+      uploadTask.on('state_changed', (snapshot) => {
+
+      },
+        (error) => {
+          console.log(error);
+
+        },
+        () => {
+          storage.ref('images').child(image.name).getDownloadURL().then(url => {
+            this.setState({ picture: url })
+
+          })
+        })
+
+    };
 
   }
+
+
+
   render() {
     console.log("Signup States:", this.state);
     const { username, password, file, bio, email, city, state, zip } = this.state
@@ -188,11 +195,11 @@ class Signup extends React.Component {
             <Button variant="primary" type="submit" onClick={this.handleSubmit}>
               Submit
           </Button>
-          <input type="file" hidden ref={fileInput => this.fileInput = fileInput} onChange={this.selectedFileHander} name="file"/>
-          <Button variant="info" inputType="file" onClick={()=> this.fileInput.click()} className="pic-upload" >
+            <input type="file" hidden ref={fileInput => this.fileInput = fileInput} onChange={this.selectedFileHander} name="file" />
+            <Button variant="info" inputType="file" onClick={() => this.fileInput.click()} className="pic-upload" >
               Photo
           </Button>
-         
+
             <Button variant="secondary" type="submit" onClick={() => this.props.history.push('/')} className="cancel-btn">
               Cancel
           </Button>
