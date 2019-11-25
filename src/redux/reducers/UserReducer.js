@@ -14,10 +14,13 @@ export default (state = initialState, action)=> {
     switch (action.type) {
         case USER_REQUEST:
             return {...state, requested: true   }
+            
         case USER_SUCCESS:
             return {...state, username: action.payload.username, id: action.payload.id, picture: action.payload.picture }
+
         case USER_FAILURE:
-            return {...state, errorMessage: action.payload.message, requested:false} 
+            return {...state, errorMessage: action.payload.message, requested:false}
+
         case CREATE_USER:
             return {...state} 
         case UPDATE_USER:
@@ -26,7 +29,7 @@ export default (state = initialState, action)=> {
             return {...state }
         case GET_ALL:
             return {...state,
-                all: state.all.concat(action.payload)
+                all: action.payload
             }
         default:
             return state;

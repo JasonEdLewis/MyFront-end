@@ -9,8 +9,9 @@ export const addComment = (info) => dispatch => {
   dispatch({ type: REQUESTING })
    axios.post(url, info)
    .then( comment => { 
-    dispatch({ type: ADD_COMMENT, submitted: false, id: comment.data.post_id, payload: comment.data.content })
-  console.log("COMMENTS ACTION:", comment.data.content);
+     debugger
+    dispatch({ type: ADD_COMMENT, submitted: false, payload:comment.data })
+  console.log("COMMENTS ACTION:", comment.data);
 })
 }
 

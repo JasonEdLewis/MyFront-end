@@ -34,12 +34,8 @@ class HomeContainer extends React.Component {
 
     console.log("HOME CONTAINER")
     const { fetchUser, history, notRequesting } = this.props
- 
-    localStorage.token && fetchUser(localStorage.token).then(() => !localStorage.token ? history.push('/') : notRequesting()
-    )
-
-
-
+    debugger
+    !localStorage.token && history.push('/') 
 
   }
 
@@ -228,7 +224,7 @@ class HomeContainer extends React.Component {
         </div>
 
         <div className={!localStorage.token ? "loading " : "Home-Content"}>
-
+        {}
           {this.pageToRender()}
           {this.state.page !== "newPost" ? <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div> : <></>}
         </div>

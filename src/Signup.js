@@ -2,6 +2,9 @@ import React from "react";
 import { Form, Col, Button, Row } from "react-bootstrap";
 import "./css/Signup.css";
 import { storage } from './firebase/index';
+import Loader from './components/loader';
+import { connect } from 'react-redux';
+import { newUser, fetchUser } from './redux/actions/UserActions'
 
 import axios from 'axios'
 
@@ -27,21 +30,24 @@ class Signup extends React.Component {
   };
 
   submitNewUser = async () => {
+    const { newUser, fetchUser } = this.props
+    newUser(this.state)
+      .then(user => {
+        const token = user.payload.token
+        debugger
+        if (token) {
+          localStorage.setItem("token", token)
+          fetchUser(token)
+            .then(() => this.props.history.push("/home")
+            )
+        }
+        else {
+          this.props.history.push("/");
 
-    const resp = await fetch("http://localhost:3000/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "Application/json",
-        Accept: "Application/json"
-      },
-      body: JSON.stringify(this.state)
-    });
-    const user = await resp.json();
-    user.token
-      ? this.props.history.push("/home")
-      : this.props.history.push("/");
-    localStorage.setItem("token", user.token);
-    console.log("New User Token : ", localStorage.token);
+          console.log("New User Token : ", localStorage.token);
+        }
+      }
+      )
   };
 
   handleSubmit = e => {
@@ -76,7 +82,7 @@ class Signup extends React.Component {
 
 
   render() {
-    console.log("Signup States:", this.state);
+    console.log("Signup Props:", this.props);
     const { username, password, file, bio, email, city, state, zip } = this.state
     return (
       <div className="form">
@@ -111,7 +117,7 @@ class Signup extends React.Component {
               <Form.Label>Email</Form.Label>
               <Form.Control placeholder="" name="email" value={email} type="email" onChange={this.handleChange} />
             </Form.Group>
-
+            {this.props.requesting && <Loader />}
             <Form.Group>
               <Form.Label>Describe Yourself</Form.Label>
               <Form.Control
@@ -209,4 +215,9 @@ class Signup extends React.Component {
     );
   }
 }
-export default Signup;
+const mapStateToProps = state => {
+  return {
+    requesting: state.users.requested
+  }
+}
+export default connect(null, { newUser })(Signup);

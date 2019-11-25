@@ -13,7 +13,7 @@ export const fetchUser = (token) => async dispatch => {
     const user = await axios.get('http://localhost:3000/profile', config);
     console.log(user.username)
     !!user ? dispatch({ type: USER_SUCCESS, payload: user.data })
-    : dispatch({ type: USER_FAILURE, payload: user.message })
+        : dispatch({ type: USER_FAILURE, payload: user.message })
 
     !!user && localStorage.setItem("currentUser", user.data.username, 'currentUserId', user.data.id)
     return console.log("From fetch User in UsersActions", user.data);
@@ -24,7 +24,8 @@ export const fetchAllUsers = () => async dispatch => {
     dispatch({ type: GET_ALL, payload: users.data });
 
 }
-export const picUrl=(url)=>{
-    debugger
-    return url
+export const newUser = (info) => dispatch => {
+    dispatch({ type: USER_REQUEST })
+ return   axios.post('http://localhost:3000/signup', info).then(user =>  dispatch({ type: CREATE_USER, payload: user.data, requested:true })
+    )
 }
