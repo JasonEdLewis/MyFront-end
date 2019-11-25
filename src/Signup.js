@@ -34,7 +34,7 @@ class Signup extends React.Component {
     newUser(this.state)
       .then(user => {
         const token = user.payload.token
-        debugger
+        // debugger
         if (token) {
           localStorage.setItem("token", token)
           fetchUser(token)
@@ -220,4 +220,4 @@ const mapStateToProps = state => {
     requesting: state.users.requested
   }
 }
-export default connect(null, { newUser })(Signup);
+export default connect(null, { newUser, fetchUser })(Signup);
