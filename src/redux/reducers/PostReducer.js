@@ -24,9 +24,10 @@ export default (state = initialState, action) => {
         case POST_FAILURE:
             return { ...state, success: false, requested: false, errorMessage: action.payload }
         case CREATE_POST:
+            const newPost = [action.payload, ...state.posts]
             return {
                 ...state, requested: false, success: true,
-                posts: state.posts.concat(action.payload)
+                posts: newPost
             }
         case EDIT_POST_CAPTION:
 
@@ -55,21 +56,32 @@ export default (state = initialState, action) => {
                 state.comments.slice(ixa + 1)]
             }
         case DELETE_COMMENT:
-            const coms = state.comments.filter(com => com.id !== action.id)
+
+            const postIdx = state.posts.findIndex(p => p.id === action.post_id)
+            const post2deleteCom = state.posts[postIdx]
+            const remainingComments = post2deleteCom.comments.filter(comment => comment.id !== action.id)
+            const returnPosts = [...state.posts.slice(0, postIdx),
+            Object.assign({}, post2deleteCom, { comments: remainingComments }),
+            ...state.posts.slice(postIdx + 1)
+            ]
+
+
             return {
                 ...state,
-                comments: coms
+                posts: returnPosts
+
             }
         case ADD_COMMENT:
-            const idb = state.posts.findIndex(post => post.id === action.id)
+            const idb = state.posts.findIndex(post => post.id === action.payload.post_id)
             const thePost = state.posts[idb]
+            const newPosts = [...state.posts.slice(0, idb),
+            Object.assign({}, thePost, { comments: [...thePost.comments, action.payload] }), ...state.posts.slice(idb + 1)]
 
             return {
                 ...state,
                 requested: false,
-                posts: [...state.posts.slice(0, idb),
-                Object.assign({}, thePost, { comments: [...thePost.comments, action.payload] }),
-                ...state.posts.slice(idb + 1)],
+                posts: newPosts
+
 
             }
 
