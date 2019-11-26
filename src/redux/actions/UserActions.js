@@ -1,6 +1,6 @@
 import { USER_REQUEST, USER_SUCCESS, USER_FAILURE, GET_ALL, CREATE_USER, UPDATE_USER, DELETE_USER } from '../actions/types';
 import axios from 'axios';
-import { database } from 'firebase';
+
 
 export const fetchUser = (token) => async dispatch => {
     dispatch({ type: USER_REQUEST })

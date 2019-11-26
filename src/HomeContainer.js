@@ -3,7 +3,6 @@ import "./css/HomeContainer.css";
 import Postcard from "./components/PostCard";
 import NewPostCard from "./components/NewPostCard";
 import Follows from './components/Follows';
-import Jack from "./img/jack.jpg";
 import { getFollows } from './redux/actions/FollowActions';
 import { connect } from 'react-redux';
 import { getPost, editCaption } from './redux/actions/PostActions';
@@ -33,8 +32,8 @@ class HomeContainer extends React.Component {
   componentDidMount() {
 
     console.log("HOME CONTAINER")
-    const { fetchUser, history, notRequesting } = this.props
-    // debugger
+    const {  history } = this.props
+   
     !localStorage.token && history.push('/')
 
   }

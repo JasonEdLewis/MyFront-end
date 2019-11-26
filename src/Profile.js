@@ -9,41 +9,60 @@ import ProfilePostCard from './components/ProfilePostCard'
 class Profile extends Component {
   state = {
     promiseReturned: false,
-    liked: false,
-    comment:"",
+    likedPosts: [],
+    comment: "",
   }
 
+
+  handleLike = (id, likes) => {
+    const { likedPosts } = this.state
+    const { changeLike } = this.props
+    if (likedPosts.includes(id)) {
+      changeLike(id, likes, '')
+      const newArr = likedPosts.filter(pId => pId !== id)
+      this.setState({ likedPosts: newArr })
+
+    }
+    else {
+      changeLike(id, likes, 'add')
+      const newArr = [...this.state.likedPosts, id]
+      this.setState({ likedPosts: newArr })
+    }
+
+  }
 
   postCard = () => {
     const { comment } = this.state
     const { post, user, id } = this.props
-    
+
     const { pathname } = this.props.history.location
     let resultsArr = []
-    const myPost = post.filter(p =>  p.user_id == id)
+    const myPost = post.filter(p => p.user_id == id)
     console.log("My Post", myPost)
-    return myPost.map(p => <ProfilePostCard 
-      post={p} 
+    return myPost.map(p => <ProfilePostCard
+      post={p}
       user={user}
-      id={id} 
+      id={id}
       path={pathname}
-      handleComment={this.handleComment} 
+      handleComment={this.handleComment}
       comment={comment}
+      handleLike={this.handleLike}
+      likedPosts={this.state.likedPosts}
     />)
 
 
   };
 
   componentDidMount() {
-    const { getPost, post } = this.props
+    const { getPost, post, changeLike } = this.props
     getPost()
 
     post && this.setState({ promiseReturned: true })
     console.log("Promise ", this.state.promiseReturned)
 
   }
-  handleComment=(e)=>{ 
-    this.setState( {[e.target.name]: e.target.value } )
+  handleComment = (e) => {
+    this.setState({ [e.target.name]: e.target.value })
   }
 
 
@@ -54,7 +73,7 @@ class Profile extends Component {
     // const { pathname } = this.props.history.location
     // console.log("Pathname:", pathname);
     // this.props.history.location.pathname
-    
+
     console.log("Profile props:", this.props)
     return (
       <div>
@@ -71,28 +90,28 @@ class Profile extends Component {
               logout
                 </button >
             <span className="dots-edit-profile" onClick={(e) => console.log(e.target.className)}>. . .</span>
-            </div>
-            <div className="friends">
-              friends
-            </div>
-
-            <div className="post-cards-div">
-               
-                
-              {/* <ProfilePostCard  post={post} user={user} /> */}
-              {this.state.promiseReturned && this.postCard()}
+          </div>
+          <div className="friends">
+            friends
             </div>
 
-            <div className="non-friends">
-              non-friends
+          <div className="post-cards-div">
+
+
+            {/* <ProfilePostCard  post={post} user={user} /> */}
+            {this.state.promiseReturned && this.postCard()}
+          </div>
+
+          <div className="non-friends">
+            non-friends
             </div>
-          
+
         </div>
-        </div>
+      </div>
 
 
 
-      
+
     );
   }
 }
