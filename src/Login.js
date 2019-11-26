@@ -3,7 +3,8 @@ import LoginForm from './components/LoginForm';
 import './css/Login.css';
 import { Form, Navbar, Button } from "react-bootstrap";
 import { connect } from 'react-redux';
-import fetchLogin from './redux/actions/LoginActions';
+import { fetchLogin } from './redux/actions/LoginActions';
+import { fetchUser } from './redux/actions/UserActions';
 import Loader from './components/loader'
 // import Vid from './img/caliSkaters.mp4';
 
@@ -31,12 +32,25 @@ class Login extends React.Component {
   };
 
   handleSubmit = e => {
-    const { fetchLogin, login, history } = this.props
+    const { fetchLogin, login, history, fetchUser } = this.props
     e.preventDefault();
-    fetchLogin(this.state).then(() =>
-      !!localStorage.token ? history.push('/home') : this.setState({ showError: true })
+    fetchLogin(this.state).then(() => {
+      if (localStorage.token) {
+        fetchUser(localStorage.token)
+          .then(()=> {
+            debugger
+            localStorage.currentUser && localStorage.token && history.push('/home')
+          }
+          )
+      }
+      else {
+        this.setState({ showError: true })
+      }
+
+
+    }
     )
-    // setTimeout(() => { this.setState({ showError: false }) }, 3000)
+
     this.setState({ username: '', password: "" })
   };
 
@@ -55,7 +69,7 @@ class Login extends React.Component {
       //     </video>
       //  </div>
       <>
-        <div className= "signindiv">
+        <div className="signindiv">
 
           <div className="header-div">
             <span className="sign-in-header" >Jays'taGram</span>
@@ -77,18 +91,18 @@ class Login extends React.Component {
                 name="username"
                 onChange={this.handleChage}
                 required
-                id={showError && "Wrong-user-input" }
+                id={showError && "Wrong-user-input"}
               />
             </Form.Group>
             <Form.Group controlId="formGroupPassword">
-            <Form.Label alt="password-field"><p id="error-message">{showError && errorMessage }</p></Form.Label>
+              <Form.Label alt="password-field"><p id="error-message">{showError && errorMessage}</p></Form.Label>
               <Form.Control
                 type="password"
                 name="password"
                 value={this.state.password}
                 onChange={this.handleChage}
                 placeholder="Password"
-                id={showError && "Wrong-user-input" }
+                id={showError && "Wrong-user-input"}
                 required
               />
 
@@ -114,5 +128,5 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { fetchLogin })(Login);
+export default connect(mapStateToProps, { fetchLogin, fetchUser })(Login);
 

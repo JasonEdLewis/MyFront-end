@@ -13,4 +13,6 @@ export const  ThePic = (id, users) =>{
     
  }
 
-
+export default{
+  TheUser, ThePic
+}

@@ -29,16 +29,15 @@ const PostCard = props => {
             `${props.commentors()[props.userid]} :  `
           }
 
-        </strong>{t.content}<span className="delete-x" onClick={()=> deleteComment(t)}> ✘ </span></p>);
+        </strong>{t.content}<span className="delete-x" onClick={() => deleteComment(t)}> ✘ </span></p>);
       });
     } else {
       return <h6 style={{ color: "light-grey" }}>Be the first to comment</h6>;
     }
   };
 
-  const activeComment = (e) => {
-    console.log(e.target.id)
-    e.target.id === e.target.parentElement.parentElement.parentElement.id && props.toggleCommentField()
+  const activeComment = (id) => {
+    props.post2comment(id)
 
   }
 
@@ -46,8 +45,8 @@ const PostCard = props => {
     return post.user_id !== props.userid ? TheUser(post.user_id, users) : user
   }
   const clearCommentBox = (e) => {
-    const { commentFieldStatus, resetComment, editCapStatus, getCapEditField } = props
-    if (props.commentLen || commentFieldStatus) {
+    const { resetComment, editCapStatus, getCapEditField, yourField } = props
+    if (props.commentLen <= 0 && yourField && e.target.className !== "comment-input") {
       activeComment(e); resetComment()
     }
     else if (editCapStatus && e.target.id !== "edit-caption-input") {
@@ -99,7 +98,7 @@ const PostCard = props => {
 
 
 
-  // console.log("Post card props", props)
+  console.log("Post card props", props)
 
   return (
 
@@ -126,12 +125,12 @@ const PostCard = props => {
 
 
         <div className="comments-div" id={post.id} onClick={(e) => clearCommentBox(e)}>
-          {props.liked ? <span id="on-heart" onClick={() => props.disLike(post.id, post.likes)}>❤️</span>
+          {props.liked.includes(post.id) ? <span id="on-heart" onClick={() => props.handleLikes(post.id, post.likes)}>❤️</span>
             :
-            <span id="off-heart" onClick={() => props.addLike(post.id, post.likes)}>♡</span>}
+            <span id="off-heart" onClick={() => props.handleLikes(post.id, post.likes)}>♡</span>}
           <div id='comments-header'>
-            <span id={post.id} className="pen" onClick={(e) => activeComment(e)}
-            >{props.commentFieldStatus ? "💬" : "🖋 "}</span>
+            <span id={post.id} className="pen" onClick={() => activeComment(post.id)}
+            >{props.yourField === post.id ? "💬" : "🖋 "}</span>
             <span className="likes" >Likes: {post.likes}</span>
 
           </div>
@@ -142,7 +141,7 @@ const PostCard = props => {
 
             {comment()}
           </div>
-          {props.commentFieldStatus ? <input
+          {props.yourField === post.id ? <input
             size="sm"
             type="text"
             name="comment"

@@ -51,13 +51,14 @@
   }
 
 /* ADJUST WHEN PROFILE PIC IS INSERTED */
-/* .profile-post-thumbnail{
+.profile-post-thumbnail{
     width: 5vw;
     position: relative;
-    height:5vw ;
-    margin: -2% 0% 0% 40% ;
+    height:2.5vh ;
+    width: 1.25vw;
+    margin: -.5% 0% 0% 90% ;
     background-color: salmon;
-  } */
+  }
 
                                            /******   PIC BOX  ******/ 
 
@@ -137,7 +138,7 @@
     width: 20vw;
   }
   
-  #profile-off-heart{
+  .profile-off-heart{
       
       font-size: 1.25rem;
       float: left;
@@ -146,17 +147,17 @@
 
   }
 
-  #profile-off-heart:hover{
+  .profile-off-heart:hover{
     color:rgb(233, 10, 10);
     text-shadow: -.075vw -.075vh rgb(204, 208, 251);
   }
-  #profile-on-heart{
+  .profile-on-heart{
     font-size: 1rem;
       float: left;
       margin-left: 5%;
       margin-top: 1%;
   }
-  #profile-on-heart:hover{
+  .profile-on-heart:hover{
     text-shadow: -.075vw 0vh rgb(238, 167, 167);
   }
   .profile-pen{
