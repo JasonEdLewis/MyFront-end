@@ -15,7 +15,7 @@ const PostCard = props => {
 
 
 
-  const { post, user, users } = props;
+  const { post, user, users, deleteComment } = props;
 
   const comment = () => {
 
@@ -29,7 +29,7 @@ const PostCard = props => {
             `${props.commentors()[props.userid]} :  `
           }
 
-        </strong>{t.content}</p>);
+        </strong>{t.content}<span className="delete-x" onClick={()=> deleteComment(t)}> ✘ </span></p>);
       });
     } else {
       return <h6 style={{ color: "light-grey" }}>Be the first to comment</h6>;

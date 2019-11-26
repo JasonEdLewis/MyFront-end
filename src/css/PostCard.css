@@ -217,4 +217,10 @@
   #submit-cap-edit{
     font-size: small;
   }
-  
+  .delete-x{
+  color:rgb(250, 244, 244);
+
+  }
+  .delete-x:hover{
+   color: black;
+  }

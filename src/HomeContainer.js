@@ -8,7 +8,7 @@ import { getFollows } from './redux/actions/FollowActions';
 import { connect } from 'react-redux';
 import { getPost, editCaption } from './redux/actions/PostActions';
 import { fetchUser, fetchAllUsers } from './redux/actions/UserActions';
-import { addComment } from './redux/actions/CommentsActions';
+import { addComment,deleteComment  } from './redux/actions/CommentsActions';
 import { changeLike } from './redux/actions/PostActions';
 import { logout, notRequesting } from './redux/actions/LoginActions';
 import Loader from './components/loader';
@@ -39,7 +39,9 @@ class HomeContainer extends React.Component {
 
   }
 
-  // COMMENTS //
+                              // COMMENTS //
+
+
   submitComment = (postId) => {
     const { userid, addComment, user, requestedPost } = this.props
     const { userId, comment } = this.state
@@ -71,6 +73,14 @@ class HomeContainer extends React.Component {
     });
   };
 
+
+  deleteComment = (com) => {
+    const {deleteComment  } = this.props
+   
+    // console.log(com.id, com.post_id, com.followee_id, com.content)
+    deleteComment(com.id, com.post_id, com.followee_id, com.content)
+
+  }
   // EDIT CAPTION
 
   getCapField = () => {
@@ -96,7 +106,8 @@ class HomeContainer extends React.Component {
   }
 
 
-  // POST STUFF 
+                                  // POST STUFF  //
+
 
   thePost = () => {
     const { posts, users } = this.props
@@ -120,6 +131,7 @@ class HomeContainer extends React.Component {
         disLike={this.deleteLike}
         liked={liked}
         commentors={this.theUsers}
+        deleteComment={this.deleteComment}
       />
     )) : console.log("The Post didnt work, here are the props:", this.props)
   };
@@ -248,6 +260,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getFollows, getPost, fetchAllUsers, fetchUser, addComment, editCaption, changeLike, logout, notRequesting })(HomeContainer);
+export default connect(mapStateToProps, { getFollows, getPost, fetchAllUsers, fetchUser, addComment, editCaption, changeLike, logout, notRequesting,deleteComment  })(HomeContainer);
 
 
