@@ -33,7 +33,7 @@ class Profile extends Component {
 
   postCard = () => {
     const { comment } = this.state
-    const { post, user, id } = this.props
+    const { post, user, id,pic } = this.props
 
     const { pathname } = this.props.history.location
     let resultsArr = []
@@ -42,6 +42,7 @@ class Profile extends Component {
     return myPost.map(p => <ProfilePostCard
       post={p}
       user={user}
+      pic={pic}
       id={id}
       path={pathname}
       handleComment={this.handleComment}
@@ -119,6 +120,7 @@ const mapStateToProps = state => {
   return {
     post: state.post.posts,
     user: state.users.username,
+    pic: state.users.picture,
     id: state.users.id,
     users: state.users.all
   }

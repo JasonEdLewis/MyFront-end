@@ -51,13 +51,14 @@
   }
 
 /* ADJUST WHEN PROFILE PIC IS INSERTED */
-/* .profile-post-thumbnail{
+.profile-post-thumbnail{
     width: 5vw;
     position: relative;
-    height:5vw ;
-    margin: -2% 0% 0% 40% ;
+    height:2.5vh ;
+    width: 1.25vw;
+    margin: -.5% 0% 0% 90% ;
     background-color: salmon;
-  } */
+  }
 
                                            /******   PIC BOX  ******/ 
 

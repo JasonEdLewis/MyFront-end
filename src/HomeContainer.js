@@ -23,7 +23,8 @@ class HomeContainer extends React.Component {
     likes: 0,
     page: "thePost",
     editingCaption: false,
-    liked: false,
+    likedPosts: [],
+    postRecieveingComment:null,
     requesting: false
 
 
@@ -62,9 +63,14 @@ class HomeContainer extends React.Component {
   };
 
 
+postToCommentOn=(id)=>{
+this.setState( {postRecieveingComment: id })
+}
+
   resetCommentLength = () => {
-    this.setState({ comment: "" })
+    this.setState({ comment: "",postRecieveingComment: null  })
   }
+
   handleComment = e => {
     // console.log(e.target.value);
     this.setState({
@@ -80,7 +86,7 @@ class HomeContainer extends React.Component {
     deleteComment(com.id, com.post_id, com.followee_id, com.content)
 
   }
-  // EDIT CAPTION
+                            // EDIT CAPTION
 
   getCapField = () => {
     this.setState({ editingCaption: !this.state.editingCaption })
@@ -93,13 +99,34 @@ class HomeContainer extends React.Component {
   showCommentField = () => {
     return this.setState({ showCommentField: !this.state.showCommentField })
   }
+
+
+                               // LIKES //
+
+  handleLikes =(id,likes)=>{
+    const {likedPosts } = this.state
+    if(likedPosts.includes(id)){
+      this.deleteLike(id, likes)
+        const likesArr = likedPosts.filter(pId => pId !== id)
+        this.setState( {likedPosts: likesArr } )
+
+    }
+    else {
+      this.addLike(id, likes)
+      const newLikes = [...likedPosts, id]
+      this.setState( {likedPosts: newLikes } )
+    }
+
+  }
+
   addLike = (id, like) => {
-    this.setState({ liked: !this.state.liked })
+
+    // this.setState({ liked: !this.state.liked })
     const numLikes = like + 1
     this.props.changeLike(id, numLikes, "add")
   }
   deleteLike = (id, like) => {
-    this.setState({ liked: !this.state.liked })
+    // this.setState({ liked: !this.state.liked })
     const numLikes = like - 1
     this.props.changeLike(id, numLikes, "")
   }
@@ -110,7 +137,7 @@ class HomeContainer extends React.Component {
 
   thePost = () => {
     const { posts, users } = this.props
-    const { comment, showCommentField, editingCaption, liked } = this.state
+    const { comment, showCommentField, editingCaption, likedPosts, postToCommentOn,postRecieveingComment } = this.state
     return posts && posts.length > 0 ? posts.map(post => (
 
       <Postcard
@@ -119,16 +146,19 @@ class HomeContainer extends React.Component {
         commentLen={comment.length}
         toggleCommentField={this.showCommentField}
         commentFieldStatus={showCommentField}
+        yourField={postRecieveingComment}
+        post2comment={this.postToCommentOn}
         id={post.id}
         resetComment={this.resetCommentLength}
         submitComment={() => this.submitComment(post.id, post.userId)}
         handleComment={this.handleComment}
+        handleLikes={this.handleLikes}
         getCapEditField={this.getCapField}
         editCapStatus={editingCaption}
         submitCapEdit={this.handleEditSubmit}
         addLike={this.addLike}
         disLike={this.deleteLike}
-        liked={liked}
+        liked={likedPosts}
         commentors={this.theUsers}
         deleteComment={this.deleteComment}
       />
