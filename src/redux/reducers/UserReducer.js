@@ -1,7 +1,7 @@
 import { USER_REQUEST ,USER_SUCCESS,USER_FAILURE,CREATE_USER,UPDATE_USER,DELETE_USER, GET_ALL } from '../actions/types'
 
 const initialState = {
-    all: [],
+    all: {},
     username: "",
     id:"",
     picture:"",

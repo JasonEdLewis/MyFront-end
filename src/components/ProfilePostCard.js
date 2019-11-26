@@ -7,12 +7,17 @@ import placeholder from '../img/placeHolder.png';
 
 
 
-const comments = (post) => {
-  return post.comments.map(c => <p>{c.content}</p>)
-}
+
+
 
 
 export default function ProfilePostCard(props) {
+
+
+  const comments = (post) => {
+  
+    return post.comments.map(c => <p><strong>{props.users[c.followee_id]}</strong> : {c.content}</p>)
+  }
   console.log("profile post cards props",props)
   const { post, user, comment, picture, handleLike, likedPosts,pic } = props
   return (
