@@ -16,7 +16,7 @@ export default function ProfilePostCard(props) {
 
   const comments = (post) => {
   
-    return post.comments.map(c => <p><strong>{props.users[c.followee_id]}</strong> : {c.content}</p>)
+    return post.comments.map(c => <p><strong>{props.name[c.followee_id +1] || c.followee_id}</strong> : {c.content}</p>)
   }
   console.log("profile post cards props",props)
   const { post, user, comment, picture, handleLike, likedPosts,pic } = props
@@ -27,10 +27,7 @@ export default function ProfilePostCard(props) {
           <div className="profile-card-header">
 
             {/* REPLACE WITH THE IMAGE ASSOCIATED WITH NAME */}
-          <img
-            className="profile-post-thumbnail"
-            src={pic}
-          />  
+         
 
             {/* {areFriends(post.user_id)} */}
 

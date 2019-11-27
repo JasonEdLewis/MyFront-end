@@ -1,35 +1,39 @@
-import { USER_REQUEST ,USER_SUCCESS,USER_FAILURE,CREATE_USER,UPDATE_USER,DELETE_USER, GET_ALL } from '../actions/types'
+import { USER_REQUEST, USER_SUCCESS, USER_FAILURE, CREATE_USER, UPDATE_USER, DELETE_USER, GET_ALL } from '../actions/types'
 
 const initialState = {
-    all: {},
+    all: [],
+    usersObj:{},
     username: "",
-    id:"",
-    picture:"",
+    id: "",
+    picture: "",
     requested: null,
-    errorMessage:"",
+    errorMessage: "",
 
 }
 
-export default (state = initialState, action)=> {
+export default (state = initialState, action) => {
     switch (action.type) {
         case USER_REQUEST:
-            return {...state, requested: true   }
-            
+            return { ...state, requested: true }
+
         case USER_SUCCESS:
-            return {...state, username: action.payload.username, id: action.payload.id, picture: action.payload.picture }
+            return { ...state, username: action.payload.username, id: action.payload.id, picture: action.payload.picture }
 
         case USER_FAILURE:
-            return {...state, errorMessage: action.payload.message, requested:false}
+            return { ...state, errorMessage: action.payload.message, requested: false }
 
         case CREATE_USER:
-            return {...state} 
+            return { ...state }
         case UPDATE_USER:
-            return {...state} 
+            return { ...state }
         case DELETE_USER:
-            return {...state }
+            return { ...state }
         case GET_ALL:
-            return {...state,
-                all: action.payload
+            return {
+                ...state,
+                all: action.payload,
+                usersObj: action.usersObj
+
             }
         default:
             return state;

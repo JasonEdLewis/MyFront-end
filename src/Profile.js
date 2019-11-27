@@ -33,7 +33,7 @@ class Profile extends Component {
 
   postCard = () => {
     const { comment } = this.state
-    const { post, user, id,pic,users } = this.props
+    const { post, user, id,pic,name } = this.props
 
     const { pathname } = this.props.history.location
     let resultsArr = []
@@ -42,7 +42,7 @@ class Profile extends Component {
     return myPost.map(p => <ProfilePostCard
       post={p}
       user={user}
-      users={users}
+      name={name}
       pic={pic}
       id={id}
       path={pathname}
@@ -70,7 +70,7 @@ class Profile extends Component {
 
   render() {
 
-    const { post, history } = this.props;
+    const { post, history,pic } = this.props;
     const user = localStorage.currentUser
     // const { pathname } = this.props.history.location
     // console.log("Pathname:", pathname);
@@ -93,8 +93,12 @@ class Profile extends Component {
                 </button >
             <span className="dots-edit-profile" onClick={(e) => console.log(e.target.className)}>. . .</span>
           </div>
-          <div className="friends">
-            friends
+          <div className="profile-section">
+            <h3 style={{color:"red", fontFamily:"cursive"}}><strong>{user}</strong></h3>
+            <img src={pic} className="profile-pic"/>
+            <div>
+          <p style={{color:"red", fontFamily:"cursive"}}> Hi! Im {user} and I'm from {user.city}</p>
+          </div>
             </div>
 
           <div className="post-cards-div">
@@ -105,7 +109,7 @@ class Profile extends Component {
           </div>
 
           <div className="non-friends">
-            non-friends
+            
             </div>
 
         </div>
@@ -123,7 +127,8 @@ const mapStateToProps = state => {
     user: state.users.username,
     pic: state.users.picture,
     id: state.users.id,
-    users: state.users.all
+    users: state.users.all,
+    name: state.users.usersObj
   }
 }
 export default connect(mapStateToProps, { getPost, changeLike })(Profile)
