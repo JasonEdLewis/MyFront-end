@@ -60,7 +60,7 @@ const PostCard = props => {
 
   const nameOrpic = (id) => {
     if (!!ThePic(id, users) && ThePic(id, users).includes(".jpg")) {
-      return (<img src={`${ThePic(id, users)}`} style={{ width: "5vw", float: "right", marginRight: "-60%" }} onClick={() => props.history.push('/profile')} />)
+      return (<img src={`${ThePic(id, users)}`} className="post-thumbnail" onClick={() => props.history.push('/profile')} />)
     }
     else if (!!ThePic(id, users) && ThePic(id, users).includes('.mp4')) {
       return (<Player

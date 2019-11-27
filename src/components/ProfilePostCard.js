@@ -27,10 +27,7 @@ export default function ProfilePostCard(props) {
           <div className="profile-card-header">
 
             {/* REPLACE WITH THE IMAGE ASSOCIATED WITH NAME */}
-          <img
-            className="profile-post-thumbnail"
-            src={pic}
-          />  
+         
 
             {/* {areFriends(post.user_id)} */}
 
