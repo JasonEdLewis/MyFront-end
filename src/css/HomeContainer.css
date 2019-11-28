@@ -13,6 +13,7 @@ body{
     opacity: 1;
     
     }
+    
 
 
 .Home-Container{
@@ -40,57 +41,61 @@ body{
 
 
 .Homepage-nav{
-display: grid;
 width: 98vw;
-max-height: 12vh;
-margin: 0 auto;
-padding: 2%;
-margin: 1% 0% 0% 1%;
 
+max-height: 13vh;
+list-style: none;
+margin: 1% 0% 0% 1%;
 border:#3f8aaf; 
 border-width: .05vw;
 border-style: solid;
 background-color: darkgray;
-grid-template-columns: 2fr ;
-/* grid-auto-rows: 10vh; */
 
-grid-template-areas:
-            'jay camera '
-
-;
 
 }
+li {    display: inline-block;
+    /* position: relative;
+    font-family: cursive;
+    font-size: 1.5vw;
+    font-weight: 900;
+    width: 20%;
+    height: 20%;
+    margin: auto 5% ;
+    color: rgb(222, 227, 243);
+    text-shadow: 0.02vw 0.02vh rgb(1, 17, 20) ; */
+}
 #jays-gram {
-    grid-area: jay;
+    /* grid-area: jay; */
     color: red;
     font-family: 'Abril Fatface', cursive;
     /* font-family: Georgia, "Times New Roman", Times, serif; */
   font-feature-settings: "c2sc";
-   font-size: 3rem;
+   font-size: 2vw;
    font-weight: 900;
-   margin: -2% 0% 0% 0%;
+   margin: 0% 0% 0% 0%;
    text-shadow: 2px 2px rgba(5, 111, 138, 0.712) ;
 
 }
+.logout{
+    margin: 0% 0% 0% 10%;
+    font-family: cursive;
+    font-size: 1vw;
+    color:white;
+    text-shadow: 2px 2px rgba(17, 17, 17, 0.712) ;
+}
 .camera {
-    grid-area: camera;
+   
     position: relative;
-    font-size: 4.5vw;
-    margin: -1vh 0vw 1vh -45vw;
+    font-size: 2.5vw;
+    margin: 0vh 0vw 0vh 40vw;
    float: center;
 }
-.user-span{
-    grid-area: theUser;
-    margin: 0% 50% 50% 0%;
-    color: rgb(24, 73, 233);
-  
-}
+
 
 
 .thumbnail{
-    position: sticky;
-    grid-area: thumb;
-    margin: -15vh -25vw 0vh 90vw;
+    /* position: sticky; */
+    margin: 0vh 0vw 0vh 30vw;
 }
 #thumbnail{
     width: 3.5vw;
@@ -98,25 +103,8 @@ grid-template-areas:
     border-width: .01vw ;
     border-color:rgb(154, 159, 165);
 }
-.logout{
-        position: relative;
-        font-family: cursive;
-        font-size: 1.5vw;
-        font-weight: 900;
-        width: 20%;
-        height: 20%;
-        margin: -5vh 0vh 15vw 0vw;
-        color: rgb(222, 227, 243);
-        text-shadow: 0.02vw 0.02vh rgb(1, 17, 20) ;
-    }
-/* #logout-span {
-    
 
-} */
-.Home-Nav ul{
-    list-style-type: none;
-    padding: 0;
-}
+
 
 
 .Home-footer{
@@ -129,8 +117,8 @@ p {
     margin-right: auto;  
 }
 
-.nav-main{
+/* .nav-main{
     flex: row;
     justify-content: space-between
-}
+} */
 

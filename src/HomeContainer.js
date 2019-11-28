@@ -7,7 +7,7 @@ import { getFollows } from './redux/actions/FollowActions';
 import { connect } from 'react-redux';
 import { getPost, editCaption } from './redux/actions/PostActions';
 import { fetchUser, fetchAllUsers } from './redux/actions/UserActions';
-import { addComment,deleteComment  } from './redux/actions/CommentsActions';
+import { addComment, deleteComment } from './redux/actions/CommentsActions';
 import { changeLike } from './redux/actions/PostActions';
 import { logout, notRequesting } from './redux/actions/LoginActions';
 import Loader from './components/loader';
@@ -24,7 +24,7 @@ class HomeContainer extends React.Component {
     page: "thePost",
     editingCaption: false,
     likedPosts: [],
-    postRecieveingComment:null,
+    postRecieveingComment: null,
     requesting: false
 
 
@@ -33,13 +33,13 @@ class HomeContainer extends React.Component {
   componentDidMount() {
 
     console.log("HOME CONTAINER")
-    const {  history } = this.props
-   
+    const { history } = this.props
+
     !localStorage.token && history.push('/')
 
   }
 
-                              // COMMENTS //
+  // COMMENTS //
 
 
   submitComment = (postId) => {
@@ -63,12 +63,12 @@ class HomeContainer extends React.Component {
   };
 
 
-postToCommentOn=(id)=>{
-this.setState( {postRecieveingComment: id })
-}
+  postToCommentOn = (id) => {
+    this.setState({ postRecieveingComment: id })
+  }
 
   resetCommentLength = () => {
-    this.setState({ comment: "",postRecieveingComment: null  })
+    this.setState({ comment: "", postRecieveingComment: null })
   }
 
   handleComment = e => {
@@ -80,13 +80,13 @@ this.setState( {postRecieveingComment: id })
 
 
   deleteComment = (com) => {
-    const {deleteComment  } = this.props
-   
+    const { deleteComment } = this.props
+
     // console.log(com.id, com.post_id, com.followee_id, com.content)
     deleteComment(com.id, com.post_id, com.followee_id, com.content)
 
   }
-                            // EDIT CAPTION
+  // EDIT CAPTION
 
   getCapField = () => {
     this.setState({ editingCaption: !this.state.editingCaption })
@@ -101,20 +101,20 @@ this.setState( {postRecieveingComment: id })
   }
 
 
-                               // LIKES //
+  // LIKES //
 
-  handleLikes =(id,likes)=>{
-    const {likedPosts } = this.state
-    if(likedPosts.includes(id)){
+  handleLikes = (id, likes) => {
+    const { likedPosts } = this.state
+    if (likedPosts.includes(id)) {
       this.deleteLike(id, likes)
-        const likesArr = likedPosts.filter(pId => pId !== id)
-        this.setState( {likedPosts: likesArr } )
+      const likesArr = likedPosts.filter(pId => pId !== id)
+      this.setState({ likedPosts: likesArr })
 
     }
     else {
       this.addLike(id, likes)
       const newLikes = [...likedPosts, id]
-      this.setState( {likedPosts: newLikes } )
+      this.setState({ likedPosts: newLikes })
     }
 
   }
@@ -132,12 +132,12 @@ this.setState( {postRecieveingComment: id })
   }
 
 
-                                  // POST STUFF  //
+  // POST STUFF  //
 
 
   thePost = () => {
     const { posts, users } = this.props
-    const { comment, showCommentField, editingCaption, likedPosts, postToCommentOn,postRecieveingComment } = this.state
+    const { comment, showCommentField, editingCaption, likedPosts, postToCommentOn, postRecieveingComment } = this.state
     return posts && posts.length > 0 ? posts.map(post => (
 
       <Postcard
@@ -245,24 +245,20 @@ this.setState( {postRecieveingComment: id })
     return (
       <div className="Home-Container">
         <Follows />
-        <div className="Homepage-nav">
+        <nav className="Homepage-nav">
+          <ul>
+            <li id="jays-gram" onClick={() => this.returnToThePost()}><span >{this.props.user}s'taGram </span> 
+            <p onClick={this.appLogout} className="logout" > logout  </p></li>
 
-          <div id="jays-gram" onClick={() => this.returnToThePost()}><span >{this.props.user}s'taGram </span></div>
-
-          <div>
-            <p className="camera" id={this.state.id} onClick={() => this.setState({ page: "newPost" })}> 📸 </p>
-          </div>
-
-          <div className="thumb-and-button">
-            <div className="thumbnail" onClick={() => this.setState({ page: "profile" })}><img src={picture} id='thumbnail' /> </div>
-            <div className="logout"><p onClick={this.appLogout} id="logout-button" > logout  </p></div>
+            <li>
+              <p className="camera" id={this.state.id} onClick={() => this.setState({ page: "newPost" })}> 📸 </p>
+            </li>
 
 
-
-          </div>
-
-
-        </div>
+            <li className="thumbnail" onClick={() => this.setState({ page: "profile" })}><img src={picture} id='thumbnail' /> </li>
+          
+          </ul>
+        </nav>
 
         <div className={!localStorage.token ? "loading " : "Home-Content"}>
           {}
@@ -289,6 +285,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getFollows, getPost, fetchAllUsers, fetchUser, addComment, editCaption, changeLike, logout, notRequesting,deleteComment  })(HomeContainer);
+export default connect(mapStateToProps, { getFollows, getPost, fetchAllUsers, fetchUser, addComment, editCaption, changeLike, logout, notRequesting, deleteComment })(HomeContainer);
 
 
