@@ -75,6 +75,7 @@ export default (state = initialState, action) => {
             const idb = state.posts.findIndex(post => post.id === action.payload.post_id)
             const thePost = state.posts[idb]
             const newPosts = [...state.posts.slice(0, idb),
+              
             Object.assign({}, thePost, { comments: [...thePost.comments, action.payload] }), ...state.posts.slice(idb + 1)]
 
             return {

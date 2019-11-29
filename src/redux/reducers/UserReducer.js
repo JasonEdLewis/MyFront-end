@@ -5,6 +5,9 @@ const initialState = {
     usersObj:{},
     username: "",
     id: "",
+    bio:"",
+    city:"",
+    state:"",
     picture: "",
     requested: null,
     errorMessage: "",
@@ -17,7 +20,7 @@ export default (state = initialState, action) => {
             return { ...state, requested: true }
 
         case USER_SUCCESS:
-            return { ...state, username: action.payload.username, id: action.payload.id, picture: action.payload.picture }
+            return { ...state, username: action.payload.username, id: action.payload.id, picture: action.payload.picture, bio: action.payload.bio, city:action.payload.city, state:action.payload.state }
 
         case USER_FAILURE:
             return { ...state, errorMessage: action.payload.message, requested: false }

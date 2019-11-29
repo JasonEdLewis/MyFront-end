@@ -15,7 +15,7 @@ export const fetchUser = (token) => async dispatch => {
     !!user ? dispatch({ type: USER_SUCCESS, payload: user.data })
         : dispatch({ type: USER_FAILURE, payload: user.message })
 
-    !!user && localStorage.setItem("currentUser", user.data.username, 'currentUserId', user.data.id)
+    !!user && localStorage.setItem("currentUser", user.data.username, 'currentUserId', user.data.id, user.data.bio, user.data.city, user.data.state)
     return console.log("From fetch User in UsersActions", user.data);
 
 }
@@ -27,7 +27,7 @@ export const fetchAllUsers = () => async dispatch => {
         return obj
     }
     console.log("User object from fetch all users", usersObj())
-    dispatch({ type: GET_ALL, payload: users.data, usersObj:usersObj() });
+    dispatch({ type: GET_ALL, payload: users.data, usersObj: usersObj() });
 
 }
 export const newUser = (info) => dispatch => {

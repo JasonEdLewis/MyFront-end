@@ -25,11 +25,9 @@ const PostCard = props => {
         // console.log("comments", t)
         return (<p className='li-style'><strong>
           {!!t.followee_id ?
-            `${props.commentors()[t.followee_id.toString()]} :  ` :
-            `${props.commentors()[props.userid]} :  `
-          }
-
-        </strong>{t.content}<span className="delete-x" onClick={() => deleteComment(t)}> ✘ </span></p>);
+            `${props.commentors()[t.followee_id.toString()]}:  ` :
+            `${props.commentors()[props.userid]}:  `
+          }</strong>{t.content}<span className="delete-x" onClick={() => deleteComment(t)}> ✘ </span></p>);
       });
     } else {
       return <h6 style={{ color: "light-grey" }}>Be the first to comment</h6>;
@@ -137,7 +135,7 @@ const PostCard = props => {
           <br />
           <div className='ul-style'>
 
-            <p className='post-caption'><span id="name-cap"><strong>{` ${whichUser()}`} : </strong></span> {props.editCapStatus ? editCapInput(post.caption) : post.caption} {props.editCapStatus ? <span id="submit-cap-edit" onClick={() => props.submitCapEdit(post.id)}>  ⬆️ </span> : <span id="edit-caption" onClick={() => props.getCapEditField(post.id)}>🖋</span>} </p>
+            <p className='post-caption'><span id="name-cap"><strong>{` ${whichUser()}`}:</strong></span> {props.editCapStatus ? editCapInput(post.caption) : post.caption} {props.editCapStatus ? <span id="submit-cap-edit" onClick={() => props.submitCapEdit(post.id)}>  ⬆️ </span> : <span id="edit-caption" onClick={() => props.getCapEditField(post.id)}>🖋</span>} </p>
 
             {comment()}
           </div>

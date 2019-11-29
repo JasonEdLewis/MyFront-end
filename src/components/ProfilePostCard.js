@@ -16,7 +16,7 @@ export default function ProfilePostCard(props) {
 
   const comments = (post) => {
   
-    return post.comments.map(c => <p><strong>{props.name[c.followee_id +1] || c.followee_id}</strong> : {c.content}</p>)
+    post.comments &&  post.comments.map(c => <p><strong>{props.name[c.followee_id +1] || c.followee_id}</strong> : {c.content}</p>)
   }
   console.log("profile post cards props",props)
   const { post, user, comment, picture, handleLike, likedPosts,pic } = props

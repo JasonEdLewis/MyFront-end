@@ -70,7 +70,7 @@ class Profile extends Component {
 
   render() {
 
-    const { post, history,pic } = this.props;
+    const { post, history,pic, city, bio, state } = this.props;
     const user = localStorage.currentUser
     // const { pathname } = this.props.history.location
     // console.log("Pathname:", pathname);
@@ -94,10 +94,15 @@ class Profile extends Component {
             <span className="dots-edit-profile" onClick={(e) => console.log(e.target.className)}>. . .</span>
           </div>
           <div className="profile-section">
-            <h3 style={{color:"red", fontFamily:"cursive"}}><strong>{user}</strong></h3>
+            <h3 className="hi-im"><strong>Hi I'm {user}</strong></h3>
             <img src={pic} className="profile-pic"/>
             <div>
-          <p style={{color:"red", fontFamily:"cursive"}}> Hi! Im {user} and I'm from {user.city}</p>
+          <p className="bio"><strong>Bio:</strong> {bio}</p>
+          <p><strong className="location">Location:</strong></p>
+          <p className="city-state"><strong></strong> {city}, {state}</p>
+         
+
+
           </div>
             </div>
 
@@ -127,6 +132,9 @@ const mapStateToProps = state => {
     user: state.users.username,
     pic: state.users.picture,
     id: state.users.id,
+    bio: state.users.bio,
+    city:state.users.city,
+    state:state.users.state,
     users: state.users.all,
     name: state.users.usersObj
   }

@@ -42,14 +42,14 @@ body{
 
 .Homepage-nav{
 width: 98vw;
-
-max-height: 13vh;
+background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAATklEQVQoU2O0O3X+PwMDA8MhM0NGEI0LMBKtEJsJD27YgW1R0DgEtwWrdUQrxGYLY8V5iDUdhghrKFOITfenmXFgW/jSF+H3DNEKsdkCAO99IAvXcD3VAAAAAElFTkSuQmCC");
+max-height: 15vh;
 list-style: none;
 margin: 1% 0% 0% 1%;
-border:#3f8aaf; 
+border:#97d2f0; 
 border-width: .05vw;
 border-style: solid;
-background-color: darkgray;
+background-color: rgba(242, 221, 245, 0.568);
 
 
 }
@@ -70,24 +70,30 @@ li {    display: inline-block;
     font-family: 'Abril Fatface', cursive;
     /* font-family: Georgia, "Times New Roman", Times, serif; */
   font-feature-settings: "c2sc";
-   font-size: 2vw;
+   font-size: 3vw;
    font-weight: 900;
    margin: 0% 0% 0% 0%;
    text-shadow: 2px 2px rgba(5, 111, 138, 0.712) ;
 
 }
 .logout{
-    margin: 0% 0% 0% 10%;
+    margin: -3.5% 0% 0% 10%;
     font-family: cursive;
-    font-size: 1vw;
+    font-size: 1.25vw;
     color:white;
     text-shadow: 2px 2px rgba(17, 17, 17, 0.712) ;
+}
+.logout:hover{
+    color: black;
+    text-shadow: 2px 2px rgba(230, 227, 227, 0.712) ;
+
+    
 }
 .camera {
    
     position: relative;
     font-size: 2.5vw;
-    margin: 0vh 0vw 0vh 40vw;
+    margin: 0vh 0vw 0vh 35vw;
    float: center;
 }
 
@@ -98,10 +104,12 @@ li {    display: inline-block;
     margin: 0vh 0vw 0vh 30vw;
 }
 #thumbnail{
-    width: 3.5vw;
+    width: 5vw;
+    position: relative;
+    margin: 0% 0% 50% 100%;
     border-style: solid;
-    border-width: .01vw ;
-    border-color:rgb(154, 159, 165);
+    border-width: .1vw ;
+    border-color:rgb(152, 153, 153);
 }
 
 

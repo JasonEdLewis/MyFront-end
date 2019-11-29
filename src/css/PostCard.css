@@ -8,7 +8,7 @@
     border-style:solid;
     border-color: rgb(230, 223, 223) ;
     justify-self: center;
-    background-color:#fff
+    background-color:#fff;
 
 }
 .card-header{
@@ -59,8 +59,8 @@
     .post-thumbnail{
     width: 3vw;
     position: relative;
-    height:4vw ;
-    margin: -7.5% 0% 0% 130% ;
+    height:3vw ;
+    margin: -7.5% 0% 0% 150% ;
     /* background-color: salmon; */
   }
   .img-div {
@@ -120,7 +120,7 @@
    margin: auto;
    position: relative;
    color: black;
-   font-size: 1.25vw;
+   font-size: .75vw;
     /* background-color: coral; */
   }
   .comments-div{
@@ -136,10 +136,9 @@
   }
   
   #off-heart{
-      
       font-size: 1.75rem;
       float: left;
-      margin-left: 5%;
+      margin:-1% 0% 0% 5%;
       color: black;
 
   }
@@ -152,15 +151,16 @@
     font-size: 1.5rem;
       float: left;
       margin-left: 5%;
-      margin-top: 1%;
+      margin-top: -.5%;
   }
   #on-heart:hover{
     text-shadow: -.075vw 0vh rgb(238, 167, 167);
   }
   .pen{
-    font-size: 1.5vw;
+    font-size: 1vw;
     float: left;
-    margin: 1vh 0vw 0vh 1.5vw;
+    margin: 0% 0vw 0vh 1.5vw;
+    position: relative;
     /* color: black; */
     /* background-color: pink; */
   }
@@ -177,7 +177,7 @@
     font-weight: bolder;
     float: right;
     margin-right: 5%;
-    margin-top: 1%;
+    margin-top: 0%;
   }
 #comments-header {
   height: 4vh;
