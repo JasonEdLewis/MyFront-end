@@ -15,7 +15,30 @@
                 'profile-info card  nonfriends'
                 ;
     } 
-
+    .delete-requested{
+        opacity: .25;
+    }
+    .confirm-delete-div{
+        position: absolute;
+        margin:-35% 0% 0% 45%;
+        padding: 1.5%;
+        text-align: center;
+        font-size: 1vw;
+        color:rgb(27, 15, 15);
+        border-style: solid;
+        border-color: rgb(206, 205, 205);
+        border-width: .01vw;
+    }
+.yes-btn{
+margin-right: 5%;
+border-radius: 10%;
+color: green;
+}
+.no-btn{
+    margin-left: 5%;
+    border-radius: 10%;
+    color: red;
+}
     /* NAV STUFF */
 
     .nav-div{
@@ -97,6 +120,17 @@
     border-color:rgba(2, 1, 1, 0.219);
     border-style: solid;
 }
+
+
+.delete-profile-text{
+    position: absolute;
+    margin:-5% 0% 0% 5%;
+    color: blue;
+}
+.dont-show-delete{
+    display: none;
+}
+
 /* PROFILE INFO */
 .profile-pic{
     width: 9vw;

@@ -136,13 +136,14 @@ class HomeContainer extends React.Component {
 
 
   thePost = () => {
-    const { posts, users } = this.props
+    const { posts, users,history } = this.props
     const { comment, showCommentField, editingCaption, likedPosts, postToCommentOn, postRecieveingComment } = this.state
     return posts && posts.length > 0 ? posts.map(post => (
 
       <Postcard
         users={users}
         post={post}
+        history={history}
         commentLen={comment.length}
         toggleCommentField={this.showCommentField}
         commentFieldStatus={showCommentField}

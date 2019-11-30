@@ -102,7 +102,7 @@
       font-weight: 700;
       float: left;
       font-style: italic;
-      margin-left: .5vw;
+      margin: 5vw;
       color: brown;
   }
      .ul-style{
@@ -189,16 +189,22 @@
 }
 .post-caption{
   color:black;
+  margin: 0% 0% 0% 5%;
+  position: relative;
+  background-color: aquamarine;
+  width: 30vw;
 }
 /* .post-caption:hover{
  
 } */
 #edit-caption{
-  display: unset;
-  font-size: xx-small;
+  display: run-in;
+  font-size: .01rem;
+ 
+
 }
 #edit-caption:hover{
-  display: all;
+  background-color: crimson;
 }
   #post-span{
       color:black;
