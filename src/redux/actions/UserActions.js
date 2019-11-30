@@ -1,4 +1,4 @@
-import { USER_REQUEST, USER_SUCCESS, USER_FAILURE, GET_ALL, CREATE_USER, UPDATE_USER, DELETE_USER } from '../actions/types';
+import { USER_REQUEST, USER_SUCCESS, USER_FAILURE, GET_ALL, CREATE_USER, UPDATE_USER, DELETE_USER, FINISHED_REQUESTING } from '../actions/types';
 import axios from 'axios';
 
 
@@ -27,11 +27,21 @@ export const fetchAllUsers = () => async dispatch => {
         return obj
     }
     console.log("User object from fetch all users", usersObj())
-    dispatch({ type: GET_ALL, payload: users.data, usersObj: usersObj() });
+    dispatch({ type: GET_ALL, payload: users.data, usersObj: usersObj(), requested:false });
 
 }
 export const newUser = (info) => dispatch => {
     dispatch({ type: USER_REQUEST })
-    return axios.post('http://localhost:3000/signup', info).then(user => dispatch({ type: CREATE_USER, payload: user.data, requested: true })
+    return axios.post('http://localhost:3000/signup', info).then(user => dispatch({ type: CREATE_USER, payload: user.data, requested: false })
     )
+}
+export const deleteUser = (id) => dispatch => {
+    dispatch({ type: USER_REQUEST })
+    localStorage.clear()
+    return axios.delete(`http://localhost:3000/users/${id}`)
+        .then(dispatch({ type: DELETE_USER, id, requested: false }))
+        .then(dispatch({type:FINISHED_REQUESTING}))
+
+
+
 }
