@@ -37,8 +37,8 @@ class Login extends React.Component {
     fetchLogin(this.state).then(() => {
       if (localStorage.token) {
         fetchUser(localStorage.token)
-          .then(()=> {
-            debugger
+          .then(() => {
+
             localStorage.currentUser && localStorage.token && history.push('/home')
           }
           )

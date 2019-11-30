@@ -11,6 +11,7 @@ class Profile extends Component {
     promiseReturned: false,
     likedPosts: [],
     comment: "",
+    deleteAccountRequested: null,
   }
 
 
@@ -66,12 +67,29 @@ class Profile extends Component {
   handleComment = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
-
+  preDelete=()=>{
+    this.setState( {deleteAccountRequested: true } )
+  }
+  deleteProfile=(id)=>{
+    
+    // confirm("Are you sure you want to delete your account?")
+  }
+confirmDelete=()=>{
+  const {id } = this.props
+  return <div className="confirm-delete-div">
+    <p>Are you sure you want to delete your account?</p>
+    <button className="yes-btn" onClick={()=> this.deleteProfile(id)}>Yes</button>
+    <button className="no-btn" onClick={()=> this.setState( { deleteAccountRequested:false } )}>No</button>
+  </div>
+}
 
   render() {
 
-    const { post, history,pic } = this.props;
+    const { post, history,pic, city, bio, state,id} = this.props;
+    const { deleteAccountRequested} = this.state
+    const dlt = deleteAccountRequested
     const user = localStorage.currentUser
+
     // const { pathname } = this.props.history.location
     // console.log("Pathname:", pathname);
     // this.props.history.location.pathname
@@ -79,7 +97,7 @@ class Profile extends Component {
     console.log("Profile props:", this.props)
     return (
       <div>
-        <div class="parent">
+        <div class={dlt? " parent delete-requested" :"parent"}>
 
           <div className="nav-div">
             <span className="user-gram" onClick={() => history.push('/home')}>{user}'taGram </span>
@@ -94,11 +112,17 @@ class Profile extends Component {
             <span className="dots-edit-profile" onClick={(e) => console.log(e.target.className)}>. . .</span>
           </div>
           <div className="profile-section">
-            <h3 style={{color:"red", fontFamily:"cursive"}}><strong>{user}</strong></h3>
+            <h3 className="hi-im"><strong>Hi I'm {user}</strong></h3>
             <img src={pic} className="profile-pic"/>
             <div>
-          <p style={{color:"red", fontFamily:"cursive"}}> Hi! Im {user} and I'm from {user.city}</p>
+          <p className="bio"><strong>Bio:</strong> {bio}</p>
+          <p><strong className="location">Location:</strong></p>
+          <p className="city-state"><strong></strong> {city}, {state}</p>
+          
+          
+
           </div>
+          
             </div>
 
           <div className="post-cards-div">
@@ -113,6 +137,11 @@ class Profile extends Component {
             </div>
 
         </div>
+      
+      <div>
+      {dlt && this.confirmDelete()}
+      <span onClick={this.preDelete} className={dlt? "dont-show-delete" : "delete-profile-text"}>Delete Profile</span>
+      </div>
       </div>
 
 
@@ -127,6 +156,9 @@ const mapStateToProps = state => {
     user: state.users.username,
     pic: state.users.picture,
     id: state.users.id,
+    bio: state.users.bio,
+    city:state.users.city,
+    state:state.users.state,
     users: state.users.all,
     name: state.users.usersObj
   }
