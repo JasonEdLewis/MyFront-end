@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Navbar, Button, Card } from "react-bootstrap";
 import PostCard from "./components/PostCard";
+import Loader from './components/loader';
 import { connect } from 'react-redux';
 import { getPost, changeLike } from './redux/actions/PostActions';
+import { deleteUser } from './redux/actions/UserActions' 
 import './css/Profile.css';
 import ProfilePostCard from './components/ProfilePostCard'
 
@@ -13,7 +15,10 @@ class Profile extends Component {
     comment: "",
     deleteAccountRequested: null,
   }
-
+componentDidMount() {
+  debugger
+  !localStorage.token && this.props.history.push('/')
+}
 
   handleLike = (id, likes) => {
     const { likedPosts } = this.state
@@ -71,13 +76,20 @@ class Profile extends Component {
     this.setState( {deleteAccountRequested: true } )
   }
   deleteProfile=(id)=>{
-    
-    // confirm("Are you sure you want to delete your account?")
+    localStorage.clear()
+    const { deleteUser, history } = this.props
+    this.setState( {deleteAccountRequested: false } )
+    deleteUser(id)
+     .then(()=> {localStorage.clear()
+      history.push('/')
+     }
+     )
   }
 confirmDelete=()=>{
-  const {id } = this.props
+  const {id,pic } = this.props
   return <div className="confirm-delete-div">
     <p>Are you sure you want to delete your account?</p>
+    {pic && <><img src={pic} className="pic-in-delete-option"/><br/></>}
     <button className="yes-btn" onClick={()=> this.deleteProfile(id)}>Yes</button>
     <button className="no-btn" onClick={()=> this.setState( { deleteAccountRequested:false } )}>No</button>
   </div>
@@ -85,7 +97,7 @@ confirmDelete=()=>{
 
   render() {
 
-    const { post, history,pic, city, bio, state,id} = this.props;
+    const { post, history,pic, city, bio, state,id, requested} = this.props;
     const { deleteAccountRequested} = this.state
     const dlt = deleteAccountRequested
     const user = localStorage.currentUser
@@ -139,6 +151,7 @@ confirmDelete=()=>{
         </div>
       
       <div>
+        {dlt && requested && <Loader/>}
       {dlt && this.confirmDelete()}
       <span onClick={this.preDelete} className={dlt? "dont-show-delete" : "delete-profile-text"}>Delete Profile</span>
       </div>
@@ -160,10 +173,11 @@ const mapStateToProps = state => {
     city:state.users.city,
     state:state.users.state,
     users: state.users.all,
-    name: state.users.usersObj
+    name: state.users.usersObj,
+    requested:state.users.requested
   }
 }
-export default connect(mapStateToProps, { getPost, changeLike })(Profile)
+export default connect(mapStateToProps, { getPost, changeLike, deleteUser  })(Profile)
 {
   /* <Col xs={6} md={4}>
       <Image src="holder.js/171x180" roundedCircle />

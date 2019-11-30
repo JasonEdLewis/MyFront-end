@@ -1,4 +1,4 @@
-import { USER_REQUEST, USER_SUCCESS, USER_FAILURE, CREATE_USER, UPDATE_USER, DELETE_USER, GET_ALL } from '../actions/types'
+import { USER_REQUEST, USER_SUCCESS, USER_FAILURE,  UPDATE_USER, DELETE_USER, GET_ALL } from '../actions/types'
 
 const initialState = {
     all: [],
@@ -20,22 +20,26 @@ export default (state = initialState, action) => {
             return { ...state, requested: true }
 
         case USER_SUCCESS:
-            return { ...state, username: action.payload.username, id: action.payload.id, picture: action.payload.picture, bio: action.payload.bio, city:action.payload.city, state:action.payload.state }
+            return { ...state, username: action.payload.username, id: action.payload.id, picture: action.payload.picture, bio: action.payload.bio, city:action.payload.city, state:action.payload.state, requested:false }
 
         case USER_FAILURE:
             return { ...state, errorMessage: action.payload.message, requested: false }
 
-        case CREATE_USER:
-            return { ...state }
+       
         case UPDATE_USER:
             return { ...state }
         case DELETE_USER:
-            return { ...state }
+            const users = state.all.filter(user => user.id !== action.id)
+            return { ...state,
+                all: users,
+                requested:false
+             }
         case GET_ALL:
             return {
                 ...state,
                 all: action.payload,
-                usersObj: action.usersObj
+                usersObj: action.usersObj,
+                requested:false
 
             }
         default:

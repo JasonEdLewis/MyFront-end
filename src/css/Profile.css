@@ -29,6 +29,14 @@
         border-color: rgb(206, 205, 205);
         border-width: .01vw;
     }
+
+    .pic-in-delete-option{
+        position: relative;
+        background-color: black;
+        width:3vw;
+        height: 7.2vh;
+        margin: -1% 0% 5% 0%;
+    }
 .yes-btn{
 margin-right: 5%;
 border-radius: 10%;
