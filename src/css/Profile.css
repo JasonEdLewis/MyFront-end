@@ -132,8 +132,15 @@ color: green;
 
 .delete-profile-text{
     position: absolute;
-    margin:-5% 0% 0% 5%;
+    margin:-10% 0% 0% 5%;
     color: blue;
+}
+.edit-profile-text{
+    position: absolute;
+    color: green;
+    margin: -12% 0% 0% 5%;
+    font: bolder
+
 }
 .dont-show-delete{
     display: none;
@@ -202,26 +209,13 @@ color: green;
     margin: -7.5% 0% 0% 0%;
     font-family:   'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-.edit-profile-text{
-    position: absolute;
-    color: green;
-    margin: -10% 0% 0% 5%;
-    font: bolder
 
-}
-.edit-profile-form input, textarea{
-    position: absolute;
-    /* margin:0% 0% 0% 45%; */
-    padding: 1.5%;
+.edit-profile-form {
+    position: relative;
+    margin:0% 0% 0% 5%;
     text-align: center;
     font-size: 1vw;
-    color:rgb(27, 15, 15);
-    border-style: solid;
-    border-color: rgb(206, 205, 205);
-    border-width: .01vw;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #000000;
+
 }
 .edit-bio{
     margin: 15%;
