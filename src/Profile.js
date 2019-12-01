@@ -4,7 +4,7 @@ import PostCard from "./components/PostCard";
 import Loader from './components/loader';
 import { connect } from 'react-redux';
 import { getPost, changeLike } from './redux/actions/PostActions';
-import { deleteUser } from './redux/actions/UserActions' 
+import { deleteUser, editUser } from './redux/actions/UserActions' 
 import './css/Profile.css';
 import ProfilePostCard from './components/ProfilePostCard'
 
@@ -14,10 +14,16 @@ class Profile extends Component {
     likedPosts: [],
     comment: "",
     deleteAccountRequested: null,
+    edit:null
   }
 componentDidMount() {
-  debugger
+
   !localStorage.token && this.props.history.push('/')
+  const { getPost, post, changeLike } = this.props
+  getPost()
+
+  post && this.setState({ promiseReturned: true })
+  console.log("Promise ", this.state.promiseReturned)
 }
 
   handleLike = (id, likes) => {
@@ -38,7 +44,7 @@ componentDidMount() {
   }
 
   postCard = () => {
-    const { comment } = this.state
+    const { comment,edit } = this.state
     const { post, user, id,pic,name } = this.props
 
     const { pathname } = this.props.history.location
@@ -61,14 +67,6 @@ componentDidMount() {
 
   };
 
-  componentDidMount() {
-    const { getPost, post, changeLike } = this.props
-    getPost()
-
-    post && this.setState({ promiseReturned: true })
-    console.log("Promise ", this.state.promiseReturned)
-
-  }
   handleComment = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -94,11 +92,37 @@ confirmDelete=()=>{
     <button className="no-btn" onClick={()=> this.setState( { deleteAccountRequested:false } )}>No</button>
   </div>
 }
+needEdit =()=>{
+  this.setState({ edit: !this.state.edit})
+}
+
+editForm =()=>{
+  const { history,pic,bio, state, user, city,email,zip} = this.props;
+  return  (<form className="edit-profile-form">
+      <input value={user} type="text" onChange={this.handleEdit} name="username" placeholder={user}
+            />
+      <input type="file" value={pic} name="picture" onChange={this.handleEdit} placeholder={pic}/>
+
+<input name="email" value={email} onChange={this.handleEdit} placeholder={email} />
+<input name="city" value={city} onChange={this.handleEdit} placeholder={city} />
+<input name="state" value={state} onChange={this.handleEdit} placeholder={state} />
+<input name="zip" value={zip} onChange={this.handleEdit} placeholder={zip} />
+            <br/>
+      <textarea value={bio} type="text" onChange={this.handleEdit} name="bio" placeholder={bio} className="edit-bio"/>
+            
+      
+    </form>)
+}
+handleEdit=(e)=>{
+this.setState({ [e.target.name]: e.targer.value})
+}
+
+
 
   render() {
 
-    const { post, history,pic, city, bio, state,id, requested} = this.props;
-    const { deleteAccountRequested} = this.state
+    const { history,pic, city, bio, state, requested} = this.props;
+    const { deleteAccountRequested, edit} = this.state
     const dlt = deleteAccountRequested
     const user = localStorage.currentUser
 
@@ -112,7 +136,7 @@ confirmDelete=()=>{
         <div class={dlt? " parent delete-requested" :"parent"}>
 
           <div className="nav-div">
-            <span className="user-gram" onClick={() => history.push('/home')}>{user}'taGram </span>
+           <span className="user-gram" onClick={() => history.push('/home')}>{user}'taGram </span> 
             <span className="camera" id={this.state.id} onClick={() => history.push('/home')}> 📸 </span>
             <button
               className="logout-btn"
@@ -124,8 +148,10 @@ confirmDelete=()=>{
             <span className="dots-edit-profile" onClick={(e) => console.log(e.target.className)}>. . .</span>
           </div>
           <div className="profile-section">
-            <h3 className="hi-im"><strong>Hi I'm {user}</strong></h3>
-            <img src={pic} className="profile-pic"/>
+             <h3 className="hi-im"><strong>Hi I'm {user}</strong></h3>
+            <img src={pic} className="profile-pic"/> 
+      
+           
             <div>
           <p className="bio"><strong>Bio:</strong> {bio}</p>
           <p><strong className="location">Location:</strong></p>
@@ -134,6 +160,7 @@ confirmDelete=()=>{
           
 
           </div>
+          {edit && this.editForm()}
           
             </div>
 
@@ -152,6 +179,7 @@ confirmDelete=()=>{
       
       <div>
         {dlt && requested && <Loader/>}
+        <span className="edit-profile-text" onClick={()=> this.needEdit()}>Edit Profile</span>
       {dlt && this.confirmDelete()}
       <span onClick={this.preDelete} className={dlt? "dont-show-delete" : "delete-profile-text"}>Delete Profile</span>
       </div>
@@ -177,7 +205,7 @@ const mapStateToProps = state => {
     requested:state.users.requested
   }
 }
-export default connect(mapStateToProps, { getPost, changeLike, deleteUser  })(Profile)
+export default connect(mapStateToProps, { getPost, changeLike, deleteUser, editUser  })(Profile)
 {
   /* <Col xs={6} md={4}>
       <Image src="holder.js/171x180" roundedCircle />
