@@ -1,9 +1,9 @@
 import { storage } from 'firebase';
 
 
-export const selectedFileHander = (e) => {
-    const image = e.target.files[0]
+ const processFile =(image)=>{
     if (image) {
+      debugger
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
 
     return uploadTask.on('state_changed', (snapshot) => {
@@ -14,12 +14,14 @@ export const selectedFileHander = (e) => {
 
         },
         () => {
-          storage.ref('images').child(image.name).getDownloadURL().then(url => {
-            this.setState({ picture: url })
+         return storage.ref('images').child(image.name).getDownloadURL().then(url => { 
+           return url}
+           )
 
           })
-        })
+      
 
     };
 
   }
+  export default processFile
