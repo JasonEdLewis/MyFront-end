@@ -6,8 +6,6 @@ import Loader from './components/loader';
 import { connect } from 'react-redux';
 import { newUser, fetchUser } from './redux/actions/UserActions'
 
-import axios from 'axios'
-
 class Signup extends React.Component {
   // FROM API username, password, picture: URL ,bio,email,city,state,zip: INTEGER
   state = {
