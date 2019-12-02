@@ -14,7 +14,8 @@ class Profile extends Component {
     likedPosts: [],
     comment: "",
     deleteAccountRequested: null,
-    edit:null
+    edit:true,
+
   }
 componentDidMount() {
 
@@ -97,20 +98,19 @@ needEdit =()=>{
 }
 
 editForm =()=>{
-  const { history,pic,bio, state, user, city,email,zip} = this.props;
+  const { history,pic,bio, state, user, city,email,zip,id} = this.props;
   return  (<form className="edit-profile-form">
-      <input value={user} type="text" onChange={this.handleEdit} name="username" placeholder={user}
-            />
-      <input type="file" value={pic} name="picture" onChange={this.handleEdit} placeholder={pic}/>
-
+  <input value={user} type="text" row="6" cols ="60" onChange={this.handleEdit} name="username" placeholder={user}/>
+      
 <input name="email" value={email} onChange={this.handleEdit} placeholder={email} />
 <input name="city" value={city} onChange={this.handleEdit} placeholder={city} />
 <input name="state" value={state} onChange={this.handleEdit} placeholder={state} />
 <input name="zip" value={zip} onChange={this.handleEdit} placeholder={zip} />
             <br/>
       <textarea value={bio} type="text" onChange={this.handleEdit} name="bio" placeholder={bio} className="edit-bio"/>
+      <input type="file" value={pic} name="picture" onChange={this.handleEdit} placeholder={pic}/>
             
-      
+    <input type="submit" onClick={console.log(id)}/>
     </form>)
 }
 handleEdit=(e)=>{
@@ -133,6 +133,7 @@ this.setState({ [e.target.name]: e.targer.value})
     console.log("Profile props:", this.props)
     return (
       <div>
+       
         <div class={dlt? " parent delete-requested" :"parent"}>
 
           <div className="nav-div">
@@ -147,8 +148,10 @@ this.setState({ [e.target.name]: e.targer.value})
                 </button >
             <span className="dots-edit-profile" onClick={(e) => console.log(e.target.className)}>. . .</span>
           </div>
+         
           <div className="profile-section">
-             <h3 className="hi-im"><strong>Hi I'm {user}</strong></h3>
+          { !edit &&
+            <> <h3 className="hi-im"><strong>Hi I'm {user}</strong></h3>
             <img src={pic} className="profile-pic"/> 
       
            
@@ -160,9 +163,12 @@ this.setState({ [e.target.name]: e.targer.value})
           
 
           </div>
-          {edit && this.editForm()}
-          
+          </>
+          }
+            {edit && this.editForm()}
             </div>
+           
+          
 
           <div className="post-cards-div">
 
@@ -176,6 +182,7 @@ this.setState({ [e.target.name]: e.targer.value})
             </div>
 
         </div>
+  
       
       <div>
         {dlt && requested && <Loader/>}
@@ -198,6 +205,7 @@ const mapStateToProps = state => {
     pic: state.users.picture,
     id: state.users.id,
     bio: state.users.bio,
+    email: state.users.email,
     city:state.users.city,
     state:state.users.state,
     users: state.users.all,
