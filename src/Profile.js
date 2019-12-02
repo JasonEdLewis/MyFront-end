@@ -6,7 +6,10 @@ import { connect } from 'react-redux';
 import { getPost, changeLike } from './redux/actions/PostActions';
 import { deleteUser, editUser } from './redux/actions/UserActions' 
 import './css/Profile.css';
+// import { storage } from 'firebase';
+import placepic from './img/placeHolder.png';
 import ProfilePostCard from './components/ProfilePostCard'
+import fileUploader from './components/FileUploader'
 
 class Profile extends Component {
   state = {
@@ -15,6 +18,14 @@ class Profile extends Component {
     comment: "",
     deleteAccountRequested: null,
     edit:true,
+    file:"",
+    editUser:{
+      username:"",
+      email:"",
+      state:"",
+      city:"",
+      bio:""
+    }
 
   }
 componentDidMount() {
@@ -24,7 +35,7 @@ componentDidMount() {
   getPost()
 
   post && this.setState({ promiseReturned: true })
-  console.log("Promise ", this.state.promiseReturned)
+ 
 }
 
   handleLike = (id, likes) => {
@@ -51,7 +62,7 @@ componentDidMount() {
     const { pathname } = this.props.history.location
     let resultsArr = []
     const myPost = post.filter(p => p.user_id == id)
-    console.log("My Post", myPost)
+  
     return myPost.map(p => <ProfilePostCard
       post={p}
       user={user}
@@ -97,25 +108,42 @@ needEdit =()=>{
   this.setState({ edit: !this.state.edit})
 }
 
+
+handleEdit=(e)=>{
+ 
+this.setState({... this.state,
+  editUser:{
+    [e.target.name]: e.target.value,}
+})
+}
+
+
+selectedFileHander =(e)=>{
+console.log(e.target)
+
+}
+
+
 editForm =()=>{
   const { history,pic,bio, state, user, city,email,zip,id} = this.props;
   return  (<form className="edit-profile-form">
-  <input value={user} type="text" row="6" cols ="60" onChange={this.handleEdit} name="username" placeholder={user}/>
+  <input value={this.state.editUser.username} type="text"  onChange={this.handleEdit} name="username" placeholder={user}/>
       
-<input name="email" value={email} onChange={this.handleEdit} placeholder={email} />
-<input name="city" value={city} onChange={this.handleEdit} placeholder={city} />
+<input name="email" value={this.state.editUser.email} onChange={this.handleEdit} placeholder={email} />
+<input name="city" value={this.state.city} onChange={this.handleEdit} placeholder={city} />
 <input name="state" value={state} onChange={this.handleEdit} placeholder={state} />
 <input name="zip" value={zip} onChange={this.handleEdit} placeholder={zip} />
             <br/>
-      <textarea value={bio} type="text" onChange={this.handleEdit} name="bio" placeholder={bio} className="edit-bio"/>
-      <input type="file" value={pic} name="picture" onChange={this.handleEdit} placeholder={pic}/>
+      <textarea row="12" cols ="20" value={this.state.bio} type="text" onChange={this.handleEdit} name="bio" placeholder={bio} className="edit-bio"/>
+      
+      <input type="file" hidden ref={fileInput => this.fileInput = fileInput} value={this.state.file} name="file" onChange={this.selectedFileHander} />
+      
+      <button onClick={()=> this.fileInput.click()} type="file" >add pic</button>
             
-    <input type="submit" onClick={console.log(id)}/>
+    <input type="submit" onClick={()=> console.log(id)}/>
     </form>)
 }
-handleEdit=(e)=>{
-this.setState({ [e.target.name]: e.targer.value})
-}
+
 
 
 
@@ -130,7 +158,7 @@ this.setState({ [e.target.name]: e.targer.value})
     // console.log("Pathname:", pathname);
     // this.props.history.location.pathname
 
-    console.log("Profile props:", this.props)
+    console.log("Profile state:", this.state.editUser)
     return (
       <div>
        
