@@ -6,10 +6,10 @@ import { connect } from 'react-redux';
 import { getPost, changeLike } from './redux/actions/PostActions';
 import { deleteUser, editUser } from './redux/actions/UserActions'
 import './css/Profile.css';
-// import { storage } from 'firebase';
+import { storage } from './firebase/index';
 import placepic from './img/placeHolder.png';
 import ProfilePostCard from './components/ProfilePostCard';
-import processFile from './components/FileUploader'
+
 
 class Profile extends Component {
   state = {
@@ -21,7 +21,7 @@ class Profile extends Component {
     file: "",
     editUser: {
       username: "",
-      picture:"",
+      picture: "",
       email: "",
       state: "",
       city: "",
@@ -123,17 +123,28 @@ class Profile extends Component {
 
 
   selectedFileHander = (e) => {
-  
     const image = e.target.files[0]
-    debugger
-     processFile(image)
-    .then(url => {
-    this.setState( {...this.state,
-      ...editUser, 
-      picture: url}
+    if (image) {
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
 
-     )
-    })
+      uploadTask.on('state_changed', (snapshot) => {
+
+      },
+        (error) => {
+          console.log(error);
+
+        },
+        () => {
+          storage.ref('images').child(image.name).getDownloadURL().then(url => {
+            this.setState({
+              ...this.state, ...editUser,
+              picture: url
+            })
+
+          })
+        })
+
+    };
 
   }
 
@@ -152,10 +163,10 @@ class Profile extends Component {
         <br />
         <textarea rows="12" cols="20" value={this.state.bio} type="text" onChange={this.handleEdit} name="bio" placeholder={bio} className="edit-bio" />
 
-        <input type="file"  ref={fileInput => this.fileInput = fileInput} onChange={(e)=> this.selectedFileHander(e)}  style={{ display: "none" }} />
+        <input type="file" ref={fileInput => this.fileInput = fileInput} onChange={(e) => this.selectedFileHander(e)} style={{ display: "none" }} />
 
         <div onClick={() => this.fileInput.click()} className="update-pic-div" >
-             update pic
+          update pic
           </div>
 
         <input type="submit" onClick={() => console.log(id)} />
