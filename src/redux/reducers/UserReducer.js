@@ -26,16 +26,17 @@ export default (state = initialState, action) => {
         case USER_FAILURE:
             return { ...state, errorMessage: action.payload.message, requested: false }
 
-       
         case UPDATE_USER:
             debugger
             return { ...state }
+
         case DELETE_USER:
             const users = state.all.filter(user => user.id !== action.id)
             return { ...state,
                 all: users,
                 requested:false
              }
+             
         case GET_ALL:
             return {
                 ...state,
