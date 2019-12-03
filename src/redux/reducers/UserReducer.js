@@ -28,6 +28,7 @@ export default (state = initialState, action) => {
 
        
         case UPDATE_USER:
+            debugger
             return { ...state }
         case DELETE_USER:
             const users = state.all.filter(user => user.id !== action.id)

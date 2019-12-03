@@ -19,14 +19,13 @@ class Profile extends Component {
     deleteAccountRequested: null,
     edit: true,
     file: "",
-    editUser: {
-      username: "",
-      picture: "",
-      email: "",
-      state: "",
-      city: "",
-      bio: ""
-    }
+    username: "",
+    picture: "",
+    email: "",
+    state: "",
+    city: "",
+    bio: ""
+
 
   }
   componentDidMount() {
@@ -112,13 +111,7 @@ class Profile extends Component {
 
 
   handleEdit = (e) => {
-
-    this.setState({
-      ... this.state,
-      editUser: {
-        [e.target.name]: e.target.value,
-      }
-    })
+    this.setState({ [e.target.name]: e.target.value })
   }
 
 
@@ -137,8 +130,9 @@ class Profile extends Component {
         () => {
           storage.ref('images').child(image.name).getDownloadURL().then(url => {
             this.setState({
-              ...this.state, ...editUser,
+              ...this.state,
               picture: url
+
             })
 
           })
@@ -147,16 +141,24 @@ class Profile extends Component {
     };
 
   }
+  submitEdit = () => {
+    const { id, editUser } = this.props
+    const { username, picture, email, state, city, bio } = this.state
+    const info = { username, picture, email, state, city, bio }
+    editUser(id, info)
 
+  }
 
   editForm = () => {
     const { history, pic, bio, state, user, city, email, zip, id } = this.props;
+
+
     return (<>
       <p>Edit Profile Details </p>
       <form className="edit-profile-form">
-        <input value={this.state.editUser.username} type="text" onChange={this.handleEdit} name="username" placeholder={user} />
+        <input value={this.state.username} type="text" onChange={this.handleEdit} name="username" placeholder={user} />
 
-        <input name="email" value={this.state.editUser.email} onChange={this.handleEdit} placeholder={email} />
+        <input name="email" value={this.state.email} onChange={this.handleEdit} placeholder={email} />
         <input name="city" value={this.state.city} onChange={this.handleEdit} placeholder={`City: ex.  ${city}`} />
         <input type="text" name="state" value={this.state.state} onChange={this.handleEdit} placeholder={`State: ex. ${state}`} />
         <input name="zip" value={this.state.zip} onChange={this.handleEdit} placeholder={`zip: ex. ${zip ? zip : '12345'}`} />
@@ -169,7 +171,7 @@ class Profile extends Component {
           update pic
           </div>
 
-        <input type="submit" onClick={() => console.log(id)} />
+        <input type="submit" onClick={this.submitEdit} />
       </form>
     </>
     )
@@ -189,7 +191,7 @@ class Profile extends Component {
     // console.log("Pathname:", pathname);
     // this.props.history.location.pathname
 
-    console.log("Profile state:", this.state.editUser)
+    console.log("Profile state:", this.state)
     return (
       <div>
 

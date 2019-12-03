@@ -35,10 +35,12 @@ export const newUser = (info) => dispatch => {
     return axios.post('http://localhost:3000/signup', info).then(user => dispatch({ type: CREATE_USER, payload: user.data, requested: false })
     )
 }
-export const editUser=(id,info)=> dispatch=>
-{
+export const editUser=(id,info)=> dispatch=>{
+   
     return axios.patch(`http://localhost:3000/users/${id}`, info)
-    .then(user => dispatch( {type:UPDATE_USER, payload:user.data } )   )
+    .then(user => {
+        debugger
+        dispatch( {type:UPDATE_USER, payload:user.data } ) }  )
 }
 export const deleteUser = (id) => dispatch => {
     dispatch({ type: USER_REQUEST })
