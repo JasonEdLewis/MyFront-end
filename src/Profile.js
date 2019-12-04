@@ -3,7 +3,7 @@ import { Navbar, Button, Card } from "react-bootstrap";
 import PostCard from "./components/PostCard";
 import Loader from './components/loader';
 import { connect } from 'react-redux';
-import { getPost, changeLike } from './redux/actions/PostActions';
+import { getPost, changeLike, deletePost } from './redux/actions/PostActions';
 import { deleteUser, editUser } from './redux/actions/UserActions'
 import './css/Profile.css';
 import { storage } from './firebase/index';
@@ -12,19 +12,22 @@ import ProfilePostCard from './components/ProfilePostCard';
 
 
 class Profile extends Component {
+
   state = {
     promiseReturned: false,
     likedPosts: [],
+    show_x: false,
     comment: "",
     deleteAccountRequested: null,
     edit: true,
     file: "",
-    username: "",
-    picture: "",
-    email: "",
-    state: "",
-    city: "",
-    bio: ""
+    username: "" || this.props.user,
+    picture: "" || this.props.pic,
+    email: "" || this.props.email,
+    state: "" || this.props.state,
+    city: "" || this.props.city,
+    bio: "" || this.props.bio,
+    zip:  "" || this.props.zip,
 
 
   }
@@ -56,7 +59,7 @@ class Profile extends Component {
   }
 
   postCard = () => {
-    const { comment, edit } = this.state
+    const { comment, edit, show_x } = this.state
     const { post, user, id, pic, name } = this.props
 
     const { pathname } = this.props.history.location
@@ -74,6 +77,9 @@ class Profile extends Component {
       comment={comment}
       handleLike={this.handleLike}
       likedPosts={this.state.likedPosts}
+      show_x={show_x}
+      active_Delete={this.showDelete_x}
+      deletePost={this.deletePost}
     />)
 
 
@@ -95,6 +101,9 @@ class Profile extends Component {
         history.push('/')
       }
       )
+  }
+  showDelete_x=()=>{
+    this.setState( {show_x: !this.state.show_x } )
   }
   confirmDelete = () => {
     const { id, pic } = this.props
@@ -129,11 +138,7 @@ class Profile extends Component {
         },
         () => {
           storage.ref('images').child(image.name).getDownloadURL().then(url => {
-            this.setState({
-              ...this.state,
-              picture: url
-
-            })
+            this.setState({ picture: url })
 
           })
         })
@@ -145,8 +150,8 @@ class Profile extends Component {
     const { id, editUser } = this.props
     const { username, picture, email, state, city, bio } = this.state
     const info = { username, picture, email, state, city, bio }
-    editUser(id, info)
-      .then(user => {
+    editUser(id, info).then(user => {
+      console.log(user)
         debugger
       })
 
@@ -158,6 +163,10 @@ class Profile extends Component {
 
     return (<>
       <p>Edit Profile Details </p>
+      <img src={!!this.state.picture ? this.state.picture: pic} className="profile-pic" />
+      <div onClick={() => this.fileInput.click()} className="update-pic-div" >
+          update pic
+          </div>
       <form className="edit-profile-form">
         <input value={this.state.username} type="text" onChange={this.handleEdit} name="username" placeholder={user} />
 
@@ -170,9 +179,7 @@ class Profile extends Component {
 
         <input type="file" ref={fileInput => this.fileInput = fileInput} onChange={(e) => this.selectedFileHander(e)} style={{ display: "none" }} />
 
-        <div onClick={() => this.fileInput.click()} className="update-pic-div" >
-          update pic
-          </div>
+       
 
         <input type="submit" onClick={this.submitEdit} />
       </form>
@@ -180,7 +187,9 @@ class Profile extends Component {
     )
   }
 
-
+deletePost=(id)=>{
+  this.props.deletePost(id)
+}
 
 
   render() {
@@ -273,12 +282,13 @@ const mapStateToProps = state => {
     email: state.users.email,
     city: state.users.city,
     state: state.users.state,
+    zip: state.users.zip,
     users: state.users.all,
     name: state.users.usersObj,
     requested: state.users.requested
   }
 }
-export default connect(mapStateToProps, { getPost, changeLike, deleteUser, editUser })(Profile)
+export default connect(mapStateToProps, { getPost, changeLike, deleteUser, editUser, deletePost })(Profile)
 {
   /* <Col xs={6} md={4}>
       <Image src="holder.js/171x180" roundedCircle />

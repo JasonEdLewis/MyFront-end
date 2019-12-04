@@ -23,6 +23,7 @@ export default (state = initialState, action) => {
             }
         case POST_FAILURE:
             return { ...state, success: false, requested: false, errorMessage: action.payload }
+
         case CREATE_POST:
             const newPost = [action.payload, ...state.posts]
             return {
@@ -41,6 +42,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 posts
+            }
+        case DELETE_POST:
+            const remainingPost = state.posts.filter(post => post.id !== action.id)
+            return {...state,
+                posts: remainingPost
             }
 
         // COMMENTS 
