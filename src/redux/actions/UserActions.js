@@ -36,10 +36,11 @@ export const newUser = (info) => dispatch => {
     )
 }
 export const editUser = (id, info) => async dispatch => {
-
+    
     const user = await axios.patch(`http://localhost:3000/users/${id}`, info);
-    debugger;
-    dispatch({ type: UPDATE_USER, payload: user.data });
+    user.then(data => console.log(data)
+    )
+   
 }
 export const deleteUser = (id) => dispatch => {
     dispatch({ type: USER_REQUEST })

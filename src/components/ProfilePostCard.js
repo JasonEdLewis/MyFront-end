@@ -19,13 +19,14 @@ export default function ProfilePostCard(props) {
     post.comments &&  post.comments.map(c => <p><strong>{props.name[c.followee_id +1] || c.followee_id}</strong> : {c.content}</p>)
   }
   console.log("profile post cards props",props)
-  const { post, user, comment, picture, handleLike, likedPosts,pic } = props
+  const { post, user, comment, picture, handleLike, likedPosts,pic, active_Delete, show_x, deletePost } = props
   return (
     <>
       <div className="profile-post-card-div" id={`${post.id}`} onClick={(e) => console.log(e.target.id)}>
         <div id={post.id} className="profile-post-card">
           <div className="profile-card-header">
-
+            {!show_x ? <span className="dots-to-delete" onClick={()=> active_Delete()}>...</span> :
+<span className="delete-post-x" onClick={()=> deletePost(post.id)}>✘</span> }
             {/* REPLACE WITH THE IMAGE ASSOCIATED WITH NAME */}
          
 
