@@ -146,9 +146,9 @@ class Profile extends Component {
     const { username, picture, email, state, city, bio } = this.state
     const info = { username, picture, email, state, city, bio }
     editUser(id, info)
-    .then(user => {
-      debugger
-    })
+      .then(user => {
+        debugger
+      })
 
   }
 
