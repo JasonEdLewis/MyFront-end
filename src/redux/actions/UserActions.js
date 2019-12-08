@@ -35,13 +35,15 @@ export const newUser = (info) => dispatch => {
     return axios.post('http://localhost:3000/signup', info).then(user => dispatch({ type: CREATE_USER, payload: user.data, requested: false })
     )
 }
-export const editUser = (id, info) => async dispatch => {
-    
-    const user = await axios.patch(`http://localhost:3000/users/${id}`, info);
-    user.then(data => console.log(data)
-    )
-   
+export const editUser = (user_id, info) => dispatch => {
+    dispatch( { type: USER_REQUEST } )
+    return axios.patch(`http://localhost:3000/users/${user_id}`, info)
+        .then(data => {
+            dispatch( {type:UPDATE_USER, payload:data.data })
+            console.log(data)
+           })
 }
+
 export const deleteUser = (id) => dispatch => {
     dispatch({ type: USER_REQUEST })
     localStorage.clear()

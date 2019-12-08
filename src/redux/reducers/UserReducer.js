@@ -1,14 +1,15 @@
-import { USER_REQUEST, USER_SUCCESS, USER_FAILURE,  UPDATE_USER, DELETE_USER, GET_ALL } from '../actions/types'
+import { USER_REQUEST, USER_SUCCESS, USER_FAILURE, UPDATE_USER, DELETE_USER, GET_ALL } from '../actions/types'
 
 const initialState = {
     all: [],
-    usersObj:{},
+    usersObj: {},
     username: "",
-    email:"",
+    email: "",
     id: "",
-    bio:"",
-    city:"",
-    state:"",
+    bio: "",
+    city: "",
+    state: "",
+    zip: "",
     picture: "",
     requested: null,
     errorMessage: "",
@@ -21,28 +22,39 @@ export default (state = initialState, action) => {
             return { ...state, requested: true }
 
         case USER_SUCCESS:
-            return { ...state, username: action.payload.username, id: action.payload.id, picture: action.payload.picture, bio: action.payload.bio, city:action.payload.city, state:action.payload.state,email:action.payload.email, requested:false }
+            return { ...state, username: action.payload.username, id: action.payload.id, picture: action.payload.picture, bio: action.payload.bio, city: action.payload.city, state: action.payload.state, email: action.payload.email, requested: false }
 
         case USER_FAILURE:
             return { ...state, errorMessage: action.payload.message, requested: false }
 
         case UPDATE_USER:
             debugger
-            return { ...state }
+            return {
+                ...state,
+                username: action.payload.username,
+                email: action.payload.email,
+                id: action.payload.id,
+                bio: action.payload.bio,
+                city: action.payload.city,
+                state: action.payload.state,
+                zip: action.payload.zip,
+                picture: action.payload.picture
+            }
 
         case DELETE_USER:
             const users = state.all.filter(user => user.id !== action.id)
-            return { ...state,
+            return {
+                ...state,
                 all: users,
-                requested:false
-             }
-             
+                requested: false
+            }
+
         case GET_ALL:
             return {
                 ...state,
                 all: action.payload,
                 usersObj: action.usersObj,
-                requested:false
+                requested: false
 
             }
         default:
