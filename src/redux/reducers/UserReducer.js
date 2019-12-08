@@ -29,6 +29,7 @@ export default (state = initialState, action) => {
 
         case UPDATE_USER:
             debugger
+            const updatedUsers = [action.payload,...state.all]
             return {
                 ...state,
                 username: action.payload.username,
@@ -38,7 +39,8 @@ export default (state = initialState, action) => {
                 city: action.payload.city,
                 state: action.payload.state,
                 zip: action.payload.zip,
-                picture: action.payload.picture
+                picture: action.payload.picture, 
+                all:updatedUsers
             }
 
         case DELETE_USER:

@@ -40,6 +40,7 @@ export const editUser = (user_id, info) => dispatch => {
     return axios.patch(`http://localhost:3000/users/${user_id}`, info)
         .then(data => {
             dispatch( {type:UPDATE_USER, payload:data.data })
+            localStorage.setItem("currentUser", data.data.username)
             console.log(data)
            })
 }

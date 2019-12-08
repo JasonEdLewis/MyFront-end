@@ -123,6 +123,7 @@ color: green;
     text-align: center;
     background-color: rgba(255, 192, 203, 0.137);
     width: 15vw;
+    min-height: 100vh;
     margin-left: 1vw;
     border-width: .01vw;
     border-color:rgba(2, 1, 1, 0.219);
@@ -138,7 +139,7 @@ color: green;
 .edit-profile-text{
     position: absolute;
     color: green;
-    margin: 7.5% 0% 0% -7%;
+    margin: 0% 0% 0% -7%;
     font: bolder
 
 }

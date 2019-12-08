@@ -27,7 +27,7 @@ class Profile extends Component {
     state: "" || this.props.state,
     city: "" || this.props.city,
     bio: "" || this.props.bio,
-    zip:  "" || this.props.zip,
+    zip: "" || this.props.zip,
 
 
   }
@@ -102,8 +102,8 @@ class Profile extends Component {
       }
       )
   }
-  showDelete_x=()=>{
-    this.setState( {show_x: !this.state.show_x } )
+  showDelete_x = () => {
+    this.setState({ show_x: !this.state.show_x })
   }
   confirmDelete = () => {
     const { id, pic } = this.props
@@ -152,8 +152,8 @@ class Profile extends Component {
     const { username, picture, email, state, city, bio } = this.state
     const info = { username, picture, email, state, city, bio }
     editUser(id, info).then(() => {
-     this.state({edit: false})
-      })
+      this.setState({ edit: false })
+    })
 
   }
 
@@ -163,9 +163,9 @@ class Profile extends Component {
 
     return (<>
       <p>Edit Profile Details </p>
-      <img src={!!this.state.picture ? this.state.picture: pic} className="profile-pic" />
+      <img src={!!this.state.picture ? this.state.picture : pic} className="profile-pic" />
       <div onClick={() => this.fileInput.click()} className="update-pic-div" >
-          update pic
+        update pic
           </div>
       <form className="edit-profile-form">
         <input value={this.state.username} type="text" onChange={this.handleEdit} name="username" placeholder={user} />
@@ -179,7 +179,7 @@ class Profile extends Component {
 
         <input type="file" ref={fileInput => this.fileInput = fileInput} onChange={(e) => this.selectedFileHander(e)} style={{ display: "none" }} />
 
-       
+
 
         <input type="submit" onClick={this.submitEdit} />
       </form>
@@ -187,9 +187,9 @@ class Profile extends Component {
     )
   }
 
-deletePost=(id)=>{
-  this.props.deletePost(id)
-}
+  deletePost = (id) => {
+    this.props.deletePost(id)
+  }
 
 
   render() {
