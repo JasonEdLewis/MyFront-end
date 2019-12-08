@@ -6,11 +6,6 @@ import placeholder from '../img/placeHolder.png';
 
 
 
-
-
-
-
-
 export default function ProfilePostCard(props) {
 
 
@@ -27,7 +22,7 @@ export default function ProfilePostCard(props) {
           <div className="profile-card-header">
             {!show_x ? <span className="dots-to-delete" onClick={()=> active_Delete()}>...</span> :
 <span className="delete-post-x" onClick={()=> deletePost(post.id)}>✘</span> }
-            {/* REPLACE WITH THE IMAGE ASSOCIATED WITH NAME */}
+           
          
 
             {/* {areFriends(post.user_id)} */}

@@ -19,7 +19,7 @@ class Profile extends Component {
     show_x: false,
     comment: "",
     deleteAccountRequested: null,
-    edit: true,
+    edit: false,
     file: "",
     username: "" || this.props.user,
     picture: "" || this.props.pic,
@@ -146,13 +146,13 @@ class Profile extends Component {
     };
 
   }
-  submitEdit = () => {
+  submitEdit = (e) => {
+    e.preventDefault()
     const { id, editUser } = this.props
     const { username, picture, email, state, city, bio } = this.state
     const info = { username, picture, email, state, city, bio }
-    editUser(id, info).then(user => {
-      console.log(user)
-        debugger
+    editUser(id, info).then(() => {
+     this.state({edit: false})
       })
 
   }

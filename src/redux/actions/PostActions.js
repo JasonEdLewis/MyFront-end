@@ -29,7 +29,7 @@ export const deletePost =(id) => dispatch =>{
 
 export const editCaption = (id, info) => dispatch => {
     dispatch({ type: REQUESTING })
-    axios.patch(`http://localhost:3000/posts/${id}`, { caption: info })
+  return  axios.patch(`http://localhost:3000/posts/${id}`, { caption: info })
         .then(post => {  console.log(post.data)
    dispatch({ type: EDIT_POST_CAPTION, payload: post.data,id, requested: false })
         }
