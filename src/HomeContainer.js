@@ -45,24 +45,17 @@ class HomeContainer extends React.Component {
   submitComment = (postId) => {
     const { userid, addComment, user, requestedPost } = this.props
     const { userId, comment } = this.state
-    console.log(
-      "Post_id",
-      postId,
-      "User is:",
-      user,
-      "comment: ",
-      this.state.comment
-    );
     const body = {
       post_id: postId,
       content: comment,
       followee_id: userid
     }
-    addComment(body).then(resp =>{ 
-      debugger
-      this.setState({ comment: " ", showCommentField: false })
-    }
-    )
+    addComment(body)
+        this.showCommentField()
+        this.setState({ comment:""})
+      
+    
+    
   };
 
 

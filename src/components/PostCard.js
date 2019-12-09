@@ -23,7 +23,7 @@ const PostCard = props => {
     if (text) {
       return text.map(t => {
         // console.log("comments", t)
-        return (<> <span  id="name-cap">{!!t.followee_id ?
+        return (<><br/> <span  id="name-cap">{!!t.followee_id ?
           `${props.commentors()[t.followee_id.toString()]}:  ` :
           `${props.commentors()[props.userid]}:  `
         }</span><p className='the-content'><strong>
