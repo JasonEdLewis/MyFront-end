@@ -111,7 +111,7 @@ const PostCard = props => {
           src={require("../img/jack.jpg")}
         />  */}
 
-          {areFriends(post.user_id)}
+          {/* {areFriends(post.user_id)} */}
 
           <span className="name-span-style" onClick={() => { console.log(post.user_id) }}>{nameOrpic(post.user_id)}</span>
         </div>
