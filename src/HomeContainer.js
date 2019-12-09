@@ -58,8 +58,11 @@ class HomeContainer extends React.Component {
       content: comment,
       followee_id: userid
     }
-    addComment(body)
-    !requestedPost && this.setState({ comment: " ", showCommentField: false })
+    addComment(body).then(resp =>{ 
+      debugger
+      this.setState({ comment: " ", showCommentField: false })
+    }
+    )
   };
 
 

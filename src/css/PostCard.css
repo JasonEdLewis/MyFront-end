@@ -109,13 +109,25 @@
    
   }
   .li-style{
-   width: 32vw;
-   float: left;
+   max-width: 32vw;
    margin: auto;
    position: relative;
-   color: black;
-   font-size: .75vw;
+  /* background-color: azure; */
+  
     /* background-color: coral; */
+  }
+  .commentor{
+    color: rgb(9, 9, 80);
+    font-size: 1.5vw;
+    margin: 0% 0% 0% 0%;
+    /* background-color: aqua; */
+  }
+  .the-content{
+    max-width: 32vw;
+    float: left;
+    font:bold;
+    color:black;
+    /* background-color: rgb(173, 159, 148); */
   }
   .comments-div{
       width: 32vw;
@@ -183,9 +195,9 @@
 }
 .post-caption{
   color:black;
-  margin: 0% 0% 0% 5%;
+  margin: 0% 10% 0% 0%;
   position: relative;
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
   width: 30vw;
   float: left;
 }
