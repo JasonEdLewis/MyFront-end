@@ -98,13 +98,7 @@
       text-align: left;
 
   }
-  .caption,#name-cap{
-      font-weight: 700;
-      float: left;
-      font-style: italic;
-      margin: 5vw;
-      color: brown;
-  }
+ 
      .ul-style{
     width: 32.5vw;
     /* background-color: yellow; */
@@ -193,6 +187,7 @@
   position: relative;
   background-color: aquamarine;
   width: 30vw;
+  float: left;
 }
 /* .post-caption:hover{
  
@@ -232,3 +227,4 @@
    color: black;
    
   }
+   
