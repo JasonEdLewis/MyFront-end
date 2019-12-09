@@ -7,7 +7,7 @@ const url = 'http://localhost:3000/comments/'
 export const addComment = (info) => dispatch => {
 
   dispatch({ type: REQUESTING })
-  axios.post(url, info)
+ return axios.post(url, info)
     .then(comment => {
 
       dispatch({ type: ADD_COMMENT, submitted: false, payload: comment.data })

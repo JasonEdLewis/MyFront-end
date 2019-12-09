@@ -23,14 +23,14 @@ const PostCard = props => {
     if (text) {
       return text.map(t => {
         // console.log("comments", t)
-        return (<p className='li-style'><strong>
-          {!!t.followee_id ?
-            `${props.commentors()[t.followee_id.toString()]}:  ` :
-            `${props.commentors()[props.userid]}:  `
-          }</strong>{t.content}<span className="delete-x" onClick={() => deleteComment(t)}> ✘ </span></p>);
+        return (<><br/> <span  id="name-cap">{!!t.followee_id ?
+          `${props.commentors()[t.followee_id.toString()]}:  ` :
+          `${props.commentors()[props.userid]}:  `
+        }</span><p className='the-content'><strong>
+         </strong>{ t.content }<span className="delete-x" onClick={() => deleteComment(t)}> ✘ </span></p></>);
       });
     } else {
-      return <h6 style={{ color: "light-grey" }}>Be the first to comment</h6>;
+      return <h6 style={{ color: "black" }}>Be the first to comment</h6>;
     }
   };
 
@@ -105,13 +105,7 @@ const PostCard = props => {
       <div id={post.id} className="post-card">
         <div className="card-header">
 
-          {/* REPLACE WITH THE IMAGE ASSOCIATED WITH NAME
-        <img
-          className="post-thumbnail"
-          src={require("../img/jack.jpg")}
-        />  */}
-
-          {/* {areFriends(post.user_id)} */}
+          {areFriends(post.user_id)}
 
           <span className="name-span-style" onClick={() => { console.log(post.user_id) }}>{nameOrpic(post.user_id)}</span>
         </div>
@@ -133,10 +127,8 @@ const PostCard = props => {
 
           </div>
           <br />
-          <div className='ul-style'>
-
             <p className='post-caption'><span id="name-cap"><strong>{` ${whichUser()}`}:</strong></span> {props.editCapStatus ? editCapInput(post.caption) : post.caption} {props.editCapStatus ? <span id="submit-cap-edit" onClick={() => props.submitCapEdit(post.id)}>  ⬆️ </span> : <span id="edit-caption" onClick={() => props.getCapEditField(post.id)}>🖋</span>} </p>
-
+            <div className='ul-style'>
             {comment()}
           </div>
           {props.yourField === post.id ? <input
