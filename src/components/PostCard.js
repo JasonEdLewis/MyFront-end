@@ -143,7 +143,7 @@ const PostCard = props => {
           <br />
 
           <br />
-          {props.commentLen > 0 && !props.editCapStatus && <span onClick={props.submitComment}
+          {props.commentLen > 0 && !props.editCapStatus &&  <span onClick={props.submitComment}
             id="post-span">
             ⬆️
       </span>}

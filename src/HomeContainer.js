@@ -44,18 +44,14 @@ class HomeContainer extends React.Component {
 
   submitComment = (postId) => {
     const { userid, addComment, user, requestedPost } = this.props
-    const { userId, comment } = this.state
+    const { userId } = this.state
     const body = {
       post_id: postId,
-      content: comment,
+      content: this.state.comment,
       followee_id: userid
     }
     addComment(body)
-        this.showCommentField()
-        this.setState({ comment:""})
-      
-    
-    
+
   };
 
 
@@ -132,7 +128,7 @@ class HomeContainer extends React.Component {
 
 
   thePost = () => {
-    const { posts, users,history } = this.props
+    const { posts, users, history } = this.props
     const { comment, showCommentField, editingCaption, likedPosts, postToCommentOn, postRecieveingComment } = this.state
     return posts && posts.length > 0 ? posts.map(post => (
 
@@ -244,8 +240,8 @@ class HomeContainer extends React.Component {
         <Follows />
         <nav className="Homepage-nav">
           <ul>
-            <li id="jays-gram" onClick={() => this.returnToThePost()}><span >{this.props.user}s'taGram </span> 
-            <p onClick={this.appLogout} className="logout" > logout  </p></li>
+            <li id="jays-gram" onClick={() => this.returnToThePost()}><span >{this.props.user}s'taGram </span>
+              <p onClick={this.appLogout} className="logout" > logout  </p></li>
 
             <li>
               <p className="camera" id={this.state.id} onClick={() => this.setState({ page: "newPost" })}> 📸 </p>
@@ -253,7 +249,7 @@ class HomeContainer extends React.Component {
 
 
             <li className="thumbnail" onClick={() => this.setState({ page: "profile" })}><img src={picture} id='thumbnail' /> </li>
-          
+
           </ul>
         </nav>
 
