@@ -18,6 +18,8 @@ class Profile extends Component {
     likedPosts: [],
     show_x: false,
     comment: "",
+    postToComment:null,
+    postToDelete: null,
     deleteAccountRequested: null,
     edit: false,
     file: "",
@@ -59,11 +61,11 @@ class Profile extends Component {
   }
 
   postCard = () => {
-    const { comment, edit, show_x } = this.state
+    const { comment, edit, show_x, postToComment, postToDelete } = this.state
     const { post, user, id, pic, name } = this.props
 
     const { pathname } = this.props.history.location
-    let resultsArr = []
+   
     const myPost = post.filter(p => p.user_id == id)
 
     return myPost.map(p => <ProfilePostCard
@@ -73,19 +75,27 @@ class Profile extends Component {
       pic={pic}
       id={id}
       path={pathname}
+      post2Comment={this.postToCommentOn}
+      postCommId={postToComment}
       handleComment={this.handleComment}
       comment={comment}
       handleLike={this.handleLike}
       likedPosts={this.state.likedPosts}
       show_x={show_x}
-      active_Delete={this.showDelete_x}
+      setId={this.setIdForPostToBeDeleted}
+      activate_Delete={this.showDelete_x}
+      postToDelete={postToDelete}
       deletePost={this.deletePost}
+
     />)
 
 
   };
-
-  handleComment = (e) => {
+postToCommentOn=(id)=>{
+  this.setState({ postToComment: id})
+}
+  handleComment = (e, id) => {
+   this.postToCommentOn(id)
     this.setState({ [e.target.name]: e.target.value })
   }
   preDelete = () => {
@@ -103,7 +113,16 @@ class Profile extends Component {
       )
   }
   showDelete_x = () => {
-    this.setState({ show_x: !this.state.show_x })
+    this.setState({ show_x: !this.state.show_x})
+  }
+  setIdForPostToBeDeleted=(id)=>{
+    this.setState({postToDelete: id})
+    this.showDelete_x()
+    console.log(this.state.postToDelete)
+  
+  }
+  resetDeleting=()=>{
+    this.setState({postToDelete:null, show_x: false})
   }
   confirmDelete = () => {
     const { id, pic } = this.props
@@ -203,7 +222,7 @@ class Profile extends Component {
     // console.log("Pathname:", pathname);
     // this.props.history.location.pathname
 
-    console.log("Profile state:", this.state)
+    console.log("Profile state:", this.state.postToComment)
     return (
       <div>
 
