@@ -228,6 +228,14 @@ class HomeContainer extends React.Component {
     }
   }
 
+  // FREINDS
+  friends=()=>{
+    const {follows, userid } = this.props
+    const frendsArr = follows.filter(f => f.follower_id === userid)
+   // take friends array and map to users id where user id === followee_id
+  }
+
+
   render() {
     // debugger
     console.log("Home Container props", this.props);
@@ -255,10 +263,19 @@ class HomeContainer extends React.Component {
         </nav>
 
         <div className={!localStorage.token ? "loading " : "Home-Content"}>
-          {}
+       
+           <div className="sugested-friends">
+             <h5>Suggested</h5>
+             </div>
+           <div className="friends">
+             <h5>Friends</h5>
+             {this.friends()}
+             </div>
+     
           {this.pageToRender()}
           {this.state.page !== "newPost" ? <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div> : <></>}
         </div>
+       
       </div>
 
 
@@ -275,7 +292,8 @@ const mapStateToProps = (state) => {
     users: state.users.all,
     posts: state.post.posts,
     requestedPost: state.post.requested,
-    requestedLogin: state.login.requested
+    requestedLogin: state.login.requested,
+    follows: state.follows.follows
   }
 }
 
