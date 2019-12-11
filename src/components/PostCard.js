@@ -79,7 +79,7 @@ const PostCard = props => {
       const theFollow = follows.find(follow => follow.followee_id === postuser && follow.follower_id === userid);
 
       if (postuser === userid) {
-        return ""
+        return <span>⭐️</span>
       }
       else if (theFollow) {
         return (<button id="were-friends" onClick={() => deleteFollow(theFollow.id)}> 🤝</button>)
@@ -96,7 +96,6 @@ const PostCard = props => {
 
 
 
-  console.log("Post card props", props)
 
   return (
 

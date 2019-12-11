@@ -22,7 +22,6 @@ class HomeContainer extends React.Component {
     caption: "",
     likes: 0,
     page: "thePost",
-    editingCaption: false,
     likedPosts: [],
     postRecieveingComment: null,
     requesting: false
@@ -51,6 +50,8 @@ class HomeContainer extends React.Component {
       followee_id: userid
     }
     addComment(body)
+    debugger
+    this.resetCommentLength()
 
   };
 
