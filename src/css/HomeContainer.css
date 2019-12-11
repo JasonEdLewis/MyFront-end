@@ -125,8 +125,23 @@ p {
     margin-right: auto;  
 }
 
-/* .nav-main{
-    flex: row;
-    justify-content: space-between
-} */
+.sugested-friends,  .friends{
+    position: sticky;
+    color: black;
+    display: inline-block;
+    background-color: rgb(231, 235, 227);
+    margin: 5% 0% 5% 0%;
+    min-height: 50vh;
+    width:20vw;
+    border-style: solid;
+    border-width: .1vw
+}
+.sugested-friends{
+    float: left;
+}
+ .friends{
+    
+    float: right;
+  
+} 
 
