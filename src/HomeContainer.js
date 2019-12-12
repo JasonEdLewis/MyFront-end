@@ -230,6 +230,7 @@ class HomeContainer extends React.Component {
 
   // FREINDS
   followeeIds = () => {
+    // EVERYONE WHO IS FOLLOWED
     const foll = this.props.follows.map(f => f.followee_id)
     const followees = [...new Set(foll)] // deletes/ filters duplicates out of arrays
     return followees
@@ -247,11 +248,10 @@ class HomeContainer extends React.Component {
 
   }
   Suggestedfriends = () => {
-    const { createFollow, userid, users } = this.props
+    const { createFollow, userid, users,follows } = this.props
     const allButMe = users.filter(user => user.id !== userid)
-    const usersSinFollowers = users.filter(user => !this.followeeIds().includes(user.id) && allButMe.filter(all => !this.followeeIds().includes(all.id))
-    )
-
+    console.log(allButMe)
+    const usersSinFollowers = allButMe.filter(user => (!this.followeeIds().includes(user.id)) || (this.followeeIds(user.id) && follows.map(f => f.followee_id === user.id && f.follower_id !== userid)) )
     return usersSinFollowers.map(f => <div> <img src={f.picture} className="friends-or-not-image" /> <br /><span className="friends-or-not-name" onClick={() => createFollow(f.id, userid)} id={f.id}>{`Add ${f.username}`}</span></div>)
 
   }
