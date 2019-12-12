@@ -229,20 +229,37 @@ class HomeContainer extends React.Component {
   }
 
   // FREINDS
-  friends=()=>{
-    const {follows, userid } = this.props
-    const frendsArr = follows.filter(f => f.follower_id === userid)
-   // take friends array and map to users id where user id === followee_id
+  followeeIds=()=>{
+   const foll = this.props.follows.map(f => f.followee_id)
+   const followees = [...new Set(foll)]
+   return followees
   }
+  friends = () => {
+    const { follows, userid, users } = this.props
+    const friendsArr = follows.filter(f => f.follower_id == userid)
+    const follweeIds = friendsArr.map( f => f.followee_id )
+   const theFriends = follweeIds.map(f => users.find(user => user.id === f))
+  return theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" /> <br/><span className="friends-or-not-name" >{f.username}</span> </div> )
 
+  }
+  Suggestedfriends = () => {
+    const { follows, userid, users } = this.props
+    const allButMe = users.filter(user => user.id !== userid)
+    const usersSinFollowers = users.filter(user => !this.followeeIds().includes(user.id) && allButMe.filter(all => !this.followeeIds().includes(all.id))
+    )
+
+   return usersSinFollowers.map(f => <div> <img src={f.picture} className="friends-or-not-image" /> <br/><span className="friends-or-not-name" >{f.username}</span> </div> )
+
+  }
 
   render() {
     // debugger
-    console.log("Home Container props", this.props);
+    // console.log("Home Container props", this.props);
 
     const { fposts, user, userId, history, requestedLogin, picture } = this.props;
     const { requesting } = this.state
     this.theUsers()
+    this.followeeIds()
 
     return (
       <div className="Home-Container">
@@ -263,19 +280,20 @@ class HomeContainer extends React.Component {
         </nav>
 
         <div className={!localStorage.token ? "loading " : "Home-Content"}>
-       
-           <div className="sugested-friends">
-             <h5>Suggested</h5>
-             </div>
-           <div className="friends">
-             <h5>Friends</h5>
-             {this.friends()}
-             </div>
-     
+
+          <div className="sugested-friends">
+            <h5>Suggested</h5>
+            {this.Suggestedfriends()}
+          </div>
+          <div className="friends">
+            <h5>Friends</h5>
+            {this.friends()}
+          </div>
+
           {this.pageToRender()}
           {this.state.page !== "newPost" ? <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div> : <></>}
         </div>
-       
+
       </div>
 
 

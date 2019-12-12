@@ -10,19 +10,19 @@ export default function ProfilePostCard(props) {
 
 
   const comments = (post) => {
-  return  post.comments &&  post.comments.map(c => <p><strong>{props.name[c.followee_id] || c.followee_id}</strong> : {c.content}</p>)
+    return post.comments && post.comments.map(c => <p><strong>{props.name[c.followee_id] || c.followee_id}</strong> : {c.content}</p>)
   }
 
-  console.log("Post to delete",props.postToDelete)
-  const { post, user, comment, picture, handleLike, likedPosts,pic, setId, show_x, deletePost,postCommId,postToDelete } = props
+  console.log("Post to delete", props.postToDelete)
+  const { post, user, comment, picture, handleLike, likedPosts, pic, setId, show_x, deletePost, postCommId, postToDelete } = props
   return (
     <>
-      <div className="profile-post-card-div"  onClick={() => setId(post.id)}>
+      <div className="profile-post-card-div" onClick={() => setId(post.id)}>
         <div className="profile-post-card">
           <div className="profile-card-header">
-          {show_x && post.id === postToDelete ? <span className="delete-post-x" onClick={()=> deletePost(post.id)}>✘</span> : <span className="dots-to-delete" onClick={()=> setId(post.id)}>...</span> 
- }
-  <span className="star">⭐️</span>
+            {show_x && post.id === postToDelete ? <span className="delete-post-x" onClick={() => deletePost(post.id)}>✘</span> : <span className="dots-to-delete" onClick={() => setId(post.id)}>...</span>
+            }
+            <span className="star">⭐️</span>
           </div>
 
           <div className="profile-img-div">
@@ -37,20 +37,20 @@ export default function ProfilePostCard(props) {
           <div className="profile-comments-div" id={post.id} onClick={(e) => console.log(post.id)}>
 
             <div id='profile-comments-header'>
-              {likedPosts.includes(post.id) ? <span key={post.id} className="profile-on-heart" onClick={()=> handleLike(post.id, post.likes)} >❤️</span>
+              {likedPosts.includes(post.id) ? <span key={post.id} className="profile-on-heart" onClick={() => handleLike(post.id, post.likes)} >❤️</span>
                 :
-                <span className="profile-off-heart" onClick={()=> handleLike(post.id,post.likes)} key={post.id}>♡</span>}
-            
+                <span className="profile-off-heart" onClick={() => handleLike(post.id, post.likes)} key={post.id}>♡</span>}
+
               <span className="profile-likes" >Likes: {post.likes}</span>
 
             </div>
             <br />
             <div className='profile-ul-style'>
 
-              <p className='profile-post-caption'><span id="profile-name-cap"><strong>{user} : </strong></span> {post.caption} 
-             
-              {/* {'props.editCapStatus ? <span id="profile-submit-cap-edit" onClick={() => console.log("props.submitCapEdit",post.id)}>  ⬆️ </span> : <span id="profile-edit-caption" onClick={() => console.log("props.getCapEditField",post.id)}>🖋</span>'}  */}
-              
+              <p className='profile-post-caption'><span id="profile-name-cap"><strong>{user} : </strong></span> {post.caption}
+
+                {/* {'props.editCapStatus ? <span id="profile-submit-cap-edit" onClick={() => console.log("props.submitCapEdit",post.id)}>  ⬆️ </span> : <span id="profile-edit-caption" onClick={() => console.log("props.getCapEditField",post.id)}>🖋</span>'}  */}
+
               </p>
 
               {comments(post)}
@@ -60,7 +60,7 @@ export default function ProfilePostCard(props) {
               type="text"
               name="comment"
               value={props.caption}
-              onChange={(e)=> props.handleComment(e,post.id)}
+              onChange={(e) => props.handleComment(e, post.id)}
               placeholder="comment"
               className="profile-comment-input"
             />} {comment.length > 0 && postCommId === post.id && <span onClick={props.submitComment}
