@@ -145,4 +145,12 @@ p {
     float: right;
   
 } 
+.friends-or-not-image{
+    width: 5vw;
+    /* height: 7.5vh; */
+}
 
+.friends-or-not-name{
+    font-family: monospace;
+
+}
