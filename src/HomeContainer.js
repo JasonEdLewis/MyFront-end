@@ -236,7 +236,7 @@ class HomeContainer extends React.Component {
     return followees
   }
   theFollow=(ErId,EeId)=>{
-    debugger
+   
    return this.props.follows.find(f => f.follower_id === ErId && f.followee_id === EeId).id
   }
   whoImFollowing=()=>{
@@ -251,13 +251,13 @@ f.follower_id === userid && f.followee_id === u.id ))
  f.follower_id !== userid && f.followee_id === u.id ))
  return peepsImFollowing
   }
+
   friends = () => {
-    const { follows, userid, users } = this.props
+    const { follows, userid, users, deleteFollow } = this.props
     const friendsArr = follows.filter(f => f.follower_id === userid).map( f => f.followee_id )
    const theFriends = friendsArr.map(f => users.find(user => user.id === f))
 
-   
-   return theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid,f.id ))}>{f.username}</span> </div>)
+   return theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid,f.id ), console.log("here"))}>{f.username}</span> </div>)
 
   }
   Suggestedfriends = () => {
