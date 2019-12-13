@@ -250,23 +250,30 @@ f.follower_id === userid && f.followee_id === u.id ))
     const { follows, userid, users } = this.props
     const friendsArr = follows.filter(f => f.follower_id === userid).map( f => f.followee_id )
    const theFriends = friendsArr.map(f => users.find(user => user.id === f))
+
+   console.log("id of Friends:",friendsArr )
   return theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" /> <br/><span className="friends-or-not-name" >{f.username}</span> </div> )
 
   }
   Suggestedfriends = () => {
     const { follows, userid, users } = this.props
     const allButMe = users.filter(user => user.id !== userid)
-    const nonfriendsArr = follows.filter(f => f.follower_id !== userid).map(f => f.followee_id)
-    const friendsArr = follows.filter(f => f.follower_id === userid).map( f => f.followee_id )
+    const nonfriendsArr = follows.filter(f => f.follower_id !== userid).map(f => f.followee_id )
+    const friendsArr = follows.filter(f => f.follower_id === userid).map(f => f.followee_id )
     const usersSinFollowers = allButMe.filter( u => !this.followeeIds().includes(u.id))
     const nonFollowers = allButMe.filter(u => nonfriendsArr.includes(u.id) && !friendsArr.includes(u.id) )
+    const tempArr = [...nonFollowers, ...usersSinFollowers]
+    const whoImNotFollowing = [...new Set(tempArr)]
 
+    
+
+    console.log("Userid :",userid)
     console.log("Id's of those im not following:",nonfriendsArr )
     console.log("users Im not following:",nonFollowers)
     console.log("users sin Followers:", usersSinFollowers)
    
 
-  //  return usersSinFollowers.map(f => <div> <img src={f.picture} className="friends-or-not-image" /> <br/><span className="friends-or-not-name" >{f.username}</span> </div> )
+   return whoImNotFollowing.map(f => <div> <img src={f.picture} className="friends-or-not-image" /> <br/><span className="friends-or-not-name" >{f.username}</span> </div> )
 
   }
 
