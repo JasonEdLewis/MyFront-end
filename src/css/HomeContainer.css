@@ -147,10 +147,22 @@ p {
 } 
 .friends-or-not-image{
     width: 5vw;
-    /* height: 7.5vh; */
+   margin:2.5%;
 }
 
 .friends-or-not-name{
+    margin-top: 10%;
     font-family: monospace;
+    width: 10vw;
+    padding: 1%;
+   
+
+}
+.friends-or-not-name:hover{
+    border-style: solid;
+    border-color: rgb(28, 29, 28);
+    border-width:.02vw;
+    border-radius: 10%;
+    background-color: rgb(195, 207, 207);
 
 }
