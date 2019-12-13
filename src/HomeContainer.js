@@ -3,7 +3,7 @@ import "./css/HomeContainer.css";
 import Postcard from "./components/PostCard";
 import NewPostCard from "./components/NewPostCard";
 import Follows from './components/Follows';
-import { getFollows } from './redux/actions/FollowActions';
+import { getFollows, createFollow, deleteFollow } from './redux/actions/FollowActions';
 import { connect } from 'react-redux';
 import { getPost, editCaption } from './redux/actions/PostActions';
 import { fetchUser, fetchAllUsers } from './redux/actions/UserActions';
@@ -229,10 +229,15 @@ class HomeContainer extends React.Component {
   }
 
   // FREINDS
-  followeeIds=()=>{
-   const foll = this.props.follows.map(f => f.followee_id)
-   const followees = [...new Set(foll)]
-   return followees
+  followeeIds = () => {
+    // EVERYONE WHO IS FOLLOWED
+    const foll = this.props.follows.map(f => f.followee_id)
+    const followees = [...new Set(foll)] // deletes/ filters duplicates out of arrays
+    return followees
+  }
+  theFollow=(ErId,EeId)=>{
+    debugger
+   return this.props.follows.find(f => f.follower_id === ErId && f.followee_id === EeId).id
   }
   whoImFollowing=()=>{
     const {follows, userid,users } = this.props
@@ -251,12 +256,12 @@ f.follower_id === userid && f.followee_id === u.id ))
     const friendsArr = follows.filter(f => f.follower_id === userid).map( f => f.followee_id )
    const theFriends = friendsArr.map(f => users.find(user => user.id === f))
 
-   console.log("id of Friends:",friendsArr )
-  return theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" /> <br/><span className="friends-or-not-name" >{f.username}</span> </div> )
+   
+   return theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid,f.id ))}>{f.username}</span> </div>)
 
   }
   Suggestedfriends = () => {
-    const { follows, userid, users } = this.props
+    const { createFollow, userid, users,follows } = this.props
     const allButMe = users.filter(user => user.id !== userid)
     const nonfriendsArr = follows.filter(f => f.follower_id !== userid).map(f => f.followee_id )
     const friendsArr = follows.filter(f => f.follower_id === userid).map(f => f.followee_id )
@@ -265,15 +270,9 @@ f.follower_id === userid && f.followee_id === u.id ))
     const tempArr = [...nonFollowers, ...usersSinFollowers]
     const whoImNotFollowing = [...new Set(tempArr)]
 
-    
-
-    console.log("Userid :",userid)
-    console.log("Id's of those im not following:",nonfriendsArr )
-    console.log("users Im not following:",nonFollowers)
-    console.log("users sin Followers:", usersSinFollowers)
    
 
-   return whoImNotFollowing.map(f => <div> <img src={f.picture} className="friends-or-not-image" /> <br/><span className="friends-or-not-name" >{f.username}</span> </div> )
+   return whoImNotFollowing.map(f => <div> <img src={f.picture} className="friends-or-not-image" /> <br/><span className="friends-or-not-name" onClick={() => createFollow(f.id, userid)} id={f.id}>{`Add ${f.username}`}</span></div>)
 
   }
 
@@ -341,6 +340,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getFollows, getPost, fetchAllUsers, fetchUser, addComment, editCaption, changeLike, logout, notRequesting, deleteComment })(HomeContainer);
+export default connect(mapStateToProps, { getFollows, getPost, fetchAllUsers, fetchUser, addComment, editCaption, changeLike, logout, notRequesting, deleteComment, createFollow, deleteFollow })(HomeContainer);
 
 
