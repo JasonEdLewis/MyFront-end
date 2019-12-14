@@ -13,7 +13,7 @@ export default function ProfilePostCard(props) {
     return post.comments && post.comments.map(c => <p><strong>{props.name[c.followee_id] || c.followee_id}</strong> : {c.content}</p>)
   }
 
-  console.log("Post to delete", props.postToDelete)
+  console.log("Post to delete", props)
   const { post, user, comment, picture, handleLike, likedPosts, pic, setId, show_x, deletePost, postCommId, postToDelete } = props
   return (
     <>
