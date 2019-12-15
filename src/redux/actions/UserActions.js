@@ -8,7 +8,7 @@ export const fetchAllUsers = () => async dispatch => {
         users.data.forEach(user => obj[user.id] = user.username)
         return obj
     }
-    console.log("User object from fetch all users", usersObj())
+    
     dispatch({ type: GET_ALL, payload: users.data, usersObj: usersObj(), requested: false });
 
 }

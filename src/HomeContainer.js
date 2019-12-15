@@ -1,4 +1,5 @@
 import React from "react";
+import { match } from 'react'
 import "./css/HomeContainer.css";
 import Postcard from "./components/PostCard";
 import NewPostCard from "./components/NewPostCard";
@@ -10,6 +11,7 @@ import { fetchUser, fetchAllUsers } from './redux/actions/UserActions';
 import { addComment, deleteComment } from './redux/actions/CommentsActions';
 import { changeLike } from './redux/actions/PostActions';
 import { logout, notRequesting } from './redux/actions/LoginActions';
+import ProfileCard from './components/ProfilePostCard'
 import Loader from './components/loader';
 
 
@@ -24,7 +26,8 @@ class HomeContainer extends React.Component {
     page: "thePost",
     likedPosts: [],
     postRecieveingComment: null,
-    requesting: false
+    requesting: false,
+    showingUserId: 0,
 
 
   };
@@ -193,7 +196,7 @@ class HomeContainer extends React.Component {
   };
 
   pageToRender = () => {
-
+    const {showingUserId } = this.state
     switch (this.state.page) {
       case "thePost":
         return this.thePost()
@@ -201,7 +204,26 @@ class HomeContainer extends React.Component {
         return this.theNewPostCard()
       case "profile":
         return this.myProfile()
+      case "show one":
+        return this.showOneUser(showingUserId)
     }
+  }
+
+  showOneUser = (id) => {
+    this.setState( { showingUserId: id, page:"show one" })
+    const { users, posts } = this.props
+   const theId = users.find(user => user.id === id).id
+   const userPost = posts.filter(post => post.user_id === theId)
+//  return userPost.map(p =>  <ProfileCard 
+//           post={p}
+//           user={p.user_id}
+//           name={p.username}
+//           pic={p.pic}
+//           id={p.id}
+//               />
+//  )
+ 
+    
   }
 
   // LOGOUT //
@@ -235,44 +257,48 @@ class HomeContainer extends React.Component {
     const followees = [...new Set(foll)] // deletes/ filters duplicates out of arrays
     return followees
   }
-  theFollow=(ErId,EeId)=>{
-    debugger
-   return this.props.follows.find(f => f.follower_id === ErId && f.followee_id === EeId).id
-  }
-  whoImFollowing=()=>{
-    const {follows, userid,users } = this.props
-   const peepsImFollowing = users.filter(u => follows.filter(f => 
-f.follower_id === userid && f.followee_id === u.id ))
-   return peepsImFollowing
-  }
-  whoImNotFollowing=()=>{
-    const {follows, userid,users } = this.props
-    const peepsImFollowing = users.filter(u => follows.map(f => 
- f.follower_id !== userid && f.followee_id === u.id ))
- return peepsImFollowing
-  }
-  friends = () => {
-    const { follows, userid, users } = this.props
-    const friendsArr = follows.filter(f => f.follower_id === userid).map( f => f.followee_id )
-   const theFriends = friendsArr.map(f => users.find(user => user.id === f))
+  theFollow = (ErId, EeId) => {
 
-   
-   return theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid,f.id ))}>{f.username}</span> </div>)
+    return this.props.follows.find(f => f.follower_id === ErId && f.followee_id === EeId).id
+  }
+  whoImFollowing = () => {
+    const { follows, userid, users } = this.props
+    const peepsImFollowing = users.filter(u => follows.filter(f =>
+      f.follower_id === userid && f.followee_id === u.id))
+    return peepsImFollowing
+  }
+  whoImNotFollowing = () => {
+    const { follows, userid, users } = this.props
+    const peepsImFollowing = users.filter(u => follows.map(f =>
+      f.follower_id !== userid && f.followee_id === u.id))
+    return peepsImFollowing
+  }
+
+  friends = () => {
+    const { follows, userid, users, deleteFollow } = this.props
+    const friendsArr = follows.filter(f => f.follower_id === userid).map(f => f.followee_id)
+    const theFriends = friendsArr.map(f => users.find(user => user.id === f))
+
+    return theFriends.length > 0 ? theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => this.showOneUser(f.id)} /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid, f.id))}>{`${f.username} 𝚡`}</span> </div>) : <div className="make-some-friends">
+      <p > Welcome!!</p>
+      <p> Make Some New Friends </p>
+      <p>⬅️ ⬅️</p>
+    </div>
 
   }
   Suggestedfriends = () => {
-    const { createFollow, userid, users,follows } = this.props
+    const { createFollow, userid, users, follows } = this.props
     const allButMe = users.filter(user => user.id !== userid)
-    const nonfriendsArr = follows.filter(f => f.follower_id !== userid).map(f => f.followee_id )
-    const friendsArr = follows.filter(f => f.follower_id === userid).map(f => f.followee_id )
-    const usersSinFollowers = allButMe.filter( u => !this.followeeIds().includes(u.id))
-    const nonFollowers = allButMe.filter(u => nonfriendsArr.includes(u.id) && !friendsArr.includes(u.id) )
+    const nonfriendsArr = follows.filter(f => f.follower_id !== userid).map(f => f.followee_id)
+    const friendsArr = follows.filter(f => f.follower_id === userid).map(f => f.followee_id)
+    const usersSinFollowers = allButMe.filter(u => !this.followeeIds().includes(u.id))
+    const nonFollowers = allButMe.filter(u => nonfriendsArr.includes(u.id) && !friendsArr.includes(u.id))
     const tempArr = [...nonFollowers, ...usersSinFollowers]
     const whoImNotFollowing = [...new Set(tempArr)]
 
-   
 
-   return whoImNotFollowing.map(f => <div> <img src={f.picture} className="friends-or-not-image" /> <br/><span className="friends-or-not-name" onClick={() => createFollow(f.id, userid)} id={f.id}>{`Add ${f.username}`}</span></div>)
+
+    return whoImNotFollowing.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => this.showOneUser(f.id)} /> <br /><span className="friends-or-not-name" onClick={() => createFollow(f.id, userid)} id={f.id}>{` ${f.username} ✓`}</span></div>)
 
   }
 
@@ -307,11 +333,12 @@ f.follower_id === userid && f.followee_id === u.id ))
         <div className={!localStorage.token ? "loading " : "Home-Content"}>
 
           <div className="sugested-friends">
-            <h4 style={{fontFamily:"monospace"}}> Suggested</h4>
+            <span className="friends-and-suggested-headers"> Suggested</span>
             {this.Suggestedfriends()}
           </div>
+
           <div className="friends">
-            <h4 style={{fontFamily:"monospace"}}>Friends</h4>
+            <span className="friends-and-suggested-headers">Friends</span>
             {this.friends()}
           </div>
 
