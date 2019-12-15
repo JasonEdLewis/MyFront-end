@@ -28,7 +28,7 @@ class HomeContainer extends React.Component {
     likedPosts: [],
     postRecieveingComment: null,
     requesting: false,
-    showingUserId: 0,
+    showingUserId: null,
 
 
   };
@@ -210,23 +210,31 @@ class HomeContainer extends React.Component {
     }
   }
 
+  startShowingOneUser=(id)=>{
+      this.setState( { showingUserId: id, page:"show one"})
+  }
   showOneUser = (id) => {
-    this.setState({ showingUserId: id, page: "show one" })
-    const { users, posts } = this.props
-    const { likedPosts } = this.state
+    const { users, posts,name } = this.props
     const theId = users.find(user => user.id === id).id
     const userPost = posts.filter(post => post.user_id === theId)
-    // return userPost.map(p => <ProfileCard
-    //   post={p}
-    //   user={p.user_id}
-    //   name={p.username}
-    //   pic={p.pic}
-    //   id={p.id}
-    //   likedPosts={likedPosts}
-    // />
-    // )
+  return this.showOneUsersPost(userPost)
 
 
+  }
+  showOneUsersPost=(post)=>{
+    const { likedPosts, comment } = this.state
+    const {name } = this.props
+    debugger
+    return post.map(p => <ProfileCard
+      post={p}
+      user={p.user_id}
+      name={name}
+      pic={p.pic}
+      id={p.id}
+      likedPosts={likedPosts}
+      comment={comment}
+    />
+    )
   }
 
   // LOGOUT //
@@ -282,8 +290,11 @@ class HomeContainer extends React.Component {
     const friendsArr = follows.filter(f => f.follower_id === userid).map(f => f.followee_id)
 
     const theFriends = friendsArr.map(f => users.find(user => user.id === f))
-    debugger
-    return (!theFriends[0] === undefined || theFriends.length > 0 ? theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => this.showOneUser(f.id)} /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid, f.id))}>{`${f.username} 𝚡`}</span> </div>) : <div className="make-some-friends">
+ 
+    return (!theFriends[0] === undefined || theFriends.length > 0 ? theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => {
+      
+      this.startShowingOneUser(f.id)
+      }} /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid, f.id))}>{`${f.username} 𝚡`}</span> </div>) : <div className="make-some-friends">
       <p > Welcome!!</p>
       <p> Make Some New Friends </p>
       <p>⬅️ ⬅️</p>
@@ -367,7 +378,8 @@ const mapStateToProps = (state) => {
     posts: state.post.posts,
     requestedPost: state.post.requested,
     requestedLogin: state.login.requested,
-    follows: state.follows.follows
+    follows: state.follows.follows,
+    name: state.users.usersObj,
   }
 }
 
