@@ -15,6 +15,7 @@ import ProfileCard from './components/ProfilePostCard'
 import Loader from './components/loader';
 
 
+
 class HomeContainer extends React.Component {
   state = {
     showCommentField: false,
@@ -196,7 +197,7 @@ class HomeContainer extends React.Component {
   };
 
   pageToRender = () => {
-    const {showingUserId } = this.state
+    const { showingUserId } = this.state
     switch (this.state.page) {
       case "thePost":
         return this.thePost()
@@ -210,20 +211,22 @@ class HomeContainer extends React.Component {
   }
 
   showOneUser = (id) => {
-    this.setState( { showingUserId: id, page:"show one" })
+    this.setState({ showingUserId: id, page: "show one" })
     const { users, posts } = this.props
-   const theId = users.find(user => user.id === id).id
-   const userPost = posts.filter(post => post.user_id === theId)
-//  return userPost.map(p =>  <ProfileCard 
-//           post={p}
-//           user={p.user_id}
-//           name={p.username}
-//           pic={p.pic}
-//           id={p.id}
-//               />
-//  )
- 
-    
+    const { likedPosts } = this.state
+    const theId = users.find(user => user.id === id).id
+    const userPost = posts.filter(post => post.user_id === theId)
+    // return userPost.map(p => <ProfileCard
+    //   post={p}
+    //   user={p.user_id}
+    //   name={p.username}
+    //   pic={p.pic}
+    //   id={p.id}
+    //   likedPosts={likedPosts}
+    // />
+    // )
+
+
   }
 
   // LOGOUT //
@@ -277,13 +280,14 @@ class HomeContainer extends React.Component {
   friends = () => {
     const { follows, userid, users, deleteFollow } = this.props
     const friendsArr = follows.filter(f => f.follower_id === userid).map(f => f.followee_id)
-    const theFriends = friendsArr.map(f => users.find(user => user.id === f))
 
-    return theFriends.length > 0 ? theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => this.showOneUser(f.id)} /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid, f.id))}>{`${f.username} 𝚡`}</span> </div>) : <div className="make-some-friends">
+    const theFriends = friendsArr.map(f => users.find(user => user.id === f))
+    debugger
+    return (!theFriends[0] === undefined || theFriends.length > 0 ? theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => this.showOneUser(f.id)} /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid, f.id))}>{`${f.username} 𝚡`}</span> </div>) : <div className="make-some-friends">
       <p > Welcome!!</p>
       <p> Make Some New Friends </p>
       <p>⬅️ ⬅️</p>
-    </div>
+    </div>)
 
   }
   Suggestedfriends = () => {

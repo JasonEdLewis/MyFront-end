@@ -30,8 +30,10 @@ class App extends React.Component {
     console.log("App MOUNTED") 
     if (!localStorage.token ){
       this.redirect("/");
+      debugger
     }
     else{
+      debugger
       getPost(); fetchAllUsers() ; getFollows()
       
     }
