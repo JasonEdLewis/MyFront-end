@@ -29,6 +29,7 @@ class HomeContainer extends React.Component {
     postRecieveingComment: null,
     requesting: false,
     showingUserId: null,
+    showingOne: false
 
 
   };
@@ -186,7 +187,7 @@ class HomeContainer extends React.Component {
 
 
   returnToThePost = () => {
-    this.setState({ page: "thePost" })
+    this.setState({ page: "thePost", showingOne: false })
   }
 
 
@@ -210,21 +211,22 @@ class HomeContainer extends React.Component {
     }
   }
 
-  startShowingOneUser=(id)=>{
-      this.setState( { showingUserId: id, page:"show one"})
+  startShowingOneUser = (id) => {
+    this.setState({ showingUserId: id, page: "show one", showingOne:true })
   }
   showOneUser = (id) => {
-    const { users, posts,name } = this.props
+    const { users, posts, name } = this.props
     const theId = users.find(user => user.id === id).id
     const userPost = posts.filter(post => post.user_id === theId)
-  return this.showOneUsersPost(userPost)
+    return this.showOneUsersPost(userPost)
 
 
   }
-  showOneUsersPost=(post)=>{
+  showOneUsersPost = (post) => {
     const { likedPosts, comment } = this.state
-    const {name } = this.props
+    const { name } = this.props
     debugger
+
     return post.map(p => <ProfileCard
       post={p}
       user={p.user_id}
@@ -290,15 +292,15 @@ class HomeContainer extends React.Component {
     const friendsArr = follows.filter(f => f.follower_id === userid).map(f => f.followee_id)
 
     const theFriends = friendsArr.map(f => users.find(user => user.id === f))
- 
+
     return (!theFriends[0] === undefined || theFriends.length > 0 ? theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => {
-      
+
       this.startShowingOneUser(f.id)
-      }} /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid, f.id))}>{`${f.username} 𝚡`}</span> </div>) : <div className="make-some-friends">
-      <p > Welcome!!</p>
-      <p> Make Some New Friends </p>
-      <p>⬅️ ⬅️</p>
-    </div>)
+    }} /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid, f.id))}>{`${f.username} 𝚡`}</span> </div>) : <div className="make-some-friends">
+        <p > Welcome!!</p>
+        <p> Make Some New Friends </p>
+        <p>⬅️ ⬅️</p>
+      </div>)
 
   }
   Suggestedfriends = () => {
@@ -313,7 +315,10 @@ class HomeContainer extends React.Component {
 
 
 
-    return whoImNotFollowing.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => this.showOneUser(f.id)} /> <br /><span className="friends-or-not-name" onClick={() => createFollow(f.id, userid)} id={f.id}>{` ${f.username} ✓`}</span></div>)
+    return whoImNotFollowing.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => {
+
+      this.startShowingOneUser(f.id)
+    }}  /> <br /><span className="friends-or-not-name" onClick={() => createFollow(f.id, userid)} id={f.id}>{` ${f.username} ✓`}</span></div>)
 
   }
 
@@ -322,7 +327,7 @@ class HomeContainer extends React.Component {
     // console.log("Home Container props", this.props);
 
     const { fposts, user, userId, history, requestedLogin, picture } = this.props;
-    const { requesting } = this.state
+    const {showingOne} = this.state
     this.theUsers()
     this.followeeIds()
     this.whoImFollowing()
@@ -348,14 +353,14 @@ class HomeContainer extends React.Component {
         <div className={!localStorage.token ? "loading " : "Home-Content"}>
 
           <div className="sugested-friends">
-            <span className="friends-and-suggested-headers"> Suggested</span>
-            {this.Suggestedfriends()}
+        {!showingOne ? <span className="friends-and-suggested-headers"> Suggested</span> : null}
+            {!showingOne ? this.Suggestedfriends() : null}
           </div>
 
-          <div className="friends">
+         { !showingOne ? <div className="friends">
             <span className="friends-and-suggested-headers">Friends</span>
             {this.friends()}
-          </div>
+          </div> : null}
 
           {this.pageToRender()}
           {this.state.page !== "newPost" ? <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div> : <></>}
