@@ -13,6 +13,7 @@ import { changeLike } from './redux/actions/PostActions';
 import { logout, notRequesting } from './redux/actions/LoginActions';
 import ProfileCard from './components/ProfilePostCard'
 import Loader from './components/loader';
+import Bio from './components/UserBio'
 
 
 
@@ -29,7 +30,8 @@ class HomeContainer extends React.Component {
     postRecieveingComment: null,
     requesting: false,
     showingUserId: null,
-    showingOne: false
+    showingOne: false,
+    showOneBio: false
 
 
   };
@@ -212,20 +214,22 @@ class HomeContainer extends React.Component {
   }
 
   startShowingOneUser = (id) => {
-    this.setState({ showingUserId: id, page: "show one", showingOne:true })
+    this.setState({ showingUserId: id, page: "show one", showingOne: true })
   }
   showOneUser = (id) => {
     const { users, posts, name } = this.props
-    const theId = users.find(user => user.id === id).id
-    const userPost = posts.filter(post => post.user_id === theId)
-    return this.showOneUsersPost(userPost)
+    const theUser = users.find(user => user.id === id)
+    console.log("The one user stuff:", theUser)
+    const userPost = posts.filter(post => post.user_id === theUser.id)
+
+    return (this.showOneUsersPost(userPost))
 
 
   }
   showOneUsersPost = (post) => {
     const { likedPosts, comment } = this.state
     const { name } = this.props
-    debugger
+
 
     return post.map(p => <ProfileCard
       post={p}
@@ -237,6 +241,22 @@ class HomeContainer extends React.Component {
       comment={comment}
     />
     )
+  }
+  showOneUserBio = () => {
+    const { users } = this.props
+    const { showingUserId } = this.state
+    const theUser = users.find(user => user.id === showingUserId)
+    debugger
+    return <Bio
+      user={theUser.username}
+      pic={theUser.picture}
+      bio={theUser.bio}
+      city={theUser.city}
+      state={theUser.state}
+
+
+    />
+
   }
 
   // LOGOUT //
@@ -293,10 +313,8 @@ class HomeContainer extends React.Component {
 
     const theFriends = friendsArr.map(f => users.find(user => user.id === f))
 
-    return (!theFriends[0] === undefined || theFriends.length > 0 ? theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => {
-
-      this.startShowingOneUser(f.id)
-    }} /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid, f.id))}>{`${f.username} 𝚡`}</span> </div>) : <div className="make-some-friends">
+    return (!theFriends[0] === undefined || theFriends.length > 0 ? theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => this.startShowingOneUser(f.id)
+    } /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid, f.id))}>{`${f.username} 𝚡`}</span> </div>) : <div className="make-some-friends">
         <p > Welcome!!</p>
         <p> Make Some New Friends </p>
         <p>⬅️ ⬅️</p>
@@ -318,7 +336,7 @@ class HomeContainer extends React.Component {
     return whoImNotFollowing.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => {
 
       this.startShowingOneUser(f.id)
-    }}  /> <br /><span className="friends-or-not-name" onClick={() => createFollow(f.id, userid)} id={f.id}>{` ${f.username} ✓`}</span></div>)
+    }} /> <br /><span className="friends-or-not-name" onClick={() => createFollow(f.id, userid)} id={f.id}>{` ${f.username} ✓`}</span></div>)
 
   }
 
@@ -327,7 +345,7 @@ class HomeContainer extends React.Component {
     // console.log("Home Container props", this.props);
 
     const { fposts, user, userId, history, requestedLogin, picture } = this.props;
-    const {showingOne} = this.state
+    const { showingOne, showingUserId } = this.state
     this.theUsers()
     this.followeeIds()
     this.whoImFollowing()
@@ -353,14 +371,14 @@ class HomeContainer extends React.Component {
         <div className={!localStorage.token ? "loading " : "Home-Content"}>
 
           <div className="sugested-friends">
-        {!showingOne ? <span className="friends-and-suggested-headers"> Suggested</span> : null}
-            {!showingOne ? this.Suggestedfriends() : null}
+            {!showingOne ? <span className="friends-and-suggested-headers"> Suggested</span> : null}
+            {!showingOne ? this.Suggestedfriends() : this.showOneUserBio()}
           </div>
 
-         { !showingOne ? <div className="friends">
+          {!showingOne ? <div className="friends">
             <span className="friends-and-suggested-headers">Friends</span>
             {this.friends()}
-          </div> : null}
+          </div> : this.showOneUserBio()}
 
           {this.pageToRender()}
           {this.state.page !== "newPost" ? <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div> : <></>}
