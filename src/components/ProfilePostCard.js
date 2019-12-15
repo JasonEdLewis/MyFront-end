@@ -13,8 +13,8 @@ export default function ProfilePostCard(props) {
     return post.comments && post.comments.map(c => <p><strong>{props.name[c.followee_id] || c.followee_id}</strong> : {c.content}</p>)
   }
 
-  console.log("Post to delete", props)
-  const { post, user, comment, picture, handleLike, likedPosts, pic, setId, show_x, deletePost, postCommId, postToDelete } = props
+  console.log("Props from HomeContainer:", props)
+  const { post, user, comment, picture, handleLike, likedPosts, pic, setId, show_x, deletePost, postCommId, postToDelete, id } = props
   return (
     <>
       <div className="profile-post-card-div" onClick={() => setId(post.id)}>

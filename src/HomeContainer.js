@@ -13,6 +13,8 @@ import { changeLike } from './redux/actions/PostActions';
 import { logout, notRequesting } from './redux/actions/LoginActions';
 import ProfileCard from './components/ProfilePostCard'
 import Loader from './components/loader';
+import Bio from './components/UserBio'
+
 
 
 class HomeContainer extends React.Component {
@@ -27,7 +29,9 @@ class HomeContainer extends React.Component {
     likedPosts: [],
     postRecieveingComment: null,
     requesting: false,
-    showingUserId: 0,
+    showingUserId: null,
+    showingOne: false,
+    showOneBio: false
 
 
   };
@@ -185,7 +189,7 @@ class HomeContainer extends React.Component {
 
 
   returnToThePost = () => {
-    this.setState({ page: "thePost" })
+    this.setState({ page: "thePost", showingOne: false })
   }
 
 
@@ -196,7 +200,7 @@ class HomeContainer extends React.Component {
   };
 
   pageToRender = () => {
-    const {showingUserId } = this.state
+    const { showingUserId } = this.state
     switch (this.state.page) {
       case "thePost":
         return this.thePost()
@@ -209,21 +213,50 @@ class HomeContainer extends React.Component {
     }
   }
 
+  startShowingOneUser = (id) => {
+    this.setState({ showingUserId: id, page: "show one", showingOne: true })
+  }
   showOneUser = (id) => {
-    this.setState( { showingUserId: id, page:"show one" })
-    const { users, posts } = this.props
-   const theId = users.find(user => user.id === id).id
-   const userPost = posts.filter(post => post.user_id === theId)
-//  return userPost.map(p =>  <ProfileCard 
-//           post={p}
-//           user={p.user_id}
-//           name={p.username}
-//           pic={p.pic}
-//           id={p.id}
-//               />
-//  )
- 
-    
+    const { users, posts, name } = this.props
+    const theUser = users.find(user => user.id === id)
+    console.log("The one user stuff:", theUser)
+    const userPost = posts.filter(post => post.user_id === theUser.id)
+
+    return (this.showOneUsersPost(userPost))
+
+
+  }
+  showOneUsersPost = (post) => {
+    const { likedPosts, comment } = this.state
+    const { name } = this.props
+
+
+    return post.map(p => <ProfileCard
+      post={p}
+      user={p.user_id}
+      name={name}
+      pic={p.pic}
+      id={p.id}
+      likedPosts={likedPosts}
+      comment={comment}
+    />
+    )
+  }
+  showOneUserBio = () => {
+    const { users } = this.props
+    const { showingUserId } = this.state
+    const theUser = users.find(user => user.id === showingUserId)
+    debugger
+    return <Bio
+      user={theUser.username}
+      pic={theUser.picture}
+      bio={theUser.bio}
+      city={theUser.city}
+      state={theUser.state}
+
+
+    />
+
   }
 
   // LOGOUT //
@@ -277,13 +310,15 @@ class HomeContainer extends React.Component {
   friends = () => {
     const { follows, userid, users, deleteFollow } = this.props
     const friendsArr = follows.filter(f => f.follower_id === userid).map(f => f.followee_id)
+
     const theFriends = friendsArr.map(f => users.find(user => user.id === f))
 
-    return theFriends.length > 0 ? theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => this.showOneUser(f.id)} /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid, f.id))}>{`${f.username} 𝚡`}</span> </div>) : <div className="make-some-friends">
-      <p > Welcome!!</p>
-      <p> Make Some New Friends </p>
-      <p>⬅️ ⬅️</p>
-    </div>
+    return (!theFriends[0] === undefined || theFriends.length > 0 ? theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => this.startShowingOneUser(f.id)
+    } /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid, f.id))}>{`${f.username} 𝚡`}</span> </div>) : <div className="make-some-friends">
+        <p > Welcome!!</p>
+        <p> Make Some New Friends </p>
+        <p>⬅️ ⬅️</p>
+      </div>)
 
   }
   Suggestedfriends = () => {
@@ -298,7 +333,10 @@ class HomeContainer extends React.Component {
 
 
 
-    return whoImNotFollowing.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => this.showOneUser(f.id)} /> <br /><span className="friends-or-not-name" onClick={() => createFollow(f.id, userid)} id={f.id}>{` ${f.username} ✓`}</span></div>)
+    return whoImNotFollowing.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => {
+
+      this.startShowingOneUser(f.id)
+    }} /> <br /><span className="friends-or-not-name" onClick={() => createFollow(f.id, userid)} id={f.id}>{` ${f.username} ✓`}</span></div>)
 
   }
 
@@ -307,7 +345,7 @@ class HomeContainer extends React.Component {
     // console.log("Home Container props", this.props);
 
     const { fposts, user, userId, history, requestedLogin, picture } = this.props;
-    const { requesting } = this.state
+    const { showingOne, showingUserId } = this.state
     this.theUsers()
     this.followeeIds()
     this.whoImFollowing()
@@ -333,14 +371,14 @@ class HomeContainer extends React.Component {
         <div className={!localStorage.token ? "loading " : "Home-Content"}>
 
           <div className="sugested-friends">
-            <span className="friends-and-suggested-headers"> Suggested</span>
-            {this.Suggestedfriends()}
+            {!showingOne ? <span className="friends-and-suggested-headers"> Suggested</span> : null}
+            {!showingOne ? this.Suggestedfriends() : this.showOneUserBio()}
           </div>
 
-          <div className="friends">
+          {!showingOne ? <div className="friends">
             <span className="friends-and-suggested-headers">Friends</span>
             {this.friends()}
-          </div>
+          </div> : this.showOneUserBio()}
 
           {this.pageToRender()}
           {this.state.page !== "newPost" ? <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div> : <></>}
@@ -363,7 +401,8 @@ const mapStateToProps = (state) => {
     posts: state.post.posts,
     requestedPost: state.post.requested,
     requestedLogin: state.login.requested,
-    follows: state.follows.follows
+    follows: state.follows.follows,
+    name: state.users.usersObj,
   }
 }
 
