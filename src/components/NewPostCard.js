@@ -41,7 +41,7 @@ class NewPostCard extends React.Component {
           this.setState({ loading: false, url })
 
         }).then(()=> {
-          debugger
+         
           const {url, caption} =this.state
           const { userid, back } = this.props
           this.props.createPost({user_id: userid ,picture:url, likes:0, caption: caption})
@@ -68,7 +68,7 @@ class NewPostCard extends React.Component {
           <input type="file" onChange={this.selectedFileHander} style={{ display: "none" }} ref={fileInput => this.fileInput = fileInput} />
           <div className="img-box" onClick={() => this.fileInput.click()}>
 
-            <img src={url || require("../img/pic_placeholder.png")} style={{width:"286px", height:"180px"}} />
+            <img src={url ? `${url}` : require("../img/pic_placeholder.png")} style={{width:"286px", height:"180px"}} />
           </div>
 
           <div>
