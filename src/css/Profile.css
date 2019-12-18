@@ -16,24 +16,29 @@
                 ;
     } 
     .delete-requested{
-        opacity: .25;
+        opacity: 30%;
+        background-color: rgb(44, 43, 43);
     }
     .confirm-delete-div{
         position: absolute;
-        margin:-35% 0% 0% 45%;
+        margin:-50% 0% 0% 40%;
         padding: 1.5%;
         text-align: center;
         font-size: 1vw;
         color:rgb(27, 15, 15);
+        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAATklEQVQoU2O0O3X+PwMDA8MhM0NGEI0LMBKtEJsJD27YgW1R0DgEtwWrdUQrxGYLY8V5iDUdhghrKFOITfenmXFgW/jSF+H3DNEKsdkCAO99IAvXcD3VAAAAAElFTkSuQmCC");
+        background-color: rgb(197, 210, 214);
         border-style: solid;
-        border-color: rgb(206, 205, 205);
+        border-color: rgb(97, 91, 91);
         border-width: .01vw;
     }
 
     .pic-in-delete-option{
         position: relative;
         background-color: black;
-        width:3vw;
+        border: rgb(97, 95, 95);
+        border-style: solid;
+        border-width: .05vw;
         height: 7.2vh;
         margin: -1% 0% 5% 0%;
     }
@@ -242,7 +247,30 @@ color: green;
     line-height: 1vh;
 }
 
-.logout-edit-delete-ul{
+.profile-edit-delete-logout-ul{
+    margin-right: 2%;
     float: right;
+    border-style:solid;
+    border-width: .1vh;
+    background-color: rgb(223, 221, 226);
+    
+}
+.profile-edit-delete-logout-ul li {
     display: block;
+    margin-left: 2%;
+    margin-top: .5%;
+    width: 6vw;
+    color: rgb(38, 36, 153);
+    font-weight: 500;
+
+}
+
+.profile-edit-delete-logout-ul li:hover {
+    display: block;
+    color:rgb(149, 10, 10);
+    font-weight: bold;
+}
+
+.cancel-in-edit-btn{
+    margin-top: 5%;
 }
