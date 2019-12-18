@@ -202,6 +202,12 @@ class Profile extends Component {
 
 
         <input type="submit" onClick={this.submitEdit} />
+        <br />
+        <button className="cancel-in-edit-btn" onClick={() => {
+          this.setState({ edit: false })
+          this.state.dotsClicked && this.setState({dotsClicked:false })
+        }
+        } >Cancel</button>
       </form>
     </>
     )
@@ -225,16 +231,19 @@ class Profile extends Component {
     // console.log("Pathname:", pathname);
     // this.props.history.location.pathname
 
-    console.log("Profile state:", this.state.postToComment)
+
+
+
+    console.log("Profile Props:", this.props)
     return (
       <div>
 
-        <div class={dlt ? " parent delete-requested" : "parent"} onClick={(e) =>{ 
-          if((e.target.className === "parent delete-requested" ||  "parent") && e.target.className !== "dots-edit-profile")
-          {this.setState({ dotsClicked: !this.state.dotsClicked })
+        <div class={dlt ? " parent delete-requested" : "parent"} onClick={(e) => {
+          if ((e.target.className === "parent delete-requested" || "parent") && e.target.className !== "dots-edit-profile") {
+            this.setState({ dotsClicked: !this.state.dotsClicked })
+          }
         }
-        }
-          }>
+        }>
 
           <div className="nav-div">
             <span className="user-gram" onClick={() => history.push('/home')}>{user}'taGram </span>
@@ -243,7 +252,14 @@ class Profile extends Component {
               <ul className="profile-edit-delete-logout-ul">
                 <li onClick={() => this.needEdit()}>Edit Profile</li>
                 <li onClick={this.preDelete}>Delete Profile</li>
-                <li>logout</li>
+                <li onClick={()=>{
+                  localStorage.clear()
+                  this.props.history.push('/')
+
+                }}>Logout</li>
+                <li onClick={() => {
+                  this.setState({ edit: false, dotsClicked: false })
+                }}>Cancel</li>
               </ul>
               : <span className="dots-edit-profile" onClick={() => this.setState({ dotsClicked: !this.state.dotsClicked })}>. . .</span>}
 
