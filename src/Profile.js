@@ -18,7 +18,7 @@ class Profile extends Component {
     likedPosts: [],
     show_x: false,
     comment: "",
-    postToComment:null,
+    postToComment: null,
     postToDelete: null,
     deleteAccountRequested: null,
     edit: false,
@@ -66,7 +66,7 @@ class Profile extends Component {
     const { post, user, id, pic, name } = this.props
 
     const { pathname } = this.props.history.location
-   
+
     const myPost = post.filter(p => p.user_id == id)
 
     return myPost.map(p => <ProfilePostCard
@@ -92,11 +92,11 @@ class Profile extends Component {
 
 
   };
-postToCommentOn=(id)=>{
-  this.setState({ postToComment: id})
-}
+  postToCommentOn = (id) => {
+    this.setState({ postToComment: id })
+  }
   handleComment = (e, id) => {
-   this.postToCommentOn(id)
+    this.postToCommentOn(id)
     this.setState({ [e.target.name]: e.target.value })
   }
   preDelete = () => {
@@ -114,16 +114,16 @@ postToCommentOn=(id)=>{
       )
   }
   showDelete_x = () => {
-    this.setState({ show_x: !this.state.show_x})
+    this.setState({ show_x: !this.state.show_x })
   }
-  setIdForPostToBeDeleted=(id)=>{
-    this.setState({postToDelete: id})
+  setIdForPostToBeDeleted = (id) => {
+    this.setState({ postToDelete: id })
     this.showDelete_x()
     console.log(this.state.postToDelete)
-  
+
   }
-  resetDeleting=()=>{
-    this.setState({postToDelete:null, show_x: false})
+  resetDeleting = () => {
+    this.setState({ postToDelete: null, show_x: false })
   }
   confirmDelete = () => {
     const { id, pic } = this.props
@@ -211,13 +211,13 @@ postToCommentOn=(id)=>{
     this.props.deletePost(id)
   }
 
-showLogoutEditDelete=()=>{
-this.setState( {dotsClicked: !this.state.dotsClicked } )
-}
+  showLogoutEditDelete = () => {
+    this.setState({ dotsClicked: !this.state.dotsClicked })
+  }
   render() {
 
     const { history, pic, city, bio, state, requested } = this.props;
-    const { deleteAccountRequested, edit } = this.state
+    const { deleteAccountRequested, edit, dotsClicked } = this.state
     const dlt = deleteAccountRequested
     const user = localStorage.currentUser
 
@@ -229,31 +229,24 @@ this.setState( {dotsClicked: !this.state.dotsClicked } )
     return (
       <div>
 
-        <div class={dlt ? " parent delete-requested" : "parent"}>
+        <div class={dlt ? " parent delete-requested" : "parent"} onClick={(e) =>{ 
+          if((e.target.className === "parent delete-requested" ||  "parent") && e.target.className !== "dots-edit-profile")
+          {this.setState({ dotsClicked: !this.state.dotsClicked })
+        }
+        }
+          }>
 
           <div className="nav-div">
             <span className="user-gram" onClick={() => history.push('/home')}>{user}'taGram </span>
             <span className="camera" id={this.state.id} onClick={() => history.push('/home')}> 📸 </span>
-            <ul>
-          
-                {/*EDIT PROFILE */}
-                <span className={"edit-profile-text"} onClick={() => this.needEdit()}>Edit Profile</span>
+            {dotsClicked ?
+              <ul className="profile-edit-delete-logout-ul">
+                <li onClick={() => this.needEdit()}>Edit Profile</li>
+                <li onClick={this.preDelete}>Delete Profile</li>
+                <li>logout</li>
+              </ul>
+              : <span className="dots-edit-profile" onClick={() => this.setState({ dotsClicked: !this.state.dotsClicked })}>. . .</span>}
 
-                {/*DELETE PROFILE */}
-                {!edit && <span onClick={this.preDelete} className={dlt ? "dont-show-delete" : "delete-profile-text"}>Delete Profile</span>}
-                
-                 {/*LOGOUT PROFILE */}
-            <span className="logout-btn"
-               onClick={() => {
-                localStorage.clear()
-                this.props.history.push("/login")
-              }}
-              
-            > logout </span >
-            {/* dots */}
-            </ul>
-            <span className="dots-edit-profile" onClick={(e) => console.log
-              (e.target.className)}>. . .</span>
           </div>
 
           <div className="profile-section">
@@ -273,7 +266,7 @@ this.setState( {dotsClicked: !this.state.dotsClicked } )
               </>
             }
             {edit && this.editForm()}
-            
+
           </div>
 
 
@@ -296,7 +289,7 @@ this.setState( {dotsClicked: !this.state.dotsClicked } )
           {dlt && requested && <Loader />}
 
           {dlt && this.confirmDelete()}
-          
+
         </div>
       </div>
 

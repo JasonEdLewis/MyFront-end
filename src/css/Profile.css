@@ -242,7 +242,13 @@ color: green;
     line-height: 1vh;
 }
 
-.logout-edit-delete-ul{
+.profile-edit-delete-logout-ul{
     float: right;
+}
+.profile-edit-delete-logout-ul li {
     display: block;
+}
+.profile-edit-delete-logout-ul li:hover {
+    display: block;
+    color:blue;
 }
