@@ -37,7 +37,8 @@ class HomeContainer extends React.Component {
   };
 
   componentDidMount() {
-
+    const { getPost, fetchAllUsers, getFollows } = this.props
+    getPost(); fetchAllUsers(); getFollows()
     console.log("HOME CONTAINER")
     const { history } = this.props
 
@@ -313,12 +314,17 @@ class HomeContainer extends React.Component {
 
     const theFriends = friendsArr.map(f => users.find(user => user.id === f))
 
-    return (!theFriends[0] === undefined || theFriends.length > 0 ? theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => this.startShowingOneUser(f.id)
-    } /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid, f.id))}>{`${f.username} 𝚡`}</span> </div>) : <div className="make-some-friends">
+    if (theFriends) {
+      return theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => this.startShowingOneUser(f.id)
+      } /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid, f.id))}>{`${f.username} 𝚡`}</span> </div>)
+    }
+    else {
+      return <div className="make-some-friends">
         <p > Welcome!!</p>
         <p> Make Some New Friends </p>
         <p>⬅️ ⬅️</p>
-      </div>)
+      </div>
+    }
 
   }
   Suggestedfriends = () => {

@@ -32,11 +32,7 @@ class App extends React.Component {
       this.redirect("/");
 
     }
-    else {
-
-      getPost(); fetchAllUsers(); getFollows()
-
-    }
+   
 
 
   }
