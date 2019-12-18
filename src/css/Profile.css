@@ -78,10 +78,7 @@ color: green;
     line-height: 10vh;
 }
 .logout-btn{
-    grid-area: nav;
-    background-color: tomato;
-    float: right;
-    margin: 5vh 0vw 0vh 40vw;
+   
 
 }
 .dots-edit-profile{
@@ -132,8 +129,7 @@ color: green;
 
 
 .delete-profile-text{
-    position: absolute;
-    margin:-5% 0% 0% 8.5%;
+   
     color: blue;
 }
 .edit-profile-text{
@@ -146,7 +142,8 @@ color: green;
  .live{
     position: absolute;
     color: green;
-    margin: 5% 0% 0% -2.5%;
+    /* float: right; */
+    /* margin: 5% 0% 0% -2.5%; */
 }
 .dont-show-delete{
     display: none;
@@ -243,4 +240,9 @@ color: green;
     border-width: .05vw ;
     vertical-align: middle;
     line-height: 1vh;
+}
+
+.logout-edit-delete-ul{
+    float: right;
+    display: block;
 }

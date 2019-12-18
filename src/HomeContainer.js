@@ -214,7 +214,7 @@ class HomeContainer extends React.Component {
   }
 
   startShowingOneUser = (id) => {
-    this.setState({ showingUserId: id, page: "show one", showingOne: true })
+    this.setState({ showingUserId: id, page: "show one", showingOne: !this.state.showing })
   }
   showOneUser = (id) => {
     const { users, posts, name } = this.props
@@ -222,7 +222,7 @@ class HomeContainer extends React.Component {
     console.log("The one user stuff:", theUser)
     const userPost = posts.filter(post => post.user_id === theUser.id)
 
-    return (this.showOneUsersPost(userPost))
+    return this.showOneUsersPost(userPost)
 
 
   }
@@ -246,14 +246,14 @@ class HomeContainer extends React.Component {
     const { users } = this.props
     const { showingUserId } = this.state
     const theUser = users.find(user => user.id === showingUserId)
-    debugger
+
     return <Bio
       user={theUser.username}
       pic={theUser.picture}
       bio={theUser.bio}
       city={theUser.city}
       state={theUser.state}
-
+      home={this.returnToThePost}
 
     />
 
@@ -378,7 +378,7 @@ class HomeContainer extends React.Component {
           {!showingOne ? <div className="friends">
             <span className="friends-and-suggested-headers">Friends</span>
             {this.friends()}
-          </div> : this.showOneUserBio()}
+          </div> : null}
 
           {this.pageToRender()}
           {this.state.page !== "newPost" ? <div className="Home-footer">Copyright &copy; 2019 Jaystagram</div> : <></>}

@@ -30,6 +30,7 @@ class Profile extends Component {
     city: "" || this.props.city,
     bio: "" || this.props.bio,
     zip: "" || this.props.zip,
+    dotsClicked: false
 
 
   }
@@ -210,7 +211,9 @@ postToCommentOn=(id)=>{
     this.props.deletePost(id)
   }
 
-
+showLogoutEditDelete=()=>{
+this.setState( {dotsClicked: !this.state.dotsClicked } )
+}
   render() {
 
     const { history, pic, city, bio, state, requested } = this.props;
@@ -231,14 +234,26 @@ postToCommentOn=(id)=>{
           <div className="nav-div">
             <span className="user-gram" onClick={() => history.push('/home')}>{user}'taGram </span>
             <span className="camera" id={this.state.id} onClick={() => history.push('/home')}> 📸 </span>
-            <button
-              className="logout-btn"
-              variant="outline-dark"
-              onClick={() => this.props.history.push("/login")}
-            >
-              logout
-                </button >
-            <span className="dots-edit-profile" onClick={(e) => console.log(e.target.className)}>. . .</span>
+            <ul>
+          
+                {/*EDIT PROFILE */}
+                <span className={"edit-profile-text"} onClick={() => this.needEdit()}>Edit Profile</span>
+
+                {/*DELETE PROFILE */}
+                {!edit && <span onClick={this.preDelete} className={dlt ? "dont-show-delete" : "delete-profile-text"}>Delete Profile</span>}
+                
+                 {/*LOGOUT PROFILE */}
+            <span className="logout-btn"
+               onClick={() => {
+                localStorage.clear()
+                this.props.history.push("/login")
+              }}
+              
+            > logout </span >
+            {/* dots */}
+            </ul>
+            <span className="dots-edit-profile" onClick={(e) => console.log
+              (e.target.className)}>. . .</span>
           </div>
 
           <div className="profile-section">
@@ -258,7 +273,7 @@ postToCommentOn=(id)=>{
               </>
             }
             {edit && this.editForm()}
-            <span className={edit ? " live" : "edit-profile-text"} onClick={() => this.needEdit()}>Edit Profile</span>
+            
           </div>
 
 
@@ -281,7 +296,7 @@ postToCommentOn=(id)=>{
           {dlt && requested && <Loader />}
 
           {dlt && this.confirmDelete()}
-          {!edit && <span onClick={this.preDelete} className={dlt ? "dont-show-delete" : "delete-profile-text"}>Delete Profile</span>}
+          
         </div>
       </div>
 
