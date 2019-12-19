@@ -230,12 +230,13 @@ class HomeContainer extends React.Component {
   }
   showOneUsersPost = (post) => {
     const { likedPosts, comment } = this.state
-    const { name } = this.props
+    const { name, users } = this.props
 
 
     return post.map(p => <ProfileCard
       post={p}
-      user={p.user_id}
+      user_id={p.user_id}
+      users={users}
       name={name}
       pic={p.pic}
       id={p.id}

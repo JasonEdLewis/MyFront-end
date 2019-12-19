@@ -2,18 +2,22 @@ import React from 'react';
 import '../css/ProfilePostCard.css';
 import '../css/Profile.css';
 import placeholder from '../img/placeHolder.png';
+import TheUser from './TheUser'
 
 
 
 
 export default function ProfilePostCard(props) {
 
-
+const { users,name} = props
   const comments = (post) => {
     return post.comments && post.comments.map(c => <p><strong>{props.name[c.followee_id] || c.followee_id}</strong> : {c.content}</p>)
   }
 
-  console.log("Props from HomeContainer:", props)
+  const whichUser = () => {
+    return post.user_id !== props.userid ? name[post.user_id] : user
+  }
+  console.log("Profile card for bio props:", props)
   const { post, user, comment, picture, handleLike, likedPosts, pic, setId, show_x, deletePost, postCommId, postToDelete, id } = props
   return (
     <>
@@ -47,7 +51,7 @@ export default function ProfilePostCard(props) {
             <br />
             <div className='profile-ul-style'>
 
-              <p className='profile-post-caption'><span id="profile-name-cap"><strong>{user} : </strong></span> {post.caption}
+              <p className='profile-post-caption'><span id="profile-name-cap"><strong>{whichUser()} : </strong></span> {post.caption}
 
                 {/* {'props.editCapStatus ? <span id="profile-submit-cap-edit" onClick={() => console.log("props.submitCapEdit",post.id)}>  ⬆️ </span> : <span id="profile-edit-caption" onClick={() => console.log("props.getCapEditField",post.id)}>🖋</span>'}  */}
 

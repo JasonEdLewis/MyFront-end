@@ -41,6 +41,7 @@ const PostCard = props => {
   }
 
   const whichUser = () => {
+
     return post.user_id !== props.userid ? TheUser(post.user_id, users) : user
   }
   const clearCommentBox = (e) => {
@@ -59,7 +60,7 @@ const PostCard = props => {
 
   const nameOrpic = (id) => {
     if (!!ThePic(id, users) && ThePic(id, users).includes(".jpg")) {
-      return (<img src={`${ThePic(id, users)}`} className="post-thumbnail" onClick={()=> showThisUser(post.user_id)} />)
+      return (<img src={`${ThePic(id, users)}`} className="post-thumbnail" onClick={() => showThisUser(post.user_id)} />)
     }
     else if (!!ThePic(id, users) && ThePic(id, users).includes('.mp4')) {
       return (<Player
