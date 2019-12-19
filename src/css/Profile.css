@@ -16,15 +16,15 @@
                 ;
     } 
     .delete-requested{
-        opacity: 30%;
+        opacity: 7.5%;
         background-color: rgb(44, 43, 43);
     }
     .confirm-delete-div{
         position: absolute;
-        margin:-50% 0% 0% 40%;
+        margin:-50% 0% 0% 35%;
         padding: 1.5%;
         text-align: center;
-        font-size: 1vw;
+        font-size: 1.5vw;
         color:rgb(27, 15, 15);
         background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAATklEQVQoU2O0O3X+PwMDA8MhM0NGEI0LMBKtEJsJD27YgW1R0DgEtwWrdUQrxGYLY8V5iDUdhghrKFOITfenmXFgW/jSF+H3DNEKsdkCAO99IAvXcD3VAAAAAElFTkSuQmCC");
         background-color: rgb(197, 210, 214);
@@ -259,7 +259,7 @@ color: green;
     display: block;
     margin-left: 2%;
     margin-top: .5%;
-    width: 6vw;
+    /* width: 2%; */
     color: rgb(38, 36, 153);
     font-weight: 500;
 

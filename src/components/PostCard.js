@@ -15,7 +15,8 @@ const PostCard = props => {
 
 
 
-  const { post, user, users, deleteComment } = props;
+  const { post, user, users, deleteComment, showThisUser } = props;
+  console.log("Profile card props:", props)
 
   const comment = () => {
 
@@ -23,11 +24,11 @@ const PostCard = props => {
     if (text) {
       return text.map(t => {
         // console.log("comments", t)
-        return (<><br/> <span  id="name-cap">{!!t.followee_id ?
+        return (<><br /> <span id="name-cap">{!!t.followee_id ?
           `${props.commentors()[t.followee_id.toString()]}:  ` :
           `${props.commentors()[props.userid]}:  `
         }</span><p className='the-content'><strong>
-         </strong>{ t.content }<span className="delete-x" onClick={() => deleteComment(t)}> ✘ </span></p></>);
+        </strong>{t.content}<span className="delete-x" onClick={() => deleteComment(t)}> ✘ </span></p></>);
       });
     } else {
       return <h6 style={{ color: "black" }}>Be the first to comment</h6>;
@@ -58,7 +59,7 @@ const PostCard = props => {
 
   const nameOrpic = (id) => {
     if (!!ThePic(id, users) && ThePic(id, users).includes(".jpg")) {
-      return (<img src={`${ThePic(id, users)}`} className="post-thumbnail" onClick={() => props.history.push('/profile')} />)
+      return (<img src={`${ThePic(id, users)}`} className="post-thumbnail" onClick={()=> showThisUser(post.user_id)} />)
     }
     else if (!!ThePic(id, users) && ThePic(id, users).includes('.mp4')) {
       return (<Player
@@ -106,7 +107,7 @@ const PostCard = props => {
 
           {areFriends(post.user_id)}
 
-          <span className="name-span-style" onClick={() => { console.log(post.user_id) }}>{nameOrpic(post.user_id)}</span>
+          <span className="name-span-style" onClick={() => { console.log("This is from the thumbnail", post.user_id) }} >{nameOrpic(post.user_id)}</span>
         </div>
 
         <div className="img-div">
@@ -126,8 +127,8 @@ const PostCard = props => {
 
           </div>
           <br />
-            <p className='post-caption'><span id="name-cap"><strong>{` ${whichUser()}`}:</strong></span> {props.editCapStatus ? editCapInput(post.caption) : post.caption} {props.editCapStatus ? <span id="submit-cap-edit" onClick={() => props.submitCapEdit(post.id)}>  ⬆️ </span> : <span id="edit-caption" onClick={() => props.getCapEditField(post.id)}>🖋</span>} </p>
-            <div className='ul-style'>
+          <p className='post-caption'><span id="name-cap"><strong>{` ${whichUser()}`}:</strong></span> {props.editCapStatus ? editCapInput(post.caption) : post.caption} {props.editCapStatus ? <span id="submit-cap-edit" onClick={() => props.submitCapEdit(post.id)}>  ⬆️ </span> : <span id="edit-caption" onClick={() => props.getCapEditField(post.id)}>🖋</span>} </p>
+          <div className='ul-style'>
             {comment()}
           </div>
           {props.yourField === post.id ? <input
@@ -142,7 +143,7 @@ const PostCard = props => {
           <br />
 
           <br />
-          {props.commentLen > 0 && !props.editCapStatus &&  <span onClick={props.submitComment}
+          {props.commentLen > 0 && !props.editCapStatus && <span onClick={props.submitComment}
             id="post-span">
             ⬆️
       </span>}

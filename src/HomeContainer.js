@@ -163,6 +163,7 @@ class HomeContainer extends React.Component {
         liked={likedPosts}
         commentors={this.theUsers}
         deleteComment={this.deleteComment}
+        showThisUser={this.startShowingOneUser}
       />
     )) : console.log("The Post didnt work, here are the props:", this.props)
   };
