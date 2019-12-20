@@ -37,7 +37,7 @@ class Profile extends Component {
   componentDidMount() {
 
     !localStorage.token && this.props.history.push('/')
-    const { getPost, post, changeLike } = this.props
+    const { getPost, post } = this.props
     getPost()
 
     post && this.setState({ promiseReturned: true })
@@ -239,8 +239,8 @@ class Profile extends Component {
       <div>
 
         <div class={dlt ? " parent delete-requested" : "parent"} onClick={(e) => {
-          if ((e.target.className === "parent delete-requested" || "parent") && e.target.className !== "dots-edit-profile") {
-            this.setState({ dotsClicked: !this.state.dotsClicked })
+          if ((e.target.className === "parent delete-requested" || "parent" ||"profile-off-heart" || "delete-post-x") && e.target.className !== "dots-edit-profile") {
+            this.setState({ dotsClicked: false })
           }
         }
         }>
