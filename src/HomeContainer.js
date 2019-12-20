@@ -31,10 +31,14 @@ class HomeContainer extends React.Component {
     requesting: false,
     showingUserId: null,
     showingOne: false,
-    showOneBio: false
+    showOneBio: false,
+    postToDelete: 0,
+    show_x: false
+
+  }
 
 
-  };
+    ;
 
   componentDidMount() {
     const { getPost, fetchAllUsers, getFollows } = this.props
@@ -242,6 +246,8 @@ class HomeContainer extends React.Component {
       id={p.id}
       likedPosts={likedPosts}
       comment={comment}
+      handleLike={this.handleLikes}
+      setId={this.setIdForPostToBeDeleted}
     />
     )
   }
@@ -257,6 +263,7 @@ class HomeContainer extends React.Component {
       city={theUser.city}
       state={theUser.state}
       home={this.returnToThePost}
+
 
     />
 
@@ -311,20 +318,20 @@ class HomeContainer extends React.Component {
   }
 
   friends = () => {
-    const { follows, userid, users, deleteFollow } = this.props
+    const { follows, userid, users, deleteFollow, user } = this.props
     const friendsArr = follows.filter(f => f.follower_id === userid).map(f => f.followee_id)
 
     const theFriends = friendsArr.map(f => users.find(user => user.id === f))
 
-    if (theFriends) {
+    if (theFriends.length > 0) {
       return theFriends.map(f => <div> <img src={f.picture} className="friends-or-not-image" onClick={() => this.startShowingOneUser(f.id)
       } /> <br /><span className="friends-or-not-name" id={f.id} onClick={() => deleteFollow(this.theFollow(userid, f.id))}>{`${f.username} 𝚡`}</span> </div>)
     }
     else {
       return <div className="make-some-friends">
-        <p > Welcome!!</p>
-        <p> Make Some New Friends </p>
-        <p>⬅️ ⬅️</p>
+
+        <p>{`⬅️ Hey ${user}, Make Some ⬅️ New Friends!`} </p>
+
       </div>
     }
 
@@ -346,6 +353,18 @@ class HomeContainer extends React.Component {
       this.startShowingOneUser(f.id)
     }} /> <br /><span className="friends-or-not-name" onClick={() => createFollow(f.id, userid)} id={f.id}>{` ${f.username} ✓`}</span></div>)
 
+  }
+
+
+  // SINGLE PAGE USER AND POST OPTIONS
+  setIdForPostToBeDeleted = (id) => {
+    this.setState({ postToDelete: id })
+    this.showDelete_x()
+    console.log(this.state.postToDelete)
+
+  }
+  showDelete_x = () => {
+    this.setState({ show_x: !this.state.show_x })
   }
 
   render() {
