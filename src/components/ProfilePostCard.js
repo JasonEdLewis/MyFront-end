@@ -9,9 +9,9 @@ import TheUser from './TheUser'
 
 export default function ProfilePostCard(props) {
 
-const { users,name} = props
+  const { users, name } = props
   const comments = (post) => {
-    return post.comments && post.comments.map(c => <p><strong>{props.name[c.followee_id] || c.followee_id}</strong> : {c.content}</p>)
+    return post.comments && post.comments.map(c => <p className="commentor-name"><strong>{props.name[c.followee_id] || c.followee_id}</strong> : {c.content}</p>)
   }
 
   const whichUser = () => {

@@ -198,11 +198,10 @@
 }
 .post-caption{
   color:black;
-  margin: 0% 10% 0% 0%;
+  margin: -2.5% 0% 0% 0%;
   position: relative;
-  /* background-color: aquamarine; */
-  width: 30vw;
-  float: left;
+  width: 32vw;
+  text-align: left;
 }
 /* .post-caption:hover{
  

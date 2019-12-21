@@ -62,7 +62,7 @@ class HomeContainer extends React.Component {
       followee_id: userid
     }
     addComment(body)
-    debugger
+
     this.resetCommentLength()
 
   };
@@ -248,6 +248,7 @@ class HomeContainer extends React.Component {
       comment={comment}
       handleLike={this.handleLikes}
       setId={this.setIdForPostToBeDeleted}
+      handleComment={this.handleComment}
     />
     )
   }
@@ -263,6 +264,7 @@ class HomeContainer extends React.Component {
       city={theUser.city}
       state={theUser.state}
       home={this.returnToThePost}
+
 
 
     />
@@ -368,8 +370,6 @@ class HomeContainer extends React.Component {
   }
 
   render() {
-    // debugger
-    // console.log("Home Container props", this.props);
 
     const { fposts, user, userId, history, requestedLogin, picture } = this.props;
     const { showingOne, showingUserId } = this.state
