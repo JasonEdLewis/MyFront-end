@@ -62,9 +62,8 @@ class HomeContainer extends React.Component {
       followee_id: userid
     }
     addComment(body)
-
     this.resetCommentLength()
-    
+
 
   };
 
@@ -78,7 +77,7 @@ class HomeContainer extends React.Component {
   }
 
   handleComment = (e) => {
-    console.log(e.target.value, this.state.postId);
+    console.log(this.state.comment, this.state.postId);
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -91,6 +90,9 @@ class HomeContainer extends React.Component {
     // console.log(com.id, com.post_id, com.followee_id, com.content)
     deleteComment(com.id, com.post_id, com.followee_id, com.content)
 
+  }
+  bioCommentState = () => {
+    return this.state.comment
   }
   // EDIT CAPTION
 
@@ -234,7 +236,7 @@ class HomeContainer extends React.Component {
 
   }
   showOneUsersPost = (post) => {
-    const { likedPosts, comment, post_id} = this.state
+    const { likedPosts, comment, post_id } = this.state
     const { name, users, userid } = this.props
 
 
@@ -253,6 +255,8 @@ class HomeContainer extends React.Component {
       postCommId={post_id}
       currentUserId={userid}
       submitComment={this.submitComment}
+      resetComment={this.resetCommentLength}
+      commentState={this.bioCommentState}
     />
     )
   }

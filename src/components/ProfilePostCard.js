@@ -17,7 +17,7 @@ export default function ProfilePostCard(props) {
   const whichUser = () => {
     return post.user_id !== props.userid ? name[post.user_id] : user
   }
-  console.log("Input classname:")
+  console.log("Bio Profile card props:", props)
   const { post, user, comment, picture, handleLike, likedPosts, pic, setId, show_x, deletePost, postCommId, postToDelete,  currentUserId, user_id} = props
   return (
     <>
@@ -63,14 +63,17 @@ export default function ProfilePostCard(props) {
               size="sm"
               type="text"
               name="comment"
-              value={props.caption}
+              value={ currentUserId === user_id ? props.caption : props.commentState() }
               onChange={(e) => props.handleComment(e, post.id)}
               placeholder="comment"
               className="profile-comment-input"
             />} {currentUserId === user_id ? (props.comment.length > 0 && postCommId === post.id && <span onClick={props.submitComment }
               id="profile-post-span" id={post.id}>
               ⬆️
-            </span> ) : (<span onClick={()=> props.submitComment(post.id) }
+            </span> ) : (<span onClick={()=> {
+              props.submitComment(post.id)
+              props.resetComment()
+            } }
               id="profile-post-span" id={post.id}>
               ⬆️
             </span>)}
