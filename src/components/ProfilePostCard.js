@@ -9,16 +9,16 @@ import TheUser from './TheUser'
 
 export default function ProfilePostCard(props) {
 
-const { users,name} = props
+  const { users, name } = props
   const comments = (post) => {
-    return post.comments && post.comments.map(c => <p><strong>{props.name[c.followee_id] || c.followee_id}</strong> : {c.content}</p>)
+    return post.comments && post.comments.map(c => <p className="commentor-name"><strong>{props.name[c.followee_id] || c.followee_id}</strong> : {c.content}</p>)
   }
 
   const whichUser = () => {
     return post.user_id !== props.userid ? name[post.user_id] : user
   }
-  console.log("Profile card for bio props:", props)
-  const { post, user, comment, picture, handleLike, likedPosts, pic, setId, show_x, deletePost, postCommId, postToDelete, id } = props
+  console.log("Bio Profile card props:", props)
+  const { post, user, comment, picture, handleLike, likedPosts, pic, setId, show_x, deletePost, postCommId, postToDelete,  currentUserId, user_id} = props
   return (
     <>
       <div className="profile-post-card-div" onClick={() => setId(post.id)}>
@@ -63,14 +63,20 @@ const { users,name} = props
               size="sm"
               type="text"
               name="comment"
-              value={props.caption}
+              value={ currentUserId === user_id ? props.caption : props.commentState }
               onChange={(e) => props.handleComment(e, post.id)}
               placeholder="comment"
               className="profile-comment-input"
-            />} {comment.length > 0 && postCommId === post.id && <span onClick={props.submitComment}
+            />} {currentUserId === user_id ? (props.comment.length > 0 && postCommId === post.id && <span onClick={props.submitComment }
               id="profile-post-span" id={post.id}>
               ⬆️
-      </span>}
+            </span> ) : (<span onClick={()=> {
+              props.submitComment(post.id)
+              props.resetComment()
+            } }
+              id="profile-post-span" id={post.id}>
+              ⬆️
+            </span>)}
             <br />
             {/* {'props.status && <Loader />'} */}
             <br />

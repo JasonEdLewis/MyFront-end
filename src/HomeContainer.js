@@ -62,8 +62,8 @@ class HomeContainer extends React.Component {
       followee_id: userid
     }
     addComment(body)
-    debugger
     this.resetCommentLength()
+
 
   };
 
@@ -76,8 +76,8 @@ class HomeContainer extends React.Component {
     this.setState({ comment: "", postRecieveingComment: null })
   }
 
-  handleComment = e => {
-    // console.log(e.target.value);
+  handleComment = (e) => {
+    console.log(this.state.comment, this.state.postId);
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -91,6 +91,7 @@ class HomeContainer extends React.Component {
     deleteComment(com.id, com.post_id, com.followee_id, com.content)
 
   }
+
   // EDIT CAPTION
 
   getCapField = () => {
@@ -233,8 +234,8 @@ class HomeContainer extends React.Component {
 
   }
   showOneUsersPost = (post) => {
-    const { likedPosts, comment } = this.state
-    const { name, users } = this.props
+    const { likedPosts, comment, post_id } = this.state
+    const { name, users, userid } = this.props
 
 
     return post.map(p => <ProfileCard
@@ -248,6 +249,12 @@ class HomeContainer extends React.Component {
       comment={comment}
       handleLike={this.handleLikes}
       setId={this.setIdForPostToBeDeleted}
+      handleComment={this.handleComment}
+      postCommId={post_id}
+      currentUserId={userid}
+      submitComment={this.submitComment}
+      resetComment={this.resetCommentLength}
+      commentState={this.state.comment}
     />
     )
   }
@@ -263,6 +270,7 @@ class HomeContainer extends React.Component {
       city={theUser.city}
       state={theUser.state}
       home={this.returnToThePost}
+
 
 
     />
@@ -368,8 +376,6 @@ class HomeContainer extends React.Component {
   }
 
   render() {
-    // debugger
-    // console.log("Home Container props", this.props);
 
     const { fposts, user, userId, history, requestedLogin, picture } = this.props;
     const { showingOne, showingUserId } = this.state

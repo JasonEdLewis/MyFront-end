@@ -106,6 +106,10 @@
       margin-left: .5vw;
       color: brown;
   }
+   #profile-name-cap{
+    color: brown;
+    font-size: 105%;
+   }
      
 
                                     /* *****  MAIN COMMENTS DIV ***** */
@@ -193,7 +197,7 @@
   /* background-color: yellow; */
   margin:auto;
   list-style: none;
-  float: right;
+ text-align: left;
  
  
 }
@@ -209,11 +213,13 @@
 
 
 .profile-post-caption{
-  color:black;
+  color:black
 }
-/* .post-caption:hover{
- 
-} */
+
+
+.commentor-name{
+  color: black;
+}
 #profile-edit-caption{
   display: unset;
   font-size: xx-small;

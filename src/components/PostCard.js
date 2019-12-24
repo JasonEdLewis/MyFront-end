@@ -1,7 +1,6 @@
 import React from "react";
 import '../css/PostCard.css';
-import '../css/Profile.css';
-import placeholder from '../img/placeHolder.png';
+// import '../css/Profile.css';
 import { connect } from 'react-redux';
 import { deleteFollow, createFollow } from '../redux/actions/FollowActions';
 import Loader from '../components/loader';
@@ -24,11 +23,10 @@ const PostCard = props => {
     if (text) {
       return text.map(t => {
         // console.log("comments", t)
-        return (<><br /> <span id="name-cap">{!!t.followee_id ?
-          `${props.commentors()[t.followee_id.toString()]}:  ` :
-          `${props.commentors()[props.userid]}:  `
-        }</span><p className='the-content'><strong>
-        </strong>{t.content}<span className="delete-x" onClick={() => deleteComment(t)}> ✘ </span></p></>);
+        return (<li className="li-style"> <strong style={{color:" #740808"}}>{!!t.followee_id ?
+          `${props.commentors()[t.followee_id.toString()]}: ` :
+          `${props.commentors()[props.userid]}: `
+        }</strong>{t.content}<span className="delete-x" onClick={() => deleteComment(t)}> ✘ </span></li>);
       });
     } else {
       return <h6 style={{ color: "black" }}>Be the first to comment</h6>;
@@ -128,9 +126,13 @@ const PostCard = props => {
 
           </div>
           <br />
-          <p className='post-caption'><span id="name-cap"><strong>{` ${whichUser()}`}:</strong></span> {props.editCapStatus ? editCapInput(post.caption) : post.caption} {props.editCapStatus ? <span id="submit-cap-edit" onClick={() => props.submitCapEdit(post.id)}>  ⬆️ </span> : <span id="edit-caption" onClick={() => props.getCapEditField(post.id)}>🖋</span>} </p>
-          <div className='ul-style'>
-            {comment()}
+          <p className='post-caption'> <strong>{` ${whichUser()}`}:</strong> {props.editCapStatus ? editCapInput(post.caption) : post.caption} {props.editCapStatus ? <span id="submit-cap-edit" onClick={() => props.submitCapEdit(post.id)}>  ⬆️ </span> : <span id="edit-caption" onClick={() => props.getCapEditField(post.id)}>🖋</span>} </p>
+          <div >
+            <ul className='ul-style'>
+              {comment()}
+            </ul>
+            
+            
           </div>
           {props.yourField === post.id ? <input
             size="sm"
