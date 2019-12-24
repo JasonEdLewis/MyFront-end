@@ -63,7 +63,7 @@ export default function ProfilePostCard(props) {
               size="sm"
               type="text"
               name="comment"
-              value={ currentUserId === user_id ? props.caption : props.commentState() }
+              value={ currentUserId === user_id ? props.caption : props.commentState }
               onChange={(e) => props.handleComment(e, post.id)}
               placeholder="comment"
               className="profile-comment-input"

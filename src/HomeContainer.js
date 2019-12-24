@@ -91,9 +91,7 @@ class HomeContainer extends React.Component {
     deleteComment(com.id, com.post_id, com.followee_id, com.content)
 
   }
-  bioCommentState = () => {
-    return this.state.comment
-  }
+
   // EDIT CAPTION
 
   getCapField = () => {
@@ -256,7 +254,7 @@ class HomeContainer extends React.Component {
       currentUserId={userid}
       submitComment={this.submitComment}
       resetComment={this.resetCommentLength}
-      commentState={this.bioCommentState}
+      commentState={this.state.comment}
     />
     )
   }

@@ -99,32 +99,22 @@
   .caption{
       color:black;
       text-align: left;
-
   }
  
      .ul-style{
-    width: 32.5vw;
     /* background-color: yellow; */
-    margin:auto;
+    margin-left:-7.5%;
     list-style: none;
-    float: right;
+    float:left;
    
    
   }
   .li-style{
    max-width: 32vw;
-   margin: auto;
-   position: relative;
-  /* background-color: azure; */
-  
-    /* background-color: coral; */
+   display: block;
+   color: black;
   }
-  .commentor{
-    color: rgb(9, 9, 80);
-    font-size: 1.5vw;
-    margin: 0% 0% 0% 0%;
-    /* background-color: aqua; */
-  }
+
   .the-content{
     max-width: 32vw;
     float: left;
