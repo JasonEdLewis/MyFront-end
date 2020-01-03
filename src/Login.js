@@ -5,8 +5,8 @@ import { Form, Navbar, Button } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { fetchLogin } from './redux/actions/LoginActions';
 import { fetchUser } from './redux/actions/UserActions';
-import Loader from './components/loader'
-// import Vid from './img/caliSkaters.mp4';
+import Loader from './components/loader';
+
 
 {
   /* <Spinner animation="grow" variant="info" /> */
@@ -62,13 +62,9 @@ class Login extends React.Component {
 
     console.log("Login props", this.props)
     return (
-      //  <div className="video-div">
-      //   <video  id="myVideo" loop autoplay >
-      //   <source src="http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4" />
-      //       {/* <source src={ Vid } type="video/mp4"/> */}
-      //     </video>
-      //  </div>
-      <>
+      <div>
+       
+        
         <div className="signindiv">
 
           <div className="header-div">
@@ -116,7 +112,7 @@ class Login extends React.Component {
               </a> </>}
           </Form>
         </div>
-      </>
+      </div>
     );
   }
 

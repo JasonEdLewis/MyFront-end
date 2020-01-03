@@ -3,6 +3,7 @@ import axios from 'axios'
 
 
 export const getPost = () => dispatch => {
+    debugger
     dispatch({ type: REQUESTING })
     axios.get('http://localhost:3000/posts')
     .then(post => {
