@@ -12,6 +12,7 @@ const LoginForm =(props)=>{
   const {handleChange, username, password, handleSubmit} = props
 return(
     <div>
+      
     <div>
       <div className="signindiv">
         <h1 style={headerStyle}>Jays'taGram </h1>
