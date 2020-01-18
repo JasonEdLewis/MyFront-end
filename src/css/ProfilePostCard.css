@@ -97,7 +97,10 @@
   .profile-caption{
       color:black;
       text-align: left;
-
+  }
+  
+  #edit-caption-input{
+   width: 75%
   }
   .profile-caption,#name-cap{
       font-weight: 700;

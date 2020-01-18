@@ -30,7 +30,9 @@ class Profile extends Component {
     city: "" || this.props.city,
     bio: "" || this.props.bio,
     zip: "" || this.props.zip,
-    dotsClicked: false
+    dotsClicked: false,
+    editCaption: false,
+    captionId: null
 
 
   }
@@ -60,9 +62,12 @@ class Profile extends Component {
     }
 
   }
+  editCapInput = (cap) => {
 
+    return <input type='text' value={this.props.comment} onChange={this.props.handleComment} placeholder={` ${cap}`} id="edit-caption-input" name="comment" />
+  }
   postCard = () => {
-    const { comment, edit, show_x, postToComment, postToDelete } = this.state
+    const { comment, edit, show_x, postToComment, postToDelete, editCaption, captionId } = this.state
     const { post, user, id, pic, name } = this.props
 
     const { pathname } = this.props.history.location
@@ -87,6 +92,9 @@ class Profile extends Component {
       activate_Delete={this.showDelete_x}
       postToDelete={postToDelete}
       deletePost={this.deletePost}
+      needEditCaption={this.needEditCaption}
+      editCaption={editCaption}
+      capId={captionId}
 
     />)
 
@@ -137,11 +145,14 @@ class Profile extends Component {
   needEdit = () => {
     this.setState({ edit: !this.state.edit })
   }
-
+  needEditCaption = (id) => {
+    this.setState({ editCaption: !this.state.editCaption, captionId: id})
+  }
 
   handleEdit = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
+
 
 
   selectedFileHander = (e) => {
@@ -205,7 +216,7 @@ class Profile extends Component {
         <br />
         <button className="cancel-in-edit-btn" onClick={() => {
           this.setState({ edit: false })
-          this.state.dotsClicked && this.setState({dotsClicked:false })
+          this.state.dotsClicked && this.setState({ dotsClicked: false })
         }
         } >Cancel</button>
       </form>
@@ -239,7 +250,7 @@ class Profile extends Component {
       <div>
 
         <div class={dlt ? " parent delete-requested" : "parent"} onClick={(e) => {
-          if ((e.target.className === "parent delete-requested" || "parent" ||"profile-off-heart" || "delete-post-x") && e.target.className !== "dots-edit-profile") {
+          if ((e.target.className === "parent delete-requested" || "parent" || "profile-off-heart" || "delete-post-x") && e.target.className !== "dots-edit-profile") {
             this.setState({ dotsClicked: false })
           }
         }
@@ -252,7 +263,7 @@ class Profile extends Component {
               <ul className="profile-edit-delete-logout-ul">
                 <li onClick={() => this.needEdit()}>Edit Profile</li>
                 <li onClick={this.preDelete}>Delete Profile</li>
-                <li onClick={()=>{
+                <li onClick={() => {
                   localStorage.clear()
                   this.props.history.push('/')
 
