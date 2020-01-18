@@ -193,18 +193,15 @@
   width: 32vw;
   text-align: left;
 }
-/* .post-caption:hover{
- 
-} */
-#edit-caption{
-  display: run-in;
-  font-size: .01rem;
- 
+.post-caption:hover #edit-caption{
+  display: inline-block;
+}
 
+#edit-caption {
+  display: none;
+  font-size: .01rem;
 }
-#edit-caption:hover{
-  background-color: crimson;
-}
+
   #post-span{
       color:black;
     font-size: 2vw;

@@ -4,7 +4,7 @@ import './css/Login.css';
 import { Form, Navbar, Button } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { fetchLogin } from './redux/actions/LoginActions';
-import { fetchUser } from './redux/actions/UserActions';
+import { fetchUser, fetchAllUsers } from './redux/actions/UserActions';
 import Loader from './components/loader';
 
 
@@ -23,7 +23,8 @@ class Login extends React.Component {
 
 
   componentDidMount() {
-    localStorage.clear()
+    localStorage.clear();
+    this.props.fetchAllUsers()
   }
   handleChage = e => {
     this.setState({
@@ -63,8 +64,8 @@ class Login extends React.Component {
     console.log("Login props", this.props)
     return (
       <div>
-       
-        
+
+
         <div className="signindiv">
 
           <div className="header-div">
@@ -119,10 +120,11 @@ class Login extends React.Component {
 }
 const mapStateToProps = (state) => {
   return {
-    login: state.login
+    login: state.login,
+    users: state.users.all
   }
 }
 
 
-export default connect(mapStateToProps, { fetchLogin, fetchUser })(Login);
+export default connect(mapStateToProps, { fetchLogin, fetchUser, fetchAllUsers })(Login);
 
