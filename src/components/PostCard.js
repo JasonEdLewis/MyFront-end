@@ -23,7 +23,7 @@ const PostCard = props => {
     if (text) {
       return text.map(t => {
         // console.log("comments", t)
-        return (<li className="li-style"> <strong style={{color:" #740808"}}>{!!t.followee_id ?
+        return (<li className="li-style"> <strong style={{ color: " #740808" }}>{!!t.followee_id ?
           `${props.commentors()[t.followee_id.toString()]}: ` :
           `${props.commentors()[props.userid]}: `
         }</strong>{t.content}<span className="delete-x" onClick={() => deleteComment(t)}> ✘ </span></li>);
@@ -92,6 +92,12 @@ const PostCard = props => {
 
     }
   }
+  const editOrSend = (poster) =>{
+   console.log(poster)
+    if( poster === props.user){
+    return  props.editCapStatus ? <span id="submit-cap-edit" onClick={() => props.submitCapEdit(post.id)}>  ⬆️ </span> : <span id="edit-caption" onClick={() => props.getCapEditField(post.id)}>🖋</span>
+    }
+  }
 
 
 
@@ -126,13 +132,13 @@ const PostCard = props => {
 
           </div>
           <br />
-          <p className='post-caption'> <strong>{` ${whichUser()}`}:</strong> {props.editCapStatus ? editCapInput(post.caption) : post.caption} {props.editCapStatus ? <span id="submit-cap-edit" onClick={() => props.submitCapEdit(post.id)}>  ⬆️ </span> : <span id="edit-caption" onClick={() => props.getCapEditField(post.id)}>🖋</span>} </p>
+          <p className='post-caption'> <strong>{` ${whichUser()}`}:</strong> {whichUser() === props.user && props.editCapStatus ? editCapInput(post.caption) : post.caption} {editOrSend(whichUser()) } </p>
           <div >
             <ul className='ul-style'>
               {comment()}
             </ul>
-            
-            
+
+
           </div>
           {props.yourField === post.id ? <input
             size="sm"
