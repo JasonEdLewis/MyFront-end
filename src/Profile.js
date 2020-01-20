@@ -3,7 +3,7 @@ import { Navbar, Button, Card } from "react-bootstrap";
 import PostCard from "./components/PostCard";
 import Loader from './components/loader';
 import { connect } from 'react-redux';
-import { getPost, changeLike, deletePost } from './redux/actions/PostActions';
+import { getPost, changeLike, deletePost, editCaption } from './redux/actions/PostActions';
 import { deleteUser, editUser } from './redux/actions/UserActions'
 import './css/Profile.css';
 import { storage } from './firebase/index';
@@ -11,12 +11,14 @@ import placepic from './img/placeHolder.png';
 import ProfilePostCard from './components/ProfilePostCard';
 
 
+// editCaption } from './redux/actions/PostActions';
 class Profile extends Component {
 
   state = {
     promiseReturned: false,
     likedPosts: [],
     show_x: false,
+    showEditCaptionField: false,
     comment: "",
     postToComment: null,
     postToDelete: null,
@@ -67,7 +69,7 @@ class Profile extends Component {
     return <input type='text' value={this.props.comment} onChange={this.props.handleComment} placeholder={` ${cap}`} id="edit-caption-input" name="comment" />
   }
   postCard = () => {
-    const { comment, edit, show_x, postToComment, postToDelete, editCaption, captionId } = this.state
+    const { comment, edit, show_x, postToComment, postToDelete, editCaption, captionId, showEditCaptionField } = this.state
     const { post, user, id, pic, name } = this.props
 
     const { pathname } = this.props.history.location
@@ -86,6 +88,8 @@ class Profile extends Component {
       handleComment={this.handleComment}
       comment={comment}
       handleLike={this.handleLike}
+      handleEdit={this.handleEdit}
+      handleCapSubmit={this.handleCaptionSubmit}
       likedPosts={this.state.likedPosts}
       show_x={show_x}
       setId={this.setIdForPostToBeDeleted}
@@ -95,6 +99,8 @@ class Profile extends Component {
       needEditCaption={this.needEditCaption}
       editCaption={editCaption}
       capId={captionId}
+      showEditField={showEditCaptionField}
+      showHideEditCaption={this.showHideEditCaption}
 
     />)
 
@@ -124,11 +130,17 @@ class Profile extends Component {
   showDelete_x = () => {
     this.setState({ show_x: !this.state.show_x })
   }
+
   setIdForPostToBeDeleted = (id) => {
     this.setState({ postToDelete: id })
     this.showDelete_x()
-    console.log(this.state.postToDelete)
 
+
+  }
+  showHideEditCaption = () => {
+    this.setState({
+      editCaption: !this.state.editCaption
+    })
   }
   resetDeleting = () => {
     this.setState({ postToDelete: null, show_x: false })
@@ -146,14 +158,18 @@ class Profile extends Component {
     this.setState({ edit: !this.state.edit })
   }
   needEditCaption = (id) => {
-    this.setState({ editCaption: !this.state.editCaption, captionId: id})
+    this.setState({ editCaption: !this.state.editCaption, captionId: id })
   }
 
   handleEdit = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  handleCaptionSubmit = (id) => {
+    this.props.editCaption(id, this.state.comment)
+    this.setState({ comment: "", editCaption: false })
 
+  }
 
   selectedFileHander = (e) => {
     const image = e.target.files[0]
@@ -237,15 +253,12 @@ class Profile extends Component {
     const { deleteAccountRequested, edit, dotsClicked } = this.state
     const dlt = deleteAccountRequested
     const user = localStorage.currentUser
-
-    // const { pathname } = this.props.history.location
-    // console.log("Pathname:", pathname);
-    // this.props.history.location.pathname
+    console.log("Edit caption:", this.state.comment)
 
 
 
 
-    console.log("Profile Props:", this.props)
+
     return (
       <div>
 
@@ -342,7 +355,7 @@ const mapStateToProps = state => {
     requested: state.users.requested
   }
 }
-export default connect(mapStateToProps, { getPost, changeLike, deleteUser, editUser, deletePost })(Profile)
+export default connect(mapStateToProps, { getPost, changeLike, deleteUser, editUser, deletePost, editCaption })(Profile)
 {
   /* <Col xs={6} md={4}>
       <Image src="holder.js/171x180" roundedCircle />

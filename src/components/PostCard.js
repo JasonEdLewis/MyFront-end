@@ -26,7 +26,7 @@ const PostCard = props => {
         return (<li className="li-style"> <strong style={{ color: " #740808" }}>{!!t.followee_id ?
           `${props.commentors()[t.followee_id.toString()]}: ` :
           `${props.commentors()[props.userid]}: `
-        }</strong>{t.content}<span className="delete-x" onClick={() => deleteComment(t)}> ✘ </span></li>);
+      }</strong>{t.content}{ (props.userid === t.followee_id || post.user_id === props.userid) && <span className="delete-x" onClick={() => deleteComment(t)}> ✘ </span>}</li>);
       });
     } else {
       return <h6 style={{ color: "black" }}>Be the first to comment</h6>;
