@@ -15,7 +15,7 @@ export default function ProfilePostCard(props) {
   }
   const editCapInput = (cap) => {
 
-    return <input type='text' value={props.comment} onChange={props.handleComment} placeholder={` ${cap}`} id="edit-caption-input" name="comment" />
+    return <input type='text' value={props.comment} onChange={props.handleComment} placeholder={` ${cap}`} id="edit-caption-input" name="comment"  />
   }
   const whichUser = () => {
     return post.user_id !== props.userid ? name[post.user_id] : user
@@ -25,12 +25,12 @@ export default function ProfilePostCard(props) {
   const { post, user, comment, picture, handleLike, likedPosts, pic, setId, show_x, deletePost, postCommId, postToDelete, currentUserId, user_id, editCaption, needEditCaption, capId, showHideEditCaption, activate_Delete} = props
 
 
-  const clearAll = ()=>{
+  const clearAll = (id,e)=>{
     // if show_x is true and edit caption is false 
-    if (show_x && !editCaption ){
+    if (show_x && id === postToDelete && !editCaption ){
       return activate_Delete()
     }
-    else if (!show_x && editCaption ){
+    else if (!show_x && editCaption && post.id && e.target.id !== "edit-caption-input" ){
       showHideEditCaption()
     }
     
@@ -38,7 +38,7 @@ export default function ProfilePostCard(props) {
   }
   return (
     <>
-      <div className="profile-post-card-div" onClick={() => clearAll()
+      <div className="profile-post-card-div" onClick={(e) => clearAll(post.id,e)
       
     
     }>
@@ -73,7 +73,7 @@ export default function ProfilePostCard(props) {
 
               <p className='profile-post-caption'><span id="profile-name-cap"><strong>{whichUser()} : </strong></span> { editCaption && capId === post.id ? editCapInput(post.caption) : post.caption}
 
-                {editCaption ? <span id="profile-submit-cap-edit" onClick={() => props.handleCapSubmit(post.id)}>  ⬆️ </span> : <span id="profile-edit-caption" onClick={() => props.needEditCaption(post.id)}> 🖋</span>}
+                {editCaption && capId === post.id ? <span id="profile-submit-cap-edit" onClick={() => props.handleCapSubmit(post.id)}>  ⬆️ </span> : <span id="profile-edit-caption" onClick={() => props.needEditCaption(post.id)}> 🖋</span>}
 
               </p>
 
