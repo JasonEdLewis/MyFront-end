@@ -80,7 +80,7 @@ class Signup extends React.Component {
 
 
   render() {
-    console.log("Signup Props:", this.props);
+    console.log("Signup Props:", this.state);
     const { username, password, file, bio, email, city, state, zip } = this.state
     return (
       <div className="form">
