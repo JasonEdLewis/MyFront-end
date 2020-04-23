@@ -6,7 +6,7 @@ import { getFollows } from '../redux/actions/FollowActions';
 class Follows extends Component {
 
     componentDidMount() {
-        const { getFollows} = this.props
+        const { getFollows } = this.props
         getFollows()
 
     }
@@ -31,9 +31,9 @@ class Follows extends Component {
 
         })
 
-        const areFreinds = (postuser, currentuser)=>{
+        const areFreinds = (postuser, currentuser) => {
             const { follows } = this.props
-            const followid = follows.find(follow => follow.followee_id === postuser && follow.foller_id === currentuser ).id
+            const followid = follows.find(follow => follow.followee_id === postuser && follow.foller_id === currentuser).id
         }
 
     }
